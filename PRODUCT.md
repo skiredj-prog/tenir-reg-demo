@@ -17,11 +17,11 @@ Source de cette direction : [analyse stratégique fournie par l'utilisateur](ref
 | Brique | État dans ce dépôt | Limite à conserver dans les interfaces |
 |---|---|---|
 | Démonstration locale | Quatre scénarios exécutables, dix tests automatisés, six preuves Ed25519 et vérificateur autonome | Runtime de démonstration, fournisseur simulé, mémoire du processus, recette auto-exécutée |
-| Règles structurelles | Sept clauses R1a–R3a extraites du HTML ; énumération interne de 144 configurations dont 42 admissibles ; catalogue GitHub consulté | Comparaison automatisée complète et capacités de déploiement non validées ; conformité externe non évaluée |
+| Règles structurelles | Sept clauses R1a–R3a extraites du HTML ; 144 configurations dont 42 admissibles ; comparaison avec le catalogue épinglé : 144 configurations et 1 008 résultats de clause concordants | Concordance structurelle ; capacités effectives et compatibilité runtime non démontrées |
 | Rapport interactif | Quatre scénarios, huit étapes de lecture, sources exactes reliées aux six records, décision, état, budget, journal et signatures | Projection explicative hors payload ; contrôle visuel et essai utilisateur encore à effectuer |
 | Configurateur produit guidé | Livré localement : quatre étapes, vue Règles & périmètre opérationnelle, 144 sélections, clauses et champs expliqués, corrections minimales, export non signé, FR/EN et lien vers les preuves | Dix tests produit et contrôle JavaScript exhaustif ; contrôle visuel dans un navigateur encore à effectuer |
 | Crosswalk et cycle JSON-LD | Fichiers documentaires fournis et conservés | Interopérabilité effective et validation sémantique non démontrées |
-| Invariants I1–I9 et contrats de référence | Guides et dépôts reçus et consultés ; mapping complet non intégré | Les références partielles ou le code d'implémentation ne remplacent pas la validation d'applicabilité des invariants |
+| Invariants I1–I9 et contrats de référence | Revue statique sourcée : quatre sous-ensembles locaux, trois non implémentés et deux non évalués ; sept contrats comparés | Compatibilité d'exécution non vérifiée ; numérotation guide/code et contrats budgétaires différents |
 | Publication publique et intégrations | Non établies par les artefacts locaux | Une démonstration locale ne prouve ni déploiement public ni intégration partenaire |
 
 ## Priorités de livraison
@@ -36,7 +36,7 @@ Critères d'acceptation :
 - Chaque rejet explique toutes les clauses concernées et met en évidence les champs impliqués.
 - Une suggestion de correction est elle-même vérifiée ; la configuration initiale reste consultable.
 - L'interface distingue **admissibilité structurelle**, **support du runtime local** et **garanties démontrées**. Le moteur local accepte uniquement son profil mono-processus ; une configuration multi-host admissible ne devient pas exécutable dans ce moteur.
-- Les invariants sont marqués « guides reçus · applicabilité non intégrée » jusqu'à intégration et vérification de leurs correspondances versionnées.
+- Les invariants sont présentés comme une revue statique de périmètre partiel ; les sous-ensembles locaux sont distingués de l'exécution des gardes de référence.
 - Le résultat porte la provenance des règles ; aucun libellé de conformité au catalogue externe n'est affiché sans comparaison réelle.
 
 ### P0.2 — Rapport de preuve sur la boucle complète

@@ -12,7 +12,7 @@
     "execution_compatibility": "NOT_VERIFIED",
     "owner_statement": "5.6.1 would be it, it will be promoted to 5.7"
   },
-  "checked_date": "2026-10-19",
+  "checked_date": "2026-10-20",
   "supplied_architecture_version": "5.6.0",
   "source_files": [
     {
@@ -75,7 +75,10 @@
     "remote_code_executed": false,
     "remote_repositories_modified": false,
     "full_5_7_contract_found": false,
-    "complete_external_conformance_demonstrated": false
+    "complete_external_conformance_demonstrated": false,
+    "structural_catalogue_comparison": "ALL_144_CONFIGURATIONS_AND_1008_CLAUSE_OUTCOMES_MATCH",
+    "runtime_contracts": "STATIC_SOURCE_REVIEW_ONLY",
+    "invariant_mapping": "FOCUSED_STATIC_REVIEW_I1_TO_I9"
   },
   "5_7_search": {
     "runtime": "branches, v5.7 tag refs, releases, default-branch code and selected docs inspected; no versioned5.7 contract identified",
@@ -83,5 +86,15 @@
     "owner_clarification": "Subsequent owner confirmation identifies 5.6.1 as the base to be promoted to 5.7; no separate 5.7 branch is required to select the working reference."
   },
   "layer_source": "architecture-v1.html (FR) and architecture-v2.html (EN), levels0-4",
-  "notes": "Metamodel notes are proposed interpretations and roadmap ideas, not conformance evidence. Guides describe a5.6.0-era snapshot; later source changes must be assessed at their pinned commits. Owner clarification supersedes the initial missing-reference question: the pinned 5.6.1 runtime is the confirmed base for planned 5.7 promotion, not proof of execution compatibility."
+  "notes": "Metamodel notes are proposed interpretations and roadmap ideas, not conformance evidence. Guides describe a5.6.0-era snapshot; later source changes must be assessed at their pinned commits. Owner clarification supersedes the initial missing-reference question: the pinned 5.6.1 runtime is the confirmed base for planned 5.7 promotion, not proof of execution compatibility.",
+  "alignment_diagnostic": {
+    "module": "tenir_demo/alignment.py",
+    "documentation": "REFERENCE_ALIGNMENT.md",
+    "manifests": [
+      "references/upstream-reg-manifest.json",
+      "references/upstream-tenir-manifest.json",
+      "references/upstream-harness-manifest.json"
+    ],
+    "execution_compatibility": "NOT_VERIFIED"
+  }
 }

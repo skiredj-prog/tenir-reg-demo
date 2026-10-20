@@ -185,8 +185,8 @@ assert.equal(model.signature_status, 'UNSIGNED');
 assert.equal(model.unsigned, true);
 assert.deepEqual(model.axes, axes);
 assert.deepEqual(model.rules, rules);
-assert.equal(model.provenance.external_catalogue, 'NOT_EVALUATED');
-assert.equal(model.provenance.invariants, 'GUIDES_RECEIVED_NOT_MAPPED');
+assert.equal(model.provenance.external_catalogue, 'STRUCTURAL_MATCH');
+assert.equal(model.provenance.invariants, 'STATIC_REVIEW_PARTIAL_SCOPE');
 assert.equal(model.provenance.alignment_target.version, '5.7');
 assert.equal(model.provenance.alignment_target.status, 'BASE_CONFIRMED_PROMOTION_PLANNED');
 assert.equal(model.provenance.alignment_target.base_version, '5.6.1');
@@ -516,7 +516,7 @@ assert.equal(rejectedDraft.structural_validation.runtime_supported, false);
 assert.deepEqual(rejectedDraft.structural_validation.violations.map(violation => violation.clause_id), oracle(rejected));
 assert.equal(rejectedDraft.signature_status, 'UNSIGNED');
 assert.equal(rejectedDraft.execution.state, 'NOT_EXECUTED');
-assert.ok(get('invariants-status').textContent.includes('non intégrée'));
+assert.ok(get('invariants-status').textContent.includes('périmètre partiel'));
 
 // Une architecture admissible hors runtime offre un retour explicite et réversible au profil local.
 get('reset-config').click();

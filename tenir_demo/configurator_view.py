@@ -6,6 +6,7 @@ from .configurator import build_model
 from .evidence import write_json
 from .locales import RULE_EN, bilingual_static
 from .theme import apply_theme
+from .alignment_view import render_alignment, _text
 
 
 def render_configurator(bundle, verification, destination):
@@ -19,7 +20,11 @@ def render_configurator(bundle, verification, destination):
     page = page.replace("@@RULE_EN@@", json.dumps(RULE_EN, ensure_ascii=False).replace("<", "\\u003c"))
     page = page.replace("@@STYLE@@", (source / "configurator.css").read_text(encoding="utf-8")
                         + "\n" + (source / "rules_scope.css").read_text(encoding="utf-8")
-                        + "\n" + (source / "configurator_ux.css").read_text(encoding="utf-8"))
+                        + "\n" + (source / "configurator_ux.css").read_text(encoding="utf-8")
+                        + "\n" + (source / "alignment.css").read_text(encoding="utf-8"))
+    page = page.replace("@@ALIGNMENT@@", render_alignment(model["alignment"]))
+    invariants = model["provenance"]["invariants"] == "STATIC_REVIEW_PARTIAL_SCOPE"
+    page = page.replace("@@INVARIANTS_STATUS@@", _text("Revue statique · périmètre partiel", "Static review · partial scope") if invariants else _text("Revue indisponible", "Review unavailable"))
     page = page.replace("@@MODEL@@", embedded)
     page = page.replace("@@SCRIPT@@", (source / "configurator_client.js").read_text(encoding="utf-8"))
     destination.write_text(apply_theme(page), encoding="utf-8")

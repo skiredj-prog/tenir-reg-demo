@@ -7,7 +7,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / ".deps"))
 from tenir_demo.evidence import read_public, verify
-from tenir_demo.contracts import CORE_TEST_IDS, CONFIGURATOR_TEST_IDS, PROOF_LOOP_TEST_IDS
+from tenir_demo.contracts import CORE_TEST_IDS, CONFIGURATOR_TEST_IDS, PROOF_LOOP_TEST_IDS, ALIGNMENT_TEST_IDS
 from tenir_demo.verification import verify_bundle
 
 
@@ -48,6 +48,13 @@ def verify_directory(directory, public_key_path):
                   and len(proof["tests"]) == len(proof_ids)
                   and {t["id"] for t in proof["tests"]} == proof_ids
                   and all(t["status"] == "PASS" for t in proof["tests"]))
+        if "alignment_tests" in tests:
+            alignment = tests["alignment_tests"]
+            alignment_ids = set(ALIGNMENT_TEST_IDS)
+            go = (go and alignment["go"] is True and alignment["passed"] == len(alignment_ids)
+                  and len(alignment["tests"]) == len(alignment_ids)
+                  and {t["id"] for t in alignment["tests"]} == alignment_ids
+                  and all(t["status"] == "PASS" for t in alignment["tests"]))
         if product_dossier:
             product = tests["product_tests"]
             product_ids = set(CONFIGURATOR_TEST_IDS)

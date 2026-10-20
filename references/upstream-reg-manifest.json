@@ -1,0 +1,116 @@
+{
+  "schema": "demo-upstream-source-manifest/v1",
+  "repository": "skiredj-prog/reg-conformance",
+  "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+  "retrieved_date": "2026-10-20",
+  "remote_code_executed": false,
+  "remote_repositories_modified": false,
+  "files": [
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "catalog/compatibility-rules-v1.yaml",
+      "local_copy": "references/upstream-reg-catalog-compatibility-rules-v1.yaml",
+      "sha256": "769fb4dfbfe8b03e415c965bdda9fdfb42a989bd7c8fd30710573d037cc4352d",
+      "git_blob_sha": "d21b720460b6b5af82401d15d85846b070a17308",
+      "bytes": 3205,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/catalog/compatibility-rules-v1.yaml"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "catalog/capabilities-v1.yaml",
+      "local_copy": "references/upstream-reg-catalog-capabilities-v1.yaml",
+      "sha256": "12ba45e8568c57cd2301ef2ce44bbc6937e12483593dcaa993b2cddef213c3b5",
+      "git_blob_sha": "5f13930fd79b2e6e63bb7f066b737c518e3f9454",
+      "bytes": 8525,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/catalog/capabilities-v1.yaml"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "catalog/hypotheses-v1.yaml",
+      "local_copy": "references/upstream-reg-catalog-hypotheses-v1.yaml",
+      "sha256": "8595e78dbb10e6c39e15599707f3146b7ca2d8da6c4f04b81ce92f00ce308245",
+      "git_blob_sha": "f708b1594cbb8fe2fc6ed945b36129cff26a5dd4",
+      "bytes": 1006,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/catalog/hypotheses-v1.yaml"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "catalog/valid-configurations-v1.json",
+      "local_copy": "references/upstream-reg-catalog-valid-configurations-v1.json",
+      "sha256": "b4371247b6f6eca9bb8f25bf39f5f028dee77eb7da340e734a15ada51933f386",
+      "git_blob_sha": "b45cbd09076699fd09fa41270264560c99aeebfa",
+      "bytes": 83802,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/catalog/valid-configurations-v1.json"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "tools/enumerate_configs.py",
+      "local_copy": "references/upstream-reg-tools-enumerate_configs.py",
+      "sha256": "aca4b268ca7a1041499d13a18597914d3896ac592f5fa52cfc01b5d73ad98050",
+      "git_blob_sha": "b64592c48193e8a3382d72835d308ea5205e22e9",
+      "bytes": 6443,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/tools/enumerate_configs.py"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "reg_common.py",
+      "local_copy": "references/upstream-reg-reg_common.py",
+      "sha256": "c827d1967ff7f76b943bb67f02c94753f668e701d2dd88937821e47dc718feea",
+      "git_blob_sha": "05300ddc847a1e0856cffeba99e33ccf4c838403",
+      "bytes": 5138,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/reg_common.py"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "tests/test_catalog_enumeration.py",
+      "local_copy": "references/upstream-reg-tests-test_catalog_enumeration.py",
+      "sha256": "2bc6381c181e82b39f4e342c265f3961a3697684312c4fd27349875138d25035",
+      "git_blob_sha": "c42a4a975ec0c0416787b9f9fd92f5183da3290e",
+      "bytes": 6228,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/tests/test_catalog_enumeration.py"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "LICENSE",
+      "local_copy": "references/upstream-reg-LICENSE",
+      "sha256": "8eeae3438f3c69a4cda204b08f16a3b58c8e900837e80b5f8d15fae18d554921",
+      "git_blob_sha": "61103e7f4bf9225882689e2324415898375967ca",
+      "bytes": 11402,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/LICENSE"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "tools/verify_effective_guarantees.py",
+      "local_copy": "references/upstream-reg-tools-verify_effective_guarantees.py",
+      "sha256": "d24bdf74019a77abf9ff664b27443c9e59b5bfd18edf8307d46344e08c4a0f3f",
+      "git_blob_sha": "76bf1d90e08c1485e1fa309a2ded32de11e54bc2",
+      "bytes": 5811,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/tools/verify_effective_guarantees.py"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "profiles/example-aggregate-budget.yaml",
+      "local_copy": "references/upstream-reg-profiles-example-aggregate-budget.yaml",
+      "sha256": "5d590854299b38a8f1f411230e631d5ac0b033562a1b511a7c30908bc4da617c",
+      "git_blob_sha": "af3107339fcb6f4a893af900d52dcc80fbac484c",
+      "bytes": 2004,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/profiles/example-aggregate-budget.yaml"
+    }
+  ],
+  "tree_snapshot": {
+    "local_copy": "references/upstream-reg-tree.json",
+    "sha256": "1c5a825905289e781d8293148dc0214de5854d540680436bfdd115c097ef37a3",
+    "canonical_api_url": "https://api.github.com/repos/skiredj-prog/reg-conformance/git/trees/cd5ab1b616ad59014f4b84d522b57a890a48a088?recursive=1",
+    "truncated": false
+  }
+}

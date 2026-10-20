@@ -1,0 +1,188 @@
+{
+  "schema": "demo-upstream-source-manifest/v1",
+  "repository": "skiredj-prog/tenir-conformance-s1-g1",
+  "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+  "retrieved_date": "2026-10-20",
+  "retrieval": "GitHub read-only fetch_file at pinned commit",
+  "remote_code_executed": false,
+  "remote_repositories_modified": false,
+  "scope": "Focused exact source snapshot for S1/S2/S3/S8 and the four local scenario comparison; remote source code was not executed.",
+  "license_snapshot": {
+    "status": "NOT_FOUND_IN_PINNED_TREE",
+    "tree_sha": "d29400100b00f7e7a87d229af660f62e51d61f12",
+    "tree_url": "https://api.github.com/repos/skiredj-prog/tenir-conformance-s1-g1/git/trees/d29400100b00f7e7a87d229af660f62e51d61f12?recursive=1",
+    "tree_truncated": false
+  },
+  "files": [
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "README.md",
+      "local_copy": "references/upstream-harness-README.md",
+      "sha256": "b3cb87abfd019a5db1d0aa54c7fc50d2ed41fe5d04b9b9623311643139744148",
+      "bytes": 1091,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/README.md",
+      "git_blob_sha": "cafc6d358edbae526c7cdcc815df73d9e750f842"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "STATUS.md",
+      "local_copy": "references/upstream-harness-STATUS.md",
+      "sha256": "6b377dbfab015c13c98ceb3c0a02a8e2964afab3334d8a24dd446e38652634d4",
+      "bytes": 4795,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/STATUS.md",
+      "git_blob_sha": "382c01101b3dc7eb73dedfacf8813d76d3219953"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "G0_S1_Evidence_Lost_After_Commit.md",
+      "local_copy": "references/upstream-harness-G0_S1_Evidence_Lost_After_Commit.md",
+      "sha256": "a3f870e2fc26278df509a334ee50c8a68b6c598339373c72e20aa21123493de8",
+      "bytes": 2323,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/G0_S1_Evidence_Lost_After_Commit.md",
+      "git_blob_sha": "aa845fa1ef88e0da49add28dee48af5aec903ecb"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "G0_S2_Qualification_Timeout.md",
+      "local_copy": "references/upstream-harness-G0_S2_Qualification_Timeout.md",
+      "sha256": "6efad9bc207fce902514dfcaefc1095efc464b5349b923482d20085e0a8987c9",
+      "bytes": 5612,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/G0_S2_Qualification_Timeout.md",
+      "git_blob_sha": "0b5887cabad2c6b779ef47c00bdd817c5c13567f"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "G0_S3_Duplicate_Request.md",
+      "local_copy": "references/upstream-harness-G0_S3_Duplicate_Request.md",
+      "sha256": "0aa894bdca4e60dfdd5e6cd7271bd5db29dbc7068989b98c599af5ad4b3950a7",
+      "bytes": 1472,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/G0_S3_Duplicate_Request.md",
+      "git_blob_sha": "38174b61c20e6b62b6ebfff63389118112b4f52a"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "src/tenir_conformance/s1_harness.py",
+      "local_copy": "references/upstream-harness-src__tenir_conformance__s1_harness.py",
+      "sha256": "c8de863b852c16732229e52edfd7d5a2d22a2981c16aa8cc162f2afdf212d613",
+      "bytes": 8143,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/s1_harness.py",
+      "git_blob_sha": "9d54782aaaebc2aaece8e859b9de3553713e2b8a"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "src/tenir_conformance/membrane/membrane.py",
+      "local_copy": "references/upstream-harness-src__tenir_conformance__membrane__membrane.py",
+      "sha256": "5460f9f122a6f786641e9b001689c890380f140cd224ad94d0499cdea70529e5",
+      "bytes": 78974,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/membrane/membrane.py",
+      "git_blob_sha": "23af1166d9da58c412ac735e3030d50117ec6ca3"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "src/tenir_conformance/membrane/kernel_bridge.py",
+      "local_copy": "references/upstream-harness-src__tenir_conformance__membrane__kernel_bridge.py",
+      "sha256": "2505425baeaf1cc4e502553481c233ba30e941f7c55cff5788529d4a5d285ebc",
+      "bytes": 2271,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/membrane/kernel_bridge.py",
+      "git_blob_sha": "397545a845312a0bd107622a42fb54c85fb15212"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "tests/test_s1.py",
+      "local_copy": "references/upstream-harness-tests__test_s1.py",
+      "sha256": "3bc892d268914f45d2a5f9acb49ddb05325a5bdc891f38d3a8f209550f1d7f8c",
+      "bytes": 2196,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_s1.py",
+      "git_blob_sha": "66a6dbe0f331d7dbf7ab2fc149e454bb5b8a7bad"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "tests/test_s1_real_kernel_membrane.py",
+      "local_copy": "references/upstream-harness-tests__test_s1_real_kernel_membrane.py",
+      "sha256": "4c5b527745e9f6052bfd69b9666ffb9303a6ebad61e55e462aea76bf6cf8f27d",
+      "bytes": 3355,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_s1_real_kernel_membrane.py",
+      "git_blob_sha": "50e428d32b954e3413376d3a7dc1059b2c1bfaa7"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "tests/test_nonce_and_kernel_veto.py",
+      "local_copy": "references/upstream-harness-tests__test_nonce_and_kernel_veto.py",
+      "sha256": "2d638604f8b98c58f25aa8945618759eec34fbc6a93451522290f7856f21aada",
+      "bytes": 5246,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_nonce_and_kernel_veto.py",
+      "git_blob_sha": "5237cf03923facdf47285229bd1b66f72d737a56"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "tests/test_s2_qualification_timeout.py",
+      "local_copy": "references/upstream-harness-tests__test_s2_qualification_timeout.py",
+      "sha256": "5af1f1aa416a6d582d0f0ae3115f1b1edcc1e28fcff831aa91aeb1e4c6ea1ea4",
+      "bytes": 9634,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_s2_qualification_timeout.py",
+      "git_blob_sha": "2dff4e35c63a32e6fb54c670626f36b5c61b9608"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "tests/test_s3_duplicate_request.py",
+      "local_copy": "references/upstream-harness-tests__test_s3_duplicate_request.py",
+      "sha256": "c5cf9c1fdd607636ecf913a7f2f120369738362d3333f54fe1b28c1b5ba3e1e0",
+      "bytes": 9852,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_s3_duplicate_request.py",
+      "git_blob_sha": "0033d2d77f1d877cd5a2c50ad479c64c3dd6227f"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "tests/test_g0_s8_concurrent_admission.py",
+      "local_copy": "references/upstream-harness-tests__test_g0_s8_concurrent_admission.py",
+      "sha256": "a07dd2301babfca34ca85f5b26ed3d992156c8e9f5cb1f5c194b897e88cd6f76",
+      "bytes": 8029,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_g0_s8_concurrent_admission.py",
+      "git_blob_sha": "00ec3c62993210d113a1e4e641ee83dd0d642a9b"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "scenarios/S1.json",
+      "local_copy": "references/upstream-harness-scenarios__S1.json",
+      "sha256": "8379ca697a81578290b16dda98ce9379e0d27c6356863418dba5ad0308531462",
+      "bytes": 1191,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/scenarios/S1.json",
+      "git_blob_sha": "61ecf201685802de913cc2d053020a9bedcf81b6"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "scenarios/S2.json",
+      "local_copy": "references/upstream-harness-scenarios__S2.json",
+      "sha256": "919b9dc345b052f7a56c74580cfb485ef875d3201ffed74ef8bbd849d3e6d9d8",
+      "bytes": 3203,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/scenarios/S2.json",
+      "git_blob_sha": "4d0c9cdf19129754330958a02cfbb7b657aada0c"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "pinned_commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "path": "scenarios/S3.json",
+      "local_copy": "references/upstream-harness-scenarios__S3.json",
+      "sha256": "a2f43239f065b86e67a6fa68f5a6551a90e7a346e9e533b10fb8456a140d7b8d",
+      "bytes": 818,
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/scenarios/S3.json",
+      "git_blob_sha": "6682572cd5ac3f8320cdccc75e5f499b316cea6b"
+    }
+  ]
+}

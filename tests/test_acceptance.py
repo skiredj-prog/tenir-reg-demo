@@ -254,4 +254,4 @@ class Acceptance(unittest.TestCase):
             self.assertEqual(json.loads(embedded), model)
             self.assertIn("GO LOCAL", text)
             self.assertNotIn("@@", text)
-            self.assertIn("NON ÉVALUÉE", text)
+            self.assertIn('data-full-conformance="NOT_DEMONSTRATED"', text)

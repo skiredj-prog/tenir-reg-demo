@@ -1,0 +1,403 @@
+{
+  "schema": "demo-upstream-reg-review/v1",
+  "repository": "skiredj-prog/reg-conformance",
+  "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+  "reviewed_date": "2026-10-20",
+  "review_method": "STRICT_OBSERVED_SUBSET_NORMALIZATION",
+  "normalization_status": "REVIEWED_AT_DEVELOPMENT_TIME",
+  "remote_code_executed": false,
+  "remote_repositories_modified": false,
+  "source_basis": [
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "catalog/hypotheses-v1.yaml",
+      "local_copy": "references/upstream-reg-catalog-hypotheses-v1.yaml",
+      "sha256": "8595e78dbb10e6c39e15599707f3146b7ca2d8da6c4f04b81ce92f00ce308245",
+      "git_blob_sha": "f708b1594cbb8fe2fc6ed945b36129cff26a5dd4",
+      "bytes": 1006,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/catalog/hypotheses-v1.yaml"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "catalog/compatibility-rules-v1.yaml",
+      "local_copy": "references/upstream-reg-catalog-compatibility-rules-v1.yaml",
+      "sha256": "769fb4dfbfe8b03e415c965bdda9fdfb42a989bd7c8fd30710573d037cc4352d",
+      "git_blob_sha": "d21b720460b6b5af82401d15d85846b070a17308",
+      "bytes": 3205,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/catalog/compatibility-rules-v1.yaml"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "catalog/valid-configurations-v1.json",
+      "local_copy": "references/upstream-reg-catalog-valid-configurations-v1.json",
+      "sha256": "b4371247b6f6eca9bb8f25bf39f5f028dee77eb7da340e734a15ada51933f386",
+      "git_blob_sha": "b45cbd09076699fd09fa41270264560c99aeebfa",
+      "bytes": 83802,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/catalog/valid-configurations-v1.json"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "catalog/capabilities-v1.yaml",
+      "local_copy": "references/upstream-reg-catalog-capabilities-v1.yaml",
+      "sha256": "12ba45e8568c57cd2301ef2ce44bbc6937e12483593dcaa993b2cddef213c3b5",
+      "git_blob_sha": "5f13930fd79b2e6e63bb7f066b737c518e3f9454",
+      "bytes": 8525,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/catalog/capabilities-v1.yaml"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "tools/verify_effective_guarantees.py",
+      "local_copy": "references/upstream-reg-tools-verify_effective_guarantees.py",
+      "sha256": "d24bdf74019a77abf9ff664b27443c9e59b5bfd18edf8307d46344e08c4a0f3f",
+      "git_blob_sha": "76bf1d90e08c1485e1fa309a2ded32de11e54bc2",
+      "bytes": 5811,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/tools/verify_effective_guarantees.py"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "pinned_commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "path": "profiles/example-aggregate-budget.yaml",
+      "local_copy": "references/upstream-reg-profiles-example-aggregate-budget.yaml",
+      "sha256": "5d590854299b38a8f1f411230e631d5ac0b033562a1b511a7c30908bc4da617c",
+      "git_blob_sha": "af3107339fcb6f4a893af900d52dcc80fbac484c",
+      "bytes": 2004,
+      "canonical_blob_url": "https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/profiles/example-aggregate-budget.yaml"
+    }
+  ],
+  "local_inputs": [
+    {
+      "path": "references/axes.json",
+      "sha256": "763763c1d89e86f238e2891adf4368bfa023c9d88727053361a48818d73d6c5c"
+    },
+    {
+      "path": "references/rules.json",
+      "sha256": "1ea681c583191891ff00209610dbc7916053b443bf582793eb8d6a7af28d37c8"
+    }
+  ],
+  "derived_axes": {
+    "HOST_SCOPE": [
+      "mono-process",
+      "mono-host",
+      "multi-host"
+    ],
+    "DEDUP_LAYER": [
+      "none",
+      "local-registry",
+      "provider-idempotency-key",
+      "distributed-consensus-registry"
+    ],
+    "CONCURRENCY": [
+      "thread-lock",
+      "file-lock",
+      "distributed-transaction",
+      "distributed-consensus"
+    ],
+    "UNCERTAINTY": [
+      "fail-closed",
+      "fail-open",
+      "human-escalation"
+    ]
+  },
+  "normalized_rules": [
+    {
+      "clause_id": "R1a",
+      "rule_id": "R1_HOST_CONCURRENCY",
+      "description": "mono-process n'autorise que le verrou de thread.",
+      "condition": {
+        "field": "HOST_SCOPE",
+        "value": "mono-process"
+      },
+      "requires": {
+        "field": "CONCURRENCY",
+        "allowed_values": [
+          "thread-lock"
+        ]
+      }
+    },
+    {
+      "clause_id": "R1b",
+      "rule_id": "R1_HOST_CONCURRENCY",
+      "description": "mono-host autorise file-lock ou distributed-transaction.",
+      "condition": {
+        "field": "HOST_SCOPE",
+        "value": "mono-host"
+      },
+      "requires": {
+        "field": "CONCURRENCY",
+        "allowed_values": [
+          "file-lock",
+          "distributed-transaction"
+        ]
+      }
+    },
+    {
+      "clause_id": "R1c",
+      "rule_id": "R1_HOST_CONCURRENCY",
+      "description": "multi-host autorise distributed-transaction ou distributed-consensus.",
+      "condition": {
+        "field": "HOST_SCOPE",
+        "value": "multi-host"
+      },
+      "requires": {
+        "field": "CONCURRENCY",
+        "allowed_values": [
+          "distributed-transaction",
+          "distributed-consensus"
+        ]
+      }
+    },
+    {
+      "clause_id": "R2a",
+      "rule_id": "R2_CONSENSUS_SCOPE",
+      "description": "Le consensus distribué exige une topologie multi-host.",
+      "condition": {
+        "field": "CONCURRENCY",
+        "value": "distributed-consensus"
+      },
+      "requires": {
+        "field": "HOST_SCOPE",
+        "allowed_values": [
+          "multi-host"
+        ]
+      }
+    },
+    {
+      "clause_id": "R2b",
+      "rule_id": "R2_CONSENSUS_DEDUP",
+      "description": "Le registre de déduplication distribué exige multi-host.",
+      "condition": {
+        "field": "DEDUP_LAYER",
+        "value": "distributed-consensus-registry"
+      },
+      "requires": {
+        "field": "HOST_SCOPE",
+        "allowed_values": [
+          "multi-host"
+        ]
+      }
+    },
+    {
+      "clause_id": "R2c",
+      "rule_id": "R2_CONSENSUS_DEDUP",
+      "description": "Le registre de déduplication distribué exige le consensus distribué.",
+      "condition": {
+        "field": "DEDUP_LAYER",
+        "value": "distributed-consensus-registry"
+      },
+      "requires": {
+        "field": "CONCURRENCY",
+        "allowed_values": [
+          "distributed-consensus"
+        ]
+      }
+    },
+    {
+      "clause_id": "R3a",
+      "rule_id": "R3_LOCAL_DEDUP",
+      "description": "Un registre local ne peut pas coordonner plusieurs hôtes.",
+      "condition": {
+        "field": "DEDUP_LAYER",
+        "value": "local-registry"
+      },
+      "requires": {
+        "field": "HOST_SCOPE",
+        "allowed_values": [
+          "mono-process",
+          "mono-host"
+        ]
+      }
+    }
+  ],
+  "development_time_comparison": {
+    "basis": "COMPUTED_LOCAL_COMPARISON",
+    "scope": "closed four-axis structural catalogue only",
+    "axes_equal_including_order": true,
+    "rules_equal_including_ids_description_and_operands": true,
+    "configurations_compared": 144,
+    "clause_outcomes_compared": 1008,
+    "admissible_structural": 42,
+    "rejected": 102,
+    "mismatches": [],
+    "violation_instances": 171,
+    "violation_wording_differences": 171,
+    "violations_per_clause": {
+      "R1a": 36,
+      "R2a": 24,
+      "R2b": 24,
+      "R2c": 27,
+      "R1b": 24,
+      "R1c": 24,
+      "R3a": 12
+    },
+    "admissible_by_host_scope": {
+      "mono-process": 9,
+      "mono-host": 18,
+      "multi-host": 15
+    },
+    "admissible_by_uncertainty": {
+      "fail-closed": 14,
+      "fail-open": 14,
+      "human-escalation": 14
+    },
+    "effective_guarantee_demonstrated_values": [
+      null
+    ]
+  },
+  "findings": [
+    {
+      "id": "STRUCTURAL_MATCH",
+      "basis": "COMPUTED_LOCAL_COMPARISON",
+      "summary": {
+        "fr": "Les 144 décisions et 1 008 résultats de clause concordent avec le catalogue épinglé.",
+        "en": "All 144 decisions and 1,008 clause outcomes match the pinned catalogue."
+      },
+      "details": {
+        "scope": "structural_only",
+        "full_external_conformance": false,
+        "runtime_compatibility_tested": false
+      }
+    },
+    {
+      "id": "UNCERTAINTY_STRUCTURAL_NEUTRAL",
+      "basis": "COMPUTED_LOCAL_COMPARISON",
+      "summary": {
+        "fr": "Les trois valeurs UNCERTAINTY ne modifient pas les sept implications structurelles ; chacune compte 14 configurations admissibles.",
+        "en": "The three UNCERTAINTY values do not change the seven structural implications; each has 14 admissible configurations."
+      },
+      "details": {
+        "values": [
+          "fail-closed",
+          "fail-open",
+          "human-escalation"
+        ],
+        "local_runtime_support": [
+          "fail-closed"
+        ]
+      }
+    },
+    {
+      "id": "CAPABILITY_VALUE_OUTSIDE_CLOSED_AXIS",
+      "basis": "REVIEWED_SOURCE",
+      "summary": {
+        "fr": "Le registre de capacités contient consensus-reference, absent de l’axe CONCURRENCY fermé des hypothèses ; cette valeur ne fait pas partie des 144 configurations.",
+        "en": "The capability registry contains consensus-reference, which is absent from the closed hypotheses CONCURRENCY axis; this value is outside the 144 configurations."
+      },
+      "details": {
+        "path": "catalog/capabilities-v1.yaml",
+        "line": 156,
+        "axis": "CONCURRENCY",
+        "value": "consensus-reference",
+        "capabilities_version": "1.1.0",
+        "hypotheses_version": "1.0.0"
+      }
+    },
+    {
+      "id": "VIOLATION_MESSAGE_FORMAT",
+      "basis": "COMPUTED_LOCAL_COMPARISON",
+      "summary": {
+        "fr": "Les 171 instances de violation ont une formulation locale différente du message calculé amont ; leurs clause_id concordent.",
+        "en": "All 171 violation instances use local wording different from the upstream generated message; their clause_id values match."
+      },
+      "details": {
+        "different_instances": 171,
+        "comparison_key": "clause_id",
+        "message_is_semantic_key": false
+      }
+    },
+    {
+      "id": "FAMILY_IDS_ARE_NOT_UNIQUE",
+      "basis": "REVIEWED_SOURCE",
+      "summary": {
+        "fr": "rule_id désigne une famille répétable ; clause_id identifie une implication unique.",
+        "en": "rule_id identifies a repeatable family; clause_id identifies a unique implication."
+      },
+      "details": {
+        "family_counts": {
+          "R1_HOST_CONCURRENCY": 3,
+          "R2_CONSENSUS_SCOPE": 1,
+          "R2_CONSENSUS_DEDUP": 2,
+          "R3_LOCAL_DEDUP": 1
+        },
+        "local_violation_objects_omit_rule_id": true,
+        "rule_id_recoverable_from_clause_id": true
+      }
+    },
+    {
+      "id": "LOCAL_CONFIGURATION_IDS",
+      "basis": "REVIEWED_SOURCE",
+      "summary": {
+        "fr": "Les identifiants cfg-* sont propres à la démo ; le catalogue amont identifie les lignes par les quatre valeurs de configuration.",
+        "en": "The cfg-* identifiers belong to the demo; upstream catalogue rows are identified by their four configuration values."
+      },
+      "details": {
+        "join_key": [
+          "HOST_SCOPE",
+          "DEDUP_LAYER",
+          "CONCURRENCY",
+          "UNCERTAINTY"
+        ],
+        "upstream_configuration_id_field": null
+      }
+    },
+    {
+      "id": "EFFECTIVE_GUARANTEES_NOT_ASSESSED",
+      "basis": "REVIEWED_SOURCE",
+      "summary": {
+        "fr": "Les garanties effectives restent non évaluées : toutes les lignes amont portent null et les tests locaux ne constituent pas des attestations au format du registre.",
+        "en": "Effective guarantees remain unassessed: all upstream rows carry null and local tests are not registry-format attestations."
+      },
+      "details": {
+        "upstream_effective_guarantee_value": null,
+        "required_attestation_fields": [
+          "capability_ids",
+          "evidence_type",
+          "verified",
+          "evidence_ref",
+          "evidence_sha256"
+        ],
+        "local_profile_required_pairs": [
+          {
+            "capability_id": "cap.host.single-process",
+            "evidence_type": "deployment.manifest"
+          },
+          {
+            "capability_id": "cap.dedup.local-registry",
+            "evidence_type": "test.idempotency.local"
+          },
+          {
+            "capability_id": "cap.concurrency.thread-lock",
+            "evidence_type": "test.mutex.exclusion"
+          },
+          {
+            "capability_id": "cap.uncertainty.fail-closed",
+            "evidence_type": "test.unknown-outcome.blocks"
+          }
+        ]
+      }
+    },
+    {
+      "id": "PINNED_EXAMPLE_IS_NOT_LOCAL_RUNTIME",
+      "basis": "REVIEWED_SOURCE",
+      "summary": {
+        "fr": "Le profil exemple épinglé est multi-hôte, emploie des réactions de signal et des TTL différents, et déclare attestations: []. Il ne décrit pas le moteur local.",
+        "en": "The pinned example profile is multi-host, uses different signal reactions and TTLs, and declares attestations: []. It does not describe the local engine."
+      },
+      "details": {
+        "path": "profiles/example-aggregate-budget.yaml",
+        "profile_id": "aggregate-budget-multi-host",
+        "hypothesis_signal_ttl_seconds": 30,
+        "local_max_signal_age_seconds": 300,
+        "attestations": []
+      }
+    }
+  ],
+  "limits": {
+    "fr": "Normalisation relue des fichiers épinglés et comparaison structurelle locale uniquement. Aucun code amont exécuté, aucun harnais externe exécuté, aucune garantie effective ni compatibilité runtime démontrée.",
+    "en": "Reviewed normalization of pinned files and local structural comparison only. No upstream code or external harness executed; no effective guarantee or runtime compatibility demonstrated."
+  }
+}

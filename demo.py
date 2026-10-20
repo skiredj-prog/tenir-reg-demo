@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT / ".deps"))
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from tenir_demo.acceptance import run_tests, source_fingerprint
 from tenir_demo.configurator_view import render_configurator
-from tenir_demo.contracts import CONFIGURATOR_TEST_IDS, PROOF_LOOP_TEST_IDS
+from tenir_demo.contracts import CONFIGURATOR_TEST_IDS, PROOF_LOOP_TEST_IDS, ALIGNMENT_TEST_IDS
 from tenir_demo.evidence import seal, write_json, write_public
 from tenir_demo.report import render
 from tenir_demo.scenario import attest, run_scenarios
@@ -43,6 +43,8 @@ def generate(destination, results):
     print(f'{results["product_tests"]["passed"]}/{len(CONFIGURATOR_TEST_IDS)} tests du configurateur ; 144 configurations explorées.')
     if "proof_loop_tests" in results:
         print(f'{results["proof_loop_tests"]["passed"]}/{len(PROOF_LOOP_TEST_IDS)} tests de la boucle de preuve.')
+    if "alignment_tests" in results:
+        print(f'{results["alignment_tests"]["passed"]}/{len(ALIGNMENT_TEST_IDS)} tests du diagnostic d\'alignement.')
     print(f'Configurateur : {destination / "configurator.html"}')
     print(f'Rapport : {destination / "report.html"}')
     return receipt["go_local"]

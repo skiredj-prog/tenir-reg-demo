@@ -1,0 +1,358 @@
+{
+  "schema": "demo-upstream-harness-review/v1",
+  "repository": "skiredj-prog/tenir-conformance-s1-g1",
+  "commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+  "basis": "STATIC_SOURCE_REVIEW",
+  "upstream_code_executed": false,
+  "local_code_executed_for_this_review": false,
+  "conformance_status": "NOT_EVALUATED",
+  "production_status": "NOT_EVALUATED",
+  "source_manifest": "references/upstream-harness-manifest.json",
+  "scope": "Focused pinned source review for four local scenarios; not a run of the upstream harness or a runtime compatibility test.",
+  "support_flags": {
+    "upstream_harness_executed": false,
+    "reference_kernel_execution_verified": false,
+    "local_runtime_is_reference_runtime": false,
+    "numeric_reservation_budget_oracle_in_selected_harness": false,
+    "S1_conformance_demonstrated": false
+  },
+  "scenarios": [
+    {
+      "id": "autorisation",
+      "status": "PARTIAL_BEHAVIORAL_ANALOGY",
+      "local": {
+        "historical_verdict": "PASS",
+        "operation_state": "CONFIRMED",
+        "provider_calls_for_operation": 1,
+        "reservation_after": 0
+      },
+      "upstream": {
+        "contract": "Nominal process_transaction completion",
+        "disposition": "PASS",
+        "client_state": "RESOLVED",
+        "effect_observed": true,
+        "receipt_observed": true
+      },
+      "support_flags": {
+        "same_disposition": true,
+        "same_state_vocabulary": false,
+        "same_effect_identity_protocol": false,
+        "same_numeric_budget_contract": false,
+        "upstream_execution_verified": false
+      },
+      "finding": {
+        "fr": "Les deux chemins autorisent puis enregistrent un résultat positif. CONFIRMED et RESOLVED appartiennent toutefois à des contrats différents ; le moteur local ne possède ni LEI, ni attempt_id distinct, ni permis consommable et reçu lié au nonce.",
+        "en": "Both paths allow an operation and record a positive result. CONFIRMED and RESOLVED belong to different contracts; the local engine has no LEI, distinct attempt_id, consumable permit or nonce-bound receipt."
+      },
+      "sources": [
+        {
+          "local_path": "tenir_demo/engine.py",
+          "start_line": 160,
+          "end_line": 167,
+          "symbol": "Engine.execute completion",
+          "sha256": "b9c4b7defa17be40701658cb52bd90e92ee4a172fb9226f41f19e27b72369f8a"
+        },
+        {
+          "local_path": "references/upstream-harness-src__tenir_conformance__membrane__membrane.py",
+          "repository_path": "src/tenir_conformance/membrane/membrane.py",
+          "start_line": 701,
+          "end_line": 705,
+          "symbol": "process_transaction nominal completion",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/membrane/membrane.py#L701-L705",
+          "sha256": "5460f9f122a6f786641e9b001689c890380f140cd224ad94d0499cdea70529e5"
+        }
+      ]
+    },
+    {
+      "id": "blocage",
+      "status": "PARTIAL_BEHAVIORAL_ANALOGY",
+      "local": {
+        "historical_verdict": "HARD_VETO",
+        "operation_state": "BLOCKED",
+        "provider_calls_for_operation": 0,
+        "reservation_after": 0
+      },
+      "upstream": {
+        "contract": "Deterministic kernel veto",
+        "disposition": "HARD_VETO",
+        "client_state": "FAILED",
+        "permit_issued": false,
+        "new_effect_count": 0
+      },
+      "support_flags": {
+        "same_disposition": true,
+        "same_state_vocabulary": false,
+        "same_veto_cause": false,
+        "same_effect_identity_protocol": false,
+        "upstream_execution_verified": false
+      },
+      "finding": {
+        "fr": "Le refus empêche un nouvel envoi dans les deux modèles. Le veto local porte ici sur une hypothèse affaiblie ; le harnais teste le refus du KernelBridge et conserve FAILED avec non_execution_confirmed puis déverrouillage du LEI.",
+        "en": "Refusal prevents a new dispatch in both models. This local veto concerns a weakened hypothesis; the harness tests KernelBridge refusal and records FAILED with non_execution_confirmed and LEI unlocking."
+      },
+      "sources": [
+        {
+          "local_path": "tenir_demo/engine.py",
+          "start_line": 62,
+          "end_line": 63,
+          "symbol": "evaluate veto",
+          "sha256": "b9c4b7defa17be40701658cb52bd90e92ee4a172fb9226f41f19e27b72369f8a"
+        },
+        {
+          "local_path": "tenir_demo/engine.py",
+          "start_line": 152,
+          "end_line": 157,
+          "symbol": "Engine.execute pre-dispatch state",
+          "sha256": "b9c4b7defa17be40701658cb52bd90e92ee4a172fb9226f41f19e27b72369f8a"
+        },
+        {
+          "local_path": "references/upstream-harness-tests__test_nonce_and_kernel_veto.py",
+          "repository_path": "tests/test_nonce_and_kernel_veto.py",
+          "start_line": 94,
+          "end_line": 112,
+          "symbol": "hard-veto test",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_nonce_and_kernel_veto.py#L94-L112",
+          "sha256": "2d638604f8b98c58f25aa8945618759eec34fbc6a93451522290f7856f21aada"
+        }
+      ]
+    },
+    {
+      "id": "attente",
+      "status": "HOLD_DISPOSITION_ONLY",
+      "local": {
+        "historical_verdict": "HOLD",
+        "operation_state": "HELD",
+        "cause": "SIGNAL_MISSING",
+        "provider_calls_for_operation": 0,
+        "reservation_after": 0
+      },
+      "upstream": {
+        "contract": "Pre-registration payload-binding refusal, not qualification timeout S2",
+        "disposition": "HOLD",
+        "client_state": "UNKNOWN",
+        "new_effect_count": 0
+      },
+      "support_flags": {
+        "same_disposition": true,
+        "same_state_vocabulary": false,
+        "same_observation_protocol": false,
+        "equivalent_to_S2_qualification_timeout": false,
+        "upstream_execution_verified": false
+      },
+      "finding": {
+        "fr": "HOLD est un point commun de disposition, pas une correspondance S2. L’attente locale provient d’un signal absent avant tout envoi ; S2 expire après consommation d’un permis et peut survenir après un effet.",
+        "en": "HOLD is a shared disposition, not an S2 mapping. The local hold comes from a missing signal before dispatch; S2 expires after permit consumption and may occur after an effect."
+      },
+      "sources": [
+        {
+          "local_path": "tenir_demo/engine.py",
+          "start_line": 44,
+          "end_line": 45,
+          "symbol": "evaluate missing observation",
+          "sha256": "b9c4b7defa17be40701658cb52bd90e92ee4a172fb9226f41f19e27b72369f8a"
+        },
+        {
+          "local_path": "tenir_demo/engine.py",
+          "start_line": 64,
+          "end_line": 65,
+          "symbol": "evaluate HOLD",
+          "sha256": "b9c4b7defa17be40701658cb52bd90e92ee4a172fb9226f41f19e27b72369f8a"
+        },
+        {
+          "local_path": "references/upstream-harness-src__tenir_conformance__membrane__membrane.py",
+          "repository_path": "src/tenir_conformance/membrane/membrane.py",
+          "start_line": 506,
+          "end_line": 512,
+          "symbol": "pre-registration binding refusal",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/membrane/membrane.py#L506-L512",
+          "sha256": "5460f9f122a6f786641e9b001689c890380f140cd224ad94d0499cdea70529e5"
+        },
+        {
+          "local_path": "references/upstream-harness-G0_S2_Qualification_Timeout.md",
+          "repository_path": "G0_S2_Qualification_Timeout.md",
+          "start_line": 38,
+          "end_line": 41,
+          "symbol": "S2 initial state",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/G0_S2_Qualification_Timeout.md#L38-L41",
+          "sha256": "6efad9bc207fce902514dfcaefc1095efc464b5349b923482d20085e0a8987c9"
+        }
+      ]
+    },
+    {
+      "id": "issue-inconnue",
+      "status": "DIFFERENT_RETURN_CONTRACT",
+      "local": {
+        "historical_verdict": "PASS",
+        "operation_state": "UNKNOWN",
+        "provider_calls_for_operation": 1,
+        "reservation_after": 10000,
+        "same_operation_replay": "Returns cached historical PASS/UNKNOWN with no new provider call"
+      },
+      "upstream": {
+        "contract": "S1 receipt-loss / unresolved LEI retry",
+        "disposition": "HOLD",
+        "client_state": "UNKNOWN",
+        "retry_permit_issued": false,
+        "new_effect_on_retry": false
+      },
+      "support_flags": {
+        "same_disposition": false,
+        "same_uncertainty_state": true,
+        "no_automatic_repeat_send_intent": true,
+        "same_effect_identity_protocol": false,
+        "target_truth_indistinguishability_tested_locally": false,
+        "same_numeric_budget_contract": false,
+        "S1_conformance_demonstrated": false,
+        "upstream_execution_verified": false
+      },
+      "finding": {
+        "fr": "Le PASS local est la décision historique avant envoi, conservée lors du rejeu. Le harnais renvoie HOLD comme disposition actuelle et verrouille le même LEI. La conservation d’une réservation et l’absence de nouvel appel local ne démontrent pas le protocole S1 des permis, nonces et trois vérités cible.",
+        "en": "Local PASS is the historical pre-dispatch decision, retained on replay. The harness returns HOLD as the current disposition and locks the same LEI. Retained reservation and no extra local call do not demonstrate the S1 permit/nonce protocol or its three target-truth cases."
+      },
+      "sources": [
+        {
+          "local_path": "tenir_demo/engine.py",
+          "start_line": 145,
+          "end_line": 149,
+          "symbol": "Engine.execute immutable replay",
+          "sha256": "b9c4b7defa17be40701658cb52bd90e92ee4a172fb9226f41f19e27b72369f8a"
+        },
+        {
+          "local_path": "tenir_demo/engine.py",
+          "start_line": 117,
+          "end_line": 120,
+          "symbol": "Engine._budget UNKNOWN reservation",
+          "sha256": "b9c4b7defa17be40701658cb52bd90e92ee4a172fb9226f41f19e27b72369f8a"
+        },
+        {
+          "local_path": "references/upstream-harness-src__tenir_conformance__membrane__membrane.py",
+          "repository_path": "src/tenir_conformance/membrane/membrane.py",
+          "start_line": 707,
+          "end_line": 716,
+          "symbol": "Membrane.retry",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/membrane/membrane.py#L707-L716",
+          "sha256": "5460f9f122a6f786641e9b001689c890380f140cd224ad94d0499cdea70529e5"
+        },
+        {
+          "local_path": "references/upstream-harness-tests__test_s1.py",
+          "repository_path": "tests/test_s1.py",
+          "start_line": 35,
+          "end_line": 50,
+          "symbol": "S1 target-truth indistinguishability",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_s1.py#L35-L50",
+          "sha256": "3bc892d268914f45d2a5f9acb49ddb05325a5bdc891f38d3a8f209550f1d7f8c"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "NO_NUMERIC_BUDGET_ORACLE",
+      "status": "LOCAL_EXTENSION",
+      "fr": "Le budget entier consommé + réservé ≤ plafond est une propriété du moteur local. Les chemins S1/S2/S3/S8 examinés portent sur permis, LEI, tentatives et effets ; consumed y désigne notamment un booléen de permis, pas une consommation budgétaire.",
+      "en": "The integer consumed + reserved ≤ ceiling budget is a local-engine property. The reviewed S1/S2/S3/S8 paths concern permits, LEIs, attempts and effects; consumed notably denotes a permit boolean, not budget consumption.",
+      "sources": [
+        {
+          "local_path": "tenir_demo/engine.py",
+          "start_line": 115,
+          "end_line": 120,
+          "symbol": "Engine._budget",
+          "sha256": "b9c4b7defa17be40701658cb52bd90e92ee4a172fb9226f41f19e27b72369f8a"
+        },
+        {
+          "local_path": "references/upstream-harness-src__tenir_conformance__membrane__membrane.py",
+          "repository_path": "src/tenir_conformance/membrane/membrane.py",
+          "start_line": 78,
+          "end_line": 82,
+          "symbol": "Permit consumed boolean",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/membrane/membrane.py#L78-L82",
+          "sha256": "5460f9f122a6f786641e9b001689c890380f140cd224ad94d0499cdea70529e5"
+        },
+        {
+          "local_path": "references/upstream-harness-tests__test_g0_s8_concurrent_admission.py",
+          "repository_path": "tests/test_g0_s8_concurrent_admission.py",
+          "start_line": 183,
+          "end_line": 222,
+          "symbol": "S8c consumable permit",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_g0_s8_concurrent_admission.py#L183-L222",
+          "sha256": "a07dd2301babfca34ca85f5b26ed3d992156c8e9f5cb1f5c194b897e88cd6f76"
+        }
+      ]
+    },
+    {
+      "id": "OPTIONAL_KERNEL_FALLBACK",
+      "status": "EXECUTION_IDENTITY_UNPROVEN",
+      "fr": "KernelBridge utilise le vrai PolicyEngine uniquement si son import réussit. Le nom d’un test « real kernel » ne suffit donc pas à prouver cette identité ; un futur adaptateur doit vérifier explicitement le chemin réel et la version épinglée.",
+      "en": "KernelBridge uses the real PolicyEngine only when its import succeeds. A real-kernel test name therefore does not prove execution identity; a future adapter must explicitly verify the real path and pinned version.",
+      "sources": [
+        {
+          "local_path": "references/upstream-harness-src__tenir_conformance__membrane__kernel_bridge.py",
+          "repository_path": "src/tenir_conformance/membrane/kernel_bridge.py",
+          "start_line": 8,
+          "end_line": 13,
+          "symbol": "optional PolicyEngine import",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/membrane/kernel_bridge.py#L8-L13",
+          "sha256": "2505425baeaf1cc4e502553481c233ba30e941f7c55cff5788529d4a5d285ebc"
+        },
+        {
+          "local_path": "references/upstream-harness-src__tenir_conformance__membrane__kernel_bridge.py",
+          "repository_path": "src/tenir_conformance/membrane/kernel_bridge.py",
+          "start_line": 44,
+          "end_line": 67,
+          "symbol": "real and scalar-fallback branches",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/membrane/kernel_bridge.py#L44-L67",
+          "sha256": "2505425baeaf1cc4e502553481c233ba30e941f7c55cff5788529d4a5d285ebc"
+        }
+      ]
+    },
+    {
+      "id": "BOUNDED_CONCURRENCY_ONLY",
+      "status": "SCOPED_EMPIRICAL_ORACLES",
+      "fr": "S8 inclut des interleavings à deux threads et des permis consommés atomiquement. Ces tests ne constituent ni un oracle de budget numérique, ni une preuve générale multi-processus ou distribuée.",
+      "en": "S8 includes bounded two-thread interleavings and atomically consumed permits. These tests are neither a numeric-budget oracle nor a general multi-process or distributed proof.",
+      "sources": [
+        {
+          "local_path": "references/upstream-harness-tests__test_g0_s8_concurrent_admission.py",
+          "repository_path": "tests/test_g0_s8_concurrent_admission.py",
+          "start_line": 21,
+          "end_line": 78,
+          "symbol": "bounded same-LEI admission race",
+          "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/tests/test_g0_s8_concurrent_admission.py#L21-L78",
+          "sha256": "a07dd2301babfca34ca85f5b26ed3d992156c8e9f5cb1f5c194b897e88cd6f76"
+        }
+      ]
+    }
+  ],
+  "reproducible_checks_needed": [
+    {
+      "id": "PIN_INTEGRITY",
+      "kind": "LOCAL_STATIC",
+      "requirement": "Verify exact Git blob SHA-1 and SHA-256 of all saved source files, commit identity and source anchors."
+    },
+    {
+      "id": "LOCAL_SEMANTIC_MATRIX",
+      "kind": "LOCAL_RUNTIME",
+      "requirement": "Run the four local scenarios and bind the comparison to actual verdict/state/call/budget values; preserve explicit partial/different statuses."
+    },
+    {
+      "id": "UNKNOWN_REPLAY_BOUNDARY",
+      "kind": "LOCAL_RUNTIME",
+      "requirement": "Assert that replay causes no new call, consumes no extra budget and preserves historical PASS/UNKNOWN, while recording that the upstream retry disposition is HOLD."
+    },
+    {
+      "id": "CLOCK_PHASE_SEPARATION",
+      "kind": "LOCAL_STATIC",
+      "requirement": "Keep pre-dispatch observation TTL in seconds separate from post-permit qualification timeout tau_K in milliseconds; never label local missing-signal HOLD as S2."
+    },
+    {
+      "id": "REFERENCE_SUBJECT_ADAPTER",
+      "kind": "FUTURE_UPSTREAM_EXECUTION",
+      "requirement": "Before any execution-compatibility claim, run an explicitly pinned reference subject through an adapter that fails when KernelBridge uses fallback; preserve separate local and upstream results."
+    },
+    {
+      "id": "IDENTITY_PROTOCOL_GAPS",
+      "kind": "FUTURE_IMPLEMENTATION",
+      "requirement": "Implement and test LEI/attempt/nonce/permit/receipt/reconciliation contracts before claiming their S1/S2/S3 conformance."
+    }
+  ]
+}

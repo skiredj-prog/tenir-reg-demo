@@ -1,0 +1,674 @@
+{
+  "schema": "upstream-tenir-review/v1",
+  "repository": "skiredj-prog/tenir_governance",
+  "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+  "review_date": "2026-10-20",
+  "execution_compatibility": "NOT_VERIFIED",
+  "remote_code_executed": false,
+  "local_runtime_modified": false,
+  "scope": {
+    "fr": "Comparaison statique ciblée, pas un verdict de conformité. Les tests locaux cités illustrent des comportements du prototype ; ils n'exécutent pas les gardes de référence.",
+    "en": "Focused static comparison, not a conformance verdict. Referenced local tests illustrate prototype behavior; they do not execute reference guards."
+  },
+  "source_manifest": "references/upstream-tenir-manifest.json",
+  "invariants": [
+    {
+      "id": "I1",
+      "reference_label": "At-most-once effect — conditional property in the manuscript",
+      "reference_source": {
+        "path": "docs/manuscript.md",
+        "line_start": 149,
+        "line_end": 161,
+        "local_copy": "references/upstream-tenir-manuscript.md",
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/manuscript.md#L149-L161"
+      },
+      "local_scope": "One process lifetime; one simulated provider; stable caller-supplied operation_id.",
+      "local_test_ids": [
+        "T05",
+        "T07"
+      ],
+      "notes": {
+        "fr": "Le registre en mémoire empêche un deuxième appel simulé pour le même operation_id et le même request_hash, y compris pendant DISPATCHING et après UNKNOWN. Il ne représente pas l'équivalence d'effets entre identifiants distincts, la survie au crash ni les hypothèses du théorème conditionnel.",
+        "en": "The in-memory registry prevents a second simulated call for the same operation_id and request_hash, including during DISPATCHING and after UNKNOWN. It does not represent effect equivalence across different identifiers, crash survival, or the conditional theorem's assumptions."
+      },
+      "status": "LOCAL_SUBSET"
+    },
+    {
+      "id": "I2",
+      "reference_label": "Not identified in the inspected pinned-runtime guard subset",
+      "reference_source": {
+        "path": "tenir_governance/membrane/__init__.py",
+        "line_start": 208,
+        "line_end": 276,
+        "local_copy": "references/upstream-tenir-membrane.py",
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L208-L276"
+      },
+      "local_scope": "Definition/applicability unresolved in this focused audit.",
+      "local_test_ids": [],
+      "notes": {
+        "fr": "Le sous-ensemble inspecté nomme I3, I4, I6, I7, I8 et I9, mais ne donne pas de définition opérationnelle de I2. Cela ne démontre pas son absence de toutes les références doctrinales. Aucun label ni test d'équivalence n'est inventé.",
+        "en": "The inspected subset names I3, I4, I6, I7, I8 and I9 but supplies no operational definition of I2. This does not establish its absence from every doctrinal reference. No label or equivalence test is invented."
+      },
+      "status": "NOT_ASSESSED"
+    },
+    {
+      "id": "I3",
+      "reference_label": "Attempt terminality",
+      "reference_source": {
+        "path": "tenir_governance/membrane/__init__.py",
+        "line_start": 216,
+        "line_end": 222,
+        "local_copy": "references/upstream-tenir-membrane.py",
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L216-L222"
+      },
+      "local_scope": "Replay protection only; no full reference passage/state protocol.",
+      "local_test_ids": [
+        "T05",
+        "T07"
+      ],
+      "notes": {
+        "fr": "Une opération déjà connue est rejouée sans nouvel envoi ; un payload différent sous le même identifiant provoque Conflict. Le prototype n'implémente pas Passage.is_terminal ni les transitions durables CONFIRMED/FAILED de la référence.",
+        "en": "A known operation is replayed without another dispatch; a different payload under the same identifier raises Conflict. The prototype does not implement Passage.is_terminal or the reference's durable CONFIRMED/FAILED transitions."
+      },
+      "status": "LOCAL_SUBSET"
+    },
+    {
+      "id": "I4",
+      "reference_label": "Only dispatch produces effects — dispatchability guard",
+      "reference_source": {
+        "path": "tenir_governance/membrane/__init__.py",
+        "line_start": 224,
+        "line_end": 230,
+        "local_copy": "references/upstream-tenir-membrane.py",
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L224-L230"
+      },
+      "local_scope": "Control-before-simulated-dispatch only.",
+      "local_test_ids": [
+        "T03",
+        "T04",
+        "T07"
+      ],
+      "notes": {
+        "fr": "Le simulateur est appelé seulement après PASS et réservation ; les veto et attentes ne l'appellent pas. Ces tests observent le journal simulé, sans établir des effets externes ni reprendre le garde de dispatchabilité du Passage.",
+        "en": "The simulator is called only after PASS and reservation; vetoes and holds do not call it. These tests observe the simulated journal without establishing external effects or implementing Passage's dispatchability guard."
+      },
+      "status": "LOCAL_SUBSET"
+    },
+    {
+      "id": "I5",
+      "reference_label": "Not identified in the inspected pinned-runtime guard subset",
+      "reference_source": {
+        "path": "tenir_governance/membrane/__init__.py",
+        "line_start": 208,
+        "line_end": 276,
+        "local_copy": "references/upstream-tenir-membrane.py",
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L208-L276"
+      },
+      "local_scope": "Definition/applicability unresolved in this focused audit.",
+      "local_test_ids": [],
+      "notes": {
+        "fr": "Aucune définition de I5 n'a été trouvée dans les contrats ciblés de ce relevé. Le mapping doctrinal reste ouvert ; aucune conformité n'est déduite du seul chaînage ou de la signature des preuves.",
+        "en": "No I5 definition was found in the targeted contracts of this audit. Doctrinal mapping remains open; chaining or signing records alone does not establish conformance."
+      },
+      "status": "NOT_ASSESSED"
+    },
+    {
+      "id": "I6",
+      "reference_label": "No admission under quarantine",
+      "reference_source": {
+        "path": "tenir_governance/membrane/__init__.py",
+        "line_start": 208,
+        "line_end": 214,
+        "local_copy": "references/upstream-tenir-membrane.py",
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L208-L214"
+      },
+      "local_scope": "No quarantine model in the local engine.",
+      "local_test_ids": [],
+      "notes": {
+        "fr": "Le moteur local n'a pas d'état QUARANTINE_LOCK, de garde global d'admission/dispatch ni de procédure de sortie autorisée. HOLD et UNKNOWN ne sont pas des substituts à ce mécanisme.",
+        "en": "The local engine has no QUARANTINE_LOCK state, global admission/dispatch guard, or authorized exit procedure. HOLD and UNKNOWN do not substitute for that mechanism."
+      },
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "I7",
+      "reference_label": "Delegation integrity",
+      "reference_source": {
+        "path": "tenir_governance/membrane/__init__.py",
+        "line_start": 232,
+        "line_end": 245,
+        "local_copy": "references/upstream-tenir-membrane.py",
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L232-L245"
+      },
+      "local_scope": "Delegation excluded from local scenario model.",
+      "local_test_ids": [],
+      "notes": {
+        "fr": "Aucun objet Agent/Delegation, registre d'agents ou contrôle can_delegate_to n'est utilisé par ce prototype. L'absence de délégation dans ses scénarios ne démontre pas ce garde.",
+        "en": "No Agent/Delegation object, agent registry, or can_delegate_to check is used by this prototype. Delegation being absent from its scenarios does not demonstrate that guard."
+      },
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "I8",
+      "reference_label": "Aggregate budget",
+      "reference_source": {
+        "path": "tenir_governance/membrane/__init__.py",
+        "line_start": 247,
+        "line_end": 264,
+        "local_copy": "references/upstream-tenir-membrane.py",
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L247-L264"
+      },
+      "local_scope": "One process, one in-memory budget; lifecycle/accounting is not equivalent.",
+      "local_test_ids": [
+        "T02",
+        "T03",
+        "T05",
+        "T06"
+      ],
+      "notes": {
+        "fr": "Le plafond consommé + réservé est contrôlé sous RLock pour des unités entières dans un seul processus. Les phases comptables divergent : la référence réserve aussi sur HOLD et consomme au dispatch ; la démo ne réserve pas sur HELD et conserve UNKNOWN en réservé jusqu'à une confirmation qu'elle ne réconcilie pas.",
+        "en": "Consumed plus reserved is checked under RLock for integer units within one process. Accounting phases differ: the reference also reserves on HOLD and commits at dispatch; the demo does not reserve on HELD and keeps UNKNOWN reserved without implementing reconciliation."
+      },
+      "status": "LOCAL_SUBSET"
+    },
+    {
+      "id": "I9",
+      "reference_label": "Trajectory temporal consistency",
+      "reference_source": {
+        "path": "tenir_governance/membrane/__init__.py",
+        "line_start": 266,
+        "line_end": 276,
+        "local_copy": "references/upstream-tenir-membrane.py",
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L266-L276"
+      },
+      "local_scope": "No trajectory object or temporal sequence constraints.",
+      "local_test_ids": [],
+      "notes": {
+        "fr": "La démo vérifie l'âge et l'expiration d'un signal, mais ne possède pas Trajectory.check_temporal_consistency. Le test de fraîcheur T04 n'est pas une preuve de cohérence temporelle d'une trajectoire.",
+        "en": "The demo checks a signal's age and expiry but has no Trajectory.check_temporal_consistency. Freshness test T04 is not evidence of trajectory temporal consistency."
+      },
+      "status": "NOT_IMPLEMENTED"
+    }
+  ],
+  "contracts": [
+    {
+      "id": "VERSION_AND_AUTHORITY",
+      "title": {
+        "fr": "Version et portée d'autorité",
+        "en": "Version and authority scope"
+      },
+      "comparison_status": "DIFFERENT_CONTRACT",
+      "reference_sources": [
+        {
+          "path": "pyproject.toml",
+          "line_start": 5,
+          "line_end": 10,
+          "local_copy": "references/upstream-tenir-pyproject.toml",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/pyproject.toml#L5-L10"
+        },
+        {
+          "path": "tenir_governance/_profile_meta.py",
+          "line_start": 25,
+          "line_end": 46,
+          "local_copy": "references/upstream-tenir-profile-meta.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/_profile_meta.py#L25-L46"
+        }
+      ],
+      "local_sources": [
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 8,
+          "line_end": 16
+        }
+      ],
+      "field_mappings": [
+        {
+          "reference": "platform_version=5.6.1; schema_version=1.2; profile_version=agentic-governance-profile-v1.0.0",
+          "local": "prototype_version=0.1.0; profile.id=tenir-reg-local-demo",
+          "relation": "DISTINCT_VERSION_NAMESPACES"
+        }
+      ],
+      "description": {
+        "fr": "La base de référence déclare 5.6.1, une version de schéma 1.2 et une extension profile-bound. Le prototype conserve ses versions et contrats de démonstration ; l'annonce de promotion en 5.7 ne valide pas son exécution avec cette base.",
+        "en": "The reference declares platform 5.6.1, schema 1.2 and a profile-bound extension. The prototype retains its own demonstration versions and contracts; planned promotion to 5.7 does not validate execution compatibility."
+      }
+    },
+    {
+      "id": "OBSERVATION_AND_EVALUATION_INPUTS",
+      "title": {
+        "fr": "Observation et entrées de l'évaluateur",
+        "en": "Observation and evaluator inputs"
+      },
+      "comparison_status": "DIFFERENT_CONTRACT",
+      "reference_sources": [
+        {
+          "path": "tenir_kernel/kernel.py",
+          "line_start": 49,
+          "line_end": 60,
+          "local_copy": "references/upstream-tenir-kernel.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/kernel.py#L49-L60"
+        },
+        {
+          "path": "tenir_kernel/kernel.py",
+          "line_start": 145,
+          "line_end": 187,
+          "local_copy": "references/upstream-tenir-kernel.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/kernel.py#L145-L187"
+        },
+        {
+          "path": "tenir_kernel/schemas/tenir_1_2.schema.json",
+          "line_start": 70,
+          "line_end": 138,
+          "local_copy": "references/upstream-tenir-schema-1-2.json",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/schemas/tenir_1_2.schema.json#L70-L138"
+        },
+        {
+          "path": "tenir_governance/composition/governor.py",
+          "line_start": 228,
+          "line_end": 247,
+          "local_copy": "references/upstream-tenir-composition-governor.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L228-L247"
+        }
+      ],
+      "local_sources": [
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 23,
+          "line_end": 65
+        },
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 69,
+          "line_end": 74
+        }
+      ],
+      "field_mappings": [
+        {
+          "reference": "pressure, velocity, capacity, coordinates; runtime_object.tau/epistemic",
+          "local": "request.signal.payload.status + issuer/resource/property/observed_at/expires_at, signed as demo-signal/v1",
+          "relation": "NO_VALIDATED_ONE_TO_ONE_MAPPING"
+        },
+        {
+          "reference": "missing authority/context_fit/evidence_quality -> hard gate reasons in adapter",
+          "local": "missing/invalid/expired signal -> HOLD unless another hard-veto reason exists",
+          "relation": "POLICY_BEHAVIOR_DIFFERS"
+        }
+      ],
+      "description": {
+        "fr": "Le noyau de référence évalue un score et une géométrie, ou un objet runtime TENIR 1.2 ; la composition ajoute des entrées épistémiques et des gardes. La démo valide une enveloppe Ed25519/TTL et le budget. Les états VERIFIED/HYPOTHESIS_WEAKENED ne sont pas des alias validés de tau_integrity ou epistemic.status.",
+        "en": "The reference kernel evaluates a score and geometry, or a TENIR 1.2 runtime object; composition adds epistemic inputs and guards. The demo validates an Ed25519/TTL envelope and budget. VERIFIED/HYPOTHESIS_WEAKENED are not validated aliases of tau_integrity or epistemic.status."
+      }
+    },
+    {
+      "id": "DECISION_VOCABULARY",
+      "title": {
+        "fr": "Verdicts et composition",
+        "en": "Verdicts and composition"
+      },
+      "comparison_status": "LOCAL_SUBSET",
+      "reference_sources": [
+        {
+          "path": "tenir_governance/composition/decisions.py",
+          "line_start": 23,
+          "line_end": 44,
+          "local_copy": "references/upstream-tenir-composition-decisions.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/decisions.py#L23-L44"
+        },
+        {
+          "path": "tenir_governance/composition/lattice.py",
+          "line_start": 46,
+          "line_end": 126,
+          "local_copy": "references/upstream-tenir-composition-lattice.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py#L46-L126"
+        },
+        {
+          "path": "tenir_governance/composition/schema_adapter.py",
+          "line_start": 46,
+          "line_end": 62,
+          "local_copy": "references/upstream-tenir-schema-adapter.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/schema_adapter.py#L46-L62"
+        }
+      ],
+      "local_sources": [
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 19,
+          "line_end": 66
+        },
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 152,
+          "line_end": 156
+        }
+      ],
+      "field_mappings": [
+        {
+          "reference": "composed_decision in PASS,FLAG,HOLD,HARD_VETO",
+          "local": "decision.verdict in PASS,HOLD,HARD_VETO",
+          "relation": "FLAG_AND_DUAL_KERNEL_COMPOSITION_NOT_IMPLEMENTED"
+        },
+        {
+          "reference": "posture + execution_disposition + execution_mode",
+          "local": "decision.verdict + operation_state",
+          "relation": "NO_CANONICAL_POSTURE_OR_EXECUTION_MODE_EXPORT"
+        }
+      ],
+      "description": {
+        "fr": "La séparation entre décision et résultat existe dans les deux périmètres. La démo n'exécute ni le scoring, ni la composition à deux noyaux, ni FLAG ou les postures canoniques. Les libellés communs ne prouvent pas une décision équivalente.",
+        "en": "Both scopes separate decision from outcome. The demo executes neither scoring nor dual-kernel composition, FLAG, or canonical postures. Shared labels do not establish equivalent decisions."
+      }
+    },
+    {
+      "id": "IDENTITY_AND_LIFECYCLE",
+      "title": {
+        "fr": "Identité, états et reprise",
+        "en": "Identity, states and recovery"
+      },
+      "comparison_status": "DIFFERENT_CONTRACT",
+      "reference_sources": [
+        {
+          "path": "tenir_governance/objects/passage.py",
+          "line_start": 31,
+          "line_end": 68,
+          "local_copy": "references/upstream-tenir-passage.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/objects/passage.py#L31-L68"
+        },
+        {
+          "path": "tenir_governance/operations/registry.py",
+          "line_start": 72,
+          "line_end": 121,
+          "local_copy": "references/upstream-tenir-operation-registry.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/operations/registry.py#L72-L121"
+        },
+        {
+          "path": "tenir_governance/operations/registry.py",
+          "line_start": 196,
+          "line_end": 248,
+          "local_copy": "references/upstream-tenir-operation-registry.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/operations/registry.py#L196-L248"
+        }
+      ],
+      "local_sources": [
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 103,
+          "line_end": 113
+        },
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 135,
+          "line_end": 167
+        }
+      ],
+      "field_mappings": [
+        {
+          "reference": "idempotency_key + passage_id + agent_id + action_type; durable OperationRecord",
+          "local": "operation_id + RFC8785 request_hash; in-memory operations dict",
+          "relation": "IDENTITY_FIELDS_AND_DURABILITY_DIFFER"
+        },
+        {
+          "reference": "created/hold/reserved/dispatching/confirmed/failed/unknown/escalated",
+          "local": "BLOCKED/HELD/DISPATCHING/CONFIRMED/UNKNOWN",
+          "relation": "STATE_MACHINE_NOT_ENUM_CASE_CONVERSION"
+        }
+      ],
+      "description": {
+        "fr": "La référence distingue passage, identité idempotente, états durables et transitions autorisées, avec UNKNOWN réconciliable. La démo rejoue une opération existante en mémoire et rejette les conflits de payload ; elle ne fournit ni FAILED, ni résolution de HOLD/UNKNOWN, ni reprise après redémarrage.",
+        "en": "The reference distinguishes passage, idempotent identity, durable states and legal transitions, with reconcilable UNKNOWN. The demo replays existing in-memory operations and rejects payload conflicts; it provides neither FAILED, HOLD/UNKNOWN resolution, nor restart recovery."
+      }
+    },
+    {
+      "id": "BUDGET_ACCOUNTING_PHASES",
+      "title": {
+        "fr": "Phases de réservation et de consommation",
+        "en": "Reservation and consumption phases"
+      },
+      "comparison_status": "DIFFERENT_CONTRACT",
+      "reference_sources": [
+        {
+          "path": "tenir_governance/composition/governor.py",
+          "line_start": 485,
+          "line_end": 557,
+          "local_copy": "references/upstream-tenir-composition-governor.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L485-L557"
+        },
+        {
+          "path": "tenir_governance/composition/governor.py",
+          "line_start": 827,
+          "line_end": 855,
+          "local_copy": "references/upstream-tenir-composition-governor.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L827-L855"
+        },
+        {
+          "path": "tenir_governance/composition/governor.py",
+          "line_start": 1130,
+          "line_end": 1207,
+          "local_copy": "references/upstream-tenir-composition-governor.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L1130-L1207"
+        }
+      ],
+      "local_sources": [
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 115,
+          "line_end": 120
+        },
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 150,
+          "line_end": 166
+        }
+      ],
+      "field_mappings": [
+        {
+          "reference": "budget reserved on PASS/FLAG/HOLD when resource in scope; resource.commit at dispatch; budget_committed=True",
+          "local": "reservation only for DISPATCHING/UNKNOWN; consumed only for CONFIRMED",
+          "relation": "COMMIT_POINT_AND_HOLD_ACCOUNTING_DIFFER"
+        },
+        {
+          "reference": "FAILED after reconciliation refunds consumed or releases reserved based on durable ownership flags",
+          "local": "UNKNOWN remains reserved; no reconciliation method",
+          "relation": "RECONCILIATION_AND_REFUND_NOT_IMPLEMENTED"
+        }
+      ],
+      "description": {
+        "fr": "Le plafond est une préoccupation commune, mais les valeurs consommé/réservé ne décrivent pas les mêmes phases. Dans la référence, le montant est consommé au dispatch avant l'appel fournisseur ; la démo attend CONFIRMED. Une comparaison de compteurs doit conserver cette différence, notamment pour UNKNOWN et HOLD.",
+        "en": "The ceiling is a shared concern, but consumed/reserved describe different phases. The reference commits at dispatch before the provider call; the demo waits for CONFIRMED. Counter comparisons must retain this difference, especially for UNKNOWN and HOLD."
+      }
+    },
+    {
+      "id": "PROVIDER_AND_RECONCILIATION",
+      "title": {
+        "fr": "Contrat fournisseur et incertitude",
+        "en": "Provider contract and uncertainty"
+      },
+      "comparison_status": "LOCAL_SUBSET",
+      "reference_sources": [
+        {
+          "path": "tenir_governance/operations/provider.py",
+          "line_start": 39,
+          "line_end": 145,
+          "local_copy": "references/upstream-tenir-operation-provider.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/operations/provider.py#L39-L145"
+        },
+        {
+          "path": "tenir_governance/composition/governor.py",
+          "line_start": 908,
+          "line_end": 1034,
+          "local_copy": "references/upstream-tenir-composition-governor.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L908-L1034"
+        },
+        {
+          "path": "tenir_governance/composition/governor.py",
+          "line_start": 1036,
+          "line_end": 1080,
+          "local_copy": "references/upstream-tenir-composition-governor.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L1036-L1080"
+        }
+      ],
+      "local_sources": [
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 86,
+          "line_end": 100
+        },
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 158,
+          "line_end": 166
+        }
+      ],
+      "field_mappings": [
+        {
+          "reference": "DispatchProvider.execute(idempotency_key,action_type,amount,agent_id,metadata) -> DispatchResult; reconcile() -> ReconciliationResult",
+          "local": "SimulatedProvider.dispatch(request) -> CONFIRMED or UNKNOWN; cumulative in-memory journal",
+          "relation": "DIFFERENT_PROVIDER_PROTOCOL"
+        },
+        {
+          "reference": "confirmed/failed/pending/unknown + provider_reference/raw_response/error/latency_ms",
+          "local": "CONFIRMED/UNKNOWN only; no provider reconciliation",
+          "relation": "LOCAL_SIMULATED_SUBSET"
+        }
+      ],
+      "description": {
+        "fr": "La démo conserve correctement l'incertitude après une exception simulée, mais n'implémente pas le protocole fournisseur de référence ni ses issues FAILED/PENDING, le rapprochement, les références fournisseur ou les dépendances à son idempotence externe.",
+        "en": "The demo preserves uncertainty after a simulated exception but does not implement the reference provider protocol, FAILED/PENDING outcomes, reconciliation, provider references, or external-idempotency dependencies."
+      }
+    },
+    {
+      "id": "EVIDENCE_AND_CANONICAL_EXPORT",
+      "title": {
+        "fr": "Preuve, chaînage et export canonique",
+        "en": "Evidence, chaining and canonical export"
+      },
+      "comparison_status": "DIFFERENT_CONTRACT",
+      "reference_sources": [
+        {
+          "path": "tenir_governance/composition/lattice.py",
+          "line_start": 131,
+          "line_end": 145,
+          "local_copy": "references/upstream-tenir-composition-lattice.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py#L131-L145"
+        },
+        {
+          "path": "tenir_governance/composition/lattice.py",
+          "line_start": 163,
+          "line_end": 223,
+          "local_copy": "references/upstream-tenir-composition-lattice.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py#L163-L223"
+        },
+        {
+          "path": "tenir_governance/composition/schema_adapter.py",
+          "line_start": 71,
+          "line_end": 88,
+          "local_copy": "references/upstream-tenir-schema-adapter.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/schema_adapter.py#L71-L88"
+        },
+        {
+          "path": "tenir_governance/composition/schema_adapter.py",
+          "line_start": 133,
+          "line_end": 169,
+          "local_copy": "references/upstream-tenir-schema-adapter.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/schema_adapter.py#L133-L169"
+        },
+        {
+          "path": "tenir_kernel/schemas/tenir_1_2.schema.json",
+          "line_start": 6,
+          "line_end": 27,
+          "local_copy": "references/upstream-tenir-schema-1-2.json",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/schemas/tenir_1_2.schema.json#L6-L27"
+        }
+      ],
+      "local_sources": [
+        {
+          "path": "tenir_demo/evidence.py",
+          "line_start": 12,
+          "line_end": 49
+        },
+        {
+          "path": "tenir_demo/engine.py",
+          "line_start": 122,
+          "line_end": 133
+        },
+        {
+          "path": "tenir_demo/proof_loop.py",
+          "line_start": 80,
+          "line_end": 86
+        }
+      ],
+      "field_mappings": [
+        {
+          "reference": "LedgerEntry{entry_id,timestamp,previous_hash,chain_hash,kernel,decision,rationale,passage_id,idempotency_key,...}; GENESIS chain root; sorted compact json SHA256",
+          "local": "{payload,integrity}; demo-evidence/v1; previous_hash=digest(previous envelope), first previous_hash=null; RFC8785+Ed25519 domain-separated payload signature",
+          "relation": "DIFFERENT_SERIALIZATION_CHAIN_AND_INTEGRITY_CONTRACT"
+        },
+        {
+          "reference": "schema1.2 object needs explicit canonical_context(identity,tau,epistemic,trace,scores,...)",
+          "local": "demo-proof-loop/v1 documentary projection with signed field pointers",
+          "relation": "REPORT_PROJECTION_IS_NOT_SCHEMA1_2_OR_ADAPTER"
+        }
+      ],
+      "description": {
+        "fr": "Le ledger composé inspecté utilise un hash SHA-256 de JSON trié et compact ; il n'est pas l'enveloppe Ed25519/RFC8785 de la démo. Le schéma canonique exige un contexte explicite que le record local ne contient pas. Aucun format n'est déclaré équivalent ou supérieur à l'autre ; un adaptateur doit être conçu puis validé séparément.",
+        "en": "The inspected composition ledger hashes sorted compact JSON with SHA-256; it is not the demo's Ed25519/RFC8785 envelope. Canonical schema export requires explicit context absent from the local record. Neither format is declared equivalent or superior; an adapter must be designed and validated separately."
+      }
+    }
+  ],
+  "source_inconsistencies": [
+    {
+      "id": "GUIDE_INVARIANT_NUMBER_DRIFT",
+      "description": {
+        "fr": "Le tableau du guide associe plusieurs numéros à d'autres contrôles que l'implémentation et le tableau du manuscrit. Utiliser les labels exacts du code pour ce relevé et laisser le conflit visible.",
+        "en": "The guide table assigns several invariant numbers to different controls than the implementation and manuscript table. Use exact code labels for this audit and keep the conflict visible."
+      },
+      "sources": [
+        {
+          "path": "docs/agentic-governance-guide.md",
+          "line_start": 126,
+          "line_end": 135,
+          "local_copy": "references/upstream-tenir-agentic-guide.md",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/agentic-governance-guide.md#L126-L135"
+        },
+        {
+          "path": "tenir_governance/membrane/__init__.py",
+          "line_start": 208,
+          "line_end": 276,
+          "local_copy": "references/upstream-tenir-membrane.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L208-L276"
+        },
+        {
+          "path": "docs/manuscript.md",
+          "line_start": 179,
+          "line_end": 188,
+          "local_copy": "references/upstream-tenir-manuscript.md",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/manuscript.md#L179-L188"
+        }
+      ],
+      "resolution": "CODE_LABEL_USED_FOR_PINNED_IMPLEMENTATION_AUDIT; doctrinal numbering not resolved"
+    },
+    {
+      "id": "MANUSCRIPT_HMAC_VS_COMPOSITION_LEDGER",
+      "description": {
+        "fr": "Le manuscrit dit que le ledger utilise actuellement HMAC ; le code du ledger composé inspecté calcule SHA-256 sans clé sur le JSON sérialisé. Ce constat est limité à composition/lattice.py et ne généralise pas tous les ledgers historiques du dépôt.",
+        "en": "The manuscript says the ledger currently uses HMAC; the inspected composition ledger computes unkeyed SHA-256 over serialized JSON. This finding is scoped to composition/lattice.py and does not generalize to every historical ledger in the repository."
+      },
+      "sources": [
+        {
+          "path": "docs/manuscript.md",
+          "line_start": 413,
+          "line_end": 419,
+          "local_copy": "references/upstream-tenir-manuscript.md",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/manuscript.md#L413-L419"
+        },
+        {
+          "path": "tenir_governance/composition/lattice.py",
+          "line_start": 185,
+          "line_end": 219,
+          "local_copy": "references/upstream-tenir-composition-lattice.py",
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py#L185-L219"
+        }
+      ],
+      "resolution": "ACTUAL_COMPOSITION_LEDGER_CONTRACT_RECORDED; documentation drift retained"
+    }
+  ]
+}

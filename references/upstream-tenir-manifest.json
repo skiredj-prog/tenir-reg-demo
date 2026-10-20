@@ -1,0 +1,223 @@
+{
+  "schema": "upstream-source-manifest/v1",
+  "repository": "skiredj-prog/tenir_governance",
+  "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+  "observed_date": "2026-10-20",
+  "declared_base_version": "5.6.1",
+  "target_promotion": "5.7 (project-owner confirmation; not asserted as published)",
+  "retrieval_method": "Read-only GitHub connector fetch_file at pinned commit; UTF-8 files; Git blob SHA-1 checked against returned blob identity.",
+  "execution_compatibility": "NOT_VERIFIED",
+  "remote_code_executed": false,
+  "scope": "Focused source snapshot for version, decision/execution contracts, governance guards, ledger, provider/registry, runtime schema and documented limitations. Not the complete upstream repository.",
+  "files": [
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "pyproject.toml",
+      "local_copy": "references/upstream-tenir-pyproject.toml",
+      "github_blob_sha": "05047798665a9bf03eca49a8f34738279aa9e8f1",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/pyproject.toml",
+      "sha256": "e7b7823e96ee54bd2517995b27f4e22eee38efdc97f35b2a7549037f82a5bb4f",
+      "size_bytes": 2668,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/__init__.py",
+      "local_copy": "references/upstream-tenir-package-init.py",
+      "github_blob_sha": "488db66687816aa5fed8c7cd4ee967dd6d2a8261",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/__init__.py",
+      "sha256": "07778022846e32e2ee7426a910a7bcbb4024f0d017a0397d0bff6b68aff1d994",
+      "size_bytes": 5335,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/_profile_meta.py",
+      "local_copy": "references/upstream-tenir-profile-meta.py",
+      "github_blob_sha": "7f0bab2d43ce900e40cdbd4566fd0ed303e3fdb6",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/_profile_meta.py",
+      "sha256": "98d950cb723dd45893db8f21a1f4dbb1e72337e26c1add2df39cc4a5c190d8ff",
+      "size_bytes": 2140,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/composition/decisions.py",
+      "local_copy": "references/upstream-tenir-composition-decisions.py",
+      "github_blob_sha": "3d4f518bca810120a81f6b9a10dd842d8ace94cb",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/decisions.py",
+      "sha256": "fa2691c10200f958430094766f2618f815e00b7c8eda0b5e22e836d36c0c19e5",
+      "size_bytes": 3442,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/membrane/__init__.py",
+      "local_copy": "references/upstream-tenir-membrane.py",
+      "github_blob_sha": "dff84667feaa551112a7f262637573a01a6560be",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py",
+      "sha256": "dceab6b76633ae18e82e94161867b00a917989c117fb8fa80a6eb79f8efa3efa",
+      "size_bytes": 18261,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/objects/passage.py",
+      "local_copy": "references/upstream-tenir-passage.py",
+      "github_blob_sha": "4dd95a863e1e75e034b424fbf7a3a4382e9cb51d",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/objects/passage.py",
+      "sha256": "6479686cdf28c3bcc9ada261e1c4ea6abeebc1068781715d6ca7d0237fc04bc7",
+      "size_bytes": 3815,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/objects/resource.py",
+      "local_copy": "references/upstream-tenir-resource.py",
+      "github_blob_sha": "6244aa542f9b21f49942a397957e582092f40a3a",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/objects/resource.py",
+      "sha256": "7f80d93caaf9190c8127dfe4dcdbb6e129eadcd9c0f554b6f2e5124f3226f911",
+      "size_bytes": 2237,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/composition/governor.py",
+      "local_copy": "references/upstream-tenir-composition-governor.py",
+      "github_blob_sha": "c8f0e89e991371f66464e486e0149369b9aea165",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py",
+      "sha256": "69e88edc47eac338eb6c3533c191948798606ae30f5f4495fbb8a3f5580f1df8",
+      "size_bytes": 86401,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/composition/lattice.py",
+      "local_copy": "references/upstream-tenir-composition-lattice.py",
+      "github_blob_sha": "607770b90a820ddb2211a83d227b482d3bf8c708",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py",
+      "sha256": "df2e2aea06222025f401cc4a06241fdbb1b493dcd5ec8104e868a750abcdd454",
+      "size_bytes": 9115,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/composition/schema_adapter.py",
+      "local_copy": "references/upstream-tenir-schema-adapter.py",
+      "github_blob_sha": "21dc3208fa18c8d27f26656d51b294a99d00e467",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/schema_adapter.py",
+      "sha256": "78e25f802d6e39af0a677b6ed45ddaee09aae4a4079497f20d2dc28463091f84",
+      "size_bytes": 12991,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/operations/registry.py",
+      "local_copy": "references/upstream-tenir-operation-registry.py",
+      "github_blob_sha": "29b4058cf1283cb7e275755d1043ee550e2cd6c6",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/operations/registry.py",
+      "sha256": "18b0ea1c5cbd4ed3593fe264a2038051d250d10abba64c9a18625e1956d71c51",
+      "size_bytes": 26112,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_governance/operations/provider.py",
+      "local_copy": "references/upstream-tenir-operation-provider.py",
+      "github_blob_sha": "a5b65962f9e112494a2384bd24e046b883f6862a",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/operations/provider.py",
+      "sha256": "6fc3073c1c83fb7ad51dfd21b95131220755e0c4408a27f25f8540426479ec7a",
+      "size_bytes": 21160,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_kernel/kernel.py",
+      "local_copy": "references/upstream-tenir-kernel.py",
+      "github_blob_sha": "d1f6352d68c35409e1bb80b51d3258ddb2b6d2df",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/kernel.py",
+      "sha256": "280c05554ce9bbeac1cd54c50d2a7eb4bb60a78beb688530f626fe1172a72319",
+      "size_bytes": 7728,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tenir_kernel/schemas/tenir_1_2.schema.json",
+      "local_copy": "references/upstream-tenir-schema-1-2.json",
+      "github_blob_sha": "745776bbb872073c2950ea9dbf448c4329643cda",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/schemas/tenir_1_2.schema.json",
+      "sha256": "b2a7552f7e7047422851688217de13c4fba5aefa13f82298b6d3d92b90a78190",
+      "size_bytes": 12161,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "docs/agentic-governance-guide.md",
+      "local_copy": "references/upstream-tenir-agentic-guide.md",
+      "github_blob_sha": "d29c88371c2490f7e853ef53ca38cccf6291843c",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/agentic-governance-guide.md",
+      "sha256": "49d27d5b3ef02428f939c3410d4bd9b5ef316dbc64f589bb5d31ba6f8a6f3db7",
+      "size_bytes": 10681,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "docs/manuscript.md",
+      "local_copy": "references/upstream-tenir-manuscript.md",
+      "github_blob_sha": "183beb0598bd204bcd69baf1c1339d95ddef192f",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/manuscript.md",
+      "sha256": "f22a5e3ee160b0102a6e0f97d75b5a8e68d847db642d8094801c78e7316d5d3f",
+      "size_bytes": 33130,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "CHANGELOG.md",
+      "local_copy": "references/upstream-tenir-changelog.md",
+      "github_blob_sha": "5dec1e6d5cbd7922cd33acb3a19b98846bac656c",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/CHANGELOG.md",
+      "sha256": "1c208c399dbbae7690ba089f701f60226586716eb8e9742cc44f2ebfd2b01432",
+      "size_bytes": 36413,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "tests/test_membrane.py",
+      "local_copy": "references/upstream-tenir-test-membrane.py",
+      "github_blob_sha": "555c808d070f996f662b09e15ae690457c8ad4b6",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tests/test_membrane.py",
+      "sha256": "6d9725ca6118362069c73246105a3b1bf6b08313945b4ba5ecafdce2b4ea40f7",
+      "size_bytes": 11270,
+      "git_blob_verified": true
+    },
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "path": "LICENSE",
+      "local_copy": "references/upstream-tenir-LICENSE",
+      "github_blob_sha": "6274ea95f23edf98beff93321641093589dc2a1b",
+      "canonical_blob_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/LICENSE",
+      "sha256": "104c165f9953dcdfc5ef04fe6491f4bb970622e2fcfec759431eebef86a43d16",
+      "size_bytes": 11382,
+      "git_blob_verified": true
+    }
+  ]
+}

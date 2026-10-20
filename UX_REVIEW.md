@@ -53,6 +53,7 @@ node tests/check_journey.cjs output
 node tests/check_landing.cjs
 node tests/check_theme.cjs output
 node tests/check_proof_loop.cjs output
+node tests/check_alignment.cjs output
 .\run.ps1 verify
 ```
 
@@ -72,3 +73,7 @@ Faire un passage sur ordinateur et sur téléphone, notamment à 390 × 844, ave
 Mesurer réussite, hésitations, erreurs et besoin d'assistance. La présente révision améliore les obstacles identifiés ; aucun score d'intuitivité ou taux de réussite utilisateur n'est encore établi.
 
 Le [protocole de séance](USER_WALKTHROUGH.md) fournit les consignes, les critères pour l'observateur et une grille vierge ; son statut reste « à réaliser ».
+
+## Diagnostic d’alignement des références
+
+Le configurateur et le rapport montrent une synthèse visible, puis des détails repliables : comparaison exhaustive des 144 configurations/1 008 résultats de clause, sept contrats, neuf invariants, quatre rapprochements de scénario et sources épinglées. La synthèse distingue la concordance structurelle de la compatibilité d’exécution non vérifiée. Les écarts de budget, de reprise UNKNOWN et de numérotation sont sourcés. Les explications restent documentaires. Les contrôles de langue et de thème couvrent ce panneau ; sa lisibilité réelle et son usage sur mobile restent à observer.

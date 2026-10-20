@@ -78,11 +78,11 @@ function refreshNavigationLinks() {
   else el('rules-demo-link').removeAttribute('href');
   renderContextReturn();
 }
-function saveNavigation() {
+function saveNavigation(fragment = null) {
   const state=navigationState();
   try{if(typeof sessionStorage !== 'undefined')sessionStorage.setItem(navigationStorageKey,JSON.stringify(state));}catch{}
   try{if(typeof history !== 'undefined' && typeof history.replaceState === 'function' && navigationLocation.pathname)
-    history.replaceState(null,'','configurator.html?'+stateQuery(lastScenario,returnContext && returnContext.type)+(activeView==='rules'?'#rules-scope':'#workspace'));}catch{}
+    history.replaceState(null,'','configurator.html?'+stateQuery(lastScenario,returnContext && returnContext.type)+(fragment || (navigationLocation.hash==='#reference-alignment'?'#reference-alignment':activeView==='rules'?'#rules-scope':'#workspace')));}catch{}
 }
 function restoreNavigation() {
   let saved=null;
@@ -146,7 +146,7 @@ function showView(view, moveFocus = false) {
   el('journey-rules').setAttribute('aria-pressed',String(rulesView));
   el('skip-content').setAttribute('href',rulesView?'#rules-heading':'#workspace');
   if(moveFocus) (rulesView ? el('rules-heading') : el('field-'+fields[step])).focus();
-  refreshNavigationLinks();saveNavigation();
+  refreshNavigationLinks();saveNavigation(moveFocus ? (rulesView?'#rules-scope':'#workspace') : null);
 }
 function editField(field) {
   showView('configuration');
@@ -236,7 +236,9 @@ function render() {
   el('runtime-status').setAttribute('data-status',entry.runtime_supported ? 'supported' : 'unsupported');
   el('guarantees-status').textContent = entry.guarantees_status === 'LOCAL_DEMO_TESTED' ? ui('Recette locale testée · voir les preuves','Local tests passed · see evidence') : ui('Non démontrées pour cette configuration','Not demonstrated for this configuration');
   el('guarantees-status').setAttribute('data-status',entry.guarantees_status);
-  el('invariants-status').textContent = ui('Guides reçus · applicabilité non intégrée','Guides received · applicability not integrated');
+  const invariantStatus = (model.provenance.invariants === 'STATIC_REVIEW_PARTIAL_SCOPE' ? ui('Revue statique · périmètre partiel','Static review · partial scope') : ui('Revue indisponible','Review unavailable'));
+  el('invariants-status').textContent = invariantStatus;
+  el('scope-invariants-status').textContent = invariantStatus;
   const demoAvailable = entry.runtime_supported && model.demo.available;
   el('local-profile-recovery').hidden=entry.runtime_supported;
   el('demo-profile-preview').textContent=ui('Changements proposés : ','Proposed changes: ')+fields.filter(field=>current[field]!==model.runtime_configuration[field]).map(field=>fieldName(field)+' : '+valueLabel(field,current[field])+' → '+valueLabel(field,model.runtime_configuration[field])).join(' ; ')+ui('. Vous pourrez annuler ce changement.','. You can undo this change.');

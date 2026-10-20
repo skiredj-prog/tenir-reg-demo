@@ -26,5 +26,5 @@ def selfcheck():
         total += 1
         if not violations(config):
             counts[config["HOST_SCOPE"]] += 1
-    return {"label": "Énumération interne des règles extraites du HTML ; catalogue externe NON ÉVALUÉ",
+    return {"label": "Énumération interne des règles extraites du HTML ; comparaison externe dans le diagnostic d'alignement",
             "configurations": total, "admissible": sum(counts.values()), "by_scope": counts}

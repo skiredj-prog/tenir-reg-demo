@@ -10,6 +10,7 @@ from .engine import PROFILE
 from .evidence import digest
 from .structure import AXES, RULES, violations
 from .proof_loop import STAGE_IDS
+from .alignment import build_alignment
 
 
 SCHEMA = "demo-configurator/v1"
@@ -49,6 +50,7 @@ def build_model(bundle=None, verification=None):
     selecting the runtime's configuration or from passing the structural rules.
     """
     runtime_configuration = PROFILE["configuration"]
+    alignment = build_alignment()
     verified_runtime = _verified_runtime(bundle, verification)
     rule_by_id = {rule["clause_id"]: rule for rule in RULES}
     entries = []
@@ -114,15 +116,16 @@ def build_model(bundle=None, verification=None):
         "unsigned": True,
         "axes": deepcopy(AXES),
         "rules": deepcopy(RULES),
+        "alignment": alignment,
         "provenance": {
             "rules_version": RULES_VERSION,
             "rules_sha256": digest(RULES),
             "axes_sha256": digest(AXES),
             "rules_source": "references/rules.json",
             "axes_source": "references/axes.json",
-            "label": "Règles extraites des HTML de référence ; catalogue externe non évalué.",
-            "external_catalogue": "NOT_EVALUATED",
-            "invariants": "GUIDES_RECEIVED_NOT_MAPPED",
+            "label": "Règles extraites des HTML ; comparaison structurelle épinglée, revue statique des contrats.",
+            "external_catalogue": alignment["structural"]["status"],
+            "invariants": "STATIC_REVIEW_PARTIAL_SCOPE" if alignment["runtime_review"] else "NOT_ASSESSED",
             "invariant_references": ["references/reg-specification-guide.pdf", "references/tenir-gov-operationalization-guide.pdf"],
             "alignment_target": {"runtime": "TENIR-Gov", "version": "5.7",
                                  "status": "BASE_CONFIRMED_PROMOTION_PLANNED", "base_version": "5.6.1",

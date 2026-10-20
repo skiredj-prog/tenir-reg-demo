@@ -23,14 +23,14 @@ La recherche initiale n'avait pas trouvé de référence nommée 5.7. Le porteur
 - L'accueil présente l'architecture en cinq couches, son vocabulaire FR/EN et le rôle des trois dépôts.
 - La base 5.6.1 confirmée, sa promotion prévue en 5.7, les documents d'architecture 5.6.0 et le prototype local sont identifiés séparément.
 - Chaque couche indique ce qu'elle signifie et ce que la démo illustre effectivement.
-- Les guides nouvellement reçus remplacent le constat initial d'absence documentaire ; le mapping complet des invariants reste non intégré.
+- Le diagnostic compare les 144 configurations et 1 008 résultats de clause au catalogue épinglé, avec contrôle des copies et empreintes. Une revue statique source neuf invariants et sept contrats, sans exécuter le code amont. Voir [le diagnostic détaillé](REFERENCE_ALIGNMENT.md).
 - Les preuves Ed25519 de la démo restent attribuées à son format `demo-evidence/v1`, sans être présentées comme la sortie du runtime de référence.
 
 ## Vérifications nécessaires pour un alignement d'exécution 5.7
 
 1. **Référence identifiée et confirmée** : utiliser `tenir_governance@41fae550c1e0a3632e2bde473db6d31b450d4269`, version déclarée 5.6.1, comme base destinée à devenir 5.7.
-2. Comparer ses profils, axes, règles et invariants avec les données réellement utilisées dans ce dépôt.
-3. Comparer les contrats d'observation, d'exécution et de preuve ; documenter les adaptations ou exclusions.
+2. **Comparaison structurelle et revue statique livrées** : les domaines et sept clauses concordent ; les neuf invariants sont bornés au périmètre de revue, sans validation runtime.
+3. **Contrats comparés** : les écarts d'observation, d'identité, de budget, de reprise et de preuve sont documentés. Leur contrat d'adaptation reste à définir.
 4. Choisir et tester un adaptateur vers le runtime de référence si le périmètre du produit demande cette intégration.
 5. Rejouer les scénarios et la vérification avec une trace de version et de déploiement adaptée.
 
