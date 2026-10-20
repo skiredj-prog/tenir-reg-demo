@@ -79,9 +79,20 @@ function checkLocalTarget(href) {
   const [relative, fragment] = href.split('#');
   const target = relative ? path.resolve(root, decodeURIComponent(relative.split('?')[0])) : pagePath;
   assert.ok(fs.existsSync(target), `Missing navigation target: ${href}`);
+  if (path.basename(target) === 'report.html') {
+    const report = fs.readFileSync(target, 'utf8');
+    const model = JSON.parse(report.match(/<script type="application\/json" id="signed-model">([\s\S]*?)<\/script>/)[1]);
+    const parameters = new URL(href, 'https://local.invalid/').searchParams;
+    const scenario = parameters.get('scenario'), step = parameters.get('loop');
+    if (scenario) assert.ok(model.operations.some(record => record.payload.operation_id === scenario), `Unknown signed scenario: ${href}`);
+    if (step) assert.ok(scenario && model.proof_loops[scenario]?.stages.some(stage => stage.id === step), `Unknown evidence-loop step: ${href}`);
+  }
   if (fragment) {
     const destination = fs.readFileSync(target, 'utf8');
-    assert.ok([...destination.matchAll(/\bid=["']([^"']+)["']/g)].some(([, id]) => id === decodeURIComponent(fragment)), `Missing navigation fragment: ${href}`);
+    const staticTarget = [...destination.matchAll(/\bid=["']([^"']+)["']/g)].some(([, id]) => id === decodeURIComponent(fragment));
+    const renderedProofLoop = fragment === 'proof-loop' && path.basename(target) === 'report.html'
+      && /setAttribute\(\s*['"]id['"]\s*,\s*['"]proof-loop['"]\s*\)/.test(destination);
+    assert.ok(staticTarget || renderedProofLoop, `Missing navigation fragment: ${href}`);
   }
 }
 const evidenceFiles = ['output/evidence.json', 'output/receipt.json'];
@@ -142,7 +153,7 @@ const entryRoutes = {
   'entry-report': 'output/report.html#preuves',
 };
 for (const [id, href] of Object.entries(entryRoutes)) assert.equal(get(home, id).getAttribute('href'), href, `Incorrect product route: ${id}`);
-assert.ok(html.indexOf('id="journey"') < html.indexOf('id="utility"'), 'The three-step first visit path must precede expert exploration');
+assert.ok(html.indexOf('id="use-cases"') < html.indexOf('id="journey"'), 'Visitors need concrete uses before the guided workflow');
 assert.ok(html.indexOf('id="layer-detail"') < html.indexOf('id="journey"'), 'Layer explanations must stay beside the five-layer framework');
 assert.ok(/<ol class="journey-steps">/.test(html), 'The recommended sequence must have an ordered list');
 assert.ok(tags.some(({name, attributes}) => name === 'a' && attributes['aria-current'] === 'page' && attributes.href === 'index.html'), 'Shared task navigation must identify the current page');
@@ -150,6 +161,35 @@ const executed = JSON.parse(fs.readFileSync(path.join(root, 'output/evidence.jso
 assert.ok(Object.hasOwn(executed, 'autorisation'), 'The introductory example must select an executed signed operation');
 assert.ok(home.bilingual.some(element => /déjà exécutés/.test(element.getAttribute('data-fr')) && /already executed/.test(element.getAttribute('data-en'))), 'The first-visit context must explain that scenarios are already executed');
 assert.ok(/@media\(prefers-reduced-motion:reduce\)/.test(html), 'Motion must honor the reduced-motion preference');
+// Use-case entry points must explain a useful outcome and lead to available functions.
+const useCases = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/gi)]
+  .map(([, attributes, body]) => ({attributes: attrs(attributes), body})).filter(card => card.attributes['data-use-case']);
+const translated = (fragment, context) => {
+  const wording = [...fragment.matchAll(/<[a-z][^>]*>/gi)].map(match => attrs(match[0]));
+  assert.ok(wording.some(item => item['data-fr']?.trim() && item['data-en']?.trim() && item['data-fr'] !== item['data-en']), `Missing usable FR/EN explanation: ${context}`);
+};
+for (const purpose of ['architecture','refusal','unknown','evidence','workshop','integration']) {
+  const card = useCases.find(card => card.attributes['data-use-case'] === purpose);
+  assert.ok(card, `Missing entry point for ${purpose}`);
+  for (const role of ['audience','benefit','result']) {
+    const paragraph = [...card.body.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/gi)]
+      .find(([, attributes]) => (attrs(attributes).class || '').split(/\s+/).includes('use-case-' + role));
+    assert.ok(paragraph, `The ${purpose} entry must explain its ${role}`);
+    translated(paragraph[0], `${purpose} ${role}`);
+  }
+  const guide = card.body.match(/<details\b[^>]*>([\s\S]*?)<\/details>/i);
+  assert.ok(guide && /<summary\b/.test(guide[1]) && /<ol\b/.test(guide[1]), `The ${purpose} entry needs a native, ordered how-to`);
+  translated(guide[1], `${purpose} how-to`);
+  const action = [...card.body.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)]
+    .find(([, attributes]) => (attrs(attributes).class || '').split(/\s+/).includes('use-case-action'));
+  assert.ok(action, `The ${purpose} entry needs an actionable destination`);
+  assert.ok(!/^https?:/i.test(attrs(action[1]).href), 'Use-case actions should open a function in this local demonstration');
+  checkLocalTarget(attrs(action[1]).href);
+}
+assert.equal(get(home, 'entry-use-cases').getAttribute('href'), '#use-cases');
+assert.ok(get(home, 'quick-start'), 'The short getting-started guide must have a stable destination');
+assert.equal(get(home, 'readme-link').getAttribute('href'), 'README.md');
+
 for (const {name, attributes} of tags) {
   if (name === 'a') checkLocalTarget(attributes.href);
   if (name === 'button') {
@@ -172,4 +212,4 @@ checkLayer(denied, 2, 'en');
 get(denied, 'language-fr').click();
 checkLayer(denied, 2, 'fr');
 for (const name of evidenceFiles) assert.equal(fingerprint(name), evidenceBefore[name], `Landing interactions must not modify signed evidence: ${name}`);
-console.log('PASS: guided first-visit path, explicit executed scenarios, adjacent five-layer details, FR/EN state, concrete task navigation and unchanged signed evidence. Browser layout not assessed.');
+console.log('PASS: actionable bilingual uses, signed scenario/loop destinations, quick-start/README, five-layer context, actual language/theme controls and unchanged signed evidence. Browser layout not assessed.');

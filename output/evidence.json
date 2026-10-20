@@ -38,14 +38,14 @@
             "algorithm": "Ed25519",
             "canonicalization": "RFC8785",
             "domain": "TENIR-REG-LOCAL-DEMO-v1",
-            "key_id": "73aad23e9620d343dfbcc4d851d477b89cd3add9fca0368d80d772e8f152be82",
+            "key_id": "55e685cec7440013968c10048f13d26453a1c49f2bc89bbeca4db0aca7931b01",
             "payload_sha256": "ac111ae6cc4b5d061334889f6a71f0546d6572bc8c238c5b25f888db2f9e889b",
-            "signature": "xn5CBRd+IcUheMMTNmlx0QsuI+2q7D4CHa7uQFZEOn2OyJgrGnyPm4ipyQ7DAyWTn8whC9OOtTGoNumHQ4u1DQ=="
+            "signature": "/CuttLlNiJFdtswThV44FCmro429YL7XE0Q47l5HyEYexmRTz4ufJhm68AcovNYWlL/WE/7jlFY5SnHg09CWBw=="
           }
         },
         "simulated_outcome": "CONFIRMED"
       },
-      "request_hash": "bb22e8525f80d3e5ecff00a8b03782280f00f3ce1cda5b5652317fccba96959b",
+      "request_hash": "3d1ec777118daa93a39991512facf456127ca08210d90c08996edc5635636be7",
       "decision": {
         "verdict": "PASS",
         "reasons": [
@@ -75,14 +75,14 @@
             "algorithm": "Ed25519",
             "canonicalization": "RFC8785",
             "domain": "TENIR-REG-LOCAL-DEMO-v1",
-            "key_id": "73aad23e9620d343dfbcc4d851d477b89cd3add9fca0368d80d772e8f152be82",
+            "key_id": "55e685cec7440013968c10048f13d26453a1c49f2bc89bbeca4db0aca7931b01",
             "payload_sha256": "b4de23e4d3805e7001ee421f674704dcfc686b24ce6a736f036326e22989bce9",
-            "signature": "X7aJ9O7O9nJqO1HxlFm5DZDMtGoobJoijhuVW/Z9qbKA18dlwXRwbHxUwuiNpbYwMdmX4UqD54EeT5xpAPtjDA=="
+            "signature": "DVWzbvJV+U7IHPjmnCXC3GhF17/3fB+MxvwrVZR9t3uIvUhkgITtA3EeKjVinp+IZdLvpNG744vIlOT00Z6FCA=="
           }
         },
         "simulated_outcome": "CONFIRMED"
       },
-      "request_hash": "740b01b51a7dfe0d6d4eae6ea5606c456d4c8818b24a883fe9d53e44e176979b",
+      "request_hash": "95b40ccd00c7d147de86cd5060aa248e5789575e9ace4fefd0e0ff4ca6eb26fe",
       "decision": {
         "verdict": "HARD_VETO",
         "reasons": [
@@ -130,14 +130,14 @@
             "algorithm": "Ed25519",
             "canonicalization": "RFC8785",
             "domain": "TENIR-REG-LOCAL-DEMO-v1",
-            "key_id": "73aad23e9620d343dfbcc4d851d477b89cd3add9fca0368d80d772e8f152be82",
+            "key_id": "55e685cec7440013968c10048f13d26453a1c49f2bc89bbeca4db0aca7931b01",
             "payload_sha256": "ac111ae6cc4b5d061334889f6a71f0546d6572bc8c238c5b25f888db2f9e889b",
-            "signature": "xn5CBRd+IcUheMMTNmlx0QsuI+2q7D4CHa7uQFZEOn2OyJgrGnyPm4ipyQ7DAyWTn8whC9OOtTGoNumHQ4u1DQ=="
+            "signature": "/CuttLlNiJFdtswThV44FCmro429YL7XE0Q47l5HyEYexmRTz4ufJhm68AcovNYWlL/WE/7jlFY5SnHg09CWBw=="
           }
         },
         "simulated_outcome": "UNKNOWN"
       },
-      "request_hash": "dc71002570351c1853b81c97a1ce5fd7abc954508074987d95d851b35de50579",
+      "request_hash": "f22ea73eba4d5f08e5dd4f6937d99b7ce8d579e0d2e91f1ec0c65891733b8b18",
       "decision": {
         "verdict": "PASS",
         "reasons": [
@@ -201,9 +201,9 @@
               "algorithm": "Ed25519",
               "canonicalization": "RFC8785",
               "domain": "TENIR-REG-LOCAL-DEMO-v1",
-              "key_id": "73aad23e9620d343dfbcc4d851d477b89cd3add9fca0368d80d772e8f152be82",
+              "key_id": "55e685cec7440013968c10048f13d26453a1c49f2bc89bbeca4db0aca7931b01",
               "payload_sha256": "ac111ae6cc4b5d061334889f6a71f0546d6572bc8c238c5b25f888db2f9e889b",
-              "signature": "xn5CBRd+IcUheMMTNmlx0QsuI+2q7D4CHa7uQFZEOn2OyJgrGnyPm4ipyQ7DAyWTn8whC9OOtTGoNumHQ4u1DQ=="
+              "signature": "/CuttLlNiJFdtswThV44FCmro429YL7XE0Q47l5HyEYexmRTz4ufJhm68AcovNYWlL/WE/7jlFY5SnHg09CWBw=="
             },
             "payload": {
               "expires_at": 1792404300,
@@ -219,7 +219,7 @@
           "simulated_outcome": "CONFIRMED",
           "unit": "demo-unit"
         },
-        "request_hash": "bb22e8525f80d3e5ecff00a8b03782280f00f3ce1cda5b5652317fccba96959b",
+        "request_hash": "3d1ec777118daa93a39991512facf456127ca08210d90c08996edc5635636be7",
         "schema": "demo-evidence/v1",
         "sequence": 1,
         "simulation_only": true
@@ -228,9 +228,9 @@
         "algorithm": "Ed25519",
         "canonicalization": "RFC8785",
         "domain": "TENIR-REG-LOCAL-DEMO-v1",
-        "key_id": "50aaa8a17c569ec327d8ee4bbd417b2031b0aeae071b6f7d73d5e7f8ea23a411",
-        "payload_sha256": "6b8b121b641eee081ed9ce3f251c036ab6664acf849dae6e3b97732625822e36",
-        "signature": "r051fzY3S80HO9D6/vfEVh7fqwdSq65aEOb+azut7QEnLZdeHjCVwnuYzqHAjqaTnGG5k/7bofW+aUPQjRXyDg=="
+        "key_id": "9f77f4438f22104427d92e88c0b067de0fb8c509368e792e65eee9e189dfbc79",
+        "payload_sha256": "9be80bec16b9486f2c34785a4431df8548c72dfd85507e5e9a0eb056a68f5db8",
+        "signature": "mWCu3ojtHlCF5c1CQ9GE5Bf46/bSQPGbNg4Tsitripsjyxp9CCIITKIEx3W+pI7IPodP4ExPlfl6OSTJtbDJAw=="
       }
     },
     {
@@ -256,7 +256,7 @@
         "event": "PROVIDER_RESULT",
         "operation_id": "autorisation",
         "operation_state": "CONFIRMED",
-        "previous_hash": "93d5a3830e3197b60bebc61a4bb98b8ea1a1dc44ed07ae0896ee99ac67839e40",
+        "previous_hash": "e0043fd015fe9e38f139e02d116da988d63b9c124b982263bd9ad2c095854884",
         "profile": {
           "ceiling": 70000,
           "configuration": {
@@ -281,7 +281,7 @@
             "call_id": 1,
             "operation_id": "autorisation",
             "outcome": "CONFIRMED",
-            "request_hash": "bb22e8525f80d3e5ecff00a8b03782280f00f3ce1cda5b5652317fccba96959b"
+            "request_hash": "3d1ec777118daa93a39991512facf456127ca08210d90c08996edc5635636be7"
           }
         ],
         "reference_time": 1792404000,
@@ -293,9 +293,9 @@
               "algorithm": "Ed25519",
               "canonicalization": "RFC8785",
               "domain": "TENIR-REG-LOCAL-DEMO-v1",
-              "key_id": "73aad23e9620d343dfbcc4d851d477b89cd3add9fca0368d80d772e8f152be82",
+              "key_id": "55e685cec7440013968c10048f13d26453a1c49f2bc89bbeca4db0aca7931b01",
               "payload_sha256": "ac111ae6cc4b5d061334889f6a71f0546d6572bc8c238c5b25f888db2f9e889b",
-              "signature": "xn5CBRd+IcUheMMTNmlx0QsuI+2q7D4CHa7uQFZEOn2OyJgrGnyPm4ipyQ7DAyWTn8whC9OOtTGoNumHQ4u1DQ=="
+              "signature": "/CuttLlNiJFdtswThV44FCmro429YL7XE0Q47l5HyEYexmRTz4ufJhm68AcovNYWlL/WE/7jlFY5SnHg09CWBw=="
             },
             "payload": {
               "expires_at": 1792404300,
@@ -311,7 +311,7 @@
           "simulated_outcome": "CONFIRMED",
           "unit": "demo-unit"
         },
-        "request_hash": "bb22e8525f80d3e5ecff00a8b03782280f00f3ce1cda5b5652317fccba96959b",
+        "request_hash": "3d1ec777118daa93a39991512facf456127ca08210d90c08996edc5635636be7",
         "schema": "demo-evidence/v1",
         "sequence": 2,
         "simulation_only": true
@@ -320,9 +320,9 @@
         "algorithm": "Ed25519",
         "canonicalization": "RFC8785",
         "domain": "TENIR-REG-LOCAL-DEMO-v1",
-        "key_id": "50aaa8a17c569ec327d8ee4bbd417b2031b0aeae071b6f7d73d5e7f8ea23a411",
-        "payload_sha256": "d991e88b5ff1fb32fe29ebbcf8632b675b8ddf597e1f6150cd29846ea4d2ad19",
-        "signature": "V3c3fdTexS34WGAOisMFBtMXxXTuJ0vo3q0bRZFASr/7rujh0tzIshM9Mx9JoHOP1FOfVWntNRGmV5RTPSqTDg=="
+        "key_id": "9f77f4438f22104427d92e88c0b067de0fb8c509368e792e65eee9e189dfbc79",
+        "payload_sha256": "0129fde5846770049c518a6e5978387604e7c88d883a9afd0192d0640d37232e",
+        "signature": "LeJv0aabS/7pdP+3Co8dvYYP0wGSres/L0XrCX4u1H4ZOROiPQU+oM2H8gy4rLmWbi4ZYRvySni0V2/v4YDlAw=="
       }
     },
     {
@@ -348,7 +348,7 @@
         "event": "NOT_SENT",
         "operation_id": "blocage",
         "operation_state": "BLOCKED",
-        "previous_hash": "687f5cf2db57d0137575b518222ed6ece56842617a9f15969c285e6706093820",
+        "previous_hash": "9b66a32ba010c9808b3c4dff1a4fd6591b65f9f02d5f9dbe79a3daa6f3126762",
         "profile": {
           "ceiling": 70000,
           "configuration": {
@@ -373,7 +373,7 @@
             "call_id": 1,
             "operation_id": "autorisation",
             "outcome": "CONFIRMED",
-            "request_hash": "bb22e8525f80d3e5ecff00a8b03782280f00f3ce1cda5b5652317fccba96959b"
+            "request_hash": "3d1ec777118daa93a39991512facf456127ca08210d90c08996edc5635636be7"
           }
         ],
         "reference_time": 1792404000,
@@ -385,9 +385,9 @@
               "algorithm": "Ed25519",
               "canonicalization": "RFC8785",
               "domain": "TENIR-REG-LOCAL-DEMO-v1",
-              "key_id": "73aad23e9620d343dfbcc4d851d477b89cd3add9fca0368d80d772e8f152be82",
+              "key_id": "55e685cec7440013968c10048f13d26453a1c49f2bc89bbeca4db0aca7931b01",
               "payload_sha256": "b4de23e4d3805e7001ee421f674704dcfc686b24ce6a736f036326e22989bce9",
-              "signature": "X7aJ9O7O9nJqO1HxlFm5DZDMtGoobJoijhuVW/Z9qbKA18dlwXRwbHxUwuiNpbYwMdmX4UqD54EeT5xpAPtjDA=="
+              "signature": "DVWzbvJV+U7IHPjmnCXC3GhF17/3fB+MxvwrVZR9t3uIvUhkgITtA3EeKjVinp+IZdLvpNG744vIlOT00Z6FCA=="
             },
             "payload": {
               "expires_at": 1792404300,
@@ -403,7 +403,7 @@
           "simulated_outcome": "CONFIRMED",
           "unit": "demo-unit"
         },
-        "request_hash": "740b01b51a7dfe0d6d4eae6ea5606c456d4c8818b24a883fe9d53e44e176979b",
+        "request_hash": "95b40ccd00c7d147de86cd5060aa248e5789575e9ace4fefd0e0ff4ca6eb26fe",
         "schema": "demo-evidence/v1",
         "sequence": 3,
         "simulation_only": true
@@ -412,9 +412,9 @@
         "algorithm": "Ed25519",
         "canonicalization": "RFC8785",
         "domain": "TENIR-REG-LOCAL-DEMO-v1",
-        "key_id": "50aaa8a17c569ec327d8ee4bbd417b2031b0aeae071b6f7d73d5e7f8ea23a411",
-        "payload_sha256": "faa226d5faceb53ccec8f980b058151c33889b25cd6d833c67dc1851c48c3cf9",
-        "signature": "xmt2XLOdkAbzbvnp8DVQgW8kuTfg89PBPaKApvg3aQnqyiLa8+IU2y4m7cROakrXpULBAdbGPjQweed8YC/XBQ=="
+        "key_id": "9f77f4438f22104427d92e88c0b067de0fb8c509368e792e65eee9e189dfbc79",
+        "payload_sha256": "c187b15f9448b4b9721074d670c28740f563babe50d252d5c8ba27a0d2de24c2",
+        "signature": "2fk6equJqGTNAETwmDEupCdp5krYXjwusodmeGSD3j5lePz1ktnRN3o73b8oZwmTpzu4oC8SqOm+GLwnAsKaAA=="
       }
     },
     {
@@ -440,7 +440,7 @@
         "event": "NOT_SENT",
         "operation_id": "attente",
         "operation_state": "HELD",
-        "previous_hash": "607ae82078a77b06a6606634733d18e2760ccda2efd76edd266015ebe76cfd35",
+        "previous_hash": "f6a3ab156d295a7190d5a930972ab9c36ab1c2fedf6ad0aced5daf2f26a61be5",
         "profile": {
           "ceiling": 70000,
           "configuration": {
@@ -465,7 +465,7 @@
             "call_id": 1,
             "operation_id": "autorisation",
             "outcome": "CONFIRMED",
-            "request_hash": "bb22e8525f80d3e5ecff00a8b03782280f00f3ce1cda5b5652317fccba96959b"
+            "request_hash": "3d1ec777118daa93a39991512facf456127ca08210d90c08996edc5635636be7"
           }
         ],
         "reference_time": 1792404000,
@@ -485,9 +485,9 @@
         "algorithm": "Ed25519",
         "canonicalization": "RFC8785",
         "domain": "TENIR-REG-LOCAL-DEMO-v1",
-        "key_id": "50aaa8a17c569ec327d8ee4bbd417b2031b0aeae071b6f7d73d5e7f8ea23a411",
-        "payload_sha256": "0f76665c4dd99ecbcf81dc4d4f556e960d2d8d5ae4feaf4886c49e913f2496e4",
-        "signature": "RI1yguZ+7h2QfhW45IorstK3ILFOv2gANHh9X8xFBKUIvnTwxuLBC1F3pG5Li7ABwEQbny95JWF/HxrLFNYKDg=="
+        "key_id": "9f77f4438f22104427d92e88c0b067de0fb8c509368e792e65eee9e189dfbc79",
+        "payload_sha256": "1c24dbce13713d557f589a81cc03378001b5f14900ead4931efd189bd8ff5ca2",
+        "signature": "/Z5jOfHPHeHdzE0NN5Qia3jGNBeTgEbms0spH7Y2+NMjXAkRdoPR6bQPc8r3eBhE25+vGeS5bXgffEfbCWswBQ=="
       }
     },
     {
@@ -513,7 +513,7 @@
         "event": "RESERVED_FOR_DISPATCH",
         "operation_id": "issue-inconnue",
         "operation_state": "DISPATCHING",
-        "previous_hash": "52e9edcd8aff7674006cb83445b670d7bca44ebcfce678c66dd1230cc6acfa9a",
+        "previous_hash": "4b66a4315088925c90dbed5a63011debf1ea61af30f73fee181cd1b145f1956a",
         "profile": {
           "ceiling": 70000,
           "configuration": {
@@ -538,7 +538,7 @@
             "call_id": 1,
             "operation_id": "autorisation",
             "outcome": "CONFIRMED",
-            "request_hash": "bb22e8525f80d3e5ecff00a8b03782280f00f3ce1cda5b5652317fccba96959b"
+            "request_hash": "3d1ec777118daa93a39991512facf456127ca08210d90c08996edc5635636be7"
           }
         ],
         "reference_time": 1792404000,
@@ -550,9 +550,9 @@
               "algorithm": "Ed25519",
               "canonicalization": "RFC8785",
               "domain": "TENIR-REG-LOCAL-DEMO-v1",
-              "key_id": "73aad23e9620d343dfbcc4d851d477b89cd3add9fca0368d80d772e8f152be82",
+              "key_id": "55e685cec7440013968c10048f13d26453a1c49f2bc89bbeca4db0aca7931b01",
               "payload_sha256": "ac111ae6cc4b5d061334889f6a71f0546d6572bc8c238c5b25f888db2f9e889b",
-              "signature": "xn5CBRd+IcUheMMTNmlx0QsuI+2q7D4CHa7uQFZEOn2OyJgrGnyPm4ipyQ7DAyWTn8whC9OOtTGoNumHQ4u1DQ=="
+              "signature": "/CuttLlNiJFdtswThV44FCmro429YL7XE0Q47l5HyEYexmRTz4ufJhm68AcovNYWlL/WE/7jlFY5SnHg09CWBw=="
             },
             "payload": {
               "expires_at": 1792404300,
@@ -568,7 +568,7 @@
           "simulated_outcome": "UNKNOWN",
           "unit": "demo-unit"
         },
-        "request_hash": "dc71002570351c1853b81c97a1ce5fd7abc954508074987d95d851b35de50579",
+        "request_hash": "f22ea73eba4d5f08e5dd4f6937d99b7ce8d579e0d2e91f1ec0c65891733b8b18",
         "schema": "demo-evidence/v1",
         "sequence": 5,
         "simulation_only": true
@@ -577,9 +577,9 @@
         "algorithm": "Ed25519",
         "canonicalization": "RFC8785",
         "domain": "TENIR-REG-LOCAL-DEMO-v1",
-        "key_id": "50aaa8a17c569ec327d8ee4bbd417b2031b0aeae071b6f7d73d5e7f8ea23a411",
-        "payload_sha256": "9750a7ba433478d2ff1605562c3f039528c18110913298750bde548bbeb79c25",
-        "signature": "9ISpy+WLJfc9Ms+bkI9f+yBZjLO4nomRes6Js+pyAL7Q+S/HpEdsCJJXcUnZCstCq0Z/xNrAlAtF2YZPCFsbBQ=="
+        "key_id": "9f77f4438f22104427d92e88c0b067de0fb8c509368e792e65eee9e189dfbc79",
+        "payload_sha256": "48180f10fb9c91c0edc0377d4f9a7eb3bc2f9576622d85f983a47b1a4996a194",
+        "signature": "oGVwfm0u0nZri3pMZS2ZJuwrOuBdqGUV6wwbmLz0aWILkHKBvfRtWdBu7XySQZj4/hgG/iBBu7LAXiaSbtpaAw=="
       }
     },
     {
@@ -605,7 +605,7 @@
         "event": "PROVIDER_RESULT",
         "operation_id": "issue-inconnue",
         "operation_state": "UNKNOWN",
-        "previous_hash": "175088bed9783bb4c36d270db693b512baf061082c20db39925b47cb8f6adf1b",
+        "previous_hash": "989b3e541e0abc16a4e329946b35f21dab65ba3e85b39901e372beebb97abb38",
         "profile": {
           "ceiling": 70000,
           "configuration": {
@@ -630,14 +630,14 @@
             "call_id": 1,
             "operation_id": "autorisation",
             "outcome": "CONFIRMED",
-            "request_hash": "bb22e8525f80d3e5ecff00a8b03782280f00f3ce1cda5b5652317fccba96959b"
+            "request_hash": "3d1ec777118daa93a39991512facf456127ca08210d90c08996edc5635636be7"
           },
           {
             "amount": 10000,
             "call_id": 2,
             "operation_id": "issue-inconnue",
             "outcome": "UNKNOWN",
-            "request_hash": "dc71002570351c1853b81c97a1ce5fd7abc954508074987d95d851b35de50579"
+            "request_hash": "f22ea73eba4d5f08e5dd4f6937d99b7ce8d579e0d2e91f1ec0c65891733b8b18"
           }
         ],
         "reference_time": 1792404000,
@@ -649,9 +649,9 @@
               "algorithm": "Ed25519",
               "canonicalization": "RFC8785",
               "domain": "TENIR-REG-LOCAL-DEMO-v1",
-              "key_id": "73aad23e9620d343dfbcc4d851d477b89cd3add9fca0368d80d772e8f152be82",
+              "key_id": "55e685cec7440013968c10048f13d26453a1c49f2bc89bbeca4db0aca7931b01",
               "payload_sha256": "ac111ae6cc4b5d061334889f6a71f0546d6572bc8c238c5b25f888db2f9e889b",
-              "signature": "xn5CBRd+IcUheMMTNmlx0QsuI+2q7D4CHa7uQFZEOn2OyJgrGnyPm4ipyQ7DAyWTn8whC9OOtTGoNumHQ4u1DQ=="
+              "signature": "/CuttLlNiJFdtswThV44FCmro429YL7XE0Q47l5HyEYexmRTz4ufJhm68AcovNYWlL/WE/7jlFY5SnHg09CWBw=="
             },
             "payload": {
               "expires_at": 1792404300,
@@ -667,7 +667,7 @@
           "simulated_outcome": "UNKNOWN",
           "unit": "demo-unit"
         },
-        "request_hash": "dc71002570351c1853b81c97a1ce5fd7abc954508074987d95d851b35de50579",
+        "request_hash": "f22ea73eba4d5f08e5dd4f6937d99b7ce8d579e0d2e91f1ec0c65891733b8b18",
         "schema": "demo-evidence/v1",
         "sequence": 6,
         "simulation_only": true
@@ -676,9 +676,9 @@
         "algorithm": "Ed25519",
         "canonicalization": "RFC8785",
         "domain": "TENIR-REG-LOCAL-DEMO-v1",
-        "key_id": "50aaa8a17c569ec327d8ee4bbd417b2031b0aeae071b6f7d73d5e7f8ea23a411",
-        "payload_sha256": "b42166a8679d4ee695b53264871785b9cbc7087bc3407030c4d7df09d86fe35d",
-        "signature": "QWIXdZ8829KhN5wZwHRnKmPIdDmR3q0UuFMYAH5EYXW4/RtVAoaA5W/qQlZouCWn1eD2t3b0gkr7ZhHXxYIhCg=="
+        "key_id": "9f77f4438f22104427d92e88c0b067de0fb8c509368e792e65eee9e189dfbc79",
+        "payload_sha256": "aa165b4f167e5e840664ca6f72e6d4427e9151515e664ffd820ce031b5dd0f44",
+        "signature": "dHhivaBC0jYx2K8FJ0YaixB0QdJgM9ICsO1E+j33BYKqG2pWT6M7+iDGtoIXWzFiT7zDei41KotOCEaMwiQuCg=="
       }
     }
   ],
@@ -686,14 +686,14 @@
     {
       "call_id": 1,
       "operation_id": "autorisation",
-      "request_hash": "bb22e8525f80d3e5ecff00a8b03782280f00f3ce1cda5b5652317fccba96959b",
+      "request_hash": "3d1ec777118daa93a39991512facf456127ca08210d90c08996edc5635636be7",
       "amount": 20000,
       "outcome": "CONFIRMED"
     },
     {
       "call_id": 2,
       "operation_id": "issue-inconnue",
-      "request_hash": "dc71002570351c1853b81c97a1ce5fd7abc954508074987d95d851b35de50579",
+      "request_hash": "f22ea73eba4d5f08e5dd4f6937d99b7ce8d579e0d2e91f1ec0c65891733b8b18",
       "amount": 10000,
       "outcome": "UNKNOWN"
     }
@@ -704,14 +704,14 @@
     "reserved": 10000,
     "available": 40000
   },
-  "signal_public_key_id": "73aad23e9620d343dfbcc4d851d477b89cd3add9fca0368d80d772e8f152be82",
+  "signal_public_key_id": "55e685cec7440013968c10048f13d26453a1c49f2bc89bbeca4db0aca7931b01",
   "build": {
-    "source_sha256": "146c0390fd59790fd03bdae72d224adf0e4bd4e54e07480d967d427142c138f7",
-    "test_results_sha256": "c3e3a76e71f3af4e9813fdf243955343af572dd8a4a4f4680fb0d722759ea723"
+    "source_sha256": "9debda186346b62dc3510e59d6b2e110a06937a909e3ba038c3ef967309cf838",
+    "test_results_sha256": "22ebdd9bef6d79132ebed602716dd25790c1d74bf98774e64340f922c05f950d"
   },
   "attestation": {
     "payload": {
-      "bundle_sha256": "e8789813a189f247412d538660f3bbbe241fcd32f05a738b9a6d16a4855634ff",
+      "bundle_sha256": "903e9048ae9aab1d411316bb821f7a8bc1497d82a537979496ce15cd99d2f16a",
       "record_count": 6,
       "schema": "demo-dossier/v1"
     },
@@ -719,9 +719,9 @@
       "algorithm": "Ed25519",
       "canonicalization": "RFC8785",
       "domain": "TENIR-REG-LOCAL-DEMO-v1",
-      "key_id": "50aaa8a17c569ec327d8ee4bbd417b2031b0aeae071b6f7d73d5e7f8ea23a411",
-      "payload_sha256": "662802058f9956e725c42de2578d4aa849ad70840347a3ae6070dbf5a491c939",
-      "signature": "3vfQ0s/Rb9pTsi5COgkFjL9o26otBxdg/EwW974A4OKar3T1gCE9UEQsxqwEFHy5mBrWAKjU/np+PCdWySOqAA=="
+      "key_id": "9f77f4438f22104427d92e88c0b067de0fb8c509368e792e65eee9e189dfbc79",
+      "payload_sha256": "4744a7245a0b84d753fb0fed1f27781a29608f98e470b8ca45b78cc261dd2321",
+      "signature": "7+EOKZiIKujDcYVL0EIDPD/eA6aIXrp0Fknx8rPjul0vVvOG+00v0MgUf+6ITlVoRhcd4n2plC69I9XhNpLiBQ=="
     }
   }
 }

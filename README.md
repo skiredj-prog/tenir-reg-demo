@@ -1,16 +1,46 @@
-# TENIR/REG — configuration, démonstration et preuve
+# TENIR/REG — choisir, comprendre, prouver
 
-L'objectif du dépôt est de transformer les règles de configuration, le diagramme d'observation et les EvidenceRecords en un parcours produit utilisable par un prospect, un développeur et un auditeur : **configurer → comprendre la décision → examiner et vérifier la preuve**.
+TENIR/REG aide une équipe à répondre à trois questions : **quelle architecture choisir, pourquoi une action est autorisée ou arrêtée, et quelles données permettent d'examiner cette décision ?** Le dépôt relie des règles explicites, quatre situations simulées et leurs preuves signées dans un parcours local : **configuration → décision → exécution → preuve**.
 
-Le [cadrage produit et les priorités](PRODUCT.md) traduit l'objectif stratégique fourni par l'utilisateur en livrables et critères d'acceptation. Le prototype décrit ci-dessous constitue la première base technique de ce parcours.
+Un responsable produit peut présenter le fonctionnement et ses limites ; un développeur ou architecte peut comparer ses choix ; un auditeur ou relecteur peut retrouver les données exactes derrière une décision. Le résultat est une configuration argumentée, une explication partageable et un dossier vérifiable.
 
-La [page de garde](index.html) situe ce parcours dans les cinq couches : règle métier, contrainte réglementaire, acte de médiation, standard REG Core/REG+, runtime TENIR-Gov. Chaque couche est interactive et explique son rôle, son acteur, son résultat attendu et ce que la démo illustre. Elle présente également l'utilité de la démo, la boucle de lecture des preuves et les trois dépôts de référence.
+## Premier parcours
 
-**Base d'alignement : TENIR 5.6.1, destinée à être promue en 5.7**, selon la confirmation du porteur du projet. Le commit runtime identifié devient la référence technique ; les documents d'architecture fournis restent un snapshot 5.6.0. Le [suivi d'alignement](ALIGNMENT.md) distingue cette base confirmée, la promotion prévue et les adaptations du prototype encore à valider. La compatibilité d'exécution n'est pas déduite du seul changement de numéro.
+1. Ouvrez [l'accueil](index.html) pour comprendre l'utilité du démonstrateur et situer l'architecture en cinq couches, puis entrez dans la configuration. Si les pages générées manquent, utilisez les commandes de la section **Générer ou vérifier le dossier**.
+2. Pour découvrir le fonctionnement, gardez le profil local présélectionné. Parcourez les quatre choix, puis **Examiner ma configuration** et **Règles & périmètre**. Pour explorer une autre architecture, modifiez un choix, lisez les incompatibilités et choisissez éventuellement une correction.
+3. Ouvrez les **Scénarios & preuves**. Comparez l'autorisation, le blocage, l'attente d'une observation et l'issue inconnue. Distinguez la décision avant envoi du résultat du simulateur ; les compteurs suivent la trace sélectionnée.
+4. Dans la **boucle de preuve**, choisissez une étape puis une source : sa valeur exacte, son chemin JSON et son record sont affichés. Vous pouvez ensuite examiner les fichiers et lancer la vérification du dossier. Le retour vers la configuration conserve votre contexte de lecture.
 
-Prototype **non officiel v0.1.0**, réalisé depuis le plan d'une journée et les pièces fournies. Il produit une action autorisée, une action bloquée, une attente avant envoi et une issue inconnue après envoi. Aucun service externe n'est appelé.
+L'accueil, le configurateur et le rapport proposent **FR/EN** et les thèmes clair/sombre. Les pages générées s'utilisent sans serveur ni réseau.
 
-## Exécuter
+## Fonctions utiles et livrables
+
+| Votre besoin | Ce que vous pouvez faire | Ce que vous obtenez |
+|---|---|---|
+| **Choisir une architecture** | Comparer les quatre axes sur 144 configurations, dont 42 admissibles ; lire les sept clauses, appliquer puis annuler une correction | Un choix expliqué et un brouillon JSON exportable, avec règles, violations et provenance ; ce brouillon reste non signé |
+| **Comprendre un blocage ou une attente** | Comparer le veto sur hypothèse affaiblie à l'observation absente ; voir le point d'arrêt et l'absence d'envoi | Une explication du motif et des données nécessaires avant une nouvelle évaluation |
+| **Examiner une issue inconnue** | Retrouver le PASS historique, l'appel enregistré et la réservation conservée ; changer de trace sans renvoyer d'action | Une distinction claire entre autorisation et résultat incertain ; une recommandation de suivi, sans résolution automatique |
+| **Relire une preuve** | Parcourir les huit étapes, ouvrir les champs exacts et distinguer explications documentaires, payload signé et métadonnées ; lancer `.\run.ps1 verify` | Le rapport HTML autonome, le dossier JSON, les clés publiques, le reçu et un résultat de vérification |
+| **Animer un atelier de conception** | Mettre en relation les cinq couches de l'architecture et la boucle d'observation, puis comparer les quatre situations | Un support commun pour expliciter les rôles, les règles, les observations et les preuves attendues |
+| **Cadrer une future intégration TENIR** | Lire le diagnostic sur les trois références épinglées, les écarts de contrat et les invariants au périmètre partiel | Une base de travail pour définir un adaptateur vers 5.6.1, cible 5.7 ; aucun adaptateur ni compatibilité d'exécution n'est livré |
+
+## Exemples de transposition
+
+Ces exemples donnent un contexte métier possible aux mécanismes montrés. **Ils ne sont pas des intégrations exécutées par ce dépôt.**
+
+- **Agent doté d'un budget** : examiner une autorisation d'engagement, un plafond et la retenue nécessaire lorsque le résultat n'est pas confirmé. Les scénarios actuels utilisent des unités de simulation, sans paiement réel.
+- **Consommation d'un quota d'API** : transposer le budget à un coût de requêtes et discuter du contrôle des accès concurrents ou des doublons. Aucun fournisseur d'API ni quota réel n'est connecté.
+- **Changement d'infrastructure** : utiliser l'observation requise pour discuter d'une validation avant déploiement et du traitement d'un résultat incertain. Aucun pipeline ni système d'infrastructure n'est piloté.
+
+## Ce qui fonctionne aujourd'hui
+
+Le prototype **non officiel v0.1.0** exécute quatre scénarios fixes lors de la génération, puis l'interface permet d'en lire les traces signées. Modifier une configuration ou sélectionner un scénario **ne lance aucune nouvelle opération**. La saisie libre de paramètres avec production d'une nouvelle preuve, l'exécution en direct, la persistance et la réconciliation font partie des développements possibles.
+
+La [page de garde](index.html) expose les cinq couches : règle métier, contrainte réglementaire, acte de médiation, standard REG Core/REG+, runtime TENIR-Gov. Le [cadrage produit](PRODUCT.md) précise les livrables et priorités ; le [diagnostic d'alignement](REFERENCE_ALIGNMENT.md) expose les correspondances et écarts sourcés.
+
+**Base d'alignement : TENIR 5.6.1, destinée à être promue en 5.7**, selon la confirmation du porteur du projet. Les documents d'architecture fournis restent un snapshot 5.6.0. Le [suivi d'alignement](ALIGNMENT.md) distingue ces références du moteur local ; la compatibilité d'exécution reste non vérifiée.
+
+## Générer ou vérifier le dossier
 
 Depuis ce dossier dans PowerShell :
 
@@ -19,7 +49,7 @@ Depuis ce dossier dans PowerShell :
 .\run.ps1 verify
 ```
 
-`all` et `demo` exécutent T01–T10, C01–C10 et P01–P06, puis génèrent le configurateur, le rapport, les preuves, les clés **publiques**, les résultats et un reçu signé. Ouvrir [index.html](index.html) pour accéder au parcours, ou directement `output/configurator.html`. Le configurateur et le rapport fonctionnent sans serveur et sans réseau. `test` exécute seulement la recette et écrit `test-only-results.json`, sans modifier les fichiers du dossier signé. Pour conserver un dossier précédent, choisir `-OutputDir output-autre`, puis ouvrir son propre `configurator.html`.
+`all` et `demo` exécutent T01–T10, C01–C10, P01–P06 et A01–A06, puis génèrent le configurateur, le rapport, les preuves, les clés **publiques**, les résultats et un reçu signé. Ouvrir [index.html](index.html) pour accéder au parcours, ou directement `output/configurator.html`. Le configurateur et le rapport fonctionnent sans serveur et sans réseau. `test` exécute seulement la recette et écrit `test-only-results.json`, sans modifier les fichiers du dossier signé. Pour conserver un dossier précédent, choisir `-OutputDir output-autre`, puis ouvrir son propre `configurator.html`.
 
 `tenir_demo/report_template.html` est le modèle source, avec des marqueurs de génération. Son ouverture directe redirige vers `output/report.html` ; pour consulter les résultats, utiliser le rapport généré.
 
@@ -35,7 +65,7 @@ Le bouton **02 · Règles & périmètre** ouvre une vue dédiée des sept clause
 
 Les boutons **FR et EN** du configurateur, du rapport et de l'accueil changent la langue des libellés et explications. La commande **Mode clair / Mode sombre** partage la présentation du futur site TENIR : monogramme encadré, titres avec empattements, fond ivoire ou sombre et accents sobres. La sélection, l'étape et la configuration avant correction sont conservées. Les préférences sont mémorisées lorsque le navigateur autorise `localStorage` pour les fichiers locaux. Les identifiants techniques, les JSON source et les preuves signées restent dans leur forme originale.
 
-Depuis les règles, un retour vers la configuration fait apparaître **Revenir aux règles et au périmètre**. Depuis le rapport, **Revenir au configurateur** puis **Reprendre la démo consultée** permet de retrouver le même scénario. Les liens transportent les identifiants de configuration, l'étape et le choix avant correction ; une mémoire de session par dossier complète cette conservation lorsque le navigateur l'autorise. Les destinations de retour sont limitées aux pages locales prévues.
+Depuis les règles, un retour vers la configuration fait apparaître **Revenir aux règles et au périmètre**. Depuis le rapport, **Configuration** puis **Reprendre la démo consultée** permet de retrouver le même scénario. Les liens transportent les identifiants de configuration, l'étape et le choix avant correction ; une mémoire de session par dossier complète cette conservation lorsque le navigateur l'autorise. Les destinations de retour sont limitées aux pages locales prévues.
 
 Trois états restent distincts : admissibilité structurelle, prise en charge par le runtime et garanties démontrées. Seul `mono-process / local-registry / thread-lock / fail-closed` correspond au profil du rapport vérifié. Les autres configurations peuvent être admissibles sans être exécutables dans ce prototype : l'interface propose de les conserver pour l'export ou d'adopter explicitement le profil local. Le lien d'en-tête permet aussi de consulter l'archive des scénarios locaux ; le rapport précise alors le profil réellement exécuté et conserve la sélection pour le retour. Une recette en échec désactive les liens vers ces scénarios. Le diagnostic d'alignement compare le catalogue épinglé et présente une revue statique des invariants I1–I9 : quatre sous-ensembles locaux, trois non implémentés et deux non évalués dans la revue. La compatibilité d'exécution reste non vérifiée.
 
@@ -107,6 +137,8 @@ C01–C07 contrôlent l'énumération exhaustive, les clauses et champs, toutes 
 
 P01–P06 vérifient la projection déterministe, toutes les références vers les champs réels, la distinction documentaire/payload/métadonnées, le budget avant réservation, les observations inutilisables, les deux événements des envois et les arrêts avant envoi. Les références inconnues ou mal formées sont rejetées.
 
+A01–A06 contrôlent le diagnostic d'alignement : comparaison exhaustive du catalogue, identité et intégrité des sources épinglées, refus des sources invalides, détection des différences structurelles, portée des invariants et des rapprochements avec le harnais, déterminisme et absence d'écriture des sources. Ces tests locaux n'exécutent pas le runtime ou le harnais amont.
+
 Contrôles supplémentaires du JavaScript :
 
 ```powershell
@@ -116,9 +148,10 @@ node tests/check_landing.cjs
 node tests/check_journey.cjs output
 node tests/check_theme.cjs output
 node tests/check_proof_loop.cjs output
+node tests/check_alignment.cjs output
 ```
 
-Ils exécutent les vrais scripts générés dans un DOM minimal : 144 sélections du configurateur, 1 008 résultats de clauses, ouverture de la vue Règles & périmètre, corrections, navigation, focus, export, basculement FR/EN et quatre preuves du rapport. Le test de parcours vérifie aussi les allers-retours entre pages, les compteurs par preuve et la conservation des choix avec ou sans stockage de session. Ils ne valident pas la mise en page dans un navigateur. Le contrôle visuel n'a pas été effectué : le navigateur intégré a refusé le protocole des fichiers locaux.
+Ils exécutent les vrais scripts générés dans un DOM minimal : 144 sélections du configurateur, 1 008 résultats de clauses, ouverture de la vue Règles & périmètre, corrections, navigation, focus, export, basculement FR/EN et quatre parcours du rapport avec leurs preuves. Le test de parcours vérifie aussi les allers-retours entre pages, les compteurs par preuve et la conservation des choix avec ou sans stockage de session. Ils ne valident pas la mise en page dans un navigateur. Le contrôle visuel n'a pas été effectué : le navigateur intégré a refusé le protocole des fichiers locaux.
 
 Les règles sont extraites du HTML XXL dans `references/rules.json` et `axes.json`. Le rapport reprend la boucle des pièces jointes, projetée sur les preuves locales, et l'identité du futur site fournie en vidéo. Les originaux sont copiés sans modification dans `references/`, avec provenance et empreintes dans `manifest.json`. **Leurs indications de statut et de conformité restent des assertions des documents d'origine, pas des résultats de ce prototype.** La projection `demo-proof-loop/v1` sert à la lecture du rapport ; le crosswalk et son cycle JSON-LD restent des références documentaires, sans export sémantique signé ni validation SHACL.
 
