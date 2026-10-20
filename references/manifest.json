@@ -1,0 +1,62 @@
+[
+  {
+    "source": "C:\\Users\\hp\\Downloads\\diagram system complex process XXL.html",
+    "copy": "original-xxl.html",
+    "sha256": "6c0dc8123f82411b9c2423fbd56955011e4e4d89186ca12cbae3dcba4106943b"
+  },
+  {
+    "source": "C:\\Users\\hp\\Downloads\\diagram system complex mapping Ontologie de l'observation × TENIRREG HTML interactif annoté.html",
+    "copy": "original-mapping.html",
+    "sha256": "bd59a9ea150a7bab7b0bde1671897ccb4a5401d4b9339ae0bc8117560201f4d1"
+  },
+  {
+    "source": "C:\\Users\\hp\\Downloads\\diagram system complex process Instanciation d'un cycle complet (un parcours de la boucle).json",
+    "copy": "original-cycle.json",
+    "sha256": "65b51c16bacf57f921172b6024524e207b576d6380888fd254fa7302919d8a65"
+  },
+  {
+    "source": "C:\\Users\\hp\\Downloads\\diagram system complex process Crosswalk JSON-LD REG ↔ W3C SSNSOSA ↔ PROV-O.json",
+    "copy": "original-crosswalk.json",
+    "sha256": "27cc52251bffbb3c453455d993fc6ca5048686ca3c85a3a427a75c355091bec4"
+  },
+  {
+    "source": "C:\\Users\\hp\\Downloads\\diagram system complex process.png",
+    "copy": "original-diagram.png",
+    "sha256": "6419f90ce2737aeeb194b26e5942bc7f6cfff669f9daffb8a15773e98ac0ef56"
+  },
+  {
+    "source": "C:\\Users\\hp\\.codex\\attachments\\82583a8f-a462-46b2-af90-344b6a8df2de\\Texte collé.txt",
+    "copy": "objectif-strategique-fourni.md",
+    "sha256": "b397d1e71954dbb0e487462d2102e25e6a1552904d1c3cc0a93cd67680dda4fb"
+  },
+  {
+    "source": "C:\\Users\\hp\\Downloads\\Tenir v5.6.0 architecture v1.html",
+    "copy": "architecture-v1.html",
+    "sha256": "a715129d5a33e13d565304ffca2266b6a935182ba37092c3020e3e7484cc3f27"
+  },
+  {
+    "source": "C:\\Users\\hp\\Downloads\\Tenir v5.6.0 architecture v2 Interactive.html",
+    "copy": "architecture-v2.html",
+    "sha256": "8f7f9af371342d31943676208cb8ca957b4493de89eda5f717fad629c6d05e09"
+  },
+  {
+    "source": "C:\\Users\\hp\\Downloads\\TENIR-Gov-Operationalization-Guide.pdf",
+    "copy": "tenir-gov-operationalization-guide.pdf",
+    "sha256": "9c57f0c855c160cb210a5d26d095200d55c8e96c0a4cf3d21f1526076492463f"
+  },
+  {
+    "source": "C:\\Users\\hp\\Downloads\\REG-REG-Plus-Specification-Guide.pdf",
+    "copy": "reg-specification-guide.pdf",
+    "sha256": "5d845e0d5316c3c0270ea09a0d4d29aba252c397a77e53bc246743f2d8f165ba"
+  },
+  {
+    "source": "C:\\Users\\hp\\.codex\\attachments\\30f9a933-d2ea-4d64-953b-bc28cb520b55\\Texte collé.txt",
+    "copy": "metamodel-notes-a.md",
+    "sha256": "f62fc302c7ead39af9baa929090569b04b3099a0edabe36cc09b9eda920d954b"
+  },
+  {
+    "source": "C:\\Users\\hp\\.codex\\attachments\\9d6c1d79-0fcf-4af0-be4c-5f0f0f97a039\\Texte collé.txt",
+    "copy": "metamodel-notes-b.md",
+    "sha256": "5c619377f42eb9c53c895892d0a913d7d32e062e2f9ae575a4fe9430a5aec80b"
+  }
+]

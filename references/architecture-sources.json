@@ -1,0 +1,87 @@
+{
+  "schema": "demo-architecture-context/v1",
+  "alignment_target": {
+    "runtime": "TENIR-Gov",
+    "version": "5.7",
+    "authority": "user-request",
+    "status": "BASE_CONFIRMED_PROMOTION_PLANNED",
+    "release_reference": null,
+    "base_version": "5.6.1",
+    "base_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+    "promotion_basis": "project-owner-confirmation",
+    "execution_compatibility": "NOT_VERIFIED",
+    "owner_statement": "5.6.1 would be it, it will be promoted to 5.7"
+  },
+  "checked_date": "2026-10-19",
+  "supplied_architecture_version": "5.6.0",
+  "source_files": [
+    {
+      "source": "C:\\Users\\hp\\Downloads\\Tenir v5.6.0 architecture v1.html",
+      "copy": "architecture-v1.html",
+      "sha256": "a715129d5a33e13d565304ffca2266b6a935182ba37092c3020e3e7484cc3f27"
+    },
+    {
+      "source": "C:\\Users\\hp\\Downloads\\Tenir v5.6.0 architecture v2 Interactive.html",
+      "copy": "architecture-v2.html",
+      "sha256": "8f7f9af371342d31943676208cb8ca957b4493de89eda5f717fad629c6d05e09"
+    },
+    {
+      "source": "C:\\Users\\hp\\Downloads\\TENIR-Gov-Operationalization-Guide.pdf",
+      "copy": "tenir-gov-operationalization-guide.pdf",
+      "sha256": "9c57f0c855c160cb210a5d26d095200d55c8e96c0a4cf3d21f1526076492463f"
+    },
+    {
+      "source": "C:\\Users\\hp\\Downloads\\REG-REG-Plus-Specification-Guide.pdf",
+      "copy": "reg-specification-guide.pdf",
+      "sha256": "5d845e0d5316c3c0270ea09a0d4d29aba252c397a77e53bc246743f2d8f165ba"
+    },
+    {
+      "source": "C:\\Users\\hp\\.codex\\attachments\\30f9a933-d2ea-4d64-953b-bc28cb520b55\\Texte collé.txt",
+      "copy": "metamodel-notes-a.md",
+      "sha256": "f62fc302c7ead39af9baa929090569b04b3099a0edabe36cc09b9eda920d954b"
+    },
+    {
+      "source": "C:\\Users\\hp\\.codex\\attachments\\9d6c1d79-0fcf-4af0-be4c-5f0f0f97a039\\Texte collé.txt",
+      "copy": "metamodel-notes-b.md",
+      "sha256": "5c619377f42eb9c53c895892d0a913d7d32e062e2f9ae575a4fe9430a5aec80b"
+    }
+  ],
+  "repositories": [
+    {
+      "repository": "skiredj-prog/tenir_governance",
+      "role": "runtime",
+      "commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+      "declared_version": "5.6.1",
+      "release_note": "Pending release in inspected CHANGELOG",
+      "url": "https://github.com/skiredj-prog/tenir_governance/tree/41fae550c1e0a3632e2bde473db6d31b450d4269"
+    },
+    {
+      "repository": "skiredj-prog/reg-conformance",
+      "role": "standard",
+      "commit": "cd5ab1b616ad59014f4b84d522b57a890a48a088",
+      "catalogue_version": "1.0.0",
+      "capabilities_version": "1.1.0",
+      "url": "https://github.com/skiredj-prog/reg-conformance/tree/cd5ab1b616ad59014f4b84d522b57a890a48a088"
+    },
+    {
+      "repository": "skiredj-prog/tenir-conformance-s1-g1",
+      "role": "harness",
+      "commit": "d29400100b00f7e7a87d229af660f62e51d61f12",
+      "declared_version": "0.1.0",
+      "url": "https://github.com/skiredj-prog/tenir-conformance-s1-g1/tree/d29400100b00f7e7a87d229af660f62e51d61f12"
+    }
+  ],
+  "scope": {
+    "remote_code_executed": false,
+    "remote_repositories_modified": false,
+    "full_5_7_contract_found": false,
+    "complete_external_conformance_demonstrated": false
+  },
+  "5_7_search": {
+    "runtime": "branches, v5.7 tag refs, releases, default-branch code and selected docs inspected; no versioned5.7 contract identified",
+    "standard_and_harness": "branches/tags/default-branch code searched for5.7; no matching versioned reference found",
+    "owner_clarification": "Subsequent owner confirmation identifies 5.6.1 as the base to be promoted to 5.7; no separate 5.7 branch is required to select the working reference."
+  },
+  "layer_source": "architecture-v1.html (FR) and architecture-v2.html (EN), levels0-4",
+  "notes": "Metamodel notes are proposed interpretations and roadmap ideas, not conformance evidence. Guides describe a5.6.0-era snapshot; later source changes must be assessed at their pinned commits. Owner clarification supersedes the initial missing-reference question: the pinned 5.6.1 runtime is the confirmed base for planned 5.7 promotion, not proof of execution compatibility."
+}

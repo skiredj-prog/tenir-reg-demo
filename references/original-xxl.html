@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TENIR/REG — Diagramme interactif + Crosswalk + Conformance intégrée</title>
+<style>
+  :root{
+    --bg:#07111f; --panel:rgba(15,23,42,.86); --panel2:rgba(30,41,59,.6);
+    --text:#e5eef7; --muted:#9fb0c3; --line:rgba(148,163,184,.18);
+    --cyan:#22d3ee; --violet:#a78bfa; --amber:#f59e0b; --green:#22c55e; --red:#ef4444; --blue:#60a5fa;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",Inter,Arial,sans-serif;color:var(--text);line-height:1.5;
+    background:radial-gradient(circle at top left,rgba(34,211,238,.14),transparent 30%),
+               radial-gradient(circle at top right,rgba(167,139,250,.12),transparent 28%),
+               linear-gradient(180deg,#07111f,#0b1220);}
+  .container{width:min(1320px,calc(100% - 32px));margin:0 auto}
+  header{padding:42px 0 6px;text-align:center}
+  h1{margin:0 0 10px;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.03em}
+  header p{color:var(--muted);max-width:1000px;margin:0 auto}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--line);
+    border-radius:999px;font-size:.82rem;background:rgba(255,255,255,.03)}
+  .badge.ok{border-color:rgba(34,197,94,.4);color:#dcfce7}
+  .badge.partiel{border-color:rgba(245,158,11,.4);color:#fef3c7}
+  .badge.manquant{border-color:rgba(239,68,68,.4);color:#fee2e2}
+  .badge.exact{border-color:rgba(34,197,94,.5);color:#bbf7d0}
+  .badge.close{border-color:rgba(34,211,238,.5);color:#cffafe}
+  .badge.related{border-color:rgba(245,158,11,.5);color:#fde68a}
+  .tabs{display:flex;gap:8px;justify-content:center;margin:18px 0;flex-wrap:wrap}
+  .tab-btn{padding:10px 18px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);
+    color:var(--muted);cursor:pointer;font-size:.95rem}
+  .tab-btn.active{color:var(--text);border-color:rgba(34,211,238,.5);background:rgba(34,211,238,.08)}
+  section{margin:22px 0;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+  h2{margin:0 0 6px;font-size:1.4rem} h3{margin:14px 0 6px;font-size:1.05rem}
+  .lead{color:var(--muted);margin:0 0 16px}
+  .pipeline{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+  .arrow{align-self:center;color:var(--cyan);font-weight:800}
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .card{padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--panel2);cursor:pointer;
+    transition:border-color .15s,transform .15s}
+  .card:hover,.card:focus{border-color:rgba(34,211,238,.5);transform:translateY(-2px);outline:none}
+  .card.manquant{border-left:4px solid var(--red)}
+  .card.partiel{border-left:4px solid var(--amber)}
+  .card.ok{border-left:4px solid var(--green)}
+  .node-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}
+  .node-label{font-weight:700}
+  .card p{margin:0 0 10px;color:var(--muted);font-size:.88rem}
+  .chip{display:inline-block;padding:4px 9px;border-radius:999px;font-size:.74rem;border:1px solid var(--line);margin:2px}
+  .chip.runtime{border-color:rgba(34,211,238,.4);color:#cffafe}
+  .chip.conformance{border-color:rgba(167,139,250,.4);color:#ede9fe}
+  .chip.product{border-color:rgba(245,158,11,.4);color:#fef3c7}
+  .chip.transverse{border-color:rgba(96,165,250,.4);color:#dbeafe}
+  .chip.xw{border-color:rgba(34,211,238,.35);color:#a5f3fc}
+  #detail{position:sticky;top:12px;margin-top:16px;border-color:rgba(34,211,238,.35);cursor:default}
+  #detail h3{margin:0 0 8px} #detail .meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+  .bar{display:flex;height:16px;border-radius:999px;overflow:hidden;border:1px solid var(--line);margin:10px 0}
+  .bar span{height:100%}
+  .bar .okb{background:rgba(34,197,94,.75);width:29.2%}
+  .bar .kob{background:rgba(239,68,68,.6);width:70.8%}
+  code{font-family:Consolas,monospace;font-size:.9em;color:#dbeafe;background:rgba(255,255,255,.05);
+    padding:2px 6px;border-radius:6px}
+  select{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:10px;
+    padding:8px 10px;font-size:.92rem}
+  .conf-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:14px}
+  .verdict-box{padding:16px;border-radius:14px;border:1px solid var(--line);margin-top:8px}
+  .verdict-box.adm{border-color:rgba(34,197,94,.5);background:rgba(34,197,94,.07)}
+  .verdict-box.rej{border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.07)}
+  .viol{padding:10px 12px;border-radius:10px;border:1px solid rgba(239,68,68,.35);
+    background:rgba(239,68,68,.06);margin:8px 0;font-size:.88rem;color:#fecaca}
+  .stat-row{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}
+  .stat{flex:1 1 120px;text-align:center;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--panel2)}
+  .stat .n{font-size:1.7rem;font-weight:800}
+  svg{width:100%;height:auto;display:block}
+  .xw{fill:none;stroke-width:2;opacity:.75;transition:opacity .15s}
+  .xw.exact{stroke:#22c55e}
+  .xw.close{stroke:#22d3ee}
+  .xw.related{stroke:#f59e0b;stroke-dasharray:6 4}
+  .xw.dim{opacity:.12}
+  .xw.hl{opacity:1;stroke-width:3.5}
+  .xlab{fill:#9fb0c3;font-size:12px}
+  .xreg{fill:#e5eef7;font-size:12px;font-weight:600}
+  .xbox{fill:rgba(30,41,59,.7);stroke:rgba(148,163,184,.25);rx:8}
+  .xbox.reg{stroke:rgba(34,211,238,.45)}
+  footer{padding:26px 0 46px;color:var(--muted);text-align:center}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>TENIR/REG — Diagramme interactif, Crosswalk & Conformance</h1>
+  <p>Trois vues intégrées : (1) l'ontologie d'observation annotée concept par concept,
+     (2) le crosswalk sémantique REG ↔ W3C SSN/SOSA ↔ PROV-O visualisé,
+     (3) le moteur de conformance structurelle embarqué, auto-vérifié contre le catalogue publié v1.0.0.</p>
+  <div class="legend">
+    <span class="badge ok">✅ acquis</span><span class="badge partiel">⚠️ partiel</span><span class="badge manquant">🛑 manquant</span>
+    <span class="badge exact">exactMatch</span><span class="badge close">closeMatch</span><span class="badge related">relatedMatch</span>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="tab-diagram">1 · Diagramme annoté</button>
+    <button class="tab-btn" data-tab="tab-xwalk">2 · Crosswalk sémantique</button>
+    <button class="tab-btn" data-tab="tab-conf">3 · Conformance structurelle</button>
+  </div>
+</header>
+
+<!-- ==================== ONGLET 1 : DIAGRAMME ==================== -->
+<div id="tab-diagram">
+  <section>
+    <h2>Boucle principale — observation → connaissance → restitution</h2>
+    <p class="lead">Une <code>EvidenceRecord</code> = un parcours complet de cette boucle, figé et signable.
+       Cliquez sur un nœud : le panneau affiche le concept TENIR, son statut et ses correspondances crosswalk.</p>
+    <div class="pipeline" id="loop"></div>
+    <div class="arrow" style="display:block;text-align:center;margin-top:8px">↺ la restitution alimente une nouvelle question</div>
+    <aside class="card" id="detail"></aside>
+  </section>
+  <section>
+    <h2>Branche simulation — raisonnement hypothético-déductif</h2>
+    <p class="lead">Le harnais reg-conformance <em>est</em> cette branche : il falsifie le modèle théorique par scénarios.</p>
+    <div class="grid" id="sim"></div>
+  </section>
+  <section>
+    <h2>Branche suivi — séries, indicateurs, temporalité</h2>
+    <div class="grid" id="suivi"></div>
+  </section>
+  <section>
+    <h2>Nœuds supports — acteurs, système, périmètre, protocoles</h2>
+    <div class="grid" id="supports"></div>
+  </section>
+  <section>
+    <h2>Lacunes ontologiques → backlog</h2>
+    <div id="gaps"></div>
+  </section>
+</div>
+
+<!-- ==================== ONGLET 2 : CROSSWALK ==================== -->
+<div id="tab-xwalk" class="hidden">
+  <section>
+    <h2>Crosswalk REG ↔ SSN/SOSA ↔ PROV-O</h2>
+    <p class="lead">Hub visual : chaque concept REG/TENIR (centre) est relié à ses équivalents SOSA (gauche) et PROV-O (droite).
+       Couleurs = type de correspondance. Cliquez un concept central pour isoler ses liens.</p>
+    <svg id="xsvg" role="img" aria-label="Crosswalk REG SOSA PROV"></svg>
+    <div class="legend" style="justify-content:flex-start">
+      <span class="badge exact">exactMatch — même sémantique</span>
+      <span class="badge close">closeMatch — sémantique proche</span>
+      <span class="badge related">relatedMatch — lien contextuel</span>
+    </div>
+    <h3>Décisions de crosswalk à défendre en revue</h3>
+    <ul id="xnotes" style="color:var(--muted)"></ul>
+  </section>
+</div>
+
+<!-- ==================== ONGLET 3 : CONFORMANCE ==================== -->
+<div id="tab-conf" class="hidden">
+  <section>
+    <h2>Moteur de conformance structurelle embarqué</h2>
+    <p class="lead">Implémentation live des clauses R1a–R3a de <code>compatibility-rules-v1.yaml</code>.
+       Toutes les clauses applicables sont évaluées ; <strong>toutes</strong> les violations sont retournées.
+       Nœud ontologique rattaché : <em>Périmètre</em>.</p>
+    <div class="conf-grid">
+      <label>HOST_SCOPE<br><select id="sel-host"></select></label>
+      <label>DEDUP_LAYER<br><select id="sel-dedup"></select></label>
+      <label>CONCURRENCY<br><select id="sel-conc"></select></label>
+      <label>UNCERTAINTY<br><select id="sel-unc"></select></label>
+    </div>
+    <div class="verdict-box" id="conf-verdict"></div>
+    <h3>Auto-vérification du moteur contre le catalogue publié (v1.0.0)</h3>
+    <div class="stat-row" id="selfcheck"></div>
+    <p class="lead" id="selfcheck-msg"></p>
+    <h3>Référence des clauses</h3>
+    <div id="rules-ref"></div>
+    <div class="bar"><span class="okb"></span><span class="kob"></span></div>
+    <div class="legend" style="justify-content:flex-start">
+      <span class="badge ok">42 admissibles structurellement</span>
+      <span class="badge manquant">102 rejetées</span>
+      <span class="chip transverse">mono-process : 9</span>
+      <span class="chip transverse">mono-host : 18</span>
+      <span class="chip transverse">multi-host : 15</span>
+    </div>
+    <p class="lead"><code>admissible_structural = true</code> ≠ <code>effective_guarantee_demonstrated = true</code> :
+       dans le catalogue v1.0.0, <code>effective_guarantee_demonstrated</code> est <code>null</code> partout —
+       la garantie effective se vérifie séparément au build, contre les capacités démontrées.</p>
+  </section>
+</div>
+
+<footer>Document illustratif et outillage de référence — ne remplace ni les schémas normatifs, ni le catalogue, ni les rapports d'audit.</footer>
+</div>
+
+<script>
+/* ---------- Données : nœuds ontologiques ---------- */
+const NODES=[
+{id:"question",label:"Question",branch:"transverse",status:"ok",tenir:"Intention i, exigence réglementaire R, mandat.",artefact:"Resolve(i, h, R, V) → σ, I*",note:"Point d'entrée de la boucle : toute gouvernance commence par une question normative."},
+{id:"modele_theorique",label:"Modèle théorique",branch:"conformance",status:"ok",tenir:"Profil σ + invariants I* + machine à états.",artefact:"profils REG+, hypotheses-v1.yaml",note:"Le profil EST le modèle théorique : invariants + règles de réaction aux signaux."},
+{id:"modele_observation",label:"Modèle d'observation",branch:"runtime",status:"ok",tenir:"Contrat Assure v1 : signaux, fraîcheur, signature.",artefact:"assure-contract-v1.md",note:"Sépare détection (Assure) et décision (Evaluate) — propriété P4."},
+{id:"observation",label:"Observation",branch:"runtime",status:"ok",tenir:"AssuranceSignal signé Ed25519 + signaux S1–S4 dans s.",artefact:"s.infrastructure_signals",note:"Fait brut attesté ; signal non frais ⇒ ignoré ou promu FLAG selon σ."},
+{id:"valeur_observee",label:"Valeur observée (donnée)",branch:"runtime",status:"ok",tenir:"Snapshot s + coordonnées ; axe absent = unmeasured.",artefact:"inputs.state_snapshot",note:"La donnée n'est pas encore une décision."},
+{id:"analyse",label:"Analyse / interprétation",branch:"runtime",status:"ok",tenir:"Evaluate() pur : scoring + invariants + lattice + signal_reactions.",artefact:"evaluator_version",note:"Fonction pure : mêmes entrées, même verdict."},
+{id:"valeur_interpretee",label:"Valeur interprétée (information)",branch:"runtime",status:"ok",tenir:"Verdict PASS / FLAG / HOLD / HARD_VETO.",artefact:"results.verdict",note:"Le verdict n'est pas le score ; le score n'est pas le verdict."},
+{id:"connaissance",label:"Nouvelle connaissance",branch:"runtime",status:"ok",tenir:"EvidenceRecord + assessment τ⁻¹/EVP.",artefact:"evidence-contract-v1.json",note:"Un parcours complet de la boucle, figé, hashé, signable."},
+{id:"restitution",label:"Restitution",branch:"product",status:"manquant",tenir:"Regulator View / rapport d'audit (Compliance Hub, Phase 2).",artefact:"—",note:"Branche absente : c'est le produit commercial à construire."},
+{id:"scenario",label:"Scénario",branch:"conformance",status:"partiel",tenir:"Scénarios S1–S12, vecteurs de conformité publics.",artefact:"tenir-conformance-s1-g1",note:"Cas nominaux couverts ; adversarial complet en cours."},
+{id:"situation_simulee",label:"Situation simulée",branch:"conformance",status:"partiel",tenir:"Harnais + property tests ; model checking absent (P2-7).",artefact:"harness, pytest",note:"La simulation teste le modèle théorique."},
+{id:"raisonnement_hd",label:"Raisonnement hypothético-déductif",branch:"conformance",status:"partiel",tenir:"Falsification de h ; linearizability checker à réécrire (F-03).",artefact:"tests adversariaux",note:"Un validateur invalide rend le raisonnement invalide."},
+{id:"suivi",label:"Suivi",branch:"runtime",status:"ok",tenir:"Lifecycle CREATED→…→CONFIRMED/FAILED + UNKNOWN/HOLD/ESCALATED.",artefact:"DurableOperationRegistry",note:"Le suivi est la trajectoire, pas un verdict."},
+{id:"modalite_temporelle",label:"Modalité temporelle du suivi",branch:"runtime",status:"partiel",tenir:"TTL & fraîcheur ; gaps I9 ; échantillonnage non spécifié.",artefact:"assure-contract (TTL)",note:"Manque la politique d'échantillonnage explicite."},
+{id:"jeu_indicateurs",label:"Jeu d'indicateurs",branch:"product",status:"partiel",tenir:"Invariants I1–I9 ; agrégats EVP non exposés.",artefact:"invariant_details[]",note:"CheckResult présents ; agrégation tableau de bord absente."},
+{id:"ind_dyn",label:"Indicateur de dynamique",branch:"product",status:"manquant",tenir:"Débit de verdicts, latence, taux de HOLD par profil.",artefact:"—",note:"À construire dans le Compliance Hub."},
+{id:"ind_chg",label:"Indicateur de changement",branch:"product",status:"manquant",tenir:"Dérive : changement de V, de σ, de comportement.",artefact:"—",note:"Clé pour la continuité temporelle (P3) côté produit."},
+{id:"serie_valeurs",label:"Série temporelle de valeurs",branch:"runtime",status:"ok",tenir:"Ledger chaîné (previous_hash), registre durable.",artefact:"chaîne d'EvidenceRecords",note:"Append-only ; détection suppression/réordonnancement."},
+{id:"serie_interpretees",label:"Série temporelle interprétée",branch:"product",status:"partiel",tenir:"Historique des verdicts ; séries agrégées absentes.",artefact:"results.verdict (chaîne)",note:"Matière première présente, séries absentes."},
+{id:"acteur",label:"Acteur",branch:"transverse",status:"partiel",tenir:"agent, gouverneur, auditeur, régulateur ; IAM absent (P3).",artefact:"token de service partagé",note:"L'acteur pose la question et reçoit la restitution."},
+{id:"connaissance_ref",label:"Connaissance (référentiel)",branch:"transverse",status:"ok",tenir:"Catalogue V versionné : intentions, hypothèses, profils, invariants.",artefact:"catalog_version 1.0.0",note:"Si V change, le résultat peut changer ; la trace de version, jamais."},
+{id:"systeme",label:"Système (interne / interactif)",branch:"transverse",status:"ok",tenir:"Système gouverné + infrastructure ; hypothèses h.",artefact:"h = (host, dedup, concurrency, uncertainty)",note:"Inclut les providers externes."},
+{id:"perimetre",label:"Périmètre",branch:"conformance",status:"ok",tenir:"HOST_SCOPE + catalogue : 144 configs, 42 admissibles, 102 rejetées.",artefact:"valid-configurations-v1.json",note:"admissible_structural ≠ effective_guarantee_demonstrated. Voir onglet 3."},
+{id:"objet_interet",label:"Objet d'intérêt",branch:"runtime",status:"ok",tenir:"Transition τ, réservation, ressource.",artefact:"transition_proposal",note:"L'objet sur lequel portent observation et décision."},
+{id:"propriete",label:"Propriété",branch:"runtime",status:"ok",tenir:"Capacité disponible, état d'hypothèse, quarantaine, trajectoire.",artefact:"observable properties",note:"Chaque invariant lit une propriété précise."},
+{id:"proto_obs",label:"Protocole d'observation",branch:"runtime",status:"ok",tenir:"Assure : collecte, signature, TTL, anti-rejeu.",artefact:"assure-contract-v1",note:"Validation signature/identité/fraîcheur avant injection."},
+{id:"proto_collecte",label:"Protocole de collecte",branch:"runtime",status:"partiel",tenir:"Injection atomique dans s ; anti-rejeu stateful.",artefact:"s.infrastructure_signals",note:"Atomicité sous concurrence à démontrer."},
+{id:"proto_echant",label:"Protocole d'échantillonnage",branch:"runtime",status:"manquant",tenir:"Fréquence, fenêtres, agrégation : non spécifié.",artefact:"—",note:"Sans échantillonnage, signal manqué ≠ absence."},
+{id:"proto_analyse",label:"Protocole d'analyse & interprétation",branch:"runtime",status:"ok",tenir:"Version évaluateur + JCS + lattice ; reproductibilité P2.",artefact:"evaluator_version",note:"Un tiers peut recalculer le verdict."}
+];
+const LOOP=["question","modele_theorique","modele_observation","observation","valeur_observee","analyse","valeur_interpretee","connaissance","restitution"];
+const SIM=["scenario","situation_simulee","raisonnement_hd"];
+const SUIVI=["suivi","modalite_temporelle","jeu_indicateurs","ind_dyn","ind_chg","serie_valeurs","serie_interpretees"];
+const SUP=["acteur","connaissance_ref","systeme","perimetre","objet_interet","propriete","proto_obs","proto_collecte","proto_echant","proto_analyse"];
+const BL={runtime:"Runtime",conformance:"Standard & Conf.",product:"Produit",transverse:"Transverse"};
+const SL={ok:"acquis",partiel:"partiel",manquant:"manquant"};
+
+/* ---------- Crosswalk : concepts REG ↔ SOSA / PROV ---------- */
+const CONCEPTS=[
+{reg:"AssuranceSignal",node:"observation",sosa:[["Observation","close"]],prov:[["Entity","related"]]},
+{reg:"AssureService",node:"proto_obs",sosa:[["Sensor","close"]],prov:[["Agent","related"]]},
+{reg:"AssureContract",node:"modele_observation",sosa:[["Procedure","exact"]],prov:[["Plan","related"]]},
+{reg:"HypothesisStatus",node:"observation",sosa:[["ObservableProperty","close"]],prov:[]},
+{reg:"AvailableCapacity",node:"propriete",sosa:[["ObservableProperty","exact"]],prov:[]},
+{reg:"InfrastructureState",node:"systeme",sosa:[["FeatureOfInterest","close"]],prov:[]},
+{reg:"GovernedResource",node:"objet_interet",sosa:[["FeatureOfInterest","close"]],prov:[["Entity","related"]]},
+{reg:"CandidateTransition τ",node:"objet_interet",sosa:[],prov:[["Activity","related"]],note:"Aligné sur le Candidate Act (IETF Protected Execution-Finality) : activité candidate, non effective."},
+{reg:"Adjudication (Evaluate)",node:"analyse",sosa:[],prov:[["Activity","related"]],note:"Interprétation, pas observation : aucun équivalent sosa:Observation. Choix délibéré du crosswalk."},
+{reg:"Profile σ",node:"modele_theorique",sosa:[["Procedure","close"]],prov:[["Plan","related"]]},
+{reg:"Invariant I*",node:"jeu_indicateurs",sosa:[["Procedure","close"]],prov:[]},
+{reg:"CheckResult",node:"jeu_indicateurs",sosa:[["Result","exact"]],prov:[]},
+{reg:"Verdict",node:"valeur_interpretee",sosa:[["Result","close"]],prov:[["Entity","related"]]},
+{reg:"StateSnapshot",node:"valeur_observee",sosa:[],prov:[["Entity","related"]]},
+{reg:"EvidenceRecord",node:"connaissance",sosa:[],prov:[["Bundle","close"],["Entity","related"]],note:"Bundle PROV : agrège activités, entités et résultats — pas une simple entité."},
+{reg:"CommitAttempt",node:null,sosa:[],prov:[["Activity","related"]],note:"Sans nœud ontologique : l'ontologie d'observation ne modèle pas la mutation. Apport spécifique TENIR."},
+{reg:"EvidenceChain",node:"serie_valeurs",sosa:[],prov:[["Collection","close"]],note:"previous_hash se lit comme une chaîne de prov:wasDerivedFrom."},
+{reg:"Trajectory",node:"suivi",sosa:[["ObservationCollection","close"]],prov:[]},
+{reg:"AuditReport",node:"restitution",sosa:[],prov:[["Entity","related"]]},
+{reg:"Actor",node:"acteur",sosa:[],prov:[["Agent","exact"]]},
+{reg:"InterpretationProtocol",node:"proto_analyse",sosa:[["Procedure","exact"]],prov:[]}
+];
+const XNOTES=[
+"Evaluate() n'est PAS une sosa:Observation : c'est une interprétation (prov:Activity). Confondre les deux casserait la séparation observation/décision (P4) au niveau ontologique.",
+"EvidenceRecord = prov:Bundle : il agrège adjudication, commit, snapshots, signaux et résultats.",
+"La chaîne d'évidence = prov:Collection + prov:wasDerivedFrom : traduction sémantique de previous_hash, lisible par tout outillage PROV.",
+"τ = activité candidate (alignement IETF Protected Execution-Finality) : proposée, non effective.",
+"CommitAttempt n'a aucun nœud ontologique correspondant : l'ontologie d'observation ne modèle pas la mutation — c'est l'apport propre de TENIR.",
+"Les signaux Assure sont des sosa:Observation complètes (sensor, procedure, property, result, expiration) : la fraîcheur devient une propriété de premier rang."
+];
+
+/* ---------- Conformance : règles R1a–R3a ---------- */
+const RULES=[
+{rule_id:"R1_HOST_CONCURRENCY",clause_id:"R1a",desc:"mono-process n'autorise que le verrou de thread.",cf:"HOST_SCOPE",cv:"mono-process",rf:"CONCURRENCY",av:["thread-lock"]},
+{rule_id:"R1_HOST_CONCURRENCY",clause_id:"R1b",desc:"mono-host autorise file-lock ou distributed-transaction.",cf:"HOST_SCOPE",cv:"mono-host",rf:"CONCURRENCY",av:["file-lock","distributed-transaction"]},
+{rule_id:"R1_HOST_CONCURRENCY",clause_id:"R1c",desc:"multi-host autorise distributed-transaction ou distributed-consensus.",cf:"HOST_SCOPE",cv:"multi-host",rf:"CONCURRENCY",av:["distributed-transaction","distributed-consensus"]},
+{rule_id:"R2_CONSENSUS_SCOPE",clause_id:"R2a",desc:"Le consensus distribué exige une topologie multi-host.",cf:"CONCURRENCY",cv:"distributed-consensus",rf:"HOST_SCOPE",av:["multi-host"]},
+{rule_id:"R2_CONSENSUS_DEDUP",clause_id:"R2b",desc:"Le registre de déduplication distribué exige multi-host.",cf:"DEDUP_LAYER",cv:"distributed-consensus-registry",rf:"HOST_SCOPE",av:["multi-host"]},
+{rule_id:"R2_CONSENSUS_DEDUP",clause_id:"R2c",desc:"Le registre de déduplication distribué exige le consensus distribué.",cf:"DEDUP_LAYER",cv:"distributed-consensus-registry",rf:"CONCURRENCY",av:["distributed-consensus"]},
+{rule_id:"R3_LOCAL_DEDUP",clause_id:"R3a",desc:"Un registre local ne peut pas coordonner plusieurs hôtes.",cf:"DEDUP_LAYER",cv:"local-registry",rf:"HOST_SCOPE",av:["mono-process","mono-host"]}
+];
+const AXES={
+ HOST_SCOPE:["mono-process","mono-host","multi-host"],
+ DEDUP_LAYER:["none","local-registry","provider-idempotency-key","distributed-consensus-registry"],
+ CONCURRENCY:["thread-lock","file-lock","distributed-transaction","distributed-consensus"],
+ UNCERTAINTY:["fail-closed","fail-open","human-escalation"]
+};
+function evaluate(cfg){
+  const v=[];
+  for(const r of RULES){
+    if(cfg[r.cf]===r.cv && !r.av.includes(cfg[r.rf])){
+      v.push({rule_id:r.rule_id,clause_id:r.clause_id,
+        message:`${r.cf}=${r.cv} exige ${r.rf} dans [${r.av.map(x=>`'${x}'`).join(', ')}], obtenu='${cfg[r.rf]}'`});
+    }
+  }
+  return v;
+}
+
+/* ---------- Rendu onglet 1 ---------- */
+const byId=id=>NODES.find(n=>n.id===id);
+const xwOf=id=>CONCEPTS.filter(c=>c.node===id);
+function card(n){
+  const x=xwOf(n.id).length;
+  return `<article class="card ${n.status}" data-id="${n.id}" tabindex="0">
+  <div class="node-head"><span class="node-label">${n.label}</span><span class="badge ${n.status}">${SL[n.status]}</span></div>
+  <p>${n.tenir}</p>
+  <span class="chip ${n.branch}">${BL[n.branch]}</span>${x?`<span class="chip xw" title="correspondances crosswalk">⇄ ${x}</span>`:""}</article>`;
+}
+document.getElementById("loop").innerHTML=LOOP.map((id,i)=>card(byId(id))+(i<LOOP.length-1?'<span class="arrow">→</span>':"")).join("");
+document.getElementById("sim").innerHTML=SIM.map(id=>card(byId(id))).join("");
+document.getElementById("suivi").innerHTML=SUIVI.map(id=>card(byId(id))).join("");
+document.getElementById("supports").innerHTML=SUP.map(id=>card(byId(id))).join("");
+document.getElementById("gaps").innerHTML="<ul style='color:var(--muted)'>"+NODES.filter(n=>n.status!=="ok")
+  .map(n=>`<li><strong style="color:var(--text)">${n.label}</strong> (${SL[n.status]}) — ${n.note}</li>`).join("")+"</ul>";
+function show(id){
+  const n=byId(id); const xs=xwOf(id);
+  const xhtml=xs.length?xs.map(c=>`<div style="margin:6px 0"><code>${c.reg}</code> `+
+    c.sosa.map(([t,m])=>`<span class="badge ${m}">sosa:${t}</span>`).join(" ")+
+    c.prov.map(([t,m])=>`<span class="badge ${m}">prov:${t}</span>`).join(" ")+
+    (c.note?`<div style="color:var(--muted);font-size:.85rem;margin-top:4px">${c.note}</div>`:"")+"</div>").join("")
+    :"<div style='color:var(--muted)'>Aucune correspondance crosswalk directe pour ce nœud.</div>";
+  document.getElementById("detail").innerHTML=
+   `<h3>${n.label}</h3><div class="meta"><span class="badge ${n.status}">${SL[n.status]}</span><span class="chip ${n.branch}">${BL[n.branch]}</span></div>
+    <p style="color:var(--muted)"><strong style="color:var(--text)">Concept TENIR/REG :</strong> ${n.tenir}</p>
+    <p style="color:var(--muted)"><strong style="color:var(--text)">Artefact :</strong> <code>${n.artefact}</code></p>
+    <p style="color:var(--muted)">${n.note}</p>
+    <h3>Crosswalk intégré</h3>${xhtml}`;
+}
+document.addEventListener("click",e=>{const c=e.target.closest(".card[data-id]");if(c&&c.id!=="detail")show(c.dataset.id);});
+document.addEventListener("keydown",e=>{const c=e.target.closest(".card[data-id]");if(c&&c.id!=="detail"&&(e.key==="Enter"||e.key===" "))show(c.dataset.id);});
+show("question");
+
+/* ---------- Rendu onglet 2 : SVG hub ---------- */
+function buildXwalk(){
+  const svg=document.getElementById("xsvg");
+  const W=1000,rowH=34;
+  const left=[...new Set(CONCEPTS.flatMap(c=>c.sosa.map(s=>s[0])))].sort();
+  const right=[...new Set(CONCEPTS.flatMap(c=>c.prov.map(p=>p[0])))].sort();
+  const H=Math.max(CONCEPTS.length,left.length,right.length)*rowH+60;
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  const cy=i=>40+rowH*(i+0.5);
+  const ly=i=>40+(H-80)/left.length*(i+0.5);
+  const ry=i=>40+(H-80)/right.length*(i+0.5);
+  const L={};left.forEach((n,i)=>L[n]=ly(i));
+  const R={};right.forEach((n,i)=>R[n]=ry(i));
+  let s="";
+  CONCEPTS.forEach((c,i)=>{
+    c.sosa.forEach(([t,m])=>{s+=`<path class="xw ${m}" data-reg="${c.reg}" d="M ${W/2-130} ${cy(i)} C ${W/2-230} ${cy(i)}, 260 ${L[t]}, 170 ${L[t]}"/>`;});
+    c.prov.forEach(([t,m])=>{s+=`<path class="xw ${m}" data-reg="${c.reg}" d="M ${W/2+130} ${cy(i)} C ${W/2+230} ${cy(i)}, ${W-260} ${R[t]}, ${W-170} ${R[t]}"/>`;});
+  });
+  left.forEach((n,i)=>{s+=`<rect class="xbox" x="20" y="${L[n]-12}" width="150" height="24" rx="8"/><text class="xlab" x="30" y="${L[n]+4}">sosa:${n}</text>`;});
+  right.forEach((n,i)=>{s+=`<rect class="xbox" x="${W-170}" y="${R[n]-12}" width="150" height="24" rx="8"/><text class="xlab" x="${W-160}" y="${R[n]+4}">prov:${n}</text>`;});
+  CONCEPTS.forEach((c,i)=>{s+=`<g class="regrow" data-reg="${c.reg}" style="cursor:pointer"><rect class="xbox reg" x="${W/2-130}" y="${cy(i)-13}" width="260" height="26" rx="8"/><text class="xreg" x="${W/2-120}" y="${cy(i)+4}">${c.reg}${c.node?"":"  ·  (sans nœud ontologique)"}</text></g>`;});
+  svg.innerHTML=s;
+  let sel=null;
+  svg.querySelectorAll(".regrow").forEach(g=>g.addEventListener("click",()=>{
+    sel=(sel===g.dataset.reg)?null:g.dataset.reg;
+    svg.querySelectorAll(".xw").forEach(p=>{
+      p.classList.remove("hl","dim");
+      if(sel){p.classList.add(p.dataset.reg===sel?"hl":"dim");}
+    });
+  }));
+}
+buildXwalk();
+document.getElementById("xnotes").innerHTML=XNOTES.map(n=>`<li>${n}</li>`).join("");
+
+/* ---------- Rendu onglet 3 : conformance ---------- */
+function fill(selId,axis){
+  const el=document.getElementById(selId);
+  el.innerHTML=AXES[axis].map(v=>`<option>${v}</option>`).join("");
+  el.addEventListener("change",runConf);
+}
+fill("sel-host","HOST_SCOPE");fill("sel-dedup","DEDUP_LAYER");fill("sel-conc","CONCURRENCY");fill("sel-unc","UNCERTAINTY");
+function runConf(){
+  const cfg={HOST_SCOPE:document.getElementById("sel-host").value,
+             DEDUP_LAYER:document.getElementById("sel-dedup").value,
+             CONCURRENCY:document.getElementById("sel-conc").value,
+             UNCERTAINTY:document.getElementById("sel-unc").value};
+  const v=evaluate(cfg);
+  const box=document.getElementById("conf-verdict");
+  box.className="verdict-box "+(v.length?"rej":"adm");
+  box.innerHTML=`<strong style="font-size:1.1rem">${v.length?"🛑 REJETÉE":"✅ ADMISSIBLE (structurellement)"}</strong>
+    <div style="color:var(--muted);margin:6px 0"><code>${JSON.stringify(cfg)}</code></div>
+    <div style="color:var(--muted)">effective_guarantee_demonstrated : <code>null</code> (vérifié séparément au build)</div>`+
+    (v.length?v.map(x=>`<div class="viol"><strong>${x.clause_id}</strong> · ${x.rule_id}<br>${x.message}</div>`).join(""):"");
+}
+runConf();
+/* auto-vérification : énumération des 144 vs catalogue publié */
+(function(){
+  let total=0,adm=0,rej=0;const bd={"mono-process":0,"mono-host":0,"multi-host":0};
+  for(const h of AXES.HOST_SCOPE)for(const d of AXES.DEDUP_LAYER)for(const c of AXES.CONCURRENCY)for(const u of AXES.UNCERTAINTY){
+    total++;const v=evaluate({HOST_SCOPE:h,DEDUP_LAYER:d,CONCURRENCY:c,UNCERTAINTY:u});
+    if(v.length){rej++;}else{adm++;bd[h]++;}
+  }
+  const exp={total:144,adm:42,rej:102,"mono-process":9,"mono-host":18,"multi-host":15};
+  const okk=total===exp.total&&adm===exp.adm&&rej===exp.rej&&bd["mono-process"]===exp["mono-process"]&&bd["mono-host"]===exp["mono-host"]&&bd["multi-host"]===exp["multi-host"];
+  document.getElementById("selfcheck").innerHTML=
+   `<div class="stat"><div class="n">${total}</div>total</div>
+    <div class="stat"><div class="n" style="color:var(--green)">${adm}</div>admissibles</div>
+    <div class="stat"><div class="n" style="color:var(--red)">${rej}</div>rejetées</div>
+    <div class="stat"><div class="n" style="color:var(--cyan)">${bd["mono-process"]}/${bd["mono-host"]}/${bd["multi-host"]}</div>mono-p / mono-h / multi-h</div>`;
+  document.getElementById("selfcheck-msg").innerHTML=okk
+   ?`<span class="badge ok">✅ Moteur embarqué conforme au catalogue publié v1.0.0 (144 / 42 / 102 · 9 / 18 / 15)</span>`
+   :`<span class="badge manquant">🛑 Divergence moteur ↔ catalogue : corriger les clauses embarquées</span>`;
+})();
+document.getElementById("rules-ref").innerHTML=RULES.map(r=>
+  `<span class="chip conformance" title="${r.desc}">${r.clause_id} · ${r.cf}=${r.cv} ⇒ ${r.rf} ∈ [${r.av.join(", ")}]</span>`).join(" ");
+
+/* ---------- Onglets ---------- */
+document.querySelectorAll(".tab-btn").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".tab-btn").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  ["tab-diagram","tab-xwalk","tab-conf"].forEach(id=>document.getElementById(id).classList.toggle("hidden",id!==b.dataset.tab));
+}));
+</script>
+</body>
+</html>

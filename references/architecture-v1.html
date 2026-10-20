@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TENIR / REG — Architecture illustrative</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(15, 23, 42, 0.82);
+      --panel-2: rgba(30, 41, 59, 0.62);
+      --text: #e5eef7;
+      --muted: #9fb0c3;
+      --line: rgba(148, 163, 184, 0.18);
+      --accent: #38bdf8;
+      --accent-2: #a78bfa;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --blue: #60a5fa;
+      --cyan: #22d3ee;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Inter", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 32%),
+        radial-gradient(circle at top right, rgba(167, 139, 250, 0.14), transparent 28%),
+        linear-gradient(180deg, #07111f 0%, #0b1220 100%);
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1280px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 56px 0 24px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      max-width: 980px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .badge.small {
+      padding: 5px 10px;
+      font-size: 0.82rem;
+    }
+
+    .badge.green { border-color: rgba(34, 197, 94, 0.35); color: #dcfce7; }
+    .badge.amber { border-color: rgba(245, 158, 11, 0.35); color: #fef3c7; }
+    .badge.red { border-color: rgba(239, 68, 68, 0.35); color: #fee2e2; }
+    .badge.blue { border-color: rgba(96, 165, 250, 0.35); color: #dbeafe; }
+    .badge.cyan { border-color: rgba(34, 211, 238, 0.35); color: #cffafe; }
+    .badge.violet { border-color: rgba(167, 139, 250, 0.35); color: #ede9fe; }
+
+    .toc {
+      margin: 28px auto 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px;
+    }
+
+    .toc a {
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: var(--muted);
+    }
+
+    .toc a:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+    }
+
+    section {
+      margin: 34px 0;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    section > h2 {
+      margin: 0 0 8px;
+      font-size: 1.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .lead {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+    }
+
+    .card h3, .card h4 {
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .card .muted { color: var(--muted); }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.85rem;
+    }
+
+    .chip.accent { border-color: rgba(56, 189, 248, 0.35); color: #e0f2fe; }
+    .chip.violet { border-color: rgba(167, 139, 250, 0.35); color: #ede9fe; }
+    .chip.green { border-color: rgba(34, 197, 94, 0.35); color: #dcfce7; }
+    .chip.amber { border-color: rgba(245, 158, 11, 0.35); color: #fef3c7; }
+    .chip.red { border-color: rgba(239, 68, 68, 0.35); color: #fee2e2; }
+    .chip.blue { border-color: rgba(96, 165, 250, 0.35); color: #dbeafe; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    td { color: var(--muted); }
+    td strong { color: var(--text); }
+
+    .verdict {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+
+    .verdict.pass { background: rgba(34, 197, 94, 0.14); color: #bbf7d0; border: 1px solid rgba(34, 197, 94, 0.3); }
+    .verdict.flag { background: rgba(245, 158, 11, 0.14); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .verdict.hold { background: rgba(96, 165, 250, 0.14); color: #bfdbfe; border: 1px solid rgba(96, 165, 250, 0.3); }
+    .verdict.veto { background: rgba(239, 68, 68, 0.14); color: #fecaca; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .timeline {
+      position: relative;
+      margin-left: 10px;
+      padding-left: 28px;
+      border-left: 2px solid rgba(148, 163, 184, 0.28);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin: 0 0 20px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -37px;
+      top: 5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.12);
+    }
+
+    .timeline-item.violet::before { background: var(--accent-2); box-shadow: 0 0 0 5px rgba(167, 139, 250, 0.12); }
+    .timeline-item.green::before { background: var(--green); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.12); }
+    .timeline-item.amber::before { background: var(--amber); box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.12); }
+    .timeline-item.red::before { background: var(--red); box-shadow: 0 0 0 5px rgba(239, 68, 68, 0.12); }
+
+    .timeline-item h3 {
+      margin: 0 0 6px;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(150px, 1fr));
+      gap: 10px;
+      align-items: stretch;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .step {
+      position: relative;
+      min-height: 180px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .step::after {
+      content: "→";
+      position: absolute;
+      right: -13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 1.2rem;
+      z-index: 2;
+    }
+
+    .step:last-child::after {
+      display: none;
+    }
+
+    .step h4 {
+      margin: 0 0 8px;
+      font-size: 0.98rem;
+    }
+
+    .step p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .artifact {
+      display: inline-block;
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: #dbeafe;
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.22);
+      padding: 5px 8px;
+      border-radius: 8px;
+    }
+
+    .formula {
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      font-family: Consolas, monospace;
+      font-size: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+
+    .callout.info {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.22);
+    }
+
+    .callout.warning {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: rgba(245, 158, 11, 0.24);
+    }
+
+    .callout.danger {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.24);
+    }
+
+    .callout.success {
+      background: rgba(34, 197, 94, 0.08);
+      border-color: rgba(34, 197, 94, 0.22);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .stat {
+      padding: 16px;
+      text-align: center;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .stat .number {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .stat .label {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .bar {
+      display: flex;
+      height: 18px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin: 12px 0 8px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+    }
+
+    .bar .ok { background: rgba(34, 197, 94, 0.75); }
+    .bar .ko { background: rgba(239, 68, 68, 0.65); }
+
+    .legend {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .dot.green { background: var(--green); }
+    .dot.red { background: var(--red); }
+    .dot.blue { background: var(--blue); }
+    .dot.amber { background: var(--amber); }
+
+    .state-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .state {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      font-size: 0.88rem;
+    }
+
+    .arrow {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    code, .mono {
+      font-family: Consolas, Menlo, monospace;
+      font-size: 0.92em;
+      color: #dbeafe;
+      background: rgba(255,255,255,0.05);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    footer {
+      padding: 30px 0 50px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 1100px) {
+      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .pipeline { grid-template-columns: repeat(4, minmax(180px, 1fr)); }
+      .step::after { display: none; }
+    }
+
+    @media (max-width: 820px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .pipeline { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <h1>TENIR / REG</h1>
+      <p>
+        Architecture globale, explicative et visuelle : théorie, standard, runtime, signaux structurels,
+        chaîne de transformation, preuve, audit et catalogue de configurations.
+      </p>
+      <div class="hero-badges">
+        <span class="badge cyan">Runtime : TENIR-Gov</span>
+        <span class="badge violet">Standard : REG Core + REG+</span>
+        <span class="badge green">Preuve : EvidenceRecord</span>
+        <span class="badge amber">Audit : v5.6.0 → v5.7.0</span>
+        <span class="badge blue">Catalogue : 144 configurations</span>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Sommaire">
+      <a href="#piliers">1. Trois piliers</a>
+      <a href="#niveaux">2. Architecture à 5 niveaux</a>
+      <a href="#runtime">3. Runtime TENIR-Gov</a>
+      <a href="#signaux">4. Signaux structurels</a>
+      <a href="#pipeline">5. Chaîne de transformation</a>
+      <a href="#double-kernel">6. Double kernel</a>
+      <a href="#verdicts">7. Verdicts & états</a>
+      <a href="#evidence">8. EvidenceRecord</a>
+      <a href="#assessment">9. Assessment post-hoc</a>
+      <a href="#catalogue">10. Catalogue REG+</a>
+      <a href="#audit">11. Audit & intégrité</a>
+      <a href="#pieges">12. Pièges à éviter</a>
+      <a href="#depots">13. Dépôts & release</a>
+    </nav>
+
+    <main>
+      <section id="piliers">
+        <h2>1. Les trois piliers de l’écosystème</h2>
+        <p class="lead">
+          TENIR / REG repose sur une séparation stricte entre la théorie, le standard et le runtime.
+          Cette séparation est essentielle : elle évite de confondre ce qui est conçu, ce qui est exigé, et ce qui est exécuté.
+        </p>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>📚 Théorie</h3>
+            <p>
+              Les papiers posent le diagnostic, la séparation conceptuelle et la formalisation.
+              Ils expliquent pourquoi la gouvernance runtime ne peut pas être réduite à un simple policy engine.
+            </p>
+            <div class="pill-row">
+              <span class="chip accent">Paper 1 — diagnostic</span>
+              <span class="chip accent">Paper 2 — séparation</span>
+              <span class="chip accent">Paper 3 — formalisation</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>📜 Standard REG</h3>
+            <p>
+              Le standard définit ce que le système doit garantir. Il est séparé en
+              <strong>REG Core</strong> pour les invariants, et <strong>REG+</strong> pour les profils,
+              hypothèses et règles de compatibilité structurelle.
+            </p>
+            <div class="pill-row">
+              <span class="chip violet">REG Core — invariants</span>
+              <span class="chip violet">REG+ — profils σ</span>
+              <span class="chip violet">catalogue v1.0.0</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>⚙️ Runtime TENIR-Gov</h3>
+            <p>
+              TENIR-Gov est l’implémentation de référence. Il exécute le standard :
+              il évalue, commit, enregistre la preuve, et intègre les signaux d’infrastructure.
+            </p>
+            <div class="pill-row">
+              <span class="chip green">Evaluate()</span>
+              <span class="chip green">Commit()</span>
+              <span class="chip green">Record()</span>
+              <span class="chip green">Assure()</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="niveaux">
+        <h2>2. Architecture à 5 niveaux</h2>
+        <p class="lead">
+          Le modèle de résolution descend de la règle métier jusqu’à l’exécution machine.
+          Aucune étape ne doit être sautée : une intention métier ne devient exécutable qu’après traduction,
+          résolution en profil, puis projection en invariants runtime.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>Niveau 0 — Règle métier</h3>
+            <p>
+              Exprimée par l’équipe fonctionnelle ou le régulateur.
+              Exemple : <em>« Ne pas double-exécuter un paiement. »</em>
+              Elle est complète dans son registre, mais pas encore exécutable.
+            </p>
+          </div>
+
+          <div class="timeline-item violet">
+            <h3>Niveau 1 — Contrainte réglementaire</h3>
+            <p>
+              Exemple : <em>EU AI Act Art. 12</em>, <em>DORA Art. 9</em>.
+              La compliance traduit l’exigation réglementaire en obligation de traçabilité, de supervision ou de contrôle.
+            </p>
+          </div>
+
+          <div class="timeline-item amber">
+            <h3>Niveau 2 — Acte de médiation</h3>
+            <p>
+              L’architecte de gouvernance traduit :
+              <br /><br />
+              <code>Intention métier + Hypothèses d’infrastructure = Règle substantive</code>
+              <br /><br />
+              C’est l’étape où la règle devient dépendante du contexte de déploiement.
+            </p>
+          </div>
+
+          <div class="timeline-item green">
+            <h3>Niveau 3 — Standard REG Core & REG+</h3>
+            <p>
+              La règle substantive est résolue en <strong>profil σ</strong>, puis décomposée en
+              <strong>invariants I*</strong>. Le profil est le contrat ; les invariants sont les primitives exécutables.
+            </p>
+            <div class="pill-row">
+              <span class="chip violet">Resolve(i, h, R, V) → Profile(σ, I*)</span>
+              <span class="chip violet">σ = contrat</span>
+              <span class="chip violet">I* = invariants</span>
+            </div>
+          </div>
+
+          <div class="timeline-item red">
+            <h3>Niveau 4 — Runtime TENIR-Gov</h3>
+            <p>
+              La membrane exécute : <code>Evaluate()</code> produit un verdict, <code>Commit()</code> applique la mutation,
+              <code>Record()</code> produit la preuve reconstructible.
+            </p>
+            <div class="pill-row">
+              <span class="chip green">Evaluate(σ, I*, s, τ) → verdict</span>
+              <span class="chip green">Commit(σ, s, τ, v) → s′</span>
+              <span class="chip green">Record(...) → EvidenceRecord</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="runtime">
+        <h2>3. Runtime TENIR-Gov — fonctions fondamentales</h2>
+        <p class="lead">
+          Le runtime sépare strictement l’adjudication, la mutation, la preuve et l’assurance.
+          Cette séparation est au cœur de la robustesse de l’architecture.
+        </p>
+
+        <div class="grid grid-4">
+          <article class="card">
+            <h3>Evaluate()</h3>
+            <p>
+              Fonction <strong>pure</strong>. Elle lit le profil, les invariants, l’état <code>s</code>
+              et la transition proposée <code>τ</code>. Elle retourne un verdict.
+              Elle ne modifie rien.
+            </p>
+            <div class="pill-row">
+              <span class="chip blue">PASS</span>
+              <span class="chip amber">FLAG</span>
+              <span class="chip blue">HOLD</span>
+              <span class="chip red">HARD_VETO</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Commit()</h3>
+            <p>
+              Fonction <strong>mutative</strong>. Elle tente d’appliquer les effets de bord si le verdict l’autorise.
+              Si le commit échoue, le verdict effectif n’est pas <code>PASS</code>.
+            </p>
+            <div class="pill-row">
+              <span class="chip green">COMMITTED</span>
+              <span class="chip amber">FAILED_RACE</span>
+              <span class="chip amber">FAILED_CONSTRAINT</span>
+              <span class="chip red">SKIPPED</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Record()</h3>
+            <p>
+              Produit l’<strong>EvidenceRecord</strong> : contexte, entrées, résultats, trace de commit,
+              hash canonique et signature. La preuve doit être reconstructible par un tiers.
+            </p>
+            <div class="pill-row">
+              <span class="chip cyan">SHA-256</span>
+              <span class="chip cyan">Ed25519</span>
+              <span class="chip cyan">JCS</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Assure()</h3>
+            <p>
+              Service externe qui observe l’infrastructure et injecte des signaux attestés dans l’état.
+              Le moteur ne détecte pas lui-même les violations d’hypothèses.
+            </p>
+            <div class="pill-row">
+              <span class="chip green">HYPOTHESIS_VERIFIED</span>
+              <span class="chip amber">HYPOTHESIS_WEAKENED</span>
+              <span class="chip red">HYPOTHESIS_VIOLATED</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="callout info">
+          <strong>Règle centrale :</strong> l’adjudication est séparée de la mutation.
+          <code>Evaluate()</code> juge, <code>Commit()</code> agit, <code>Record()</code> prouve.
+        </div>
+      </section>
+
+      <section id="signaux">
+        <h2>4. Taxonomie des signaux structurels</h2>
+        <p class="lead">
+          Les signaux sont les faits bruts lus par le moteur. Ils proviennent de quatre familles distinctes,
+          chacune ayant une origine, une nature et un niveau de confiance différents.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Famille</th>
+              <th>Origine</th>
+              <th>Nature</th>
+              <th>Exemples</th>
+              <th>Lecture critique</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>S1 — Signaux de transition</strong></td>
+              <td>Passage <code>τ</code> proposé</td>
+              <td>Déclaratifs</td>
+              <td><code>agent_id</code>, <code>action_type</code>, <code>amount</code>, <code>idempotency_key</code></td>
+              <td>Peuvent être faux ou mal formés : ils doivent être validés.</td>
+            </tr>
+            <tr>
+              <td><strong>S2 — Signaux d’état métier</strong></td>
+              <td>MembraneState <code>s</code></td>
+              <td>Observés</td>
+              <td><code>resource.available</code>, <code>quarantine_active</code>, <code>authority_score</code></td>
+              <td>Lus dans l’état ; ils doivent être frais et cohérents.</td>
+            </tr>
+            <tr>
+              <td><strong>S3 — Signaux d’infrastructure</strong></td>
+              <td>Service <code>Assure()</code></td>
+              <td>Attestés</td>
+              <td><code>HYPOTHESIS_VERIFIED</code>, <code>HYPOTHESIS_WEAKENED</code>, <code>HYPOTHESIS_VIOLATED</code></td>
+              <td>Signés Ed25519 ; leur fraîcheur doit être vérifiée.</td>
+            </tr>
+            <tr>
+              <td><strong>S4 — Signaux historiques</strong></td>
+              <td>DurableOperationRegistry</td>
+              <td>Persistés</td>
+              <td><code>state = DISPATCHING</code>, <code>budget_committed = true</code></td>
+              <td>Trace d’exécution ; base de l’idempotence et de la reconstruction.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout warning">
+          <strong>Règle de provenance :</strong> un signal S1 est déclaratif, un signal S2 est observé,
+          un signal S3 est attesté, un signal S4 est historique. Le moteur ne doit jamais traiter ces niveaux de confiance comme équivalents.
+        </div>
+      </section>
+
+      <section id="pipeline">
+        <h2>5. Chaîne de transformation — du signal brut à l’évaluation</h2>
+        <p class="lead">
+          Huit niveaux conceptuels, sept étapes de transformation. Chaque étape est distincte, testable,
+          et produit un artefact traçable.
+        </p>
+
+        <div class="pipeline">
+          <article class="step">
+            <h4>Niveau 0</h4>
+            <p>Observation brute : S1 + S2 + S3 + S4.</p>
+            <span class="artifact">signaux bruts</span>
+          </article>
+
+          <article class="step">
+            <h4>Étape 1 — Normalisation</h4>
+            <p>
+              Transformation des signaux en coordonnées de géométrie de contrainte.
+              Une coordonnée absente devient <code>unmeasured</code>, jamais une valeur favorable.
+            </p>
+            <span class="artifact">coordinates + unmeasured_axes</span>
+          </article>
+
+          <article class="step">
+            <h4>Étape 2 — Scoring</h4>
+            <p>
+              Calcul continu du score de stabilité. Le score n’est pas le verdict.
+            </p>
+            <span class="artifact">scoring_result</span>
+          </article>
+
+          <article class="step">
+            <h4>Étape 3 — Invariants</h4>
+            <p>
+              Évaluation discrète et indépendante des invariants I1..I9 selon le profil.
+            </p>
+            <span class="artifact">membrane_result</span>
+          </article>
+
+          <article class="step">
+            <h4>Étape 4 — Composition</h4>
+            <p>
+              Lattice + signal reactions du profil σ + fraîcheur des signaux.
+            </p>
+            <span class="artifact">composed_decision</span>
+          </article>
+
+          <article class="step">
+            <h4>Étape 5 — Commit</h4>
+            <p>
+              Mutation réelle si autorisée. Atomique, tracée, réversible ou explicitement échouée.
+            </p>
+            <span class="artifact">commit_trace</span>
+          </article>
+
+          <article class="step">
+            <h4>Étape 6 — Record</h4>
+            <p>
+              Sérialisation canonique de la preuve : contexte, entrées, résultats, commit, intégrité.
+            </p>
+            <span class="artifact">EvidenceRecord</span>
+          </article>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:18px;">
+          <article class="card">
+            <h3>Étape 7 — Assessment post-hoc</h3>
+            <p>
+              Une fois l’opération terminée, deux évaluations indépendantes sont produites :
+              la classification de réversibilité <code>τ⁻¹</code> et la mesure de valeur préservée <code>EVP</code>.
+            </p>
+            <div class="pill-row">
+              <span class="chip blue">PRE_COMMIT</span>
+              <span class="chip green">EXACT_INVERSE</span>
+              <span class="chip amber">COMPENSATION</span>
+              <span class="chip red">IRREVERSIBLE</span>
+              <span class="chip violet">INDETERMINATE</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Point critique</h3>
+            <p>
+              Le score est continu, le verdict est discret, l’assessment est rétrospectif.
+              Il ne faut jamais les confondre. Un score élevé ne garantit pas <code>PASS</code> ;
+              un invariant peut imposer <code>HARD_VETO</code> à lui seul.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="double-kernel">
+        <h2>6. Double kernel — continu × discret</h2>
+        <p class="lead">
+          Le double kernel ne signifie pas “structurel vs substantif”.
+          Il sépare un kernel de scoring continu et une membrane discrète d’invariants.
+          La composition des deux produit le verdict final.
+        </p>
+
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>Scoring Kernel — continu</h3>
+            <div class="formula">
+              S = K / (P · V + ε)
+            </div>
+            <p style="margin-top:12px;">
+              <code>K</code> = capacité, <code>P</code> = pression, <code>V</code> = volatilité,
+              <code>ε</code> = plancher de stabilité. Le score est ensuite comparé à des seuils.
+            </p>
+            <div class="pill-row">
+              <span class="chip green">S &gt; τ_pass → PASS</span>
+              <span class="chip amber">τ_block &lt; S ≤ τ_pass → FLAG</span>
+              <span class="chip red">S ≤ τ_block → HARD_VETO</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Transition Membrane — discret</h3>
+            <p>
+              Chaque invariant est évalué indépendamment. Aucun invariant ne lit le score.
+              Chaque résultat est traçable : <code>invariant_id</code>, <code>result</code>, <code>reason</code>.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Invariant</th>
+                  <th>Lecture</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><code>I1 single-use-permit</code></td><td>permis non consommé</td></tr>
+                <tr><td><code>I2 commit-binding</code></td><td>liaison autorisation / tentative</td></tr>
+                <tr><td><code>I6 no-admission-under-quarantine</code></td><td>absence de quarantaine</td></tr>
+                <tr><td><code>I8 aggregate-budget</code></td><td>capacité disponible suffisante</td></tr>
+                <tr><td><code>I9 trajectory-temporal-consistency</code></td><td>cohérence temporelle</td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+          <h3>Composition du verdict</h3>
+          <div class="formula">
+            IF either HARD_VETO → HARD_VETO<br />
+            ELSE IF either HOLD → HOLD<br />
+            ELSE IF either FLAG → FLAG<br />
+            ELSE → PASS
+          </div>
+          <p style="margin-top:12px;">
+            Ensuite, les <strong>signal reactions</strong> du profil σ peuvent modifier la décision composée.
+            Exemple : si <code>HYPOTHESIS_VIOLATED</code> est présent et frais, alors <code>HARD_VETO</code>.
+            Sans règle explicite dans σ, le signal est ignoré.
+          </p>
+          <div class="pill-row">
+            <span class="chip blue">Lattice</span>
+            <span class="chip violet">signal_reactions</span>
+            <span class="chip amber">fraîcheur des signaux</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="verdicts">
+        <h2>7. Verdicts, états et machine à états</h2>
+        <p class="lead">
+          Les verdicts d’admissibilité ne doivent pas être confondus avec les états opérationnels.
+          Le verdict autorise, suspend ou refuse ; l’état opérationnel décrit la vie réelle de l’opération.
+        </p>
+
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>Verdicts d’admissibilité</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Verdict</th>
+                  <th>Signification</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="verdict pass">PASS</span></td>
+                  <td>Autorisé sans réserve.</td>
+                </tr>
+                <tr>
+                  <td><span class="verdict flag">FLAG</span></td>
+                  <td>Autorisé avec alerte ou surveillance renforcée.</td>
+                </tr>
+                <tr>
+                  <td><span class="verdict hold">HOLD</span></td>
+                  <td>Suspendu : ni autorisé ni refusé, en attente d’évidence ou de résolution.</td>
+                </tr>
+                <tr>
+                  <td><span class="verdict veto">HARD_VETO</span></td>
+                  <td>Refus catégorique.</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="card">
+            <h3>États opérationnels</h3>
+            <div class="state-flow">
+              <span class="state">CREATED</span>
+              <span class="arrow">→</span>
+              <span class="state">RESERVED</span>
+              <span class="arrow">→</span>
+              <span class="state">DISPATCHING</span>
+              <span class="arrow">→</span>
+              <span class="state">CONFIRMED</span>
+              <span class="arrow">|</span>
+              <span class="state">FAILED</span>
+            </div>
+            <div class="pill-row" style="margin-top:14px;">
+              <span class="chip amber">UNKNOWN</span>
+              <span class="chip blue">HOLD</span>
+              <span class="chip red">ESCALATED</span>
+            </div>
+            <p style="margin-top:12px;">
+              Les états d’incertitude sont essentiels : un provider silencieux ne doit jamais être interprété comme un succès.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="evidence">
+        <h2>8. EvidenceRecord — la preuve reconstructible</h2>
+        <p class="lead">
+          L’EvidenceRecord est l’artefact produit après évaluation et commit.
+          Il doit permettre à un auditeur indépendant de reconstruire le verdict.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Contenu</th>
+              <th>Usage d’audit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>evaluation_context</strong></td>
+              <td><code>profile_id</code>, <code>profile_version</code>, <code>evaluator_version</code>, <code>catalog_version</code>, hypothèses</td>
+              <td>Reproductibilité : quel profil a produit le verdict ?</td>
+            </tr>
+            <tr>
+              <td><strong>inputs</strong></td>
+              <td><code>state_snapshot</code>, <code>transition_proposal</code>, signaux</td>
+              <td>Reconstruction : avec quelles entrées ?</td>
+            </tr>
+            <tr>
+              <td><strong>results</strong></td>
+              <td><code>verdict</code>, <code>invariant_details[]</code></td>
+              <td>Traçabilité : pourquoi ce verdict ?</td>
+            </tr>
+            <tr>
+              <td><strong>commit_trace</strong></td>
+              <td><code>commit_result</code>, hashes pré/post commit</td>
+              <td>Intégrité de la mutation : a-t-elle réellement eu lieu ?</td>
+            </tr>
+            <tr>
+              <td><strong>integrity</strong></td>
+              <td><code>current_hash</code>, <code>signature</code>, <code>previous_hash</code></td>
+              <td>Intégrité et authenticité de la preuve.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout success">
+          <strong>Point décisif :</strong> <code>invariant_details</code> n’est pas un booléen global.
+          C’est une liste de résultats individuels. Un auditeur doit pouvoir lire, par exemple :
+          <code>I8: HARD_VETO (requested 80000, available 70000)</code>.
+        </div>
+      </section>
+
+      <section id="assessment">
+        <h2>9. Assessment post-hoc — τ⁻¹ et EVP</h2>
+        <p class="lead">
+          Après coup, on évalue séparément la réversibilité et la valeur préservée.
+          Ces deux dimensions ne s’impliquent pas mutuellement.
+        </p>
+
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>τ⁻¹ — classification de réversibilité</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Classe</th>
+                  <th>Signification</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><code>PRE_COMMIT</code></td><td>Annulée avant effet.</td></tr>
+                <tr><td><code>EXACT_INVERSE</code></td><td>Effet réversible sans perte.</td></tr>
+                <tr><td><code>COMPENSATION</code></td><td>Effet réversible avec perte mesurée.</td></tr>
+                <tr><td><code>IRREVERSIBLE</code></td><td>Aucun retour valide.</td></tr>
+                <tr><td><code>INDETERMINATE</code></td><td>Information insuffisante.</td></tr>
+              </tbody>
+            </table>
+            <div class="callout warning" style="margin-top:12px;">
+              <strong>Règle :</strong> <code>INDETERMINATE</code> n’est pas <code>IRREVERSIBLE</code>.
+              Un échec de vérification prouve l’ignorance, pas l’irréversibilité.
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>EVP — Intended Value Preservation</h3>
+            <div class="formula">
+              EVP Gross = intended_value × confidence<br />
+              EVP Net = realized_value − execution_loss<br />
+              EVP Ratio = EVP Net / EVP Gross
+            </div>
+            <p style="margin-top:12px;">
+              Les coûts de friction sont rapportés séparément, pas soustraits de EVP Net.
+              Cela préserve la traçabilité des pertes.
+            </p>
+            <div class="pill-row">
+              <span class="chip green">valeur visée</span>
+              <span class="chip amber">perte d’exécution</span>
+              <span class="chip blue">friction séparée</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="catalogue">
+        <h2>10. Catalogue REG+ — configurations structurelles</h2>
+        <p class="lead">
+          Le catalogue <code>valid-configurations-v1.json</code> et les règles <code>compatibility-rules-v1.yaml</code>
+          définissent l’espace des configurations structurellement admissibles.
+        </p>
+
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="number">144</div>
+            <div class="label">configurations totales</div>
+          </div>
+          <div class="stat">
+            <div class="number" style="color:var(--green);">42</div>
+            <div class="label">admissibles structurellement</div>
+          </div>
+          <div class="stat">
+            <div class="number" style="color:var(--red);">102</div>
+            <div class="label">rejetées</div>
+          </div>
+          <div class="stat">
+            <div class="number" style="color:var(--accent);">1.0.0</div>
+            <div class="label">catalog & rules version</div>
+          </div>
+        </div>
+
+        <div class="bar" aria-label="Répartition admissibles / rejetées">
+          <span class="ok" style="width:29.17%;"></span>
+          <span class="ko" style="width:70.83%;"></span>
+        </div>
+        <div class="legend">
+          <span><span class="dot green"></span>42 admissibles</span>
+          <span><span class="dot red"></span>102 rejetées</span>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:18px;">
+          <article class="card">
+            <h3>mono-process</h3>
+            <p><strong style="font-size:1.4rem;">9</strong> configurations admissibles.</p>
+            <div class="pill-row">
+              <span class="chip accent">thread-lock uniquement</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>mono-host</h3>
+            <p><strong style="font-size:1.4rem;">18</strong> configurations admissibles.</p>
+            <div class="pill-row">
+              <span class="chip accent">file-lock</span>
+              <span class="chip accent">distributed-transaction</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>multi-host</h3>
+            <p><strong style="font-size:1.4rem;">15</strong> configurations admissibles.</p>
+            <div class="pill-row">
+              <span class="chip accent">distributed-transaction</span>
+              <span class="chip accent">distributed-consensus</span>
+            </div>
+          </article>
+        </div>
+
+        <h3 style="margin-top:24px;">Règles de compatibilité structurelle</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Règle</th>
+              <th>Clause</th>
+              <th>Exigence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>R1_HOST_CONCURRENCY</code></td>
+              <td>R1a</td>
+              <td><code>HOST_SCOPE=mono-process</code> exige <code>CONCURRENCY=thread-lock</code>.</td>
+            </tr>
+            <tr>
+              <td><code>R1_HOST_CONCURRENCY</code></td>
+              <td>R1b</td>
+              <td><code>HOST_SCOPE=mono-host</code> exige <code>file-lock</code> ou <code>distributed-transaction</code>.</td>
+            </tr>
+            <tr>
+              <td><code>R1_HOST_CONCURRENCY</code></td>
+              <td>R1c</td>
+              <td><code>HOST_SCOPE=multi-host</code> exige <code>distributed-transaction</code> ou <code>distributed-consensus</code>.</td>
+            </tr>
+            <tr>
+              <td><code>R2_CONSENSUS_SCOPE</code></td>
+              <td>R2a</td>
+              <td><code>CONCURRENCY=distributed-consensus</code> exige <code>HOST_SCOPE=multi-host</code>.</td>
+            </tr>
+            <tr>
+              <td><code>R2_CONSENSUS_DEDUP</code></td>
+              <td>R2b</td>
+              <td><code>DEDUP_LAYER=distributed-consensus-registry</code> exige <code>HOST_SCOPE=multi-host</code>.</td>
+            </tr>
+            <tr>
+              <td><code>R2_CONSENSUS_DEDUP</code></td>
+              <td>R2c</td>
+              <td><code>DEDUP_LAYER=distributed-consensus-registry</code> exige <code>CONCURRENCY=distributed-consensus</code>.</td>
+            </tr>
+            <tr>
+              <td><code>R3_LOCAL_DEDUP</code></td>
+              <td>R3a</td>
+              <td><code>DEDUP_LAYER=local-registry</code> exige <code>mono-process</code> ou <code>mono-host</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout danger">
+          <strong>Distinction essentielle :</strong>
+          <code>admissible_structural = true</code> ne signifie pas
+          <code>effective_guarantee_demonstrated = true</code>.
+          Une configuration peut être structurellement cohérente sans que l’implémentation ait effectivement démontré la capacité correspondante.
+        </div>
+      </section>
+
+      <section id="audit">
+        <h2>11. Audit & intégrité du pipeline</h2>
+        <p class="lead">
+          L’audit montre que la chaîne de transformation est conceptuellement saine,
+          mais que certains points d’entrée/sortie sont compromis dans la v5.6.0.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Étape</th>
+              <th>État</th>
+              <th>Défaut identifié</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Normalisation</strong></td>
+              <td><span class="badge red">F-02</span></td>
+              <td><code>register_resource()</code> réinitialise l’état existant.</td>
+              <td>Les signaux S2, notamment <code>resource.available</code>, peuvent devenir faux après crash/reload.</td>
+            </tr>
+            <tr>
+              <td><strong>2. Scoring</strong></td>
+              <td><span class="badge green">OK</span></td>
+              <td>Déterministe.</td>
+              <td>Le score est reconstructible si les coordonnées sont correctes.</td>
+            </tr>
+            <tr>
+              <td><strong>3. Invariants</strong></td>
+              <td><span class="badge green">OK</span></td>
+              <td>Évaluation discrète testable.</td>
+              <td>Chaque invariant peut être audité individuellement.</td>
+            </tr>
+            <tr>
+              <td><strong>4. Composition</strong></td>
+              <td><span class="badge green">OK</span></td>
+              <td>Lattice déterministe.</td>
+              <td>La composition reste prévisible si les entrées sont saines.</td>
+            </tr>
+            <tr>
+              <td><strong>5. Commit</strong></td>
+              <td><span class="badge red">F-01</span></td>
+              <td><code>reconcile_commit()</code> peut forcer une mutation sans re-vérifier la capacité.</td>
+              <td>Un état <code>RELEASED</code> peut devenir <code>COMMITTED</code>, violant I8.</td>
+            </tr>
+            <tr>
+              <td><strong>6. Record</strong></td>
+              <td><span class="badge green">OK</span></td>
+              <td>Schéma JSON valide.</td>
+              <td>L’EvidenceRecord est conforme structurellement.</td>
+            </tr>
+            <tr>
+              <td><strong>7. Assessment</strong></td>
+              <td><span class="badge red">F-03</span></td>
+              <td>LinearizabilityChecker invalide.</td>
+              <td>Les preuves LIN peuvent contenir des faux positifs.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="grid grid-2" style="margin-top:18px;">
+          <article class="card">
+            <h3>Objectif v5.7.0</h3>
+            <p>
+              La release durcie doit corriger les points critiques :
+              réconciliation sécurisée, persistance non destructive, validateur de linéarisation fiable,
+              et durcissement du transport consensus.
+            </p>
+            <div class="pill-row">
+              <span class="chip green">fix reconcile_commit</span>
+              <span class="chip green">fix register_resource</span>
+              <span class="chip green">fix linearizability</span>
+              <span class="chip green">harden transport</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Conclusion d’audit</h3>
+            <p>
+              La chaîne est saine sauf aux points où l’intégrité des entrées, de la mutation ou de la validation post-hoc est compromise.
+              Le standard est bon ; l’implémentation doit être durcie.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="pieges">
+        <h2>12. Pièges à éviter</h2>
+        <p class="lead">
+          Ces confusions reviennent souvent dans les discussions techniques ou les revues.
+          Les éviter est indispensable pour parler correctement de TENIR / REG.
+        </p>
+
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>❌ Double kernel ≠ structurel vs substantif</h3>
+            <p>
+              Le double kernel sépare le <strong>continu</strong> (scoring) du <strong>discret</strong> (invariants).
+              Ce n’est pas une opposition entre structurel et substantif.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>❌ Catalogue ≠ Assure</h3>
+            <p>
+              Le catalogue décrit les axes et règles structurelles.
+              <code>Assure()</code> est le service dynamique qui observe l’infrastructure et produit des signaux attestés.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>❌ Raft 5.6.0 ≠ preuve de consensus</h3>
+            <p>
+              L’interface <code>ConsensusBackend</code> est spécifiée par REG, mais l’implémentation 5.6.0 doit être durcie.
+              Elle ne constitue pas encore une preuve de consensus fiable en environnement hostile.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>❌ Score ≠ verdict</h3>
+            <p>
+              Un score élevé ne garantit pas <code>PASS</code>. Un invariant peut imposer <code>HARD_VETO</code>.
+              Inversement, un score bas peut produire <code>FLAG</code> si les invariants passent.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="depots">
+        <h2>13. Dépôts et état de release</h2>
+        <p class="lead">
+          Cartographie des dépôts et état actuel de la release.
+        </p>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>skiredj-prog/tenir_governance</h3>
+            <p>
+              Runtime : membrane, gouverneur, ledger, implémentation consensus.
+              C’est le code qui exécute le standard.
+            </p>
+            <div class="pill-row">
+              <span class="chip green">runtime</span>
+              <span class="chip green">membrane</span>
+              <span class="chip green">ledger</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>skiredj-prog/reg-conformance</h3>
+            <p>
+              Standard : RFC REG Core, schémas JSON, catalogue, règles de compatibilité, profils.
+            </p>
+            <div class="pill-row">
+              <span class="chip violet">standard</span>
+              <span class="chip violet">EvidenceRecord</span>
+              <span class="chip violet">catalogue</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>skiredj-prog/tenir-conformance-s1-g1</h3>
+            <p>
+              Harnais de test : scénarios, tests de robustesse, preuves d’exécution, campagnes de conformance.
+            </p>
+            <div class="pill-row">
+              <span class="chip blue">tests</span>
+              <span class="chip blue">scénarios</span>
+              <span class="chip blue">preuves</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+          <h3>État de la release actuelle</h3>
+          <div class="grid grid-3" style="margin-top:12px;">
+            <div class="callout success">
+              <strong>✅ Acquis</strong><br />
+              Architecture globale, standard REG+, Evidence Contract, interface ConsensusBackend, invariants, lifecycle HOLD.
+            </div>
+            <div class="callout warning">
+              <strong>⚠️ En cours</strong><br />
+              Correction de réconciliation, persistance sûre, validateur de linéarisation, sécurisation du transport.
+            </div>
+            <div class="callout danger">
+              <strong>🛑 Gelé</strong><br />
+              Communication publique et artifacts marketing conditionnés à la sortie de la v5.7.0 durcie.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Document illustratif — TENIR / REG.
+        Il explique l’architecture et la chaîne de transformation, mais ne remplace pas les schémas normatifs,
+        les fichiers YAML/JSON officiels ni les rapports d’audit complets.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

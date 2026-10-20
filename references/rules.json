@@ -1,0 +1,82 @@
+[
+  {
+    "rule_id": "R1_HOST_CONCURRENCY",
+    "clause_id": "R1a",
+    "desc": "mono-process n'autorise que le verrou de thread.",
+    "cf": "HOST_SCOPE",
+    "cv": "mono-process",
+    "rf": "CONCURRENCY",
+    "av": [
+      "thread-lock"
+    ]
+  },
+  {
+    "rule_id": "R1_HOST_CONCURRENCY",
+    "clause_id": "R1b",
+    "desc": "mono-host autorise file-lock ou distributed-transaction.",
+    "cf": "HOST_SCOPE",
+    "cv": "mono-host",
+    "rf": "CONCURRENCY",
+    "av": [
+      "file-lock",
+      "distributed-transaction"
+    ]
+  },
+  {
+    "rule_id": "R1_HOST_CONCURRENCY",
+    "clause_id": "R1c",
+    "desc": "multi-host autorise distributed-transaction ou distributed-consensus.",
+    "cf": "HOST_SCOPE",
+    "cv": "multi-host",
+    "rf": "CONCURRENCY",
+    "av": [
+      "distributed-transaction",
+      "distributed-consensus"
+    ]
+  },
+  {
+    "rule_id": "R2_CONSENSUS_SCOPE",
+    "clause_id": "R2a",
+    "desc": "Le consensus distribué exige une topologie multi-host.",
+    "cf": "CONCURRENCY",
+    "cv": "distributed-consensus",
+    "rf": "HOST_SCOPE",
+    "av": [
+      "multi-host"
+    ]
+  },
+  {
+    "rule_id": "R2_CONSENSUS_DEDUP",
+    "clause_id": "R2b",
+    "desc": "Le registre de déduplication distribué exige multi-host.",
+    "cf": "DEDUP_LAYER",
+    "cv": "distributed-consensus-registry",
+    "rf": "HOST_SCOPE",
+    "av": [
+      "multi-host"
+    ]
+  },
+  {
+    "rule_id": "R2_CONSENSUS_DEDUP",
+    "clause_id": "R2c",
+    "desc": "Le registre de déduplication distribué exige le consensus distribué.",
+    "cf": "DEDUP_LAYER",
+    "cv": "distributed-consensus-registry",
+    "rf": "CONCURRENCY",
+    "av": [
+      "distributed-consensus"
+    ]
+  },
+  {
+    "rule_id": "R3_LOCAL_DEDUP",
+    "clause_id": "R3a",
+    "desc": "Un registre local ne peut pas coordonner plusieurs hôtes.",
+    "cf": "DEDUP_LAYER",
+    "cv": "local-registry",
+    "rf": "HOST_SCOPE",
+    "av": [
+      "mono-process",
+      "mono-host"
+    ]
+  }
+]

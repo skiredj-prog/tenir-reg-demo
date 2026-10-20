@@ -1,0 +1,190 @@
+{
+  "prototype_version": "0.1.0",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cryptography": "50.0.2",
+    "rfc8785": "0.1.4"
+  },
+  "source": {
+    "sha256": "93898b3058ccff91694d05b78b6a34ffcd86e017ed81ba8df1ef191b87aa521e",
+    "files": {
+      "ALIGNMENT.md": "93a2f515df1e883b66282da684e561606bf206809fe76790c660347802a366a2",
+      "demo.py": "1e3b9c1d3ec5634811b39540950eef84f257bb9607dd851881296a9cb508dc00",
+      "fixtures/acceptance.json": "858ff8c3b813c9823c1dfbbd8405f490fe389d290a3d26d48f2cc6f4aa681568",
+      "fixtures/structure.json": "08220abd52d567d463a602344a28cf702a0397639fe33feab94e8266d12ea8f1",
+      "index.html": "7c78185c9b6f9458158381d09297c63455ad80b68ed548bfb55ec458b2dc6860",
+      "PRODUCT.md": "188c3802702d9e6c189c9c9c67869545891e77b9a1a16c77a22fb01e4ef07b4a",
+      "README.md": "497d3f870657bd5927eb79de685f4eda5d67ee627820fb0c9c56481bf2c6767a",
+      "references/architecture-sources.json": "2cb0a58792df82c620b9500069d00626900d0f7533201ca779149ec2a12bfd27",
+      "references/architecture-v1.html": "a715129d5a33e13d565304ffca2266b6a935182ba37092c3020e3e7484cc3f27",
+      "references/architecture-v2.html": "8f7f9af371342d31943676208cb8ca957b4493de89eda5f717fad629c6d05e09",
+      "references/axes.json": "763763c1d89e86f238e2891adf4368bfa023c9d88727053361a48818d73d6c5c",
+      "references/manifest.json": "99b917c704dd46a80d43a79c4337e9a117a9d160e61d8919208ff7c207757c31",
+      "references/metamodel-notes-a.md": "f62fc302c7ead39af9baa929090569b04b3099a0edabe36cc09b9eda920d954b",
+      "references/metamodel-notes-b.md": "5c619377f42eb9c53c895892d0a913d7d32e062e2f9ae575a4fe9430a5aec80b",
+      "references/objectif-strategique-fourni.md": "b397d1e71954dbb0e487462d2102e25e6a1552904d1c3cc0a93cd67680dda4fb",
+      "references/original-crosswalk.json": "27cc52251bffbb3c453455d993fc6ca5048686ca3c85a3a427a75c355091bec4",
+      "references/original-cycle.json": "65b51c16bacf57f921172b6024524e207b576d6380888fd254fa7302919d8a65",
+      "references/original-diagram.png": "6419f90ce2737aeeb194b26e5942bc7f6cfff669f9daffb8a15773e98ac0ef56",
+      "references/original-mapping.html": "bd59a9ea150a7bab7b0bde1671897ccb4a5401d4b9339ae0bc8117560201f4d1",
+      "references/original-xxl.html": "6c0dc8123f82411b9c2423fbd56955011e4e4d89186ca12cbae3dcba4106943b",
+      "references/plan-un-jour.md": "daeeb15760e0c5ab3b798a001513d57be93ff47ab1c4808b6ed62bf6e29745d4",
+      "references/reg-specification-guide.pdf": "5d845e0d5316c3c0270ea09a0d4d29aba252c397a77e53bc246743f2d8f165ba",
+      "references/rules.json": "1ea681c583191891ff00209610dbc7916053b443bf582793eb8d6a7af28d37c8",
+      "references/tenir-gov-operationalization-guide.pdf": "9c57f0c855c160cb210a5d26d095200d55c8e96c0a4cf3d21f1526076492463f",
+      "requirements.txt": "6245940e3b65e73edb34f73ca9e7c7d1161905f12984067c5e50e01ad97c4043",
+      "run.ps1": "6cb39c2e2a818fe03fdf724e0c6ce8e09ce4f7c1c3eb066b3921f0c6ec05eba6",
+      "tenir_demo/__init__.py": "caaac9825442ced07aafbee16367a120e54bebb6ea1f1b22f4eed4210185fc00",
+      "tenir_demo/acceptance.py": "8b667f4848dfcc975c394c06fd6590fbf056d22c2c92367d81bd257e13e3dd3c",
+      "tenir_demo/configurator.css": "0613bae16bb584fdc353c663d58539364f95e55dd736e48f4266b1b53294a826",
+      "tenir_demo/configurator.py": "f0a72841eb42f322658023ffc7817c97d4c551663a4e1c4a0420189ddc18632c",
+      "tenir_demo/configurator_client.js": "d86759dedfdfd6e65996b61df254652cca37f72d78ba3675833a7bb8039fd59f",
+      "tenir_demo/configurator_template.html": "66be9ea15b946e644cd376ff1e83656c0fa3f85e21baf52bfd25bbac367a1a0c",
+      "tenir_demo/configurator_ux.css": "0a86aa815a5b7bbd3af40d33c307f064891e66cbd7f30f2b47552a7b2ccec8d5",
+      "tenir_demo/configurator_view.py": "806438aa91d97e38371ec88b8b701206d3e475844445540afb86465b1ae0dcbf",
+      "tenir_demo/contracts.py": "c4f06d00766fe367690a8e3e681cd6eb787b4b76aa342d1391b5279ea683a2a4",
+      "tenir_demo/engine.py": "b9c4b7defa17be40701658cb52bd90e92ee4a172fb9226f41f19e27b72369f8a",
+      "tenir_demo/evidence.py": "d0571221d0567dad9a6ba0d606db02d1664deee6bd70d151d4eb47df0dcf80a0",
+      "tenir_demo/locales.py": "e2cf40de5738c3d70ee0c45d4cd98c9183f5ae314aec2798fa2ba3842e65a093",
+      "tenir_demo/report.py": "7a9e5fe4a7c0d0a657bc25c3714550d3517e21fe1c7c4a3166d2bbbb1658dd9c",
+      "tenir_demo/report_template.html": "85fdf6a73b2b4850d8ab51d693b4c37ddda7bfbe7de942fdbc4a73831f671b81",
+      "tenir_demo/rules_scope.css": "030259e9d43e18c7653e05200a134c667d227e3d4cdc9c5bc2be4dbba957204c",
+      "tenir_demo/scenario.py": "9718ea44d145498d7dab59c7e08efb8241bfc3bbdaf06ed5d5b592bc5610395e",
+      "tenir_demo/structure.py": "87b6903e1309cb946dc3b286f4f361fa403ac1b11194fbb83b5209cb5569435c",
+      "tenir_demo/theme.css": "a279ce0a53e665c00b4ab9a56de4b3ab93200dab5b43045d107aa9e5741a177b",
+      "tenir_demo/theme.py": "b7ac6b901d6db0eef29346b44298139a5af55b94119038d2b58ef20fd050c352",
+      "tenir_demo/theme_client.js": "eaa633e22ac4e23fcf88e07249ce11725950c0937af435a0cb4795c5f3f3aebd",
+      "tenir_demo/verification.py": "75b16540af43cfdc73ac283ccba620c15223b61a113752b540f623c21cfec6f5",
+      "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests/check_configurator.cjs": "0d27d27c9d23e59e00eb98c79b42b5ec60b2f367001086e6f3691c17543546ca",
+      "tests/check_journey.cjs": "4950921dcdc893d9b0ba33b0472c8e278e2839dddd1fc8050e087820221fc5de",
+      "tests/check_landing.cjs": "8301f333c4d3f31471c0250495b4b441087c58f0ae5cecc42d530ee471a36b4c",
+      "tests/check_report.cjs": "a670d5d739596f6ce7ea715a657168a35583b1c041930b3b409e83283212d812",
+      "tests/check_theme.cjs": "cc337c9a9e914014cee6e3b79c1a2402ddc10a6ff43f37df8297ba5b15ca0711",
+      "tests/test_acceptance.py": "0aedc496b0e64c2645fe02e5cf8e37c181c717a0d434d07929e3890973719d98",
+      "tests/test_configurator.py": "3ceced6dbe00309cb026e528560e6d0260c616a07f0789ef72a24a2a596a2129",
+      "tests/test_configurator_integration.py": "6f459ada83acc3c4e542e4e2b9dd962d563e3c72219323bed20cc12a9f2b5e2b",
+      "UX_REVIEW.md": "c15ccb346e654950a173c027c41c50712b3204cc3c6f3044871716124df89466",
+      "verify.py": "1103c6440028ec7ee8e9d0c2fc9b25d1892258921f192b13c4ed5e129b402465"
+    }
+  },
+  "qa": "Recette auto-exécutée ; aucune indépendance QA revendiquée",
+  "concurrency": {
+    "competing_budget_races": 50,
+    "duplicate_conflict_races": 20,
+    "in_flight_duplicate": true
+  },
+  "go": true,
+  "passed": 10,
+  "tests": [
+    {
+      "id": "T01",
+      "description": "Clauses R1a–R3a et violations multiples ; test interne.",
+      "status": "PASS"
+    },
+    {
+      "id": "T02",
+      "description": "Budget nominal, limite exacte, montants et unités invalides.",
+      "status": "PASS"
+    },
+    {
+      "id": "T03",
+      "description": "Dépassement et signal affaibli : aucun appel ni réservation.",
+      "status": "PASS"
+    },
+    {
+      "id": "T04",
+      "description": "Signaux absent, expiré et invalide distingués avant envoi.",
+      "status": "PASS"
+    },
+    {
+      "id": "T05",
+      "description": "UNKNOWN conserve la réservation et le verdict au rejeu.",
+      "status": "PASS"
+    },
+    {
+      "id": "T06",
+      "description": "50 courses synchronisées : contrôle atomique du plafond.",
+      "status": "PASS"
+    },
+    {
+      "id": "T07",
+      "description": "Doublons, conflits et doublons pendant un envoi en cours.",
+      "status": "PASS"
+    },
+    {
+      "id": "T08",
+      "description": "Même entrée, état, profil et temps : décision reproductible.",
+      "status": "PASS"
+    },
+    {
+      "id": "T09",
+      "description": "Signature, altération, autre clé, ordre JSON et chaîne tronquée.",
+      "status": "PASS"
+    },
+    {
+      "id": "T10",
+      "description": "Quatre parcours : rapport, preuves, appels et budget concordent.",
+      "status": "PASS"
+    }
+  ],
+  "unittest_output": "test_T01_structure (tests.test_acceptance.Acceptance.test_T01_structure)\nClauses R1a–R3a et violations multiples ; test interne. ... ok\ntest_T02_budget (tests.test_acceptance.Acceptance.test_T02_budget)\nBudget nominal, limite exacte, montants et unités invalides. ... ok\ntest_T03_veto (tests.test_acceptance.Acceptance.test_T03_veto)\nDépassement et signal affaibli : aucun appel ni réservation. ... ok\ntest_T04_hold (tests.test_acceptance.Acceptance.test_T04_hold)\nSignaux absent, expiré et invalide distingués avant envoi. ... ok\ntest_T05_unknown (tests.test_acceptance.Acceptance.test_T05_unknown)\nUNKNOWN conserve la réservation et le verdict au rejeu. ... ok\ntest_T06_concurrency (tests.test_acceptance.Acceptance.test_T06_concurrency)\n50 courses synchronisées : contrôle atomique du plafond. ... ok\ntest_T07_idempotency (tests.test_acceptance.Acceptance.test_T07_idempotency)\nDoublons, conflits et doublons pendant un envoi en cours. ... ok\ntest_T08_determinism (tests.test_acceptance.Acceptance.test_T08_determinism)\nMême entrée, état, profil et temps : décision reproductible. ... ok\ntest_T09_integrity (tests.test_acceptance.Acceptance.test_T09_integrity)\nSignature, altération, autre clé, ordre JSON et chaîne tronquée. ... ok\ntest_T10_end_to_end (tests.test_acceptance.Acceptance.test_T10_end_to_end)\nQuatre parcours : rapport, preuves, appels et budget concordent. ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 1.205s\n\nOK\n",
+  "product_tests": {
+    "go": true,
+    "passed": 10,
+    "tests": [
+      {
+        "id": "C01",
+        "description": "All 144 configurations agree with the structural evaluator.",
+        "status": "PASS"
+      },
+      {
+        "id": "C02",
+        "description": "Clauses retain their fields, applicability and evaluated operands.",
+        "status": "PASS"
+      },
+      {
+        "id": "C03",
+        "description": "Every suggestion is valid, minimum-distance, complete and stable.",
+        "status": "PASS"
+      },
+      {
+        "id": "C04",
+        "description": "An admissible multi-host draft does not gain runtime support.",
+        "status": "PASS"
+      },
+      {
+        "id": "C05",
+        "description": "Only the matching runtime with explicit verified evidence is linked.",
+        "status": "PASS"
+      },
+      {
+        "id": "C06",
+        "description": "Building and editing a draft leaves bundle, profile and rules intact.",
+        "status": "PASS"
+      },
+      {
+        "id": "C07",
+        "description": "Exports identify their extracted rules and carry no signed claim.",
+        "status": "PASS"
+      },
+      {
+        "id": "C08",
+        "description": "Page autonome, sans marqueurs ni redirection, fidèle au catalogue.",
+        "status": "PASS"
+      },
+      {
+        "id": "C09",
+        "description": "Reçu v2 valide puis altération des nouveaux fichiers détectée.",
+        "status": "PASS"
+      },
+      {
+        "id": "C10",
+        "description": "Recette produit en échec : dossier valide, aucune démo revendiquée.",
+        "status": "PASS"
+      }
+    ],
+    "unittest_output": "test_C01_exhaustive_enumeration (tests.test_configurator.Configurator.test_C01_exhaustive_enumeration)\nAll 144 configurations agree with the structural evaluator. ... ok\ntest_C02_clauses_and_highlights (tests.test_configurator.Configurator.test_C02_clauses_and_highlights)\nClauses retain their fields, applicability and evaluated operands. ... ok\ntest_C03_nearest_corrections (tests.test_configurator.Configurator.test_C03_nearest_corrections)\nEvery suggestion is valid, minimum-distance, complete and stable. ... ok\ntest_C04_runtime_and_guarantees_are_separate (tests.test_configurator.Configurator.test_C04_runtime_and_guarantees_are_separate)\nAn admissible multi-host draft does not gain runtime support. ... ok\ntest_C05_verified_bundle_gate (tests.test_configurator.Configurator.test_C05_verified_bundle_gate)\nOnly the matching runtime with explicit verified evidence is linked. ... ok\ntest_C06_no_mutation_or_hidden_execution (tests.test_configurator.Configurator.test_C06_no_mutation_or_hidden_execution)\nBuilding and editing a draft leaves bundle, profile and rules intact. ... ok\ntest_C07_unsigned_provenance_and_reproducibility (tests.test_configurator.Configurator.test_C07_unsigned_provenance_and_reproducibility)\nExports identify their extracted rules and carry no signed claim. ... ok\ntest_C08_standalone_page_projection (tests.test_configurator_integration.ConfiguratorIntegration.test_C08_standalone_page_projection)\nPage autonome, sans marqueurs ni redirection, fidèle au catalogue. ... ok\ntest_C09_signed_dossier_covers_product_files (tests.test_configurator_integration.ConfiguratorIntegration.test_C09_signed_dossier_covers_product_files)\nReçu v2 valide puis altération des nouveaux fichiers détectée. ... ok\ntest_C10_failing_product_recipe_remains_no_go (tests.test_configurator_integration.ConfiguratorIntegration.test_C10_failing_product_recipe_remains_no_go)\nRecette produit en échec : dossier valide, aucune démo revendiquée. ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 2.090s\n\nOK\n"
+  }
+}

@@ -1,0 +1,43 @@
+# Alignement de la présentation vers TENIR 5.7
+
+## Cible et sources observées
+
+La **base technique retenue est TENIR 5.6.1**, que le porteur du projet confirme destinée à être promue en **5.7**. Cette confirmation résout le choix de la référence : les travaux d'alignement peuvent partir du commit 5.6.1 déjà identifié, sans attendre une nouvelle branche nommée 5.7. La promotion reste prévue ; la compatibilité d'exécution du prototype avec cette base reste à vérifier.
+
+La vérification en lecture seule du 19 octobre 2026 a identifié :
+
+| Élément | Référence consultée | Portée |
+|---|---|---|
+| Architecture en cinq niveaux | HTML fournis v5.6.0, éditions v1 FR et v2 EN | Terminologie et responsabilités des niveaux 0 à 4 |
+| Runtime `tenir_governance` | `41fae550c1e0a3632e2bde473db6d31b450d4269` | Version déclarée 5.6.1 ; changelog « Pending release » |
+| Standard `reg-conformance` | `cd5ab1b616ad59014f4b84d522b57a890a48a088` | Axes/règles/catalogue v1.0.0 ; capacités v1.1.0 |
+| Harnais `tenir-conformance-s1-g1` | `d29400100b00f7e7a87d229af660f62e51d61f12` | Harnais exécutable S1 G0+G1 ; package 0.1.0 |
+| Prototype de ce dépôt | `tenir_demo` 0.1.0 | Moteur local non officiel, fournisseur simulé, format de preuve de démonstration |
+
+Les liens et empreintes des documents sont consignés dans [architecture-sources.json](references/architecture-sources.json). Les sources GitHub sont liées à leurs commits pour éviter de confondre une branche mouvante avec une version de référence.
+
+La recherche initiale n'avait pas trouvé de référence nommée 5.7. Le porteur du projet a ensuite confirmé que **5.6.1 constitue cette base avant promotion**. L'absence initiale de tag 5.7 est donc un constat historique, pas un blocage du choix de la référence. Les éventuels changements ultérieurs au commit de base devront être comparés avant de revendiquer leur prise en charge.
+
+## Ce qui est aligné dans cette livraison
+
+- L'accueil présente l'architecture en cinq couches, son vocabulaire FR/EN et le rôle des trois dépôts.
+- La base 5.6.1 confirmée, sa promotion prévue en 5.7, les documents d'architecture 5.6.0 et le prototype local sont identifiés séparément.
+- Chaque couche indique ce qu'elle signifie et ce que la démo illustre effectivement.
+- Les guides nouvellement reçus remplacent le constat initial d'absence documentaire ; le mapping complet des invariants reste non intégré.
+- Les preuves Ed25519 de la démo restent attribuées à son format `demo-evidence/v1`, sans être présentées comme la sortie du runtime de référence.
+
+## Vérifications nécessaires pour un alignement d'exécution 5.7
+
+1. **Référence identifiée et confirmée** : utiliser `tenir_governance@41fae550c1e0a3632e2bde473db6d31b450d4269`, version déclarée 5.6.1, comme base destinée à devenir 5.7.
+2. Comparer ses profils, axes, règles et invariants avec les données réellement utilisées dans ce dépôt.
+3. Comparer les contrats d'observation, d'exécution et de preuve ; documenter les adaptations ou exclusions.
+4. Choisir et tester un adaptateur vers le runtime de référence si le périmètre du produit demande cette intégration.
+5. Rejouer les scénarios et la vérification avec une trace de version et de déploiement adaptée.
+
+Ces étapes ne sont pas remplacées par une modification du numéro de version affiché. Le moteur local reste un démonstrateur tant que leur recette n'est pas réalisée.
+
+## Deux lectures complémentaires
+
+Les cinq couches décrivent une répartition des responsabilités : intention, exigence, médiation, standard, runtime. La boucle d'observation décrit la lecture des données et des preuves : question, modèle, observation, interprétation, connaissance, restitution et suivi.
+
+Les notes de métamodèle fournies sont conservées dans [note A](references/metamodel-notes-a.md) et [note B](references/metamodel-notes-b.md). Elles alimentent la conception du produit ; leurs affirmations d'isomorphisme, d'interopérabilité ou de maturité ne constituent pas une validation du présent dépôt.

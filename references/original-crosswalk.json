@@ -1,0 +1,102 @@
+{
+  "@context": {
+    "reg":  "https://reg-conformance.example/ns#",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "ssn":  "http://www.w3.org/ns/ssn/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd":  "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    { "@id": "reg:AssuranceSignal", "@type": "rdfs:Class",
+      "rdfs:label": "AssuranceSignal",
+      "skos:closeMatch": { "@id": "sosa:Observation" },
+      "skos:relatedMatch": { "@id": "prov:Entity" } },
+
+    { "@id": "reg:AssureService", "@type": "rdfs:Class",
+      "rdfs:label": "Assure (service)",
+      "skos:closeMatch": { "@id": "sosa:Sensor" },
+      "skos:relatedMatch": { "@id": "prov:Agent" } },
+
+    { "@id": "reg:AssureContract", "@type": "rdfs:Class",
+      "rdfs:label": "Contrat Assure",
+      "skos:exactMatch": { "@id": "sosa:Procedure" },
+      "skos:relatedMatch": { "@id": "prov:Plan" } },
+
+    { "@id": "reg:HypothesisStatus", "@type": "rdfs:Class",
+      "rdfs:label": "État d'hypothèse (VERIFIED / WEAKENED / VIOLATED)",
+      "skos:closeMatch": { "@id": "sosa:ObservableProperty" } },
+
+    { "@id": "reg:InfrastructureState", "@type": "rdfs:Class",
+      "rdfs:label": "État d'infrastructure",
+      "skos:closeMatch": { "@id": "sosa:FeatureOfInterest" } },
+
+    { "@id": "reg:GovernedResource", "@type": "rdfs:Class",
+      "rdfs:label": "Ressource gouvernée (budget, capacité)",
+      "skos:closeMatch": { "@id": "sosa:FeatureOfInterest" },
+      "skos:relatedMatch": { "@id": "prov:Entity" } },
+
+    { "@id": "reg:AvailableCapacity", "@type": "rdfs:Class",
+      "rdfs:label": "Capacité disponible (propriété lue par I8)",
+      "skos:exactMatch": { "@id": "sosa:ObservableProperty" } },
+
+    { "@id": "reg:Adjudication", "@type": "rdfs:Class",
+      "rdfs:label": "Evaluate() — adjudication",
+      "skos:relatedMatch": { "@id": "prov:Activity" },
+      "rdfs:comment": "Interprétation, pas observation : aucun équivalent sosa:Observation. C'est un choix délibéré du crosswalk." },
+
+    { "@id": "reg:Profile", "@type": "rdfs:Class",
+      "rdfs:label": "Profil sigma",
+      "skos:closeMatch": { "@id": "sosa:Procedure" },
+      "skos:relatedMatch": { "@id": "prov:Plan" } },
+
+    { "@id": "reg:Invariant", "@type": "rdfs:Class",
+      "rdfs:label": "Invariant I*",
+      "skos:closeMatch": { "@id": "sosa:Procedure" } },
+
+    { "@id": "reg:Verdict", "@type": "rdfs:Class",
+      "rdfs:label": "Verdict (PASS/FLAG/HOLD/HARD_VETO)",
+      "skos:closeMatch": { "@id": "sosa:Result" },
+      "skos:relatedMatch": { "@id": "prov:Entity" } },
+
+    { "@id": "reg:CheckResult", "@type": "rdfs:Class",
+      "rdfs:label": "Résultat individuel d'invariant",
+      "skos:exactMatch": { "@id": "sosa:Result" } },
+
+    { "@id": "reg:EvidenceRecord", "@type": "rdfs:Class",
+      "rdfs:label": "EvidenceRecord",
+      "skos:closeMatch": { "@id": "prov:Bundle" },
+      "skos:relatedMatch": { "@id": "prov:Entity" } },
+
+    { "@id": "reg:CommitAttempt", "@type": "rdfs:Class",
+      "rdfs:label": "Tentative de commit",
+      "skos:relatedMatch": { "@id": "prov:Activity" } },
+
+    { "@id": "reg:StateSnapshot", "@type": "rdfs:Class",
+      "rdfs:label": "Snapshot d'état (pre/post commit)",
+      "skos:relatedMatch": { "@id": "prov:Entity" } },
+
+    { "@id": "reg:EvidenceChain", "@type": "rdfs:Class",
+      "rdfs:label": "Chaîne d'évidence (ledger)",
+      "skos:closeMatch": { "@id": "prov:Collection" },
+      "rdfs:comment": "previous_hash se lit comme une chaîne de prov:wasDerivedFrom." },
+
+    { "@id": "reg:Trajectory", "@type": "rdfs:Class",
+      "rdfs:label": "Trajectoire / suivi",
+      "skos:closeMatch": { "@id": "sosa:ObservationCollection" } },
+
+    { "@id": "reg:AuditReport", "@type": "rdfs:Class",
+      "rdfs:label": "Restitution / rapport d'audit",
+      "skos:relatedMatch": { "@id": "prov:Entity" } },
+
+    { "@id": "reg:Actor", "@type": "rdfs:Class",
+      "rdfs:label": "Acteur (agent, gouverneur, auditeur, régulateur)",
+      "skos:exactMatch": { "@id": "prov:Agent" } },
+
+    { "@id": "reg:CandidateTransition", "@type": "rdfs:Class",
+      "rdfs:label": "Transition proposée tau",
+      "skos:relatedMatch": { "@id": "prov:Activity" },
+      "rdfs:comment": "Aligné sur le concept de Candidate Act (IETF Protected Execution-Finality) : activité candidate, non effective." }
+  ]
+}

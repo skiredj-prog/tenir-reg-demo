@@ -1,0 +1,11 @@
+[
+  {"name":"nominal","host":"mono-process","dedup":"local-registry","concurrency":"thread-lock","expected":[]},
+  {"name":"R1a","host":"mono-process","dedup":"none","concurrency":"file-lock","expected":["R1a"]},
+  {"name":"R1b","host":"mono-host","dedup":"none","concurrency":"thread-lock","expected":["R1b"]},
+  {"name":"R1c","host":"multi-host","dedup":"none","concurrency":"thread-lock","expected":["R1c"]},
+  {"name":"R2a","host":"mono-host","dedup":"none","concurrency":"distributed-consensus","expected":["R1b","R2a"]},
+  {"name":"R2b","host":"mono-host","dedup":"distributed-consensus-registry","concurrency":"distributed-transaction","expected":["R2b","R2c"]},
+  {"name":"R2c","host":"multi-host","dedup":"distributed-consensus-registry","concurrency":"distributed-transaction","expected":["R2c"]},
+  {"name":"R3a","host":"multi-host","dedup":"local-registry","concurrency":"distributed-transaction","expected":["R3a"]},
+  {"name":"violations multiples","host":"mono-process","dedup":"distributed-consensus-registry","concurrency":"distributed-consensus","expected":["R1a","R2a","R2b"]}
+]

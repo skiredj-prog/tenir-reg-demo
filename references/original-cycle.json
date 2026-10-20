@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "reg":  "https://reg-conformance.example/ns#",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "xsd":  "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    { "@id": "reg:assure/v1", "@type": ["sosa:Sensor", "reg:AssureService"] },
+
+    { "@id": "reg:sig/0001", "@type": ["sosa:Observation", "reg:AssuranceSignal"],
+      "sosa:madeBySensor": { "@id": "reg:assure/v1" },
+      "sosa:observedProperty": { "@id": "reg:HypothesisStatus" },
+      "sosa:featureOfInterest": { "@id": "reg:infra/emea-1" },
+      "sosa:usedProcedure": { "@id": "reg:assure-contract/v1" },
+      "sosa:hasResult": {
+        "@type": "sosa:Result",
+        "sosa:hasSimpleResult": "HYPOTHESIS_WEAKENED"
+      },
+      "reg:expiresAt": { "@type": "xsd:dateTime", "@value": "2026-10-20T10:00:00Z" } },
+
+    { "@id": "reg:snapshot/s4", "@type": ["prov:Entity", "reg:StateSnapshot"],
+      "reg:availableCapacity": { "@type": "xsd:decimal", "@value": "70000" } },
+
+    { "@id": "reg:tau/0003", "@type": ["prov:Activity", "reg:CandidateTransition"],
+      "reg:amount": { "@type": "xsd:decimal", "@value": "20000" } },
+
+    { "@id": "reg:eval/0003", "@type": ["prov:Activity", "reg:Adjudication"],
+      "prov:used": [
+        { "@id": "reg:snapshot/s4" },
+        { "@id": "reg:tau/0003" },
+        { "@id": "reg:sig/0001" }
+      ],
+      "prov:wasAssociatedWith": { "@id": "reg:evaluator/v5.7.0" },
+      "reg:usedProfile": { "@id": "reg:profile/aggregate-budget-multi-host-v1" } },
+
+    { "@id": "reg:verdict/0003", "@type": ["sosa:Result", "reg:Verdict"],
+      "sosa:hasSimpleResult": "HARD_VETO",
+      "reg:rationale": "signal_reactions: HYPOTHESIS_WEAKENED frais => veto nouvelles opérations externes" },
+
+    { "@id": "reg:commit/0003", "@type": ["prov:Activity", "reg:CommitAttempt"],
+      "reg:commitResult": "SKIPPED" },
+
+    { "@id": "reg:ev/0003", "@type": ["prov:Bundle", "reg:EvidenceRecord"],
+      "prov:wasGeneratedBy": { "@id": "reg:eval/0003" },
+      "prov:wasAttributedTo": { "@id": "reg:evaluator/v5.7.0" },
+      "reg:hasVerdict": { "@id": "reg:verdict/0003" },
+      "reg:hasCommitTrace": { "@id": "reg:commit/0003" },
+      "reg:integrityHash": "sha256:...",
+      "reg:signature": "ed25519:..." },
+
+    { "@id": "reg:chain", "@type": ["prov:Collection", "reg:EvidenceChain"],
+      "prov:hadMember": [ { "@id": "reg:ev/0002" }, { "@id": "reg:ev/0003" } ] },
+
+    { "@id": "reg:ev/0003", "prov:wasDerivedFrom": { "@id": "reg:ev/0002" } }
+  ]
+}

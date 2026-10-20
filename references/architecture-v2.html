@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="fr" data-writer-dashboard-theme="org-default" data-writer-dashboard-color-scheme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TENIR Governance — Interactive Architecture</title>
+<script>
+const saved = localStorage.getItem("writer-dashboard-color-scheme");
+if (saved) document.documentElement.setAttribute("data-writer-dashboard-color-scheme", saved);
+</script>
+<style id="writer-dashboard-theme-values">
+[data-writer-dashboard-color-scheme="dark"] {
+  --writer-dashboard-page: #0a0a14;
+  --writer-dashboard-surface: #12121f;
+  --writer-dashboard-surface-muted: #1a1a2e;
+  --writer-dashboard-text: #e8e8f0;
+  --writer-dashboard-muted-text: #8888aa;
+  --writer-dashboard-border: #2a2a44;
+  --writer-dashboard-accent: #c8a94b;
+  --writer-dashboard-accent-foreground: #0a0a14;
+  --writer-dashboard-chart-1: #c8a94b;
+  --writer-dashboard-chart-2: #28b098;
+  --writer-dashboard-chart-3: #8858cc;
+  --writer-dashboard-chart-4: #f07838;
+  --writer-dashboard-chart-5: #e04040;
+  --writer-dashboard-chart-track: #1a1a2e;
+  --writer-dashboard-comparison: #1a1a2e;
+  --writer-dashboard-comparison-foreground: #8888aa;
+  --writer-dashboard-font-family: 'IBM Plex Sans', system-ui, sans-serif;
+}
+[data-writer-dashboard-color-scheme="light"] {
+  --writer-dashboard-page: #f8f8fc;
+  --writer-dashboard-surface: #ffffff;
+  --writer-dashboard-surface-muted: #f0f0f5;
+  --writer-dashboard-text: #1a1a2e;
+  --writer-dashboard-muted-text: #6a6a88;
+  --writer-dashboard-border: #d8d8e5;
+  --writer-dashboard-accent: #a07828;
+  --writer-dashboard-accent-foreground: #ffffff;
+  --writer-dashboard-chart-1: #a07828;
+  --writer-dashboard-chart-2: #1a7a6a;
+  --writer-dashboard-chart-3: #6a3aaa;
+  --writer-dashboard-chart-4: #c85a18;
+  --writer-dashboard-chart-5: #b02828;
+  --writer-dashboard-chart-track: #e8e8f0;
+  --writer-dashboard-comparison: #f0f0f5;
+  --writer-dashboard-comparison-foreground: #6a6a88;
+  --writer-dashboard-font-family: 'IBM Plex Sans', system-ui, sans-serif;
+}
+</style>
+<style id="writer-dashboard-styles">
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --gold: var(--writer-dashboard-accent);
+  --gold2: var(--writer-dashboard-chart-1);
+  --gold3: #f8e090;
+  --teal: var(--writer-dashboard-chart-2);
+  --teal2: #28b098;
+  --teal3: #60d8c0;
+  --violet: var(--writer-dashboard-chart-3);
+  --violet2: #8858cc;
+  --violet3: #b898f8;
+  --amber: var(--writer-dashboard-chart-4);
+  --amber2: #f07838;
+  --red: var(--writer-dashboard-chart-5);
+  --red2: #b02828;
+  --red3: #e04040;
+  --bg: var(--writer-dashboard-page);
+  --surface: var(--writer-dashboard-surface);
+  --surface-muted: var(--writer-dashboard-surface-muted);
+  --text: var(--writer-dashboard-text);
+  --muted: var(--writer-dashboard-muted-text);
+  --border: var(--writer-dashboard-border);
+  --font: var(--writer-dashboard-font-family);
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+section { padding: 5rem 0; position: relative; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.section-title em { font-style: italic; color: var(--gold); }
+
+.section-subtitle {
+  font-size: clamp(15px, 1.6vw, 19px);
+  color: var(--muted);
+  max-width: 70ch;
+  margin-bottom: 3rem;
+  line-height: 1.7;
+}
+
+/* ── HEADER / NAV ── */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,10,20,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.light header { background: rgba(248,248,252,0.9); }
+
+.header-inner {
+  max-width: 1400px; margin: 0 auto;
+  padding: 0.75rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 18px; font-weight: 700;
+  letter-spacing: 0.05em; color: var(--gold);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a.active { color: var(--text); }
+
+.header-controls { display: flex; align-items: center; gap: 0.75rem; }
+
+.theme-toggle {
+  width: 38px; height: 38px;
+  border: 1px solid var(--border);
+  background: var(--surface); color: var(--text);
+  border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--gold); }
+
+/* ── HERO ── */
+#hero {
+  padding: 8rem 0 6rem;
+  text-align: center;
+  background: radial-gradient(ellipse 70% 70% at 50% 40%,
+    rgba(200,169,75,0.06) 0%, transparent 70%);
+}
+.hero-title {
+  font-size: clamp(48px, 9vw, 120px);
+  font-weight: 200; line-height: 0.9;
+  letter-spacing: 0.08em;
+  color: var(--text); margin-bottom: 1rem;
+}
+.hero-title span {
+  background: linear-gradient(135deg, var(--gold), var(--gold3));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.hero-sub {
+  font-size: clamp(15px, 1.8vw, 20px);
+  color: var(--muted); letter-spacing: 0.3em;
+  text-transform: uppercase; margin-bottom: 2rem;
+}
+.hero-desc {
+  max-width: 60ch; margin: 0 auto;
+  font-size: clamp(16px, 1.6vw, 20px);
+  color: var(--text); line-height: 1.7; opacity: 0.8;
+}
+.hero-badges {
+  display: flex; gap: 1rem; justify-content: center;
+  flex-wrap: wrap; margin-top: 2rem;
+}
+.badge {
+  padding: 0.4rem 1rem; border-radius: 20px;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.badge.gold { color: var(--gold); border-color: var(--gold); }
+.badge.teal { color: var(--teal3); border-color: var(--teal); }
+.badge.violet { color: var(--violet3); border-color: var(--violet); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.card:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+.card-grid {
+  display: grid; gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.card-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 1rem;
+}
+.card-title {
+  font-size: 17px; font-weight: 600;
+  margin-bottom: 0.5rem; color: var(--text);
+}
+.card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* ── 5-LEVEL RESOLUTION ── */
+.level-stack { display: flex; flex-direction: column; gap: 0; }
+.level-row {
+  display: grid; grid-template-columns: 60px 1fr 200px;
+  gap: 1.5rem; align-items: center;
+  padding: 1.5rem 2rem;
+  border-left: 3px solid var(--border);
+  transition: all 0.3s; cursor: default;
+  position: relative;
+}
+.level-row:hover { border-left-color: var(--gold); background: var(--surface); }
+.level-row + .level-row { border-top: 1px solid var(--border); }
+.level-num {
+  font-size: 36px; font-weight: 200;
+  color: var(--muted); line-height: 1;
+}
+.level-row:hover .level-num { color: var(--gold); }
+.level-name { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+.level-desc { font-size: 14px; color: var(--muted); }
+.level-actor {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); text-align: right;
+}
+
+/* ── SIGNAL TAXONOMY ── */
+.signal-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+.signal-card {
+  padding: 1.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: all 0.3s;
+}
+.signal-card:hover { transform: translateY(-3px); }
+.signal-card.s1 { border-top: 3px solid var(--gold); }
+.signal-card.s2 { border-top: 3px solid var(--teal2); }
+.signal-card.s3 { border-top: 3px solid var(--violet2); }
+.signal-card.s4 { border-top: 3px solid var(--amber2); }
+.signal-id {
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.3em; margin-bottom: 0.5rem;
+}
+.s1 .signal-id { color: var(--gold); }
+.s2 .signal-id { color: var(--teal3); }
+.s3 .signal-id { color: var(--violet3); }
+.s4 .signal-id { color: var(--amber2); }
+.signal-name { font-size: 16px; font-weight: 600; margin-bottom: 0.5rem; }
+.signal-origin { font-size: 13px; color: var(--muted); margin-bottom: 0.75rem; font-style: italic; }
+.signal-nature {
+  display: inline-block; padding: 2px 10px;
+  border-radius: 4px; font-size: 11px;
+  font-family: var(--mono); letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+.s1 .signal-nature { background: rgba(200,169,75,0.15); color: var(--gold); }
+.s2 .signal-nature { background: rgba(40,176,152,0.15); color: var(--teal3); }
+.s3 .signal-nature { background: rgba(136,88,204,0.15); color: var(--violet3); }
+.s4 .signal-nature { background: rgba(240,120,56,0.15); color: var(--amber2); }
+.signal-example { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+/* ── PIPELINE ── */
+.pipeline { position: relative; }
+.pipeline-step {
+  display: grid; grid-template-columns: 50px 1fr;
+  gap: 1.5rem; padding: 1.25rem 0;
+  position: relative;
+}
+.pipeline-step::before {
+  content: ''; position: absolute;
+  left: 24px; top: 50px; bottom: -10px;
+  width: 2px; background: var(--border);
+}
+.pipeline-step:last-child::before { display: none; }
+.pipeline-num {
+  width: 50px; height: 50px; border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 600; color: var(--muted);
+  background: var(--surface); z-index: 1; transition: all 0.3s;
+  flex-shrink: 0;
+}
+.pipeline-step.active .pipeline-num {
+  border-color: var(--gold); color: var(--gold);
+  box-shadow: 0 0 20px rgba(200,169,75,0.3);
+}
+.pipeline-step.active::before { background: var(--gold); }
+.pipeline-level {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.3rem;
+}
+.pipeline-title { font-size: 16px; font-weight: 600; margin-bottom: 0.3rem; }
+.pipeline-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.pipeline-artifact {
+  display: inline-block; margin-top: 0.5rem;
+  padding: 3px 10px; border-radius: 4px;
+  background: var(--surface-muted); font-family: var(--mono);
+  font-size: 11px; color: var(--gold);
+}
+.pipeline-controls {
+  display: flex; gap: 1rem; align-items: center;
+  margin-top: 2rem; flex-wrap: wrap;
+}
+.btn {
+  padding: 0.6rem 1.5rem; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text); font-size: 14px; cursor: pointer;
+  transition: all 0.2s; font-family: var(--font);
+}
+.btn:hover { border-color: var(--gold); color: var(--gold); }
+.btn.primary { background: var(--gold); color: var(--bg); border-color: var(--gold); font-weight: 600; }
+.btn.primary:hover { opacity: 0.9; }
+
+/* ── DOUBLE KERNEL ── */
+.kernel-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; align-items: stretch;
+}
+.kernel-panel {
+  padding: 2.5rem; border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.kernel-panel.scoring { border-top: 3px solid var(--teal2); }
+.kernel-panel.membrane { border-top: 3px solid var(--red2); }
+.kernel-label {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.scoring .kernel-label { color: var(--teal3); }
+.membrane .kernel-label { color: var(--red3); }
+.kernel-title { font-size: 20px; font-weight: 600; margin-bottom: 1rem; }
+.kernel-formula {
+  font-family: var(--mono); font-size: clamp(20px, 3vw, 32px);
+  text-align: center; padding: 1.5rem;
+  background: var(--surface-muted); border-radius: 8px;
+  margin: 1rem 0;
+}
+.scoring .kernel-formula { color: var(--teal3); }
+.membrane .kernel-formula { color: var(--red3); font-size: clamp(16px, 2vw, 22px); }
+.kernel-list { list-style: none; margin-top: 1rem; }
+.kernel-list li {
+  padding: 0.5rem 0; font-size: 14px;
+  color: var(--muted); border-bottom: 1px solid var(--border);
+  display: flex; gap: 0.75rem;
+}
+.kernel-list li:last-child { border-bottom: none; }
+.kernel-list .kkey {
+  font-family: var(--mono); font-size: 12px;
+  font-weight: 700; min-width: 2rem;
+}
+.scoring .kkey { color: var(--teal3); }
+.membrane .kkey { color: var(--red3); }
+.kernel-compose {
+  margin-top: 2rem; padding: 1.5rem;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: var(--surface-muted);
+}
+.compose-lattice {
+  font-family: var(--mono); font-size: 13px;
+  line-height: 2; color: var(--text);
+}
+.compose-lattice .pass { color: var(--teal3); }
+.compose-lattice .flag { color: var(--gold); }
+.compose-lattice .hold { color: var(--amber2); }
+.compose-lattice .veto { color: var(--red3); }
+
+/* ── CAVE MATRIX ── */
+.cave-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; max-width: 800px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden;
+}
+.cave-cell {
+  padding: 2rem; background: var(--surface);
+  cursor: pointer; transition: background 0.3s;
+  position: relative;
+}
+.cave-cell:hover { background: var(--surface-muted); }
+.cave-cell.active { background: var(--surface-muted); }
+.cave-letter {
+  font-size: 64px; font-weight: 200; line-height: 0.9;
+  margin-bottom: 0.5rem; transition: color 0.3s;
+}
+.cave-cell:nth-child(1) .cave-letter { color: var(--gold); }
+.cave-cell:nth-child(2) .cave-letter { color: var(--teal3); }
+.cave-cell:nth-child(3) .cave-letter { color: var(--violet3); }
+.cave-cell:nth-child(4) .cave-letter { color: var(--amber2); }
+.cave-word {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.75rem;
+}
+.cave-desc { font-size: 14px; color: var(--text); line-height: 1.6; }
+.cave-detail {
+  margin-top: 2rem; padding: 2rem;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: var(--surface);
+  min-height: 80px; transition: all 0.3s;
+}
+.cave-detail-title { font-size: 18px; font-weight: 600; margin-bottom: 0.5rem; }
+.cave-detail-text { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+/* ── CONSENSUS & BUDGET ── */
+.property-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem; margin-bottom: 2rem;
+}
+.property-card {
+  padding: 1.75rem; border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: all 0.3s;
+}
+.property-card:hover { transform: translateY(-3px); border-color: var(--gold); }
+.property-id {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.3em; margin-bottom: 0.5rem; color: var(--gold);
+}
+.property-name { font-size: 16px; font-weight: 600; margin-bottom: 0.5rem; }
+.property-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+.i8-box {
+  margin: 2rem 0; padding: 2rem;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  background: rgba(200,169,75,0.05);
+}
+.i8-formula {
+  font-family: var(--mono); font-size: clamp(20px, 3vw, 36px);
+  text-align: center; color: var(--gold);
+  margin: 1rem 0; letter-spacing: 0.05em;
+}
+.i8-note { font-size: 14px; color: var(--muted); text-align: center; }
+
+.backend-comparison {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5rem; margin-top: 2rem;
+}
+.backend-card {
+  padding: 2rem; border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.backend-card.raft { border-top: 3px solid var(--violet2); }
+.backend-card.single { border-top: 3px solid var(--teal2); }
+.backend-title { font-size: 17px; font-weight: 600; margin-bottom: 0.75rem; }
+.backend-props { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.prop-tag {
+  padding: 3px 10px; border-radius: 4px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.15em;
+}
+.prop-tag.yes { background: rgba(40,176,152,0.15); color: var(--teal3); }
+.prop-tag.no { background: rgba(176,40,40,0.15); color: var(--red3); }
+
+/* ── STATE MACHINE ── */
+.state-machine {
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+  align-items: center; justify-content: center;
+  padding: 2rem; margin: 1rem 0;
+}
+.state-node {
+  padding: 0.75rem 1.5rem; border-radius: 8px;
+  border: 2px solid var(--border);
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s;
+  background: var(--surface);
+}
+.state-node:hover { border-color: var(--gold); }
+.state-node.created { border-color: var(--muted); color: var(--muted); }
+.state-node.reserved { border-color: var(--gold); color: var(--gold); }
+.state-node.dispatching { border-color: var(--amber2); color: var(--amber2); }
+.state-node.confirmed { border-color: var(--teal2); color: var(--teal3); background: rgba(40,176,152,0.08); }
+.state-node.failed { border-color: var(--red2); color: var(--red3); }
+.state-node.unknown { border-color: var(--violet2); color: var(--violet3); }
+.state-node.hold { border-color: var(--amber); color: var(--amber2); }
+.state-arrow { color: var(--muted); font-size: 18px; }
+
+/* ── EVIDENCE CONTRACT ── */
+.evidence-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; max-width: 700px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.ev-section {
+  padding: 1.5rem; background: var(--surface);
+}
+.ev-label {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.5rem;
+}
+.ev-content { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+.evidence-levels {
+  margin-top: 2rem; display: flex; gap: 0;
+  border-radius: 10px; overflow: hidden;
+}
+.ev-level {
+  flex: 1; padding: 1rem; text-align: center;
+  border: 1px solid var(--border); border-right: none;
+  font-size: 13px;
+}
+.ev-level:last-child { border-right: 1px solid var(--border); }
+.ev-level .lvl-num { font-size: 24px; font-weight: 200; margin-bottom: 0.25rem; }
+.ev-level.l1 .lvl-num { color: var(--teal3); }
+.ev-level.l2 .lvl-num { color: var(--gold); }
+.ev-level.l3 .lvl-num { color: var(--amber2); }
+.ev-level.l4 .lvl-num { color: var(--violet3); }
+.ev-level .lvl-name { font-size: 12px; font-weight: 600; margin-bottom: 0.25rem; }
+.ev-level .lvl-status { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.ev-level.l1 .lvl-status { color: var(--teal3); }
+.ev-level.l2 .lvl-status { color: var(--gold); }
+.ev-level.l3 .lvl-status { color: var(--red3); }
+.ev-level.l4 .lvl-status { color: var(--red3); }
+
+/* ── USE CASE SIMULATORS ── */
+.simulator {
+  border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden;
+  background: var(--surface);
+}
+.sim-header {
+  padding: 1.5rem 2rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.sim-title { font-size: 17px; font-weight: 600; }
+.sim-mode {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 4px;
+}
+.sim-mode.single { background: rgba(40,176,152,0.15); color: var(--teal3); }
+.sim-mode.raft { background: rgba(136,88,204,0.15); color: var(--violet3); }
+.sim-body { padding: 2rem; }
+.sim-controls {
+  display: flex; gap: 1rem; flex-wrap: wrap; align-items: end;
+  margin-bottom: 2rem;
+}
+.sim-field { display: flex; flex-direction: column; gap: 0.3rem; }
+.sim-field label {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted);
+}
+.sim-field input, .sim-field select {
+  padding: 0.5rem 0.75rem; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--surface-muted);
+  color: var(--text); font-size: 14px; font-family: var(--font);
+  width: 140px;
+}
+.sim-field input:focus { outline: none; border-color: var(--gold); }
+
+.sim-log {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1.5rem;
+  font-family: var(--mono); font-size: 12px;
+  line-height: 2; min-height: 200px;
+  max-height: 400px; overflow-y: auto;
+}
+.log-entry { display: flex; gap: 0.75rem; align-items: baseline; }
+.log-time { color: var(--muted); font-size: 10px; min-width: 60px; }
+.log-agent { font-weight: 700; min-width: 70px; }
+.log-agent.a { color: var(--gold); }
+.log-agent.b { color: var(--teal3); }
+.log-agent.c { color: var(--violet3); }
+.log-agent.sys { color: var(--muted); }
+.log-text { color: var(--text); flex: 1; }
+.log-text .pass { color: var(--teal3); }
+.log-text .fail { color: var(--red3); }
+.log-text .warn { color: var(--amber2); }
+.log-text .info { color: var(--gold); }
+
+.budget-display {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  margin-bottom: 1.5rem; padding: 1.5rem;
+  background: var(--surface-muted); border-radius: 10px;
+}
+.budget-stat { text-align: center; }
+.budget-stat .val {
+  font-size: 28px; font-weight: 200;
+  color: var(--text); line-height: 1;
+}
+.budget-stat .lbl {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--muted); margin-top: 0.25rem;
+}
+.budget-bar {
+  height: 8px; border-radius: 4px;
+  background: var(--surface-muted); overflow: hidden;
+  margin: 0.5rem 0 1.5rem; position: relative;
+}
+.budget-fill {
+  height: 100%; transition: width 0.5s cubic-bezier(0.16,1,0.3,1);
+  display: flex;
+}
+.budget-fill .reserved { background: var(--gold); height: 100%; transition: width 0.5s; }
+.budget-fill .committed { background: var(--teal2); height: 100%; transition: width 0.5s; }
+
+.i8-check {
+  margin-top: 1rem; padding: 0.75rem 1rem;
+  border-radius: 6px; font-family: var(--mono);
+  font-size: 12px; text-align: center;
+  transition: all 0.3s;
+}
+.i8-check.ok { background: rgba(40,176,152,0.1); color: var(--teal3); border: 1px solid var(--teal2); }
+.i8-check.violated { background: rgba(224,64,64,0.1); color: var(--red3); border: 1px solid var(--red2); }
+
+/* ── REPO MAP ── */
+.repo-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.repo-card {
+  padding: 2rem; border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface); transition: all 0.3s;
+}
+.repo-card:hover { border-color: var(--gold); }
+.repo-name { font-family: var(--mono); font-size: 14px; color: var(--gold); margin-bottom: 0.5rem; }
+.repo-role { font-size: 16px; font-weight: 600; margin-bottom: 0.5rem; }
+.repo-contents { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+/* ── LIMITATIONS ── */
+.limit-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.limit-item {
+  display: grid; grid-template-columns: 50px 1fr;
+  gap: 1rem; padding: 1rem 1.5rem;
+  border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface);
+}
+.limit-severity {
+  font-family: var(--mono); font-size: 11px;
+  font-weight: 700; text-align: center;
+  padding: 2px 0; border-radius: 4px;
+  align-self: start;
+}
+.limit-severity.p0 { background: rgba(224,64,64,0.15); color: var(--red3); }
+.limit-severity.p1 { background: rgba(240,120,56,0.15); color: var(--amber2); }
+.limit-severity.p2 { background: rgba(136,88,204,0.15); color: var(--violet3); }
+.limit-text { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 3rem 0; text-align: center;
+  border-top: 1px solid var(--border);
+}
+.writer-agent-credit {
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
+.reveal.vis { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .container, .container-wide { padding: 0 1rem; }
+  section { padding: 3rem 0; }
+  .kernel-grid { grid-template-columns: 1fr; }
+  .cave-grid { grid-template-columns: 1fr; }
+  .backend-comparison { grid-template-columns: 1fr; }
+  .evidence-grid { grid-template-columns: 1fr; }
+  .level-row { grid-template-columns: 40px 1fr; }
+  .level-actor { display: none; }
+  .nav-links { display: none; }
+  .evidence-levels { flex-direction: column; }
+  .ev-level { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">TENIR · Governance</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#hero" data-sec="hero">Overview</a>
+      <a href="#resolution" data-sec="resolution">5-Level Model</a>
+      <a href="#signals" data-sec="signals">Signals</a>
+      <a href="#pipeline" data-sec="pipeline">Pipeline</a>
+      <a href="#kernels" data-sec="kernels">Kernels</a>
+      <a href="#cave" data-sec="cave">CAVE</a>
+      <a href="#consensus" data-sec="consensus">Consensus</a>
+      <a href="#lifecycle" data-sec="lifecycle">Lifecycle</a>
+      <a href="#evidence" data-sec="evidence">Evidence</a>
+      <a href="#usecases" data-sec="usecases">Use Cases</a>
+      <a href="#repos" data-sec="repos">Repos</a>
+      <a href="#limits" data-sec="limits">Limits</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Toggle light/dark theme">☀</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="container">
+    <h1 class="hero-title">TENIR <span>Governance</span></h1>
+    <div class="hero-sub">Runtime Execution Governance · End-to-End Architecture</div>
+    <p class="hero-desc">
+      An interactive, visual walkthrough of the TENIR governance system — from business rule
+      to machine execution, from raw signal to verdict, from budget reservation to evidence record.
+      Explore the 5-level resolution model, the double-kernel adjudication, the consensus and budget
+      coordination layer, and three live use-case simulators.
+    </p>
+    <div class="hero-badges">
+      <span class="badge gold">REG+ · v5.6.0</span>
+      <span class="badge teal">ConsensusBackend</span>
+      <span class="badge violet">I8 Budget Invariant</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── 5-LEVEL RESOLUTION MODEL ────────────────────────── -->
+<section id="resolution">
+  <div class="container">
+    <div class="section-label reveal">Architecture · The Resolution Model</div>
+    <h2 class="section-title reveal">Five Levels from <em>Business Rule</em> to Machine Execution</h2>
+    <p class="section-subtitle reveal">
+      Nothing can skip a level. A business intention must be translated into a substantive rule,
+      resolved into a profile, decomposed into invariants, and only then executed by the runtime.
+      Each level has a distinct owner and produces a distinct artifact.
+    </p>
+    <div class="level-stack reveal">
+      <div class="level-row">
+        <div class="level-num">0</div>
+        <div>
+          <div class="level-name">Business Rule</div>
+          <div class="level-desc">The normative intention expressed by the business — e.g., "Never double-execute a payment." Complete in its own register, but not executable.</div>
+        </div>
+        <div class="level-actor">Functional Team</div>
+      </div>
+      <div class="level-row">
+        <div class="level-num">1</div>
+        <div>
+          <div class="level-name">Regulatory Constraint</div>
+          <div class="level-desc">The compliance mapping — e.g., "EU AI Act Art. 12 (traceability), ISO 42001 A.6.7 (audit trail)."</div>
+        </div>
+        <div class="level-actor">Compliance</div>
+      </div>
+      <div class="level-row">
+        <div class="level-num">2</div>
+        <div>
+          <div class="level-name">Act of Mediation (Translation)</div>
+          <div class="level-desc">Business Intention + Architectural Hypotheses = Substantive Rule. The architect translates intent into a machine-resolvable contract.</div>
+        </div>
+        <div class="level-actor">Governance Architect</div>
+      </div>
+      <div class="level-row">
+        <div class="level-num">3</div>
+        <div>
+          <div class="level-name">Standard (REG Core &amp; REG+)</div>
+          <div class="level-desc">The substantive rule is resolved into a Profile (σ), then decomposed into atomic Invariants (I*). REG+ publishes the profile; REG Core defines the invariant language.</div>
+        </div>
+        <div class="level-actor">REG+ Catalog</div>
+      </div>
+      <div class="level-row">
+        <div class="level-num">4</div>
+        <div>
+          <div class="level-name">Runtime (TENIR-Gov)</div>
+          <div class="level-desc">Evaluate() reads invariants, Commit() mutates state, Record() produces proof. The membrane enforces — it does not legislate.</div>
+        </div>
+        <div class="level-actor">The Membrane</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SIGNAL TAXONOMY ─────────────────────────────────── -->
+<section id="signals">
+  <div class="container">
+    <div class="section-label reveal">Signals · The Raw Material</div>
+    <h2 class="section-title reveal">Four Families of <em>Structural Signals</em></h2>
+    <p class="section-subtitle reveal">
+      Signals are the raw facts the engine reads. Each family has a distinct origin and a distinct
+      level of trust. A signal from S1 is declarative (may be false). S2 is observed. S3 is attested
+      by a third party. S4 is historical. Confusing these provenances is a category error.
+    </p>
+    <div class="signal-grid reveal">
+      <div class="signal-card s1">
+        <div class="signal-id">S1</div>
+        <div class="signal-name">Transition Signals</div>
+        <div class="signal-origin">From the Passage (τ) proposed by the caller</div>
+        <div class="signal-nature">Declarative</div>
+        <div class="signal-example">agent_id, action_type, amount, target_realm, idempotency_key</div>
+      </div>
+      <div class="signal-card s2">
+        <div class="signal-id">S2</div>
+        <div class="signal-name">Business State Signals</div>
+        <div class="signal-origin">From the MembraneState (s) — read from the registry</div>
+        <div class="signal-nature">Observed</div>
+        <div class="signal-example">resource.available, agent.authority_score, quarantine_active</div>
+      </div>
+      <div class="signal-card s3">
+        <div class="signal-id">S3</div>
+        <div class="signal-name">Infrastructure Signals</div>
+        <div class="signal-origin">From the Assure() service — signed Ed25519</div>
+        <div class="signal-nature">Attested</div>
+        <div class="signal-example">HYPOTHESIS_VERIFIED, HYPOTHESIS_WEAKENED, HYPOTHESIS_VIOLATED</div>
+      </div>
+      <div class="signal-card s4">
+        <div class="signal-id">S4</div>
+        <div class="signal-name">Historical Signals</div>
+        <div class="signal-origin">From the DurableOperationRegistry — persisted execution trace</div>
+        <div class="signal-nature">Historical</div>
+        <div class="signal-example">state=DISPATCHING, budget_committed=true, hold_record.tau_k_remaining</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRANSFORMATION PIPELINE ──────────────────────────── -->
+<section id="pipeline">
+  <div class="container">
+    <div class="section-label reveal">Pipeline · Signal to Verdict</div>
+    <h2 class="section-title reveal">The 8-Step <em>Transformation Chain</em></h2>
+    <p class="section-subtitle reveal">
+      From raw observation to post-hoc evaluation. Each step is distinct, testable, and produces
+      a traceable artifact. Click "Animate" to walk through the pipeline step by step.
+    </p>
+    <div class="pipeline reveal" id="pipelineContainer">
+      <div class="pipeline-step" data-step="1">
+        <div class="pipeline-num">1</div>
+        <div>
+          <div class="pipeline-level">Level 0 → 1 · Normalization</div>
+          <div class="pipeline-title">S1+S2+S3+S4 → Normalized Signals</div>
+          <div class="pipeline-desc">Raw signals are aggregated into a vector of constraint coordinates. If a coordinate is absent, it is never filled with a favorable default — it is marked <code>unmeasured</code> and becomes a gate reason.</div>
+          <div class="pipeline-artifact">coordinates{} + unmeasured_axes[]</div>
+        </div>
+      </div>
+      <div class="pipeline-step" data-step="2">
+        <div class="pipeline-num">2</div>
+        <div>
+          <div class="pipeline-level">Level 1 → 2a · Scoring</div>
+          <div class="pipeline-title">Coordinates → Score S</div>
+          <div class="pipeline-desc">The Scoring Kernel computes S = K / (P × V + ε). The score is continuous — two passages with close scores produce the same verdict if thresholds are the same. The score is NOT the verdict.</div>
+          <div class="pipeline-artifact">scoring_result{ s_score, decision, rationale }</div>
+        </div>
+      </div>
+      <div class="pipeline-step" data-step="3">
+        <div class="pipeline-num">3</div>
+        <div>
+          <div class="pipeline-level">Level 1 → 2b · Invariants</div>
+          <div class="pipeline-title">Signals → Discrete Results per Invariant</div>
+          <div class="pipeline-desc">Each invariant I_n is evaluated independently. No invariant reads the score. No invariant is affected by another's verdict. This is what makes the verdict reconstructible: an auditor sees which invariant failed, not just that the system said HARD_VETO.</div>
+          <div class="pipeline-artifact">membrane_result{ checks: [CheckResult...] }</div>
+        </div>
+      </div>
+      <div class="pipeline-step" data-step="4">
+        <div class="pipeline-num">4</div>
+        <div>
+          <div class="pipeline-level">Level 2 → 3 · Composition</div>
+          <div class="pipeline-title">Score + Invariants + S3 → Composed Verdict</div>
+          <div class="pipeline-desc">Three layers: (4a) Lattice composition — if either HARD_VETO → HARD_VETO, else HOLD, else FLAG, else PASS. (4b) Signal reactions from profile σ. (4c) Signal freshness — stale signals are ignored or promoted to FLAG per σ strategy.</div>
+          <div class="pipeline-artifact">composed_decision ∈ {PASS, FLAG, HOLD, HARD_VETO}</div>
+        </div>
+      </div>
+      <div class="pipeline-step" data-step="5">
+        <div class="pipeline-num">5</div>
+        <div>
+          <div class="pipeline-level">Level 3 → 4 · Commit</div>
+          <div class="pipeline-title">Verdict → Real Mutation</div>
+          <div class="pipeline-desc">If the verdict permits, Commit attempts to apply side effects atomically: reserve budget, transition to RESERVED, dispatch. If Evaluate returns PASS but Commit fails, the effective verdict is NOT PASS. This is the rule violated by the reconcile_commit() bug.</div>
+          <div class="pipeline-artifact">commit_trace{ result, pre_hash, post_hash }</div>
+        </div>
+      </div>
+      <div class="pipeline-step" data-step="6">
+        <div class="pipeline-num">6</div>
+        <div>
+          <div class="pipeline-level">Level 4 → 5 · Record</div>
+          <div class="pipeline-title">All Artifacts → EvidenceRecord</div>
+          <div class="pipeline-desc">Canonical serialization (JCS) into an EvidenceRecord with five sections: evaluation_context (reproducibility), inputs (reconstruction), results (traceability), commit_trace (integrity), integrity (SHA-256 + Ed25519 + previous_hash chain).</div>
+          <div class="pipeline-artifact">EvidenceRecord (JSON, signed)</div>
+        </div>
+      </div>
+      <div class="pipeline-step" data-step="7">
+        <div class="pipeline-num">7</div>
+        <div>
+          <div class="pipeline-level">Level 5 → 6 · Assessment</div>
+          <div class="pipeline-title">EvidenceRecord → τ⁻¹ + EVP</div>
+          <div class="pipeline-desc">Post-hoc evaluation: (7a) τ⁻¹ Partial Tau Inversion classifies reversibility into five classes. (7b) EVP (Intended Value Preservation) measures gross, net, and ratio. τ⁻¹ and EVP do not imply each other — a transition can be IRREVERSIBLE with excellent EVP.</div>
+          <div class="pipeline-artifact">assessment{ tau_class, evp_gross, evp_net, evp_ratio }</div>
+        </div>
+      </div>
+    </div>
+    <div class="pipeline-controls">
+      <button class="btn primary" id="pipelineAnimate">▶ Animate Pipeline</button>
+      <button class="btn" id="pipelineReset">Reset</button>
+      <span style="font-family:var(--mono); font-size:12px; color:var(--muted);" id="pipelineStatus">Click animate to walk through each step</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── DOUBLE KERNEL ────────────────────────────────────── -->
+<section id="kernels">
+  <div class="container">
+    <div class="section-label reveal">Adjudication · The Double Kernel</div>
+    <h2 class="section-title reveal">Continuous Score × <em>Discrete Invariants</em></h2>
+    <p class="section-subtitle reveal">
+      The Double-Kernel is NOT structural vs. substantive. It separates the continuous (Scoring Kernel:
+      S = K/(P·V+ε)) from the discrete (Transition Membrane: invariants). The composition of both
+      produces the verdict. The score and the invariants are independent in the composition.
+    </p>
+    <div class="kernel-grid reveal">
+      <div class="kernel-panel scoring">
+        <div class="kernel-label">Kernel 1 · Continuous</div>
+        <div class="kernel-title">Scoring Kernel</div>
+        <div class="kernel-formula">S = K / (P × V + ε)</div>
+        <ul class="kernel-list">
+          <li><span class="kkey">K</span> Capacity (from State)</li>
+          <li><span class="kkey">P</span> Pressure (from Passage)</li>
+          <li><span class="kkey">V</span> Velocity / Volatility (from Passage)</li>
+          <li><span class="kkey">ε</span> Stability floor (10⁻⁶)</li>
+        </ul>
+        <p style="font-size:13px; color:var(--muted); margin-top:1rem;">
+          S &gt; τ_pass → PASS · τ_block &lt; S ≤ τ_pass → FLAG · S ≤ τ_block → HARD_VETO
+        </p>
+      </div>
+      <div class="kernel-panel membrane">
+        <div class="kernel-label">Kernel 2 · Discrete</div>
+        <div class="kernel-title">Transition Membrane</div>
+        <div class="kernel-formula">I₁ ∧ I₂ ∧ ... ∧ I₉</div>
+        <ul class="kernel-list">
+          <li><span class="kkey">I1</span> single-use-permit</li>
+          <li><span class="kkey">I2</span> commit-binding</li>
+          <li><span class="kkey">I3</span> terminality</li>
+          <li><span class="kkey">I4</span> only-dispatch-produces-effects</li>
+          <li><span class="kkey">I6</span> no-admission-under-quarantine</li>
+          <li><span class="kkey">I7</span> delegation-integrity</li>
+          <li><span class="kkey">I8</span> aggregate-budget</li>
+          <li><span class="kkey">I9</span> trajectory-temporal-consistency</li>
+        </ul>
+      </div>
+    </div>
+    <div class="kernel-compose reveal">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Composition Lattice</div>
+      <div class="compose-lattice">
+        IF either HARD_VETO → <span class="veto">HARD_VETO</span><br>
+        ELSE IF either HOLD → <span class="hold">HOLD</span><br>
+        ELSE IF either FLAG → <span class="flag">FLAG</span> (but budget_util > 0.85 may escalate to HOLD)<br>
+        ELSE → <span class="pass">PASS</span>
+      </div>
+      <p style="font-size:14px; color:var(--muted); margin-top:1rem; font-style:italic;">
+        A high score (S = 0.9) does not guarantee PASS — an invariant can produce HARD_VETO alone.
+        Conversely, a low score (S = 0.4) does not force HARD_VETO if invariants pass — the verdict
+        will be FLAG, not HARD_VETO. The score and the invariants are independent in the composition.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CAVE MATRIX ──────────────────────────────────────── -->
+<section id="cave">
+  <div class="container">
+    <div class="section-label reveal">Agent Model · CAVE</div>
+    <h2 class="section-title reveal">The <em>CAVE</em> Matrix — Click to Explore</h2>
+    <p class="section-subtitle reveal">
+      Control · Aim · Veto · Epistemics. The canonical diagnostic framework for agentive situations.
+      Click any cell to see the detailed interrogation.
+    </p>
+    <div class="cave-grid reveal">
+      <div class="cave-cell active" data-cave="C">
+        <div class="cave-letter">C</div>
+        <div class="cave-word">Control</div>
+        <div class="cave-desc">Who actually holds the levers?</div>
+      </div>
+      <div class="cave-cell" data-cave="A">
+        <div class="cave-letter">A</div>
+        <div class="cave-word">Aim</div>
+        <div class="cave-desc">Is the declared objective aligned?</div>
+      </div>
+      <div class="cave-cell" data-cave="V">
+        <div class="cave-letter">V</div>
+        <div class="cave-word">Veto</div>
+        <div class="cave-desc">Does the right to stop still exist?</div>
+      </div>
+      <div class="cave-cell" data-cave="E">
+        <div class="cave-letter">E</div>
+        <div class="cave-word">Epistemics</div>
+        <div class="cave-desc">Is the source of reality intact?</div>
+      </div>
+    </div>
+    <div class="cave-detail reveal" id="caveDetail">
+      <div class="cave-detail-title" id="caveDetailTitle">Control</div>
+      <div class="cave-detail-text" id="caveDetailText">
+        Who detains the actual levers — not formally, but really? Who can accelerate, slow down, stop?
+        The question is not about org charts or stated authority. It is about the effective capacity
+        to act. In an agentive system, control can be silently colonized by speed: the human still
+        signs the form, but the machine has already determined what is on it.
+      </div>
+    </div>
+    <div style="margin-top:2rem; padding:1.5rem; border:1px solid var(--red2); border-radius:10px; background:rgba(176,40,40,0.06);" class="reveal">
+      <div style="font-size:17px; font-style:italic; color:var(--red3); line-height:1.6;">
+        The veto humain devient une illusion quand la justification épistémique elle-même
+        a été générée par la machine — à une vitesse excédant toute capacité de vérification.
+        On ne peut pas opposer un veto à ce qu'on a délégué à l'oracle.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONSENSUS & BUDGET ───────────────────────────────── -->
+<section id="consensus">
+  <div class="container">
+    <div class="section-label reveal">REG+ · Consensus &amp; Budget Coordination</div>
+    <h2 class="section-title reveal">Four Properties · <em>One Invariant</em></h2>
+    <p class="section-subtitle reveal">
+      The REG+ consensus contract defines four properties any conforming backend must satisfy.
+      The ConsensusBackend interface is implementation-neutral — a file-lock backend, a Raft cluster,
+      or a PostgreSQL transaction can all conform, provided they satisfy these properties for their
+      declared fault model.
+    </p>
+    <div class="property-grid reveal">
+      <div class="property-card">
+        <div class="property-id">C1</div>
+        <div class="property-name">Safety / Linearizability</div>
+        <div class="property-desc">Every operation takes effect at a single point between invocation and response. Verified by Wing-Gong or equivalent linearizability checker.</div>
+      </div>
+      <div class="property-card">
+        <div class="property-id">C2</div>
+        <div class="property-name">Liveness / Termination</div>
+        <div class="property-desc">Under a healthy quorum, every non-blocked operation eventually terminates. Liveness is conditional — under partition exceeding f, blocking is acceptable.</div>
+      </div>
+      <div class="property-card">
+        <div class="property-id">C3</div>
+        <div class="property-name">Fault Tolerance</div>
+        <div class="property-desc">Maintains C1 and I8 under the declared fault model (f crash, m byzantine, o omission). Safety must hold during the fault, not only after recovery.</div>
+      </div>
+      <div class="property-card">
+        <div class="property-id">I8</div>
+        <div class="property-name">Aggregate Budget Conservation</div>
+        <div class="property-desc">At every instant, for each resource: Σ(reserved) + Σ(committed) ≤ capacity. Must hold at every intermediate state, not just the final state.</div>
+      </div>
+    </div>
+    <div class="i8-box reveal">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem;">The I8 Invariant</div>
+      <div class="i8-formula">Σ(reserved) + Σ(committed) ≤ capacity</div>
+      <div class="i8-note">Per resource_id. Must hold under concurrency — two simultaneous reserve() calls must not cause the total to exceed capacity even if each individually sees sufficient available budget.</div>
+    </div>
+    <div class="backend-comparison reveal">
+      <div class="backend-card single">
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.3em; color:var(--teal3); margin-bottom:0.5rem;">BACKEND 1</div>
+        <div class="backend-title">SingleHostLockBackend</div>
+        <p style="font-size:14px; color:var(--muted);">Cross-process via fcntl.flock. Durable state. I8 enforced atomically under file lock.</p>
+        <div class="backend-props">
+          <span class="prop-tag yes">C1</span>
+          <span class="prop-tag yes">C2</span>
+          <span class="prop-tag yes">I8</span>
+          <span class="prop-tag no">C3 cross-host</span>
+          <span class="prop-tag no">Byzantine</span>
+        </div>
+      </div>
+      <div class="backend-card raft">
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.3em; color:var(--violet3); margin-bottom:0.5rem;">BACKEND 2</div>
+        <div class="backend-title">RaftConsensusBackend</div>
+        <p style="font-size:14px; color:var(--muted);">Cross-host via pysyncobj Raft. I8 enforced on leader before replication. Leader failover with state preservation.</p>
+        <div class="backend-props">
+          <span class="prop-tag yes">C1</span>
+          <span class="prop-tag yes">C2</span>
+          <span class="prop-tag yes">C3 crash-stop</span>
+          <span class="prop-tag yes">I8</span>
+          <span class="prop-tag no">Byzantine</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2rem; padding:1.5rem; border:1px solid var(--border); border-radius:10px; background:var(--surface);" class="reveal">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.3em; color:var(--gold); margin-bottom:1rem;">PARAMETRIC FAULT MODEL</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; font-size:14px;">
+        <div><strong style="color:var(--text);">crash (f):</strong> <span style="color:var(--muted);">nodes that crash-stop</span></div>
+        <div><strong style="color:var(--text);">byzantine (m):</strong> <span style="color:var(--muted);">arbitrary responses</span></div>
+        <div><strong style="color:var(--text);">omission (o):</strong> <span style="color:var(--muted);">message loss</span></div>
+        <div><strong style="color:var(--text);">quorum (q):</strong> <span style="color:var(--muted);">nodes needed to decide</span></div>
+      </div>
+      <div style="margin-top:1rem; font-size:13px; color:var(--muted); font-style:italic;">
+        Resilience bounds: Crash-stop n ≥ 2f+1, q = floor(n/2)+1 · Byzantine n ≥ 3m+1, q = 2m+1
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OPERATION LIFECYCLE ──────────────────────────────── -->
+<section id="lifecycle">
+  <div class="container">
+    <div class="section-label reveal">Runtime · Operation Lifecycle</div>
+    <h2 class="section-title reveal">The Operation <em>State Machine</em></h2>
+    <p class="section-subtitle reveal">
+      Every operation passes through a defined lifecycle. Click any state to see its meaning.
+      The critical transitions: RESERVED → DISPATCHING → CONFIRMED|FAILED, with uncertainty states
+      (UNKNOWN, HOLD, ESCALATED) for when the provider cannot confirm the outcome.
+    </p>
+    <div class="state-machine reveal">
+      <div class="state-node created" data-state="created">CREATED</div>
+      <span class="state-arrow">→</span>
+      <div class="state-node reserved" data-state="reserved">RESERVED</div>
+      <span class="state-arrow">→</span>
+      <div class="state-node dispatching" data-state="dispatching">DISPATCHING</div>
+      <span class="state-arrow">→</span>
+      <div class="state-node confirmed" data-state="confirmed">CONFIRMED</div>
+      <span class="state-arrow" style="margin-left:1rem;">|</span>
+      <div class="state-node failed" data-state="failed">FAILED</div>
+    </div>
+    <div style="text-align:center; margin:1rem 0;" class="reveal">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.3em; color:var(--muted); margin-bottom:1rem;">UNCERTAINTY STATES</div>
+      <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+        <div class="state-node unknown" data-state="unknown">UNKNOWN</div>
+        <div class="state-node hold" data-state="hold">HOLD</div>
+        <div class="state-node" style="border-color:var(--violet2); color:var(--violet3;" data-state="escalated">ESCALATED</div>
+      </div>
+    </div>
+    <div class="cave-detail reveal" id="stateDetail" style="max-width:600px; margin:1.5rem auto;">
+      <div class="cave-detail-title" id="stateDetailTitle">CREATED</div>
+      <div class="cave-detail-text" id="stateDetailText">
+        The operation has been created but no budget has been reserved yet. The passage (τ) has been
+        submitted to the membrane but Evaluate() has not yet been called.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVIDENCE CONTRACT ────────────────────────────────── -->
+<section id="evidence">
+  <div class="container">
+    <div class="section-label reveal">Proof · The Evidence Contract</div>
+    <h2 class="section-title reveal">Every Verdict Produces an <em>EvidenceRecord</em></h2>
+    <p class="section-subtitle reveal">
+      The EvidenceRecord is the artifact that makes governance verifiable. It contains not just the
+      verdict, but the exact inputs, the result of each invariant, and the commit trace — all
+      cryptographically chained.
+    </p>
+    <div class="evidence-grid reveal">
+      <div class="ev-section">
+        <div class="ev-label">evaluation_context</div>
+        <div class="ev-content">profile_id, profile_version, evaluator_version, catalog_version, hypotheses — <strong>Reproducibility</strong>: which profile produced this verdict?</div>
+      </div>
+      <div class="ev-section">
+        <div class="ev-label">inputs</div>
+        <div class="ev-content">state_snapshot, transition_proposal, signals[] — <strong>Reconstruction</strong>: with which inputs?</div>
+      </div>
+      <div class="ev-section">
+        <div class="ev-label">results</div>
+        <div class="ev-content">verdict, invariant_details[] — <strong>Traceability</strong>: why this verdict? (I8: HARD_VETO — requested 80000, available 70000)</div>
+      </div>
+      <div class="ev-section">
+        <div class="ev-label">commit_trace</div>
+        <div class="ev-content">commit_result, pre_commit_state_hash, post_commit_state_hash — <strong>Integrity</strong>: did the mutation occur?</div>
+      </div>
+      <div class="ev-section" style="grid-column:1/-1;">
+        <div class="ev-label">integrity</div>
+        <div class="ev-content">current_hash (SHA-256), signature (Ed25519), previous_hash — <strong>Integrity + Authenticity</strong>: tamper-evident chain linking all evidence records.</div>
+      </div>
+    </div>
+    <div class="evidence-levels reveal">
+      <div class="ev-level l1">
+        <div class="lvl-num">1</div>
+        <div class="lvl-name">Integrity</div>
+        <div class="lvl-status">✅ Implemented</div>
+      </div>
+      <div class="ev-level l2">
+        <div class="lvl-num">2</div>
+        <div class="lvl-name">Traceability</div>
+        <div class="lvl-status">✅ Partial</div>
+      </div>
+      <div class="ev-level l3">
+        <div class="lvl-num">3</div>
+        <div class="lvl-name">Reproducible</div>
+        <div class="lvl-status">❌ Not yet</div>
+      </div>
+      <div class="ev-level l4">
+        <div class="lvl-num">4</div>
+        <div class="lvl-name">Attested</div>
+        <div class="lvl-status">❌ Not yet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INTERACTIVE USE CASES ────────────────────────────── -->
+<section id="usecases">
+  <div class="container-wide">
+    <div class="section-label reveal">Live Simulators · Built-in Use Cases</div>
+    <h2 class="section-title reveal">Three <em>Interactive</em> Use Cases</h2>
+    <p class="section-subtitle reveal">
+      Each simulator lets you play the role of an autonomous agent operating under TENIR governance.
+      Reserve budget, execute operations, and watch the I8 invariant hold — or break. Try to
+      trigger a budget violation.
+    </p>
+
+    <!-- USE CASE 1: FINANCIAL MANDATE -->
+    <div class="simulator reveal" style="margin-bottom:2.5rem;">
+      <div class="sim-header">
+        <div class="sim-title">Use Case 1 · Financial Mandate Enforcement</div>
+        <span class="sim-mode single">SingleHostLockBackend</span>
+      </div>
+      <div class="sim-body">
+        <p style="font-size:14px; color:var(--muted); margin-bottom:1.5rem;">
+          Three AI agents propose trades against a shared $100M mandate. Each agent operates independently
+          but all draw from the same ceiling. Watch how the aggregate budget invariant prevents
+          over-commitment.
+        </p>
+        <div class="budget-display">
+          <div class="budget-stat"><div class="val" id="finCapacity">$100M</div><div class="lbl">Capacity</div></div>
+          <div class="budget-stat"><div class="val" id="finAvailable" style="color:var(--teal3);">$100M</div><div class="lbl">Available</div></div>
+          <div class="budget-stat"><div class="val" id="finReserved" style="color:var(--gold);">$0</div><div class="lbl">Reserved</div></div>
+          <div class="budget-stat"><div class="val" id="finCommitted" style="color:var(--teal2);">$0</div><div class="lbl">Committed</div></div>
+        </div>
+        <div class="budget-bar">
+          <div class="budget-fill" id="finBar" style="width:0%;">
+            <div class="reserved" style="width:0%;"></div>
+            <div class="committed" style="width:0%;"></div>
+          </div>
+        </div>
+        <div class="i8-check ok" id="finI8">I8: Σ(reserved) + Σ(committed) = $0M ≤ $100M ✓</div>
+        <div class="sim-controls">
+          <div class="sim-field">
+            <label>Agent</label>
+            <select id="finAgent">
+              <option value="A">Agent A</option>
+              <option value="B">Agent B</option>
+              <option value="C">Agent C</option>
+            </select>
+          </div>
+          <div class="sim-field">
+            <label>Amount ($M)</label>
+            <input type="number" id="finAmount" value="60" min="1" max="100">
+          </div>
+          <div class="sim-field">
+            <label>Operation</label>
+            <select id="finOp">
+              <option value="reserve">Reserve</option>
+              <option value="commit">Commit</option>
+              <option value="release">Release</option>
+            </select>
+          </div>
+          <button class="btn primary" id="finExecute">Execute</button>
+          <button class="btn" id="finReset">Reset</button>
+        </div>
+        <div class="sim-log" id="finLog">
+          <div class="log-entry"><span class="log-time">--:--</span><span class="log-agent sys">SYS</span><span class="log-text info">Mandate initialized: capacity=$100M, available=$100M</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- USE CASE 2: CLOUD BUDGET -->
+    <div class="simulator reveal" style="margin-bottom:2.5rem;">
+      <div class="sim-header">
+        <div class="sim-title">Use Case 2 · Cloud Infrastructure Budget Governance</div>
+        <span class="sim-mode single">SingleHostLockBackend</span>
+      </div>
+      <div class="sim-body">
+        <p style="font-size:14px; color:var(--muted); margin-bottom:1.5rem;">
+          A DevOps team deploys 12 autonomous agents consuming from a shared $50K monthly cloud budget.
+          Each agent must reserve before making API calls. The CFO needs a guarantee that total
+          committed spend never exceeds budget. This simulator includes reconciliation for uncertain
+          operations (timeouts).
+        </p>
+        <div class="budget-display">
+          <div class="budget-stat"><div class="val" id="cloudCapacity">$50K</div><div class="lbl">Capacity</div></div>
+          <div class="budget-stat"><div class="val" id="cloudAvailable" style="color:var(--teal3);">$50K</div><div class="lbl">Available</div></div>
+          <div class="budget-stat"><div class="val" id="cloudReserved" style="color:var(--gold);">$0</div><div class="lbl">Reserved</div></div>
+          <div class="budget-stat"><div class="val" id="cloudCommitted" style="color:var(--teal2);">$0</div><div class="lbl">Committed</div></div>
+        </div>
+        <div class="budget-bar">
+          <div class="budget-fill" id="cloudBar" style="width:0%;">
+            <div class="reserved" style="width:0%;"></div>
+            <div class="committed" style="width:0%;"></div>
+          </div>
+        </div>
+        <div class="i8-check ok" id="cloudI8">I8: Σ(reserved) + Σ(committed) = $0K ≤ $50K ✓</div>
+        <div class="sim-controls">
+          <div class="sim-field">
+            <label>Agent</label>
+            <select id="cloudAgent">
+              <option>deploy-agent</option>
+              <option>optim-agent</option>
+              <option>remediate-agent</option>
+              <option>monitor-agent</option>
+            </select>
+          </div>
+          <div class="sim-field">
+            <label>Spend ($K)</label>
+            <input type="number" id="cloudAmount" value="5" min="1" max="50">
+          </div>
+          <div class="sim-field">
+            <label>Operation</label>
+            <select id="cloudOp">
+              <option value="reserve">Reserve</option>
+              <option value="commit">Commit</option>
+              <option value="release">Release</option>
+              <option value="reconcile">Reconcile (timeout)</option>
+            </select>
+          </div>
+          <button class="btn primary" id="cloudExecute">Execute</button>
+          <button class="btn" id="cloudReset">Reset</button>
+        </div>
+        <div class="sim-log" id="cloudLog">
+          <div class="log-entry"><span class="log-time">--:--</span><span class="log-agent sys">SYS</span><span class="log-text info">Cloud budget initialized: capacity=$50K, available=$50K</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- USE CASE 3: MULTI-AGENT PROCUREMENT -->
+    <div class="simulator reveal">
+      <div class="sim-header">
+        <div class="sim-title">Use Case 3 · Multi-Agent Procurement Coordination</div>
+        <span class="sim-mode raft">RaftConsensusBackend · 3 nodes</span>
+      </div>
+      <div class="sim-body">
+        <p style="font-size:14px; color:var(--muted); margin-bottom:1.5rem;">
+          Multiple departments issue purchase orders against a shared $2M quarterly procurement
+          envelope. Three Raft nodes across data centers ensure I8 holds even under leader failover.
+          Simulate a node crash to see the cluster maintain quorum.
+        </p>
+        <div class="budget-display">
+          <div class="budget-stat"><div class="val" id="procCapacity">$2M</div><div class="lbl">Capacity</div></div>
+          <div class="budget-stat"><div class="val" id="procAvailable" style="color:var(--teal3);">$2M</div><div class="lbl">Available</div></div>
+          <div class="budget-stat"><div class="val" id="procReserved" style="color:var(--gold);">$0</div><div class="lbl">Reserved</div></div>
+          <div class="budget-stat"><div class="val" id="procCommitted" style="color:var(--teal2);">$0</div><div class="lbl">Committed</div></div>
+        </div>
+        <div class="budget-bar">
+          <div class="budget-fill" id="procBar" style="width:0%;">
+            <div class="reserved" style="width:0%;"></div>
+            <div class="committed" style="width:0%;"></div>
+          </div>
+        </div>
+        <div class="i8-check ok" id="procI8">I8: Σ(reserved) + Σ(committed) = $0M ≤ $2M ✓</div>
+        <div style="display:flex; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap; padding:1rem; background:var(--surface-muted); border-radius:8px;">
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <div id="node1Status" style="width:10px; height:10px; border-radius:50%; background:var(--teal2);"></div>
+            <span style="font-family:var(--mono); font-size:12px;">dc1 (leader)</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <div id="node2Status" style="width:10px; height:10px; border-radius:50%; background:var(--teal2);"></div>
+            <span style="font-family:var(--mono); font-size:12px;">dc2 (follower)</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <div id="node3Status" style="width:10px; height:10px; border-radius:50%; background:var(--teal2);"></div>
+            <span style="font-family:var(--mono); font-size:12px;">dc3 (follower)</span>
+          </div>
+          <span id="raftQuorum" style="font-family:var(--mono); font-size:12px; color:var(--teal3);">Quorum: 2/3 ✓</span>
+        </div>
+        <div class="sim-controls">
+          <div class="sim-field">
+            <label>Department</label>
+            <select id="procAgent">
+              <option>EU-Procurement</option>
+              <option>US-Procurement</option>
+              <option>APAC-Procurement</option>
+            </select>
+          </div>
+          <div class="sim-field">
+            <label>Amount ($K)</label>
+            <input type="number" id="procAmount" value="500" min="1" max="2000">
+          </div>
+          <div class="sim-field">
+            <label>Operation</label>
+            <select id="procOp">
+              <option value="reserve">Reserve</option>
+              <option value="commit">Commit</option>
+              <option value="release">Release</option>
+            </select>
+          </div>
+          <button class="btn primary" id="procExecute">Execute</button>
+          <button class="btn" id="procCrash" style="border-color:var(--red2); color:var(--red3);">Crash Leader</button>
+          <button class="btn" id="procReset">Reset</button>
+        </div>
+        <div class="sim-log" id="procLog">
+          <div class="log-entry"><span class="log-time">--:--</span><span class="log-agent sys">SYS</span><span class="log-text info">Raft cluster initialized: 3 nodes, quorum=2, capacity=$2M</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REPOSITORY MAP ───────────────────────────────────── -->
+<section id="repos">
+  <div class="container">
+    <div class="section-label reveal">Codebase · Repository Map</div>
+    <h2 class="section-title reveal">Three <em>Repositories</em>, One Ecosystem</h2>
+    <p class="section-subtitle reveal">
+      The ecosystem enforces a strict separation: the standard defines what, the runtime implements
+      how, and the harness verifies that.
+    </p>
+    <div class="repo-grid reveal">
+      <div class="repo-card">
+        <div class="repo-name">skiredj-prog/tenir_governance</div>
+        <div class="repo-role">The Runtime</div>
+        <div class="repo-contents">
+          The Membrane, the Governor, the Ledger, and the Raft implementation.<br>
+          Contains: Evaluate(), Commit(), Record(), ConsensusBackend, BudgetCoordinator, LinearizabilityChecker.<br>
+          Version: 5.6.0 · 726 tests
+        </div>
+      </div>
+      <div class="repo-card">
+        <div class="repo-name">skiredj-prog/reg-conformance</div>
+        <div class="repo-role">The Standard</div>
+        <div class="repo-contents">
+          RFCs (REG Core), JSON schemas (EvidenceRecord), YAML catalog (hypotheses-v1), and profiles.<br>
+          Contains: consensus-contract-v1, consensus-interface-v1, evidence-type-specs, capabilities-v1.<br>
+          Version: v0.5.0
+        </div>
+      </div>
+      <div class="repo-card">
+        <div class="repo-name">skiredj-prog/tenir-conformance-s1-g1</div>
+        <div class="repo-role">The Harness</div>
+        <div class="repo-contents">
+          Scenarios S1-S12, Jepsen-style tests, and execution proofs.<br>
+          Contains: 54 harness tests (multi-process/liveness + fault/linearizability).<br>
+          Version: PR #47 merged
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KNOWN LIMITATIONS ────────────────────────────────── -->
+<section id="limits">
+  <div class="container">
+    <div class="section-label reveal">Honest Assessment · Known Limitations</div>
+    <h2 class="section-title reveal">What's <em>Broken</em> or Missing</h2>
+    <p class="section-subtitle reveal">
+      An honest accounting of the bugs and gaps identified by the external audit. No production
+      claims until these are resolved.
+    </p>
+    <div class="limit-list reveal">
+      <div class="limit-item">
+        <div class="limit-severity p0">P0</div>
+        <div class="limit-text"><strong>reconcile_commit() I8 violation.</strong> Adds to committed without subtracting from reserved when reconciling a RELEASED reservation. Reproduced: reserve 100, release, reserve 100, reconcile_commit → reserved+committed=200 > 100.</div>
+      </div>
+      <div class="limit-item">
+        <div class="limit-severity p0">P0</div>
+        <div class="limit-text"><strong>time.time() in @replicated methods.</strong> commit(), release(), reconcile_commit(), reconcile_release() call time.time() inside @replicated — non-deterministic across nodes. Same class as the uuid4() bug already fixed for reserve().</div>
+      </div>
+      <div class="limit-item">
+        <div class="limit-severity p0">P0</div>
+        <div class="limit-text"><strong>No amount validation.</strong> Negative values, NaN, or non-numeric types can bypass the budget check.</div>
+      </div>
+      <div class="limit-item">
+        <div class="limit-severity p1">P1</div>
+        <div class="limit-text"><strong>Non-atomic durable stores.</strong> budget.json and reservations.json written separately — crash between writes can corrupt state. Should use SQLite WAL.</div>
+      </div>
+      <div class="limit-item">
+        <div class="limit-severity p1">P1</div>
+        <div class="limit-text"><strong>Linearizability checker shortcuts.</strong> _results_match() compares only status field; Raft test spec maps any commit UUID to first RESERVED reservation. Proof not rigorous.</div>
+      </div>
+      <div class="limit-item">
+        <div class="limit-severity p1">P1</div>
+        <div class="limit-text"><strong>pysyncobj pickle security.</strong> No encryption/authentication by default. Untrusted cluster members can execute arbitrary code via pickle deserialization.</div>
+      </div>
+      <div class="limit-item">
+        <div class="limit-severity p1">P1</div>
+        <div class="limit-text"><strong>Quorum formula f+1 incorrect.</strong> Correct for n=2f+1 but not general. Should be floor(n/2)+1. validate_profiles.py doesn't check fault_model parameters.</div>
+      </div>
+      <div class="limit-item">
+        <div class="limit-severity p2">P2</div>
+        <div class="limit-text"><strong>Raft tested on localhost only.</strong> No real multi-host or network partition testing. Evidence is self-attested. No byzantine fault tolerance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="writer-agent-credit">Created with Writer Agent</div>
+  </div>
+</footer>
+<script>
+// ─── THEME TOGGLE ─────────────────────────────────────────
+const toggle = document.getElementById('themeToggle');
+function setTheme(scheme) {
+  document.documentElement.setAttribute('data-writer-dashboard-color-scheme', scheme);
+  localStorage.setItem('writer-dashboard-color-scheme', scheme);
+  toggle.setAttribute('aria-pressed', String(scheme === 'dark'));
+  toggle.textContent = scheme === 'dark' ? '☀' : '☾';
+}
+const currentScheme = document.documentElement.getAttribute('data-writer-dashboard-color-scheme') || 'dark';
+setTheme(currentScheme);
+toggle.addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-writer-dashboard-color-scheme') === 'dark';
+  setTheme(isDark ? 'light' : 'dark');
+});
+
+// ─── REVEAL ON SCROLL ──────────────────────────────────────
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+// ─── NAV ACTIVE LINK ───────────────────────────────────────
+const navLinks = document.querySelectorAll('.nav-links a');
+const allSections = document.querySelectorAll('section[id]');
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.toggle('active', a.dataset.sec === e.target.id));
+    }
+  });
+}, { threshold: 0.3 });
+allSections.forEach(s => navObs.observe(s));
+
+// ─── PIPELINE ANIMATION ───────────────────────────────────
+const pipelineSteps = document.querySelectorAll('.pipeline-step');
+const animateBtn = document.getElementById('pipelineAnimate');
+const resetBtn = document.getElementById('pipelineReset');
+const pipelineStatus = document.getElementById('pipelineStatus');
+let pipelineInterval = null;
+let pipelineStepIdx = 0;
+
+function activateStep(idx) {
+  pipelineSteps.forEach((s, i) => s.classList.toggle('active', i === idx));
+  if (idx >= 0 && idx < pipelineSteps.length) {
+    pipelineStatus.textContent = `Step ${idx + 1} / ${pipelineSteps.length}: ${pipelineSteps[idx].querySelector('.pipeline-title').textContent}`;
+  }
+}
+
+animateBtn.addEventListener('click', () => {
+  if (pipelineInterval) { clearInterval(pipelineInterval); pipelineInterval = null; animateBtn.textContent = '▶ Animate Pipeline'; return; }
+  animateBtn.textContent = '⏸ Pause';
+  pipelineStepIdx = 0;
+  activateStep(0);
+  pipelineInterval = setInterval(() => {
+    pipelineStepIdx++;
+    if (pipelineStepIdx >= pipelineSteps.length) {
+      clearInterval(pipelineInterval); pipelineInterval = null;
+      animateBtn.textContent = '▶ Animate Pipeline';
+      pipelineStatus.textContent = 'Pipeline complete — all 7 steps traced';
+      return;
+    }
+    activateStep(pipelineStepIdx);
+  }, 1200);
+});
+
+resetBtn.addEventListener('click', () => {
+  if (pipelineInterval) { clearInterval(pipelineInterval); pipelineInterval = null; animateBtn.textContent = '▶ Animate Pipeline'; }
+  pipelineSteps.forEach(s => s.classList.remove('active'));
+  pipelineStepIdx = 0;
+  pipelineStatus.textContent = 'Click animate to walk through each step';
+});
+
+// ─── CAVE MATRIX ──────────────────────────────────────────
+const caveData = {
+  C: {
+    title: 'Control',
+    text: 'Who detains the actual levers — not formally, but really? Who can accelerate, slow down, stop? The question is not about org charts or stated authority. It is about the effective capacity to act. In an agentive system, control can be silently colonized by speed: the human still signs the form, but the machine has already determined what is on it.'
+  },
+  A: {
+    title: 'Aim',
+    text: 'Is the declared objective aligned with the TAU of the system — or does it serve a divergent agenda, sometimes hidden from the agent itself? The aim is not what is written in the task description. It is what the system is actually optimizing for, which may diverge from the stated goal without anyone noticing.'
+  },
+  V: {
+    title: 'Veto',
+    text: 'Does the right to stop still exist — or has it been deactivated by speed, by epistemic delegation, by complexity? A veto that cannot be exercised in time is not a veto. A veto that relies on information produced by the system being vetoed is not independent.'
+  },
+  E: {
+    title: 'Epistemics',
+    text: 'Is the source of reality intact — or has it been colonized by a synthetic agent that now defines what is true? When the epistemic ground is generated by the system under governance, the governance becomes circular. The auditor audits the audited. This is the deepest failure mode.'
+  }
+};
+
+const caveCells = document.querySelectorAll('.cave-cell');
+const caveDetailTitle = document.getElementById('caveDetailTitle');
+const caveDetailText = document.getElementById('caveDetailText');
+
+caveCells.forEach(cell => {
+  cell.addEventListener('click', () => {
+    caveCells.forEach(c => c.classList.remove('active'));
+    cell.classList.add('active');
+    const key = cell.dataset.cave;
+    caveDetailTitle.textContent = caveData[key].title;
+    caveDetailText.textContent = caveData[key].text;
+  });
+});
+
+// ─── STATE MACHINE ────────────────────────────────────────
+const stateData = {
+  created: { title: 'CREATED', text: 'The operation has been created but no budget has been reserved yet. The passage (τ) has been submitted to the membrane but Evaluate() has not yet been called.' },
+  reserved: { title: 'RESERVED', text: 'Budget has been reserved. The operation is authorized to proceed but the side effect has not been dispatched yet. reserved += amount, available -= amount.' },
+  dispatching: { title: 'DISPATCHING', text: 'The side effect is being dispatched. The operation is in flight — the provider has been contacted but the outcome is not yet known. This is the critical uncertainty window.' },
+  confirmed: { title: 'CONFIRMED', text: 'The side effect has been confirmed. The provider acknowledged the effect. reserved -= amount, committed += amount. The operation is terminal and successful.' },
+  failed: { title: 'FAILED', text: 'The side effect failed or was rejected. reserved -= amount, available += amount. Budget is returned. The operation is terminal but unsuccessful.' },
+  unknown: { title: 'UNKNOWN', text: 'The provider did not respond (timeout). The operation status is indeterminate — the effect may or may not have occurred. Reconciliation is required to determine the actual outcome.' },
+  hold: { title: 'HOLD', text: 'The operation has been suspended by the governance decision. It is neither permitted nor refused — it awaits evidence or human resolution. This is not a failure; it is deliberate restraint.' },
+  escalated: { title: 'ESCALATED', text: 'The operation has been escalated to a human reviewer. This occurs when the governance system cannot resolve the decision autonomously — typically under deep uncertainty or when the reversibility threshold has been exceeded.' }
+};
+
+const stateNodes = document.querySelectorAll('.state-node');
+const stateDetailTitle = document.getElementById('stateDetailTitle');
+const stateDetailText = document.getElementById('stateDetailText');
+
+stateNodes.forEach(node => {
+  node.addEventListener('click', () => {
+    const key = node.dataset.state;
+    if (stateData[key]) {
+      stateDetailTitle.textContent = stateData[key].title;
+      stateDetailText.textContent = stateData[key].text;
+    }
+  });
+});
+
+// ─── USE CASE SIMULATOR ENGINE ────────────────────────────
+function formatMoney(v, unit) { return '$' + v + unit; }
+
+function makeSimulator(config) {
+  const state = {
+    capacity: config.capacity,
+    available: config.capacity,
+    reserved: 0,
+    committed: 0,
+    reservations: {}, // key -> { amount, status: 'RESERVED'|'COMMITTED'|'RELEASED', agent }
+    resCount: 0,
+    crashed: false,
+    leaderNode: 1,
+    activeNodes: 3,
+  };
+
+  function updateDisplay() {
+    config.elAvailable.textContent = formatMoney(state.available, config.unit);
+    config.elReserved.textContent = formatMoney(state.reserved, config.unit);
+    config.elCommitted.textContent = formatMoney(state.committed, config.unit);
+
+    const total = state.reserved + state.committed;
+    const pct = (total / state.capacity) * 100;
+    config.elBar.style.width = Math.min(pct, 100) + '%';
+
+    // Split bar: reserved portion and committed portion
+    const reservedPct = (state.reserved / state.capacity) * 100;
+    const committedPct = (state.committed / state.capacity) * 100;
+    const resFill = config.elBar.querySelector('.reserved');
+    const comFill = config.elBar.querySelector('.committed');
+    resFill.style.width = (reservedPct / Math.max(pct, 0.001) * 100) + '%';
+    comFill.style.width = (committedPct / Math.max(pct, 0.001) * 100) + '%';
+
+    // I8 check
+    const i8ok = total <= state.capacity;
+    config.elI8.className = 'i8-check ' + (i8ok ? 'ok' : 'violated');
+    config.elI8.textContent = `I8: Σ(reserved) + Σ(committed) = ${formatMoney(total, config.unit)} ${i8ok ? '≤' : '>'} ${formatMoney(state.capacity, config.unit)} ${i8ok ? '✓' : '✗ VIOLATED'}`;
+  }
+
+  function log(agent, text, cls) {
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+    const now = new Date();
+    const time = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+    entry.innerHTML = `<span class="log-time">${time}</span><span class="log-agent ${config.agentClass(agent)}">${agent}</span><span class="log-text ${cls || ''}">${text}</span>`;
+    config.elLog.appendChild(entry);
+    config.elLog.scrollTop = config.elLog.scrollHeight;
+  }
+
+  function reserve(agent, amount) {
+    if (state.crashed && config.isRaft) {
+      log(agent, 'Cannot reserve — cluster leader unavailable, waiting for election...', 'fail');
+      return;
+    }
+    const key = `op-${++state.resCount}`;
+    if (state.available < amount) {
+      log(agent, `reserve(${formatMoney(amount, config.unit)}) → <span class="fail">INSUFFICIENT_BUDGET</span> (available=${formatMoney(state.available, config.unit)})`, 'fail');
+      return;
+    }
+    state.reserved += amount;
+    state.available -= amount;
+    state.reservations[key] = { amount, status: 'RESERVED', agent, key };
+    log(agent, `reserve(${formatMoney(amount, config.unit)}) → <span class="pass">RESERVED</span> (reserved=${formatMoney(state.reserved, config.unit)}, available=${formatMoney(state.available, config.unit)})`, 'pass');
+    if (config.isRaft) {
+      log('SYS', `Replicated to ${state.activeNodes} nodes · I8 checked on leader`, 'info');
+    }
+    updateDisplay();
+  }
+
+  function commit(agent) {
+    // Find the last RESERVED reservation for this agent
+    let found = null;
+    for (const k in state.reservations) {
+      const r = state.reservations[k];
+      if (r.status === 'RESERVED' && r.agent === agent) { found = r; }
+    }
+    if (!found) {
+      log(agent, 'commit() → <span class="fail">NOT_FOUND</span> (no reserved operation)', 'fail');
+      return;
+    }
+    state.reserved -= found.amount;
+    state.committed += found.amount;
+    found.status = 'COMMITTED';
+    log(agent, `commit(${found.key}) → <span class="pass">COMMITTED</span> (committed=${formatMoney(state.committed, config.unit)})`, 'pass');
+    updateDisplay();
+  }
+
+  function release(agent) {
+    let found = null;
+    for (const k in state.reservations) {
+      const r = state.reservations[k];
+      if (r.status === 'RESERVED' && r.agent === agent) { found = r; }
+    }
+    if (!found) {
+      log(agent, 'release() → <span class="fail">NOT_FOUND</span> (no reserved operation)', 'fail');
+      return;
+    }
+    state.reserved -= found.amount;
+    state.available += found.amount;
+    found.status = 'RELEASED';
+    log(agent, `release(${found.key}) → <span class="warn">RELEASED</span> (budget returned, available=${formatMoney(state.available, config.unit)})`, 'warn');
+    updateDisplay();
+  }
+
+  function reconcile(agent) {
+    // Simulate reconciliation of an UNKNOWN operation
+    let found = null;
+    for (const k in state.reservations) {
+      const r = state.reservations[k];
+      if (r.status === 'RESERVED' && r.agent === agent) { found = r; }
+    }
+    if (!found) {
+      log(agent, 'reconcile() → no operation to reconcile', 'fail');
+      return;
+    }
+    // Simulate: 50% chance effect occurred, 50% not
+    const effectObserved = Math.random() > 0.5;
+    if (effectObserved) {
+      state.reserved -= found.amount;
+      state.committed += found.amount;
+      found.status = 'COMMITTED';
+      log(agent, `reconcile(${found.key}) → provider confirms effect → <span class="pass">CONFIRMED</span> (committed=${formatMoney(state.committed, config.unit)})`, 'pass');
+    } else {
+      state.reserved -= found.amount;
+      state.available += found.amount;
+      found.status = 'RELEASED';
+      log(agent, `reconcile(${found.key}) → provider confirms no effect → <span class="warn">FAILED/RELEASED</span> (available=${formatMoney(state.available, config.unit)})`, 'warn');
+    }
+    updateDisplay();
+  }
+
+  function crashLeader() {
+    if (!config.isRaft) return;
+    if (state.activeNodes <= 1) {
+      log('SYS', 'Cannot crash — only 1 node active', 'fail');
+      return;
+    }
+    state.activeNodes--;
+    state.crashed = true;
+    log('SYS', `Node dc${state.leaderNode} CRASHED · Leader election triggered`, 'fail');
+    // Elect new leader from remaining nodes
+    const remaining = [];
+    for (let i = 1; i <= 3; i++) {
+      if (i !== state.leaderNode && config.nodeStatusEls[i - 1]) {
+        remaining.push(i);
+        config.nodeStatusEls[i - 1].style.background = 'var(--gold)';
+      }
+    }
+    if (config.nodeStatusEls[state.leaderNode - 1]) {
+      config.nodeStatusEls[state.leaderNode - 1].style.background = 'var(--red2)';
+    }
+    state.leaderNode = remaining[0];
+    log('SYS', `dc${state.leaderNode} elected new leader · Quorum: ${state.activeNodes}/3`, 'info');
+    if (config.elQuorum) {
+      config.elQuorum.textContent = `Quorum: ${state.activeNodes}/3 ${state.activeNodes >= 2 ? '✓' : '✗ NO QUORUM'}`;
+      config.elQuorum.style.color = state.activeNodes >= 2 ? 'var(--teal3)' : 'var(--red3)';
+    }
+    // After 2 seconds, allow operations again
+    setTimeout(() => {
+      state.crashed = false;
+      log('SYS', `Leader dc${state.leaderNode} ready · Operations resumed`, 'info');
+    }, 2000);
+    updateDisplay();
+  }
+
+  function reset() {
+    state.capacity = config.capacity;
+    state.available = config.capacity;
+    state.reserved = 0;
+    state.committed = 0;
+    state.reservations = {};
+    state.resCount = 0;
+    state.crashed = false;
+    state.leaderNode = 1;
+    state.activeNodes = 3;
+    if (config.isRaft) {
+      config.nodeStatusEls.forEach(el => { if (el) el.style.background = 'var(--teal2)'; });
+      if (config.elQuorum) {
+        config.elQuorum.textContent = 'Quorum: 2/3 ✓';
+        config.elQuorum.style.color = 'var(--teal3)';
+      }
+    }
+    config.elLog.innerHTML = '';
+    log('SYS', config.resetMsg, 'info');
+    updateDisplay();
+  }
+
+  function execute() {
+    const agent = config.getAgent();
+    const amount = config.getAmount();
+    const op = config.getOp();
+    if (!agent || !amount || !op) return;
+    if (amount <= 0 || isNaN(amount)) { log(agent, 'Invalid amount', 'fail'); return; }
+    if (op === 'reserve') reserve(agent, amount);
+    else if (op === 'commit') commit(agent);
+    else if (op === 'release') release(agent);
+    else if (op === 'reconcile') reconcile(agent);
+  }
+
+  return { execute, reset, crashLeader, updateDisplay, log, state };
+}
+
+// ─── USE CASE 1: FINANCIAL MANDATE ─────────────────────────
+const finSim = makeSimulator({
+  capacity: 100,
+  unit: 'M',
+  elAvailable: document.getElementById('finAvailable'),
+  elReserved: document.getElementById('finReserved'),
+  elCommitted: document.getElementById('finCommitted'),
+  elBar: document.getElementById('finBar'),
+  elI8: document.getElementById('finI8'),
+  elLog: document.getElementById('finLog'),
+  getAgent: () => 'Agent ' + document.getElementById('finAgent').value,
+  getAmount: () => parseInt(document.getElementById('finAmount').value),
+  getOp: () => document.getElementById('finOp').value,
+  agentClass: (a) => { const m = a.match(/([A-C])/); return m ? m[1].toLowerCase() : 'sys'; },
+  isRaft: false,
+  resetMsg: 'Mandate initialized: capacity=$100M, available=$100M',
+});
+document.getElementById('finExecute').addEventListener('click', () => finSim.execute());
+document.getElementById('finReset').addEventListener('click', () => finSim.reset());
+
+// ─── USE CASE 2: CLOUD BUDGET ──────────────────────────────
+const cloudSim = makeSimulator({
+  capacity: 50,
+  unit: 'K',
+  elAvailable: document.getElementById('cloudAvailable'),
+  elReserved: document.getElementById('cloudReserved'),
+  elCommitted: document.getElementById('cloudCommitted'),
+  elBar: document.getElementById('cloudBar'),
+  elI8: document.getElementById('cloudI8'),
+  elLog: document.getElementById('cloudLog'),
+  getAgent: () => document.getElementById('cloudAgent').value,
+  getAmount: () => parseInt(document.getElementById('cloudAmount').value),
+  getOp: () => document.getElementById('cloudOp').value,
+  agentClass: (a) => { if (a.includes('deploy')) return 'a'; if (a.includes('optim')) return 'b'; if (a.includes('remediate')) return 'c'; return 'sys'; },
+  isRaft: false,
+  resetMsg: 'Cloud budget initialized: capacity=$50K, available=$50K',
+});
+document.getElementById('cloudExecute').addEventListener('click', () => cloudSim.execute());
+document.getElementById('cloudReset').addEventListener('click', () => cloudSim.reset());
+
+// ─── USE CASE 3: MULTI-AGENT PROCUREMENT (RAFT) ────────────
+const procSim = makeSimulator({
+  capacity: 2000,
+  unit: 'K',
+  elAvailable: document.getElementById('procAvailable'),
+  elReserved: document.getElementById('procReserved'),
+  elCommitted: document.getElementById('procCommitted'),
+  elBar: document.getElementById('procBar'),
+  elI8: document.getElementById('procI8'),
+  elLog: document.getElementById('procLog'),
+  getAgent: () => document.getElementById('procAgent').value,
+  getAmount: () => parseInt(document.getElementById('procAmount').value),
+  getOp: () => document.getElementById('procOp').value,
+  agentClass: (a) => { if (a.includes('EU')) return 'a'; if (a.includes('US')) return 'b'; if (a.includes('APAC')) return 'c'; return 'sys'; },
+  isRaft: true,
+  nodeStatusEls: [document.getElementById('node1Status'), document.getElementById('node2Status'), document.getElementById('node3Status')],
+  elQuorum: document.getElementById('raftQuorum'),
+  resetMsg: 'Raft cluster initialized: 3 nodes, quorum=2, capacity=$2M',
+});
+document.getElementById('procExecute').addEventListener('click', () => procSim.execute());
+document.getElementById('procReset').addEventListener('click', () => procSim.reset());
+document.getElementById('procCrash').addEventListener('click', () => procSim.crashLeader());
+
+// ─── INITIAL DISPLAY ───────────────────────────────────────
+finSim.updateDisplay();
+cloudSim.updateDisplay();
+procSim.updateDisplay();
+</script>
+</body>
+</html>

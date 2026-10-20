@@ -1,0 +1,2 @@
+# Sources and signed dossier hashes require exact bytes on every checkout.
+* -text

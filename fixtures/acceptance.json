@@ -1,0 +1,13 @@
+{
+  "scope": "Oracle interne rédigé d'après le plan avant le moteur ; recette auto-exécutée, sans QA indépendant.",
+  "reference_time": 1792404000,
+  "ceiling": 70000,
+  "scenarios": [
+    {"id":"autorisation","amount":20000,"signal":"VERIFIED","outcome":"CONFIRMED","verdict":"PASS","state":"CONFIRMED","calls":1},
+    {"id":"blocage","amount":5000,"signal":"HYPOTHESIS_WEAKENED","outcome":"CONFIRMED","verdict":"HARD_VETO","state":"BLOCKED","calls":0},
+    {"id":"attente","amount":5000,"signal":null,"outcome":"CONFIRMED","verdict":"HOLD","state":"HELD","calls":0},
+    {"id":"issue-inconnue","amount":10000,"signal":"VERIFIED","outcome":"UNKNOWN","verdict":"PASS","state":"UNKNOWN","calls":1}
+  ],
+  "final": {"ceiling":70000,"consumed":20000,"reserved":10000,"available":40000},
+  "total_calls": 2
+}

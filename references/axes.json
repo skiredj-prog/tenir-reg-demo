@@ -1,0 +1,24 @@
+{
+  "HOST_SCOPE": [
+    "mono-process",
+    "mono-host",
+    "multi-host"
+  ],
+  "DEDUP_LAYER": [
+    "none",
+    "local-registry",
+    "provider-idempotency-key",
+    "distributed-consensus-registry"
+  ],
+  "CONCURRENCY": [
+    "thread-lock",
+    "file-lock",
+    "distributed-transaction",
+    "distributed-consensus"
+  ],
+  "UNCERTAINTY": [
+    "fail-closed",
+    "fail-open",
+    "human-escalation"
+  ]
+}

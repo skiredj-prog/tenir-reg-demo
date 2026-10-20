@@ -1,0 +1,25 @@
+{
+  "payload": {
+    "files": {
+      "configuration-catalogue.json": "76436c420ce364b301a54a82d7746261c615e0ca688136edb6eb0d4b08c8117d",
+      "configurator.html": "7cda98282513a05921c49ad508f7330a537225856d6b692eabc4dfaf5b4191d9",
+      "evidence.json": "2b542859b4c17334c722576984e197bf40606c0c19f30ad51faa88998ccb01fa",
+      "evidence.public.pem": "a2023aae21880767cc840c2078199beb4de71de0f71dc1c5bc441b3409e848c4",
+      "report.html": "e11960f4df27cfcd4c512827f2657e03e82ab1fd8ceb83e807b5bfcc02a82278",
+      "signal.public.pem": "a9126585f1ecf5a077717605f4ef9ba1886582ca703751c5aaf64c196281be88",
+      "test-results.json": "f24e3a8656e20e79b3af5afa67741539a6f304ff2fafc85142d0818f7c8a442b",
+      "verification.json": "cfc5d4e83c253e4b66b5d1055618cf306e7ecb07e6b06f1fee01623e68f8d5ad"
+    },
+    "go_local": true,
+    "production": false,
+    "schema": "demo-files/v2"
+  },
+  "integrity": {
+    "algorithm": "Ed25519",
+    "canonicalization": "RFC8785",
+    "domain": "TENIR-REG-LOCAL-DEMO-v1",
+    "key_id": "750b40ed3b87ed2edd188adf40293cc2ce75224e9dd9196a8b615d7d102c93a8",
+    "payload_sha256": "057013ef39b0b8c1b423bb4647053caf1eb9c0a8f53f3effa58bbb94b68c072e",
+    "signature": "JmHKzZwr2s5GADMDpR/IDKd3ARTRnvOTIHhkHilF8XtkmzZnDabDlvmJU88SQDg7K4LuvayAEroprI+a6pKwDg=="
+  }
+}

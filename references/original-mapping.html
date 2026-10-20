@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ontologie de l'observation × TENIR/REG — calque annoté</title>
+<style>
+  :root{
+    --bg:#07111f; --panel:rgba(15,23,42,.85); --panel2:rgba(30,41,59,.6);
+    --text:#e5eef7; --muted:#9fb0c3; --line:rgba(148,163,184,.18);
+    --cyan:#22d3ee; --violet:#a78bfa; --amber:#f59e0b; --green:#22c55e; --red:#ef4444; --blue:#60a5fa;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",Inter,Arial,sans-serif;color:var(--text);line-height:1.5;
+    background:radial-gradient(circle at top left,rgba(34,211,238,.14),transparent 30%),
+               radial-gradient(circle at top right,rgba(167,139,250,.12),transparent 28%),
+               linear-gradient(180deg,#07111f,#0b1220);}
+  .container{width:min(1280px,calc(100% - 32px));margin:0 auto}
+  header{padding:48px 0 8px;text-align:center}
+  h1{margin:0 0 10px;font-size:clamp(1.9rem,4vw,3.2rem);letter-spacing:-.03em}
+  header p{color:var(--muted);max-width:960px;margin:0 auto}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line);
+    border-radius:999px;font-size:.85rem;background:rgba(255,255,255,.03)}
+  .badge.ok{border-color:rgba(34,197,94,.4);color:#dcfce7}
+  .badge.partiel{border-color:rgba(245,158,11,.4);color:#fef3c7}
+  .badge.manquant{border-color:rgba(239,68,68,.4);color:#fee2e2}
+  section{margin:26px 0;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+  h2{margin:0 0 6px;font-size:1.5rem}
+  .lead{color:var(--muted);margin:0 0 16px}
+  .pipeline{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+  .arrow{align-self:center;color:var(--cyan);font-weight:800}
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--panel2);cursor:pointer;
+    transition:border-color .15s, transform .15s}
+  .card:hover,.card:focus{border-color:rgba(34,211,238,.5);transform:translateY(-2px);outline:none}
+  .card.manquant{border-left:4px solid var(--red)}
+  .card.partiel{border-left:4px solid var(--amber)}
+  .card.ok{border-left:4px solid var(--green)}
+  .node-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}
+  .node-label{font-weight:700}
+  .card p{margin:0 0 10px;color:var(--muted);font-size:.9rem}
+  .chip{display:inline-block;padding:4px 9px;border-radius:999px;font-size:.76rem;border:1px solid var(--line)}
+  .chip.runtime{border-color:rgba(34,211,238,.4);color:#cffafe}
+  .chip.conformance{border-color:rgba(167,139,250,.4);color:#ede9fe}
+  .chip.product{border-color:rgba(245,158,11,.4);color:#fef3c7}
+  .chip.transverse{border-color:rgba(96,165,250,.4);color:#dbeafe}
+  #detail{position:sticky;top:12px;margin-top:16px;border-color:rgba(34,211,238,.35)}
+  #detail h3{margin:0 0 8px}
+  #detail .meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.9rem}
+  th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:rgba(255,255,255,.03)} td{color:var(--muted)} td strong{color:var(--text)}
+  .bar{display:flex;height:16px;border-radius:999px;overflow:hidden;border:1px solid var(--line);margin:10px 0}
+  .bar span{height:100%}
+  .bar .okb{background:rgba(34,197,94,.75);width:29.2%}
+  .bar .kob{background:rgba(239,68,68,.6);width:70.8%}
+  code{font-family:Consolas,monospace;font-size:.9em;color:#dbeafe;background:rgba(255,255,255,.05);
+    padding:2px 6px;border-radius:6px}
+  footer{padding:26px 0 46px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>Ontologie de l'observation × TENIR/REG</h1>
+  <p>Calque annoté du processus observation → donnée → information → connaissance → restitution.
+     Chaque nœud ontologique reçoit son équivalent TENIR/REG, sa branche (runtime / standard / produit)
+     et son état (acquis, partiel, manquant). Cliquez sur un nœud pour le détail.</p>
+  <div class="legend">
+    <span class="badge ok">✅ acquis</span>
+    <span class="badge partiel">⚠️ partiel</span>
+    <span class="badge manquant">🛑 manquant</span>
+    <span class="chip runtime">Runtime — tenir_governance</span>
+    <span class="chip conformance">Standard & Conformance — reg-conformance</span>
+    <span class="chip product">Produit / Compliance Hub</span>
+    <span class="chip transverse">Transverse</span>
+  </div>
+</header>
+
+<section>
+  <h2>1. La boucle principale</h2>
+  <p class="lead">Question → modèle → observation → donnée → interprétation → information → connaissance → restitution → nouvelle question.
+     Une <code>EvidenceRecord</code> = un parcours complet de cette boucle, figé et signable.</p>
+  <div class="pipeline" id="loop"></div>
+  <div class="arrow" style="display:block;text-align:center;margin-top:8px">↺ la restitution alimente une nouvelle question (audit, incident, dérive)</div>
+  <aside class="card" id="detail"></aside>
+</section>
+
+<section>
+  <h2>2. Branche simulation — le raisonnement hypothético-déductif</h2>
+  <p class="lead">Le harnais de conformance <em>est</em> cette branche : il teste le modèle théorique (profils, invariants) par scénarios et situations simulées.</p>
+  <div class="grid" id="sim"></div>
+</section>
+
+<section>
+  <h2>3. Branche suivi — séries, indicateurs, temporalité</h2>
+  <p class="lead">La matière première existe (ledger chaîné, CheckResult) ; l'agrégation en indicateurs et séries relève du produit.</p>
+  <div class="grid" id="suivi"></div>
+</section>
+
+<section>
+  <h2>4. Nœuds supports — acteurs, système, périmètre, protocoles</h2>
+  <div class="grid" id="supports"></div>
+</section>
+
+<section>
+  <h2>5. Table de correspondance complète</h2>
+  <table id="maptable">
+    <thead><tr><th>Nœud ontologique</th><th>Branche</th><th>Équivalent TENIR/REG</th><th>Statut</th><th>Artefact</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>6. Périmètre structurel (catalogue v1.0.0)</h2>
+  <p class="lead">Le nœud « Périmètre » s'appuie sur le catalogue : 144 configurations évaluées, 42 admissibles structurellement, 102 rejetées.</p>
+  <div class="bar"><span class="okb"></span><span class="kob"></span></div>
+  <div class="legend" style="justify-content:flex-start">
+    <span class="badge ok">42 admissibles</span><span class="badge manquant">102 rejetées</span>
+    <span class="chip transverse">mono-process : 9</span><span class="chip transverse">mono-host : 18</span><span class="chip transverse">multi-host : 15</span>
+  </div>
+  <div class="legend" style="justify-content:flex-start">
+    <span class="chip conformance">R1a mono-process → thread-lock</span>
+    <span class="chip conformance">R1b mono-host → file-lock | distributed-transaction</span>
+    <span class="chip conformance">R1c multi-host → distributed-transaction | distributed-consensus</span>
+    <span class="chip conformance">R2a consensus → multi-host</span>
+    <span class="chip conformance">R2b dedup-registry → multi-host</span>
+    <span class="chip conformance">R2c dedup-registry → consensus</span>
+    <span class="chip conformance">R3a local-registry → mono-process | mono-host</span>
+  </div>
+  <p class="lead" style="margin-top:12px"><code>admissible_structural = true</code> ≠ <code>effective_guarantee_demonstrated = true</code> :
+     la cohérence structurelle ne prouve pas la capacité effective.</p>
+</section>
+
+<section>
+  <h2>7. Lacunes ontologiques → backlog</h2>
+  <div id="gaps"></div>
+</section>
+
+<footer>Document illustratif — le calque annoté ne remplace ni les schémas normatifs ni les rapports d'audit.</footer>
+</div>
+
+<script>
+const NODES=[
+{id:"question",label:"Question",branch:"transverse",status:"ok",tenir:"Intention i, exigence réglementaire R, mandat (plafond, périmètre).",artefact:"Resolve(i, h, R, V) → σ, I*",note:"Point d'entrée de la boucle : toute gouvernance commence par une question normative."},
+{id:"modele_theorique",label:"Modèle théorique",branch:"conformance",status:"ok",tenir:"Profil σ + invariants I* + machine à états (structurel / fonctionnel / dynamique).",artefact:"profils REG+, hypotheses-v1.yaml",note:"Le profil EST le modèle théorique : il fixe invariants et règles de réaction aux signaux."},
+{id:"modele_observation",label:"Modèle d'observation",branch:"runtime",status:"ok",tenir:"Contrat Assure v1 : quels signaux, quelle fraîcheur, quelle signature.",artefact:"assure-contract-v1.md",note:"Sépare détection (Assure) et décision (Evaluate) — propriété P4."},
+{id:"observation",label:"Observation",branch:"runtime",status:"ok",tenir:"AssuranceSignal signé Ed25519 + signaux S1–S4 injectés dans s.",artefact:"s.infrastructure_signals",note:"Fait brut attesté ; signal non frais ⇒ ignoré ou promu FLAG selon σ."},
+{id:"valeur_observee",label:"Valeur observée (donnée)",branch:"runtime",status:"ok",tenir:"Snapshot s + coordonnées normalisées ; axe absent = unmeasured, jamais valeur favorable par défaut.",artefact:"inputs.state_snapshot, unmeasured_axes",note:"La donnée n'est pas encore une décision."},
+{id:"analyse",label:"Analyse / interprétation",branch:"runtime",status:"ok",tenir:"Evaluate() pur : scoring continu + invariants discrets + lattice + signal_reactions.",artefact:"evaluator_version",note:"Fonction pure : mêmes entrées, même verdict (déterminisme P0)."},
+{id:"valeur_interpretee",label:"Valeur interprétée (information)",branch:"runtime",status:"ok",tenir:"Verdict PASS / FLAG / HOLD / HARD_VETO.",artefact:"results.verdict",note:"Le verdict n'est pas le score ; le score n'est pas le verdict."},
+{id:"connaissance",label:"Nouvelle connaissance",branch:"runtime",status:"ok",tenir:"EvidenceRecord (contexte, entrées, résultats, commit_trace, intégrité) + assessment τ⁻¹/EVP.",artefact:"evidence-contract-v1.json",note:"Un parcours complet de la boucle, figé, hashé, signable."},
+{id:"restitution",label:"Restitution",branch:"product",status:"manquant",tenir:"Regulator View / rapport d'audit automatisé (Compliance Hub, Phase 2).",artefact:"—",note:"Branche absente : c'est le produit commercial à construire."},
+{id:"scenario",label:"Scénario",branch:"conformance",status:"partiel",tenir:"Scénarios S1–S12, vecteurs de conformité publics (REG-11).",artefact:"tenir-conformance-s1-g1",note:"Cas nominaux couverts ; adversarial complet en cours."},
+{id:"situation_simulee",label:"Situation simulée",branch:"conformance",status:"partiel",tenir:"Harnais + property tests ; model checking des interleavings absent (P2-7).",artefact:"harness, pytest",note:"La simulation teste le modèle théorique : c'est le raisonnement hypothético-déductif."},
+{id:"raisonnement_hd",label:"Raisonnement hypothético-déductif",branch:"conformance",status:"partiel",tenir:"Falsification des hypothèses h par tests ; linearizability checker à réécrire (F-03).",artefact:"tests adversariaux",note:"Un validateur invalide rend le raisonnement invalide : le checker fait partie du raisonnement."},
+{id:"suivi",label:"Suivi",branch:"runtime",status:"ok",tenir:"Lifecycle CREATED→RESERVED→DISPATCHING→CONFIRMED/FAILED + UNKNOWN/HOLD/ESCALATED.",artefact:"DurableOperationRegistry",note:"Le suivi est la trajectoire, pas un verdict."},
+{id:"modalite_temporelle",label:"Modalité temporelle du suivi",branch:"runtime",status:"partiel",tenir:"TTL & fraîcheur des signaux, gaps I9 ; politique d'échantillonnage non spécifiée.",artefact:"assure-contract (TTL)",note:"Manque l'échantillonnage explicite (voir nœud dédié)."},
+{id:"jeu_indicateurs",label:"Jeu d'indicateurs",branch:"product",status:"partiel",tenir:"Invariants I1–I9 comme indicateurs ; agrégats EVP / taux de verdicts non exposés.",artefact:"invariant_details[]",note:"Les CheckResult existent ; leur agrégation en tableau de bord, non."},
+{id:"ind_dyn",label:"Indicateur de dynamique",branch:"product",status:"manquant",tenir:"Débit de verdicts, latence d'adjudication, taux de HOLD par profil.",artefact:"—",note:"À construire dans le Compliance Hub."},
+{id:"ind_chg",label:"Indicateur de changement",branch:"product",status:"manquant",tenir:"Détection de dérive : changement de version V, de profil σ, de comportement.",artefact:"—",note:"Clé pour la continuité temporelle (P3) côté produit."},
+{id:"serie_valeurs",label:"Série temporelle de valeurs",branch:"runtime",status:"ok",tenir:"Ledger chaîné (previous_hash), registre d'opérations durable.",artefact:"chaîne d'EvidenceRecords",note:"Append-only ; détection de suppression et de réordonnancement."},
+{id:"serie_interpretees",label:"Série temporelle de valeurs interprétées",branch:"product",status:"partiel",tenir:"Historique des verdicts par ressource/agent ; séries agrégées absentes.",artefact:"results.verdict (chaîne)",note:"Matière première présente, séries absentes."},
+{id:"acteur",label:"Acteur",branch:"transverse",status:"partiel",tenir:"agent, gouverneur, auditeur, régulateur ; IAM multi-tenant absent (P3).",artefact:"token de service partagé",note:"L'acteur pose la question et reçoit la restitution."},
+{id:"connaissance_ref",label:"Connaissance (référentiel)",branch:"transverse",status:"ok",tenir:"Catalogue V versionné : intentions, hypothèses, profils, invariants.",artefact:"catalog_version 1.0.0",note:"Si V change, le résultat peut changer ; la trace de version, jamais."},
+{id:"systeme",label:"Système (interne / interactif)",branch:"transverse",status:"ok",tenir:"Système gouverné + infrastructure ; hypothèses h de déploiement.",artefact:"h = (host, dedup, concurrency, uncertainty)",note:"Le système interactif inclut les providers externes."},
+{id:"perimetre",label:"Périmètre",branch:"conformance",status:"ok",tenir:"HOST_SCOPE + catalogue : 144 configs, 42 admissibles, 102 rejetées.",artefact:"valid-configurations-v1.json",note:"admissible_structural ≠ effective_guarantee_demonstrated."},
+{id:"objet_interet",label:"Objet d'intérêt",branch:"runtime",status:"ok",tenir:"Transition τ proposée : réservation, paiement, délégation.",artefact:"transition_proposal",note:"L'objet sur lequel portent observation et décision."},
+{id:"propriete",label:"Propriété",branch:"runtime",status:"ok",tenir:"Propriété observée : capacité disponible, état d'hypothèse, quarantaine, trajectoire.",artefact:"observable properties",note:"Chaque invariant lit une propriété précise."},
+{id:"proto_obs",label:"Protocole d'observation",branch:"runtime",status:"ok",tenir:"Assure : collecte, signature Ed25519, TTL déterministe, anti-rejeu.",artefact:"assure-contract-v1",note:"Signature/identité/fraîcheur validées avant injection (P0-3)."},
+{id:"proto_collecte",label:"Protocole de collecte",branch:"runtime",status:"partiel",tenir:"Injection atomique dans s ; registre anti-rejeu stateful hors Evaluate.",artefact:"s.infrastructure_signals",note:"Atomicité de l'injection sous concurrence à démontrer."},
+{id:"proto_echant",label:"Protocole d'échantillonnage",branch:"runtime",status:"manquant",tenir:"Fréquence, fenêtres, agrégation des mesures d'infrastructure : non spécifié.",artefact:"—",note:"Sans échantillonnage défini, un signal manqué n'est pas distinguable d'une absence."},
+{id:"proto_analyse",label:"Protocole d'analyse & interprétation",branch:"runtime",status:"ok",tenir:"Version d'évaluateur + canonicalisation JCS + lattice ; reproductibilité P2.",artefact:"evaluator_version",note:"Un tiers peut recalculer le verdict : c'est le protocole d'analyse."}
+];
+const LOOP=["question","modele_theorique","modele_observation","observation","valeur_observee","analyse","valeur_interpretee","connaissance","restitution"];
+const SIM=["scenario","situation_simulee","raisonnement_hd"];
+const SUIVI=["suivi","modalite_temporelle","jeu_indicateurs","ind_dyn","ind_chg","serie_valeurs","serie_interpretees"];
+const SUP=["acteur","connaissance_ref","systeme","perimetre","objet_interet","propriete","proto_obs","proto_collecte","proto_echant","proto_analyse"];
+const BL={runtime:"Runtime",conformance:"Standard & Conf.",product:"Produit",transverse:"Transverse"};
+const SL={ok:"acquis",partiel:"partiel",manquant:"manquant"};
+const byId=id=>NODES.find(n=>n.id===id);
+function card(n){return `<article class="card ${n.status}" data-id="${n.id}" tabindex="0">
+  <div class="node-head"><span class="node-label">${n.label}</span><span class="badge ${n.status}">${SL[n.status]}</span></div>
+  <p>${n.tenir}</p><span class="chip ${n.branch}">${BL[n.branch]}</span></article>`;}
+document.getElementById("loop").innerHTML=LOOP.map((id,i)=>card(byId(id))+(i<LOOP.length-1?'<span class="arrow">→</span>':"")).join("");
+document.getElementById("sim").innerHTML=SIM.map(id=>card(byId(id))).join("");
+document.getElementById("suivi").innerHTML=SUIVI.map(id=>card(byId(id))).join("");
+document.getElementById("supports").innerHTML=SUP.map(id=>card(byId(id))).join("");
+document.querySelector("#maptable tbody").innerHTML=NODES.map(n=>
+  `<tr><td><strong>${n.label}</strong></td><td>${BL[n.branch]}</td><td>${n.tenir}</td><td>${SL[n.status]}</td><td><code>${n.artefact}</code></td></tr>`).join("");
+document.getElementById("gaps").innerHTML="<ul>"+NODES.filter(n=>n.status!=="ok")
+  .map(n=>`<li><strong>${n.label}</strong> (${SL[n.status]}) — ${n.note}</li>`).join("")+"</ul>";
+function show(id){const n=byId(id);document.getElementById("detail").innerHTML=
+  `<h3>${n.label}</h3><div class="meta"><span class="badge ${n.status}">${SL[n.status]}</span><span class="chip ${n.branch}">${BL[n.branch]}</span></div>
+   <p><strong>Équivalent TENIR/REG :</strong> ${n.tenir}</p>
+   <p><strong>Artefact :</strong> <code>${n.artefact}</code></p><p>${n.note}</p>`;}
+document.addEventListener("click",e=>{const c=e.target.closest(".node, .card[data-id]");if(c)show(c.dataset.id);});
+document.addEventListener("keydown",e=>{const c=e.target.closest(".card[data-id]");if(c&&(e.key==="Enter"||e.key===" "))show(c.dataset.id);});
+show("question");
+</script>
+</body>
+</html>
