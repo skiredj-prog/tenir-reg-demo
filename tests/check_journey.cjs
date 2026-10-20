@@ -175,6 +175,39 @@ function checkSnapshot(page, index) {
   assert.equal(page.get('signed-model').textContent, pages['report.html'].match(/<script type="application\/json" id="signed-model">([\s\S]*?)<\/script>/)[1], 'Navigation and presentation must preserve the embedded signed data');
 }
 
+// Initial state restoration must not manufacture a scroll destination or autofocus.
+for (const deniedStorage of [false, true]) {
+  const entrySession = session(deniedStorage);
+  for (const suffix of ['', '?'+new URLSearchParams({cfg:configId(runtime),step:'3'})]) {
+    let entry = openPage('configurator.html'+suffix, entrySession);
+    assert.equal(new URL(entry.url()).hash, '', 'A direct entry without a fragment stays at the top');
+    assert.equal(entry.document.activeElement, null, 'Initial restoration must not move focus');
+    assert.deepEqual(selection(entry), runtime, 'Initial state is still restored without a fragment');
+    assert.equal(selectedStep(entry), suffix ? 2 : 0, 'Explicit step state is restored without creating an anchor');
+    entry = openPage(entry.url(), entrySession);
+    assert.equal(new URL(entry.url()).hash, '', 'Reload preserves an empty fragment, including when storage is denied');
+    assert.equal(entry.document.activeElement, null, 'Reload must not autofocus a restored field');
+  }
+  for (const fragment of ['#workspace', '#rules-scope', '#reference-alignment']) {
+    let entry = openPage('configurator.html?step=2'+fragment, entrySession);
+    assert.equal(new URL(entry.url()).hash, fragment, 'An explicit entry anchor must survive initialization');
+    assert.equal(entry.get('rules-scope').hidden, fragment !== '#rules-scope', 'The rules anchor still selects the rules view');
+    assert.equal(selectedStep(entry), 1);
+    assert.equal(entry.document.activeElement, null, 'An explicit anchor does not manufacture focus');
+    entry = openPage(entry.url(), entrySession);
+    assert.equal(new URL(entry.url()).hash, fragment, 'Reload preserves an explicitly requested anchor');
+  }
+  const navigation = openPage('configurator.html', session(deniedStorage));
+  navigation.get('next-step').click();
+  assert.equal(new URL(navigation.url()).hash, '#workspace', 'A user step action writes a concrete workspace destination');
+  assert.equal(navigation.document.activeElement, navigation.get('field-DEDUP_LAYER'));
+  navigation.get('journey-rules').click();
+  assert.equal(new URL(navigation.url()).hash, '#rules-scope', 'A user rules action still selects its destination');
+  assert.equal(navigation.document.activeElement, navigation.get('rules-heading'));
+  navigation.get('journey-config').click();
+  assert.equal(new URL(navigation.url()).hash, '#workspace', 'Returning to configuration remains explicit');
+}
+
 // Rules -> edit -> return preserves both a correction's origin and the current step.
 const shared = session();
 let config = openPage('configurator.html', shared);
@@ -317,4 +350,4 @@ for (const destination of ['https://example.invalid/phish', '//example.invalid/p
   assert.equal(invalid.get('return-to-context').hidden, true, 'Only the known demo context may be restored from a query');
   assert.ok(!invalid.get('return-to-context').href.includes(destination));
 }
-console.log('PASS: contextual rules/demo return, signed snapshot counters, selection/origin/step restoration, reload, FR/EN and storage-denied URL fallback. Browser layout not assessed.');
+console.log('PASS: initial top entry and explicit anchors, contextual rules/demo return, signed snapshot counters, selection/origin/step restoration, reload, FR/EN and storage-denied URL fallback. Browser layout not assessed.');

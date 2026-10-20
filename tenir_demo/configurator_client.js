@@ -82,7 +82,7 @@ function saveNavigation(fragment = null) {
   const state=navigationState();
   try{if(typeof sessionStorage !== 'undefined')sessionStorage.setItem(navigationStorageKey,JSON.stringify(state));}catch{}
   try{if(typeof history !== 'undefined' && typeof history.replaceState === 'function' && navigationLocation.pathname)
-    history.replaceState(null,'','configurator.html?'+stateQuery(lastScenario,returnContext && returnContext.type)+(fragment || (navigationLocation.hash==='#reference-alignment'?'#reference-alignment':activeView==='rules'?'#rules-scope':'#workspace')));}catch{}
+    history.replaceState(null,'','configurator.html?'+stateQuery(lastScenario,returnContext && returnContext.type)+(fragment === null ? (navigationLocation.hash || '') : fragment));}catch{}
 }
 function restoreNavigation() {
   let saved=null;
@@ -173,7 +173,7 @@ function goStep(index, moveFocus = false) {
   renderStepFeedback();
   if(moveFocus) el('field-'+fields[step]).focus();
   refreshNavigationLinks();
-  saveNavigation();
+  saveNavigation(moveFocus ? '#workspace' : null);
 }
 function render() {
   const entry = entries.get(configKey(current));

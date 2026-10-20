@@ -12,6 +12,14 @@ Trois briques servent ce parcours : le configurateur de produit, le rapport enri
 
 Source de cette direction : [analyse stratégique fournie par l'utilisateur](references/objectif-strategique-fourni.md). Ce document est conservé comme expression de l'ambition et des hypothèses produit. Ses mentions « livré », ses chiffres commerciaux et ses affirmations de conformité ne constituent pas une recette du présent dépôt.
 
+## Porte d’entrée principale
+
+Le public initial est **l’équipe technique qui prépare les contrôles d’un agent** : architecte, responsable technique ou exploitation. L’entrée proposée est un atelier de diagnostic sur une action envoyée dont le résultat reste inconnu. Le configurateur et le lecteur de preuves sont les fonctions de cet atelier.
+
+La tâche à réussir est d’expliquer décision historique, envoi, résultat, budget et source, puis d’identifier l’information manquante avant une prochaine action. Le livrable est une [fiche de diagnostic](DIAGNOSTIC_ATELIER.md) complétée manuellement, soutenue par les traces et, si utile, un brouillon de configuration. Son usage dans un processus réel reste à observer.
+
+La [suite donnée à l’évaluation](REVIEW_ACTIONS.md) distingue les corrections locales des observations externes rapportées et de la validation utilisateur encore ouverte. Le prochain gain à mesurer est la réussite de cette tâche par le public cible, avant d’élargir les intégrations.
+
 ## État de départ constaté
 
 | Brique | État dans ce dépôt | Limite à conserver dans les interfaces |
@@ -53,7 +61,7 @@ Critères d'acceptation :
 
 ### P0.3 — Parcours de démonstration client et onboarding
 
-Relier le configurateur au scénario compatible avec le runtime, puis à sa preuve. Fournir une entrée unique, des explications accessibles et un rejeu reproductible. Conserver le cas de mandat de trésorerie comme scénario métier de simulation.
+Entrer par l’incident UNKNOWN, retrouver ses sources puis comparer les autres scénarios. Le configurateur sert ensuite à examiner les contrôles. Fournir des explications accessibles, un dossier reproductible et une fiche de diagnostic d’atelier. Les exemples métier restent des simulations.
 
 Critères d'acceptation :
 
@@ -95,7 +103,7 @@ La prochaine séquence approuvée privilégie l'observation de ce parcours et le
 
 Une [révision UI/UX](UX_REVIEW.md) relie désormais ces écrans par un parcours guidé, une fin explicite des choix, des corrections annulables et des sorties expliquées pour les configurations hors prototype. Le rapport distingue décision et résultat, explique les exceptions et propose une progression entre les quatre traces. Les langues, les thèmes et l'identité visuelle suivent la direction du futur site fournie en vidéo. Les contrôles automatisés de ces interactions ne clôturent pas la validation visuelle ni l'évaluation auprès d'utilisateurs.
 
-Aucun calendrier commercial n'est engagé par cette feuille de route. Le document source contient plusieurs horizons et ordres de livraison ; ce cadrage tranche en faveur du configurateur et du rapport enrichi comme premières priorités.
+Aucun calendrier commercial n'est engagé par cette feuille de route. Le document source contient plusieurs horizons ; le parcours prioritaire devient un atelier de diagnostic appuyé sur le configurateur et le rapport, avec une tâche et un livrable à éprouver auprès du public cible.
 
 ## Mesures de valeur à collecter
 

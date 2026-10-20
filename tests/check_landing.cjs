@@ -127,6 +127,7 @@ assert.equal(JSON.parse(originalLayers).length, 5);
 for (let index = 0; index < layers.length; index++) {
   get(home, `layer-${index + 1}`).click();
   assert.equal(get(home, 'layer-detail').open, true, 'Selecting a layer must reveal its adjacent explanation');
+  assert.equal(get(home, 'layer-detail-title').focused, true, 'Keyboard activation must reach the selected explanation');
   checkLayer(home, index, 'fr');
   const frenchRole = get(home, 'layer-detail-role').textContent;
   const frenchDemo = get(home, 'layer-detail-demo').textContent;
@@ -148,17 +149,41 @@ const entryRoutes = {
   'entry-example': 'output/report.html?scenario=autorisation#parcours',
   'journey-configurator': 'output/configurator.html',
   'journey-scenarios': 'output/report.html?scenario=autorisation#parcours',
-  'journey-evidence': 'output/report.html?scenario=autorisation#preuves',
+  'journey-evidence': 'output/report.html?scenario=issue-inconnue&loop=execution#proof-loop',
+  'usecase-unknown-action': 'output/report.html?scenario=issue-inconnue&loop=execution#proof-loop',
   'entry-rules': 'output/configurator.html#rules-scope',
   'entry-report': 'output/report.html#preuves',
 };
 for (const [id, href] of Object.entries(entryRoutes)) assert.equal(get(home, id).getAttribute('href'), href, `Incorrect product route: ${id}`);
-assert.ok(html.indexOf('id="use-cases"') < html.indexOf('id="journey"'), 'Visitors need concrete uses before the guided workflow');
-assert.ok(html.indexOf('id="layer-detail"') < html.indexOf('id="journey"'), 'Layer explanations must stay beside the five-layer framework');
+assert.ok(html.indexOf('id="usecase-unknown"') < html.indexOf('id="journey"'), 'The recorded incident must introduce the guided workflow');
+assert.ok(html.indexOf('id="quick-start"') < html.indexOf('id="architecture-context"'), 'Architecture is optional context after the practical guide');
+assert.equal(get(home, 'architecture').tagName, 'SUMMARY', 'The workshop anchor must lead to the native context control');
+assert.ok(!Object.hasOwn(get(home, 'architecture-context').attributes, 'open'), 'Architecture detail should be optional on first visit');
 assert.ok(/<ol class="journey-steps">/.test(html), 'The recommended sequence must have an ordered list');
 assert.ok(tags.some(({name, attributes}) => name === 'a' && attributes['aria-current'] === 'page' && attributes.href === 'index.html'), 'Shared task navigation must identify the current page');
-const executed = JSON.parse(fs.readFileSync(path.join(root, 'output/evidence.json'), 'utf8')).operations;
-assert.ok(Object.hasOwn(executed, 'autorisation'), 'The introductory example must select an executed signed operation');
+const bundle = JSON.parse(fs.readFileSync(path.join(root, 'output/evidence.json'), 'utf8'));
+const snapshot = tags.find(({attributes}) => attributes['data-incident-operation']);
+assert.ok(snapshot, 'The incident summary must identify its fixed recorded operation');
+const operationId = snapshot.attributes['data-incident-operation'];
+const record = bundle.records.find(record => record.payload.sequence === Number(snapshot.attributes['data-incident-record-sequence']));
+assert.equal(record?.payload.operation_id, operationId, 'Incident facts must come from the named signed operation');
+const incident = record.payload;
+const expectedFacts = {verdict: incident.decision.verdict, outcome: incident.operation_state,
+  reserved: incident.budget_after.reserved, calls: incident.provider_journal.filter(entry => entry.operation_id === operationId).length};
+for (const [field, value] of Object.entries(expectedFacts)) {
+  const fact = tags.find(({attributes}) => attributes['data-incident-field'] === field);
+  assert.equal(fact?.attributes['data-value'], String(value), `Incorrect recorded incident fact: ${field}`);
+  const rendered = html.match(new RegExp('<dd[^>]*data-incident-field="' + field + '"[^>]*>([^<]+)'));
+  assert.equal(decode(rendered?.[1] || '').replace(/\s/g, ''), String(value), `Visible incident fact differs from its source: ${field}`);
+}
+assert.notEqual(expectedFacts.calls, incident.provider_journal.length, 'The incident call count must have operation scope rather than cumulative scope');
+const primary = tags.filter(({name, attributes}) => name === 'a' && (attributes.class || '').split(/\s+/).includes('primary'));
+assert.equal(primary.length, 1, 'The first visit needs one primary incident action');
+assert.equal(primary[0].attributes.id, 'usecase-unknown-action');
+const sourceLink = new URL(get(home, 'incident-source').getAttribute('href'), 'https://local.invalid/');
+const reportModel = JSON.parse(fs.readFileSync(path.join(root, 'output/report.html'), 'utf8').match(/<script type="application\/json" id="signed-model">([\s\S]*?)<\/script>/)[1]);
+assert.ok(reportModel.proof_loops[operationId].stages.find(stage => stage.id === sourceLink.searchParams.get('loop')).sources
+  .some(source => source.record_sequence === Number(sourceLink.searchParams.get('source_seq')) && source.pointer === sourceLink.searchParams.get('source_ptr')), 'The fixed incident source must be available in its signed scenario stage');
 assert.ok(home.bilingual.some(element => /déjà exécutés/.test(element.getAttribute('data-fr')) && /already executed/.test(element.getAttribute('data-en'))), 'The first-visit context must explain that scenarios are already executed');
 assert.ok(/@media\(prefers-reduced-motion:reduce\)/.test(html), 'Motion must honor the reduced-motion preference');
 // Use-case entry points must explain a useful outcome and lead to available functions.
@@ -172,14 +197,19 @@ for (const purpose of ['architecture','refusal','unknown','evidence','workshop',
   const card = useCases.find(card => card.attributes['data-use-case'] === purpose);
   assert.ok(card, `Missing entry point for ${purpose}`);
   for (const role of ['audience','benefit','result']) {
-    const paragraph = [...card.body.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/gi)]
+    const explanation = [...card.body.matchAll(/<(?:p|span)\b([^>]*)>/gi)]
       .find(([, attributes]) => (attrs(attributes).class || '').split(/\s+/).includes('use-case-' + role));
-    assert.ok(paragraph, `The ${purpose} entry must explain its ${role}`);
-    translated(paragraph[0], `${purpose} ${role}`);
+    assert.ok(explanation, `The ${purpose} entry must explain its ${role}`);
+    translated(explanation[0], `${purpose} ${role}`);
   }
   const guide = card.body.match(/<details\b[^>]*>([\s\S]*?)<\/details>/i);
   assert.ok(guide && /<summary\b/.test(guide[1]) && /<ol\b/.test(guide[1]), `The ${purpose} entry needs a native, ordered how-to`);
   translated(guide[1], `${purpose} how-to`);
+  if (purpose !== 'unknown') {
+    const summary = guide[1].match(/<summary\b[^>]*>([\s\S]*?)<\/summary>/i)?.[1];
+    for (const role of ['benefit', 'result']) assert.ok(summary?.includes('use-case-' + role), `The ${purpose} value must remain visible before opening instructions`);
+    assert.ok(!/\bopen(?:\s|>|=)/i.test(card.body.match(/<details\b[^>]*>/i)[0]), `The ${purpose} instructions should be optional at first visit`);
+  }
   const action = [...card.body.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)]
     .find(([, attributes]) => (attrs(attributes).class || '').split(/\s+/).includes('use-case-action'));
   assert.ok(action, `The ${purpose} entry needs an actionable destination`);
@@ -189,6 +219,7 @@ for (const purpose of ['architecture','refusal','unknown','evidence','workshop',
 assert.equal(get(home, 'entry-use-cases').getAttribute('href'), '#use-cases');
 assert.ok(get(home, 'quick-start'), 'The short getting-started guide must have a stable destination');
 assert.equal(get(home, 'readme-link').getAttribute('href'), 'README.md');
+assert.equal(get(home, 'worksheet-link').getAttribute('href'), 'DIAGNOSTIC_ATELIER.md', 'The manual diagnostic must have a concrete worksheet');
 
 for (const {name, attributes} of tags) {
   if (name === 'a') checkLocalTarget(attributes.href);
@@ -212,4 +243,4 @@ checkLayer(denied, 2, 'en');
 get(denied, 'language-fr').click();
 checkLayer(denied, 2, 'fr');
 for (const name of evidenceFiles) assert.equal(fingerprint(name), evidenceBefore[name], `Landing interactions must not modify signed evidence: ${name}`);
-console.log('PASS: actionable bilingual uses, signed scenario/loop destinations, quick-start/README, five-layer context, actual language/theme controls and unchanged signed evidence. Browser layout not assessed.');
+console.log('PASS: recorded UNKNOWN incident and operation-scoped facts, six bilingual uses, signed source destinations, quick-start/manual worksheet, optional five-layer context, actual language/theme controls and unchanged signed evidence. Browser layout not assessed.');

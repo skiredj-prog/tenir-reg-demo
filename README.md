@@ -1,17 +1,17 @@
 # TENIR/REG — choisir, comprendre, prouver
 
-TENIR/REG aide une équipe à répondre à trois questions : **quelle architecture choisir, pourquoi une action est autorisée ou arrêtée, et quelles données permettent d'examiner cette décision ?** Le dépôt relie des règles explicites, quatre situations simulées et leurs preuves signées dans un parcours local : **configuration → décision → exécution → preuve**.
+TENIR/REG est un **atelier de diagnostic des contrôles d’agents** pour les architectes, responsables techniques et équipes d’exploitation. Son point de départ : **une action a été autorisée et envoyée, mais son résultat reste inconnu. Que sait-on, et que faut-il vérifier avant d’envisager la suite ?**
 
-Un responsable produit peut présenter le fonctionnement et ses limites ; un développeur ou architecte peut comparer ses choix ; un auditeur ou relecteur peut retrouver les données exactes derrière une décision. Le résultat est une configuration argumentée, une explication partageable et un dossier vérifiable.
+Le configurateur et le lecteur de preuves servent cette tâche : expliquer les contrôles, séparer décision et résultat, puis retrouver les données enregistrées. À l’issue de l’atelier, vous pouvez remplir une [fiche de diagnostic](DIAGNOSTIC_ATELIER.md) avec constats, sources, lacunes et prochain contrôle ; le rapport et le brouillon JSON servent de pièces d’appui. La fiche est un modèle à compléter, sans génération automatique.
 
 ## Premier parcours
 
-1. Ouvrez [l'accueil](index.html) pour comprendre l'utilité du démonstrateur et situer l'architecture en cinq couches, puis entrez dans la configuration. Si les pages générées manquent, utilisez les commandes de la section **Générer ou vérifier le dossier**.
-2. Pour découvrir le fonctionnement, gardez le profil local présélectionné. Parcourez les quatre choix, puis **Examiner ma configuration** et **Règles & périmètre**. Pour explorer une autre architecture, modifiez un choix, lisez les incompatibilités et choisissez éventuellement une correction.
-3. Ouvrez les **Scénarios & preuves**. Comparez l'autorisation, le blocage, l'attente d'une observation et l'issue inconnue. Distinguez la décision avant envoi du résultat du simulateur ; les compteurs suivent la trace sélectionnée.
-4. Dans la **boucle de preuve**, choisissez une étape puis une source : sa valeur exacte, son chemin JSON et son record sont affichés. Vous pouvez ensuite examiner les fichiers et lancer la vérification du dossier. Le retour vers la configuration conserve votre contexte de lecture.
+1. Ouvrez [l’accueil](index.html), puis l’incident UNKNOWN. Il s’agit d’une trace déjà exécutée dans le simulateur, sans nouvel envoi.
+2. Distinguez le **PASS historique**, l’état **UNKNOWN**, l’appel enregistré et la réservation conservée. Le budget retenu reste indisponible pour une autre action ; le résultat n’est pas confirmé.
+3. Dans la boucle de preuve, ouvrez une source pour retrouver valeur, chemin JSON, numéro de preuve et empreinte. Comparez avec l’autorisation confirmée et l’attente avant envoi.
+4. Utilisez la configuration pour examiner les contrôles et, si utile, exporter un brouillon. Complétez la fiche avec ce qui est établi et ce qui reste à vérifier. Le retour au rapport conserve votre contexte de lecture.
 
-L'accueil, le configurateur et le rapport proposent **FR/EN** et les thèmes clair/sombre. Les pages générées s'utilisent sans serveur ni réseau.
+L’accueil, le configurateur et le rapport proposent **FR/EN** et les thèmes clair/sombre. Les pages générées s’utilisent sans serveur ni réseau. Pour découvrir le dossier sans environnement de développement, commencez par le [guide de consultation](GUIDE_CONSULTATION.md).
 
 ## Fonctions utiles et livrables
 
@@ -39,6 +39,20 @@ Le prototype **non officiel v0.1.0** exécute quatre scénarios fixes lors de la
 La [page de garde](index.html) expose les cinq couches : règle métier, contrainte réglementaire, acte de médiation, standard REG Core/REG+, runtime TENIR-Gov. Le [cadrage produit](PRODUCT.md) précise les livrables et priorités ; le [diagnostic d'alignement](REFERENCE_ALIGNMENT.md) expose les correspondances et écarts sourcés.
 
 **Base d'alignement : TENIR 5.6.1, destinée à être promue en 5.7**, selon la confirmation du porteur du projet. Les documents d'architecture fournis restent un snapshot 5.6.0. Le [suivi d'alignement](ALIGNMENT.md) distingue ces références du moteur local ; la compatibilité d'exécution reste non vérifiée.
+
+## Choisir le kit adapté
+
+- **Consultation** : extraire entièrement `TENIR-REG-consultation.zip`, puis ouvrir `index.html`. Le dossier signé est fourni ; aucun Python ni serveur n’est nécessaire pour lire les pages. [Mode d’emploi](GUIDE_CONSULTATION.md).
+- **Développement** : `TENIR-REG-developer.zip` contient les sources, les tests et les dépendances déclarées dans `requirements.txt`. Il permet de régénérer et vérifier le dossier après installation ; aucun environnement Python, cache ni binaire auxiliaire n’est embarqué.
+
+Pour fabriquer les deux kits à partir d’un dossier généré et vérifié :
+
+```powershell
+python package_demo.py --output dist
+python -m unittest tests.test_packaging
+```
+
+Le manifeste d’emballage est non signé ; les fichiers du dossier de preuve conservent leurs octets et leurs signatures. Le générateur et les contrôles d’inventaire refusent les répertoires de travail et binaires hors périmètre.
 
 ## Générer ou vérifier le dossier
 

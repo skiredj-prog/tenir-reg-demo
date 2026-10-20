@@ -58,5 +58,11 @@
     "source": "C:\\Users\\hp\\.codex\\attachments\\9d6c1d79-0fcf-4af0-be4c-5f0f0f97a039\\Texte collé.txt",
     "copy": "metamodel-notes-b.md",
     "sha256": "5c619377f42eb9c53c895892d0a913d7d32e062e2f9ae575a4fe9430a5aec80b"
+  },
+  {
+    "source": "C:\\Users\\hp\\.codex\\attachments\\05fc1822-f8b8-4c7d-9729-cc3248b55c56\\Texte collé.txt",
+    "copy": "evaluation-demo-2026-10-20.md",
+    "sha256": "6b404d2901428964ff62f26476c9018192c6203f8e86982825db1b3796e202c1",
+    "status": "RECEIVED_EXTERNAL_REVIEW_NOT_INDEPENDENTLY_REPRODUCED"
   }
 ]

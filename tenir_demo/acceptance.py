@@ -18,6 +18,7 @@ def source_fingerprint():
     paths = sorted([*ROOT.glob("tenir_demo/*.py"), *ROOT.glob("tenir_demo/*.html"), *ROOT.glob("tenir_demo/*.js"), *ROOT.glob("tenir_demo/*.css"), *ROOT.glob("tests/*.py"), *ROOT.glob("tests/*.cjs"),
                     *ROOT.glob("fixtures/*.json"), ROOT / "demo.py", ROOT / "verify.py", ROOT / "requirements.txt",
                     ROOT / "run.ps1", ROOT / "README.md", ROOT / "PRODUCT.md", ROOT / "ALIGNMENT.md", ROOT / "REFERENCE_ALIGNMENT.md", ROOT / "UX_REVIEW.md", ROOT / "USER_WALKTHROUGH.md", ROOT / "index.html",
+                    ROOT / "package_demo.py", ROOT / "GUIDE_CONSULTATION.md", ROOT / "REVIEW_ACTIONS.md", ROOT / "DIAGNOSTIC_ATELIER.md",
                     *[p for p in ROOT.glob("references/*") if p.is_file()]])
     files = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
     return {"sha256": digest(files), "files": files}

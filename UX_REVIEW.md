@@ -77,3 +77,9 @@ Le [protocole de séance](USER_WALKTHROUGH.md) fournit les consignes, les critè
 ## Diagnostic d’alignement des références
 
 Le configurateur et le rapport montrent une synthèse visible, puis des détails repliables : comparaison exhaustive des 144 configurations/1 008 résultats de clause, sept contrats, neuf invariants, quatre rapprochements de scénario et sources épinglées. La synthèse distingue la concordance structurelle de la compatibilité d’exécution non vérifiée. Les écarts de budget, de reprise UNKNOWN et de numérotation sont sourcés. Les explications restent documentaires. Les contrôles de langue et de thème couvrent ce panneau ; sa lisibilité réelle et son usage sur mobile restent à observer.
+
+## Révision après l’évaluation reçue
+
+L’entrée passe par l’incident UNKNOWN pour un atelier de diagnostic destiné aux équipes techniques. Les autres usages et les cinq couches restent accessibles par des détails natifs. L’ouverture directe du configurateur conserve un fragment vide et ne demande aucun focus ; les destinations explicitement choisies conservent leurs ancres et leur contexte. Deux kits séparent consultation et développement. Une fiche vierge rend le livrable d’atelier explicite.
+
+La revue externe reçue rapporte des captures et essais ; ils sont conservés comme témoignage de cette revue, sans être assimilés à une validation visuelle de la nouvelle version. Aucune nouvelle mesure de hauteur mobile, séance utilisateur ou conclusion d’accessibilité complète n’est revendiquée. Les actions et leur statut sont décrits dans [REVIEW_ACTIONS.md](REVIEW_ACTIONS.md).
