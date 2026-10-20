@@ -19,7 +19,7 @@ Depuis ce dossier dans PowerShell :
 .\run.ps1 verify
 ```
 
-`all` et `demo` exécutent T01–T10 et C01–C10, puis génèrent le configurateur, le rapport, les preuves, les clés **publiques**, les résultats et un reçu signé. Ouvrir [index.html](index.html) pour accéder au parcours, ou directement `output/configurator.html`. Le configurateur et le rapport fonctionnent sans serveur et sans réseau. `test` exécute seulement la recette et écrit `test-only-results.json`, sans modifier les fichiers du dossier signé. Pour conserver un dossier précédent, choisir `-OutputDir output-autre`, puis ouvrir son propre `configurator.html`.
+`all` et `demo` exécutent T01–T10, C01–C10 et P01–P06, puis génèrent le configurateur, le rapport, les preuves, les clés **publiques**, les résultats et un reçu signé. Ouvrir [index.html](index.html) pour accéder au parcours, ou directement `output/configurator.html`. Le configurateur et le rapport fonctionnent sans serveur et sans réseau. `test` exécute seulement la recette et écrit `test-only-results.json`, sans modifier les fichiers du dossier signé. Pour conserver un dossier précédent, choisir `-OutputDir output-autre`, puis ouvrir son propre `configurator.html`.
 
 `tenir_demo/report_template.html` est le modèle source, avec des marqueurs de génération. Son ouverture directe redirige vers `output/report.html` ; pour consulter les résultats, utiliser le rapport généré.
 
@@ -67,7 +67,13 @@ Budget final : plafond 70 000, consommé 20 000, réservé 10 000, disponible 40
 
 Dans le rapport, les compteurs d'en-tête représentent **l'état de la preuve sélectionnée**, et les appels sont ceux de son journal cumulé : 1 après autorisation, toujours 1 après veto et attente, puis 2 après UNKNOWN. Les réservations sont respectivement 0, 0, 0 et 10 000. Le montant consommé reste 20 000 dans ces quatre états car seule l'autorisation confirmée consomme ce budget. Sélectionner deux fois un scénario ne crée aucun nouvel appel. Le budget disponible affiché plus bas est explicitement le bilan final du dossier.
 
-Le GO local exige les dix tests du noyau et les dix tests du configurateur exécutés et réussis ainsi qu'une vérification effective des preuves. Un échec donne NO-GO, reste dans les résultats et entraîne un code de sortie non nul. Le QA est **auto-exécuté**, sans indépendance organisationnelle revendiquée.
+La **boucle de preuve** se parcourt en huit étapes : question, modèle de contrôle, protocole d'observation, observation et donnée, interprétation, exécution contrôlée, connaissance et preuve, restitution et suite. Chaque explication est explicitement documentaire, hors EvidenceRecord. Les boutons de source ouvrent la valeur exacte, son chemin JSON Pointer, le numéro de preuve et l'empreinte du payload. Les métadonnées de signature sont identifiées séparément des champs du payload signé.
+
+L'interprétation utilise le budget de la **première preuve de l'opération, avant réservation**. L'exécution relie cet événement à sa dernière preuve : pour UNKNOWN, PASS reste le verdict historique et la réservation reste conservée. Veto et attente montrent l'arrêt avant envoi. Les observations absentes, invalides et expirées restent distinctes dans la projection. Changer de langue conserve l'étape et la source consultées ; le rechargement et le retour par la configuration les restaurent aussi via des paramètres validés, même sans stockage. Sélectionner un autre scénario reprend la boucle au début. L'affichage d'une source ne remplace pas la vérification cryptographique du dossier.
+
+Le GO local des nouvelles générations exige les dix tests du noyau, les dix tests du configurateur et les six tests de projection exécutés et réussis, ainsi qu'une vérification effective des preuves. Un échec donne NO-GO, reste dans les résultats et entraîne un code de sortie non nul. Le vérificateur conserve la lecture des anciens reçus ; lorsqu'une recette contient `proof_loop_tests`, cette section participe au GO. Le QA est **auto-exécuté**, sans indépendance organisationnelle revendiquée.
+
+Le [protocole d'essai utilisateur](USER_WALKTHROUGH.md) prépare six tâches et une grille de résultats vierge. Aucune observation utilisateur ni validation visuelle n'est déduite des tests automatisés.
 
 ## Contrat de démonstration D0
 
@@ -99,6 +105,8 @@ T02–T05 couvrent budget, veto, observations et UNKNOWN ; T06 comporte 50 cours
 
 C01–C07 contrôlent l'énumération exhaustive, les clauses et champs, toutes les corrections minimales, la séparation runtime/garanties, la disponibilité de la démonstration, l'absence de mutations et la provenance des brouillons. C08–C10 vérifient la page autonome et son modèle, la détection d'altérations des deux nouveaux fichiers et le maintien d'un NO-GO en cas d'échec de la recette produit.
 
+P01–P06 vérifient la projection déterministe, toutes les références vers les champs réels, la distinction documentaire/payload/métadonnées, le budget avant réservation, les observations inutilisables, les deux événements des envois et les arrêts avant envoi. Les références inconnues ou mal formées sont rejetées.
+
 Contrôles supplémentaires du JavaScript :
 
 ```powershell
@@ -106,11 +114,13 @@ node tests/check_configurator.cjs output/configurator.html
 node tests/check_report.cjs output/report.html
 node tests/check_landing.cjs
 node tests/check_journey.cjs output
+node tests/check_theme.cjs output
+node tests/check_proof_loop.cjs output
 ```
 
 Ils exécutent les vrais scripts générés dans un DOM minimal : 144 sélections du configurateur, 1 008 résultats de clauses, ouverture de la vue Règles & périmètre, corrections, navigation, focus, export, basculement FR/EN et quatre preuves du rapport. Le test de parcours vérifie aussi les allers-retours entre pages, les compteurs par preuve et la conservation des choix avec ou sans stockage de session. Ils ne valident pas la mise en page dans un navigateur. Le contrôle visuel n'a pas été effectué : le navigateur intégré a refusé le protocole des fichiers locaux.
 
-Les règles sont extraites du HTML XXL dans `references/rules.json` et `axes.json`. Le rapport reprend la palette sombre/cyan et la boucle observation → interprétation → connaissance → restitution des pièces jointes. Les originaux sont copiés sans modification dans `references/`, avec provenance et empreintes dans `manifest.json`. **Leurs indications de statut et de conformité restent des assertions des documents d'origine, pas des résultats de ce prototype.** Le crosswalk et son cycle JSON-LD restent des références documentaires ; aucune transformation signée, correction sémantique complète ou validation SHACL n'est revendiquée.
+Les règles sont extraites du HTML XXL dans `references/rules.json` et `axes.json`. Le rapport reprend la boucle des pièces jointes, projetée sur les preuves locales, et l'identité du futur site fournie en vidéo. Les originaux sont copiés sans modification dans `references/`, avec provenance et empreintes dans `manifest.json`. **Leurs indications de statut et de conformité restent des assertions des documents d'origine, pas des résultats de ce prototype.** La projection `demo-proof-loop/v1` sert à la lecture du rapport ; le crosswalk et son cycle JSON-LD restent des références documentaires, sans export sémantique signé ni validation SHACL.
 
 ## Limites
 

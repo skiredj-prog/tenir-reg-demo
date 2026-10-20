@@ -1,13 +1,13 @@
 {
   "payload": {
     "files": {
-      "configuration-catalogue.json": "76436c420ce364b301a54a82d7746261c615e0ca688136edb6eb0d4b08c8117d",
-      "configurator.html": "7cda98282513a05921c49ad508f7330a537225856d6b692eabc4dfaf5b4191d9",
-      "evidence.json": "2b542859b4c17334c722576984e197bf40606c0c19f30ad51faa88998ccb01fa",
-      "evidence.public.pem": "a2023aae21880767cc840c2078199beb4de71de0f71dc1c5bc441b3409e848c4",
-      "report.html": "e11960f4df27cfcd4c512827f2657e03e82ab1fd8ceb83e807b5bfcc02a82278",
-      "signal.public.pem": "a9126585f1ecf5a077717605f4ef9ba1886582ca703751c5aaf64c196281be88",
-      "test-results.json": "f24e3a8656e20e79b3af5afa67741539a6f304ff2fafc85142d0818f7c8a442b",
+      "configuration-catalogue.json": "b8f02a903af516ecf6e9c4c9e7246eba07787c92f5281afb75b592d006f78e93",
+      "configurator.html": "adc0d9b2de3d4615ef7e7d2a52bd5dbc9b83b2df7b0f484ac11c3c709e746c0e",
+      "evidence.json": "70d49cdd75aff6750e88df24d2464e5f205806417e3e3837a00c54a974df8a1a",
+      "evidence.public.pem": "58e46041ca61362bb90591c77727cbed3ef5cd9cd288638e25837ae696cd130e",
+      "report.html": "1895a9c45f446fcfb2f69cc7e9b335e851e6de34344eacde9b6ce89cdea39382",
+      "signal.public.pem": "11bb7597d3c78f93a7e7bdb7a18c0bbd0ffc7ee9a06f1fdc4595e34c6ade0163",
+      "test-results.json": "f948562b11cbdaf7d2e7f74b74eda22109ce452d4c41e3e50743534be8b07f42",
       "verification.json": "cfc5d4e83c253e4b66b5d1055618cf306e7ecb07e6b06f1fee01623e68f8d5ad"
     },
     "go_local": true,
@@ -18,8 +18,8 @@
     "algorithm": "Ed25519",
     "canonicalization": "RFC8785",
     "domain": "TENIR-REG-LOCAL-DEMO-v1",
-    "key_id": "750b40ed3b87ed2edd188adf40293cc2ce75224e9dd9196a8b615d7d102c93a8",
-    "payload_sha256": "057013ef39b0b8c1b423bb4647053caf1eb9c0a8f53f3effa58bbb94b68c072e",
-    "signature": "JmHKzZwr2s5GADMDpR/IDKd3ARTRnvOTIHhkHilF8XtkmzZnDabDlvmJU88SQDg7K4LuvayAEroprI+a6pKwDg=="
+    "key_id": "4169c42837d163d981f9197ce7448baa81525708fdda417790b57cbf5bda0c10",
+    "payload_sha256": "80d1473aacd1a7cece6a17e5e9461d664207e7ba6c3b568025c8adabeecdafc7",
+    "signature": "B+9WbiMQbLHM4LJz5eYqhSfn+tnRVF8jPxp5083fMmRPsDA166RE2hCof/wOvwz/uUS/ZHOlCOUv4aD92g9pDg=="
   }
 }

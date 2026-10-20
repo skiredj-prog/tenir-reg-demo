@@ -9,6 +9,7 @@ from itertools import product
 from .engine import PROFILE
 from .evidence import digest
 from .structure import AXES, RULES, violations
+from .proof_loop import STAGE_IDS
 
 
 SCHEMA = "demo-configurator/v1"
@@ -143,5 +144,6 @@ def build_model(bundle=None, verification=None):
                              "Produire et vérifier le dossier local avec .\\run.ps1 all, puis ouvrir le configurateur généré."),
             "verification": _verification_summary(verification) if verified_runtime else None,
             "operation_ids": list(bundle.get("operations", {})) if verified_runtime else [],
+            "loop_stage_ids": list(STAGE_IDS),
         },
     }

@@ -33,6 +33,7 @@ function applyConfiguration(configuration) {
 let current = copy(model.runtime_configuration), initial = copy(current), capturedInitial = false, step = 0;
 let activeView = 'configuration', returnContext = null, lastScenario = null;
 let undoConfiguration = null;
+let lastLoopContext = null;
 const navigationLocation = typeof location !== 'undefined' ? location : {pathname:'',search:'',hash:''};
 const navigationDirectory = (navigationLocation.pathname || '').replace(/[^/]*$/,'');
 const navigationStorageKey = 'tenir-reg-config:'+navigationDirectory;
@@ -42,6 +43,7 @@ function configurationId(configuration) {return entries.get(configKey(configurat
 function navigationState() {
   return {cfg:configurationId(current),initial:configurationId(initial),step:step+1,captured:capturedInitial?'1':'0',
     origin:returnContext ? returnContext.type : null,scenario:lastScenario,
+    loop_context:lastLoopContext,
     undo:undoConfiguration ? configurationId(undoConfiguration) : null};
 }
 function stateQuery(scenario = lastScenario, origin = null) {
@@ -50,6 +52,10 @@ function stateQuery(scenario = lastScenario, origin = null) {
   if(scenario && knownScenarios.includes(scenario))pairs.unshift(['scenario',scenario]);
   if(origin)pairs.unshift(['return',origin]);
   if(state.undo)pairs.push(['undo',state.undo]);
+  if(lastLoopContext && lastLoopContext.scenario===scenario){
+    pairs.push(['loop',lastLoopContext.stepId]);
+    if(lastLoopContext.sourceSequence!==null){pairs.push(['source_seq',String(lastLoopContext.sourceSequence)],['source_ptr',lastLoopContext.sourcePointer]);}
+  }
   return pairs.map(([key,value])=>encodeURIComponent(key)+'='+encodeURIComponent(value)).join('&');
 }
 function reportHref(fragment = '') {return (model.demo.report_href || 'report.html')+'?'+stateQuery()+fragment;}
@@ -90,6 +96,12 @@ function restoreNavigation() {
     if(state.captured==='0'||state.captured==='1')capturedInitial=state.captured==='1';
     if(typeof state.undo==='string' && byId.has(state.undo))undoConfiguration=copy(byId.get(state.undo).configuration);
     if(knownScenarios.includes(state.scenario))lastScenario=state.scenario;
+    const loop=fromQuery ? {scenario:state.scenario,stepId:state.loop,sourceSequence:state.source_seq,sourcePointer:state.source_ptr} : state.loop_context;
+    if(loop && knownScenarios.includes(loop.scenario) && (model.demo.loop_stage_ids||[]).includes(loop.stepId)){
+      const sequence=String(loop.sourceSequence),pointer=loop.sourcePointer;
+      const sourceValid=/^[1-9][0-9]{0,8}$/.test(sequence) && Number(sequence)<=(model.demo.verification?.records||0) && typeof pointer==='string' && pointer.length<=512 && /^\/(payload|integrity)(\/|$)/.test(pointer) && !/~(?![01])/.test(pointer);
+      lastLoopContext={scenario:loop.scenario,stepId:loop.stepId,sourceSequence:sourceValid?Number(sequence):null,sourcePointer:sourceValid?pointer:null};
+    }
     const origin=fromQuery ? state.return : state.origin;
     if(origin==='rules')returnContext={type:'rules'};
     else if(origin==='demo' && knownScenarios.includes(state.scenario))returnContext={type:'demo',scenario:state.scenario};
@@ -98,10 +110,11 @@ function restoreNavigation() {
   try{
     if(typeof URLSearchParams!=='undefined'){
       const params=new URLSearchParams(navigationLocation.search||'');
-      const query=Object.fromEntries(['cfg','initial','step','captured','return','scenario','undo'].filter(key=>params.has(key)).map(key=>[key,params.get(key)]));
+      const query=Object.fromEntries(['cfg','initial','step','captured','return','scenario','undo','loop','source_seq','source_ptr'].filter(key=>params.has(key)).map(key=>[key,params.get(key)]));
       // Un lien explicite ne reprend pas une origine de retour restée dans le cache.
       if(params.has('return'))returnContext=null;
       if(params.has('cfg'))undoConfiguration=null;
+      if(params.has('scenario')||params.has('loop'))lastLoopContext=null;
       accept(query,true);
     }
   }catch{}
@@ -118,7 +131,7 @@ function renderContextReturn() {
     el('return-context-note').textContent=ui('Vos modifications et votre configuration avant correction sont conservées.','Your changes and pre-correction configuration are preserved.');
   }else{
     link.textContent=ui('← Reprendre la démo consultée','← Resume the previous demo');
-    link.setAttribute('href',model.demo.report_href+'?'+stateQuery(returnContext.scenario)+'#parcours');
+    link.setAttribute('href',model.demo.report_href+'?'+stateQuery(returnContext.scenario)+(lastLoopContext&&lastLoopContext.scenario===returnContext.scenario?'#proof-loop':'#parcours'));
     el('return-context-note').textContent=ui('Retrouver le scénario ','Resume scenario ')+returnContext.scenario+ui('. Le rapport reste celui du profil local exécuté.','. The report still represents the executed local profile.');
   }
 }

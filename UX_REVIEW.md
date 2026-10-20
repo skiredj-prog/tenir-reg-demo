@@ -18,6 +18,8 @@ L'accès navigateur local ayant été refusé par la politique de l'outil, les c
 6. **Preuve** : ouvrir le record signé ou les pièces de vérification. Les tests et détails d'audit sont repliés par défaut.
 7. **Retour** : retrouver le scénario, la configuration, l'étape et le choix avant correction. L'annulation du dernier changement automatique circule également entre configuration et rapport.
 
+La lecture des preuves comporte désormais huit étapes interactives. Une source ouvre sa valeur exacte, le chemin JSON Pointer, la séquence et l'empreinte du record. L'explication reste marquée hors EvidenceRecord ; les métadonnées de signature ont un libellé distinct. La langue conserve l'étape et la source ; le changement de scénario reprend au début. Les événements de réservation et de résultat restent consultables séparément.
+
 ## Exceptions et sorties
 
 | Situation | Information présentée | Sortie disponible |
@@ -50,6 +52,7 @@ node tests/check_report.cjs output/report.html
 node tests/check_journey.cjs output
 node tests/check_landing.cjs
 node tests/check_theme.cjs output
+node tests/check_proof_loop.cjs output
 .\run.ps1 verify
 ```
 
@@ -67,3 +70,5 @@ Faire un passage sur ordinateur et sur téléphone, notamment à 390 × 844, ave
 6. Inspecter la preuve puis revenir au même scénario après une modification de configuration.
 
 Mesurer réussite, hésitations, erreurs et besoin d'assistance. La présente révision améliore les obstacles identifiés ; aucun score d'intuitivité ou taux de réussite utilisateur n'est encore établi.
+
+Le [protocole de séance](USER_WALKTHROUGH.md) fournit les consignes, les critères pour l'observateur et une grille vierge ; son statut reste « à réaliser ».

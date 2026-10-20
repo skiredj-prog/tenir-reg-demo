@@ -7,7 +7,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / ".deps"))
 from tenir_demo.evidence import read_public, verify
-from tenir_demo.contracts import CORE_TEST_IDS, CONFIGURATOR_TEST_IDS
+from tenir_demo.contracts import CORE_TEST_IDS, CONFIGURATOR_TEST_IDS, PROOF_LOOP_TEST_IDS
 from tenir_demo.verification import verify_bundle
 
 
@@ -40,6 +40,14 @@ def verify_directory(directory, public_key_path):
         ids = set(CORE_TEST_IDS)
         go = tests["go"] is True and tests["passed"] == 10 and len(tests["tests"]) == 10
         go = go and {t["id"] for t in tests["tests"]} == ids and all(t["status"] == "PASS" for t in tests["tests"])
+        # Optional for older v1/v2 dossiers; new generated recipes include it.
+        if "proof_loop_tests" in tests:
+            proof = tests["proof_loop_tests"]
+            proof_ids = set(PROOF_LOOP_TEST_IDS)
+            go = (go and proof["go"] is True and proof["passed"] == len(proof_ids)
+                  and len(proof["tests"]) == len(proof_ids)
+                  and {t["id"] for t in proof["tests"]} == proof_ids
+                  and all(t["status"] == "PASS" for t in proof["tests"]))
         if product_dossier:
             product = tests["product_tests"]
             product_ids = set(CONFIGURATOR_TEST_IDS)

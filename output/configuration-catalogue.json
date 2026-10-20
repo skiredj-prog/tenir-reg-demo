@@ -30755,6 +30755,16 @@
       "blocage",
       "attente",
       "issue-inconnue"
+    ],
+    "loop_stage_ids": [
+      "question",
+      "theoretical-model",
+      "observation-model",
+      "observation",
+      "interpretation",
+      "execution",
+      "knowledge",
+      "restitution"
     ]
   }
 }

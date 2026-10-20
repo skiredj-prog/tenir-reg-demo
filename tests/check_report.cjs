@@ -224,7 +224,8 @@ differentProfile.elements.get('language-en').events.click();
 assert.ok(differentProfile.elements.get('profile-context').textContent.includes('only to the local profile'));
 const filteredNavigation = reportState(storage(), {url: defaultReportUrl+'?cfg=invalid&step=5&initial=https%3A%2F%2Fexample.org&captured=true&return=https%3A%2F%2Fexample.org'});
 const filteredBackLink = new URL(filteredNavigation.elements.get('report-to-config').getAttribute('href'), defaultReportUrl);
-assert.deepEqual([...filteredBackLink.searchParams.keys()], ['return','scenario'], 'Only validated configuration state is forwarded');
+assert.deepEqual([...filteredBackLink.searchParams.keys()], ['return','scenario','loop'], 'Only validated configuration and current loop state are forwarded');
+assert.equal(filteredBackLink.searchParams.get('loop'),'question');
 
 const deniedNavigation = reportState(storage(null,true), {sessionStorage:storage(null,true),deniedHistory:true});
 deniedNavigation.elements.get('scenarios').children[3].events.click();

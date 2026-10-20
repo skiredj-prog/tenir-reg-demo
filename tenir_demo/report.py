@@ -7,13 +7,20 @@ from .structure import RULES, selfcheck
 from .locales import RULE_EN, TEST_EN
 from .configurator import configuration_id
 from .theme import apply_theme
+from .proof_loop import build_proof_loop
+from .contracts import PROOF_LOOP_TEST_IDS
 
 
 def report_model(bundle):
     latest = {}
+    histories = {}
     for record in bundle["records"]:
-        latest[record["payload"]["operation_id"]] = record
+        operation_id = record["payload"]["operation_id"]
+        latest[operation_id] = record
+        histories.setdefault(operation_id, []).append(record)
     return {"operations": list(latest.values()),
+            "evidence_records": bundle["records"],
+            "proof_loops": {operation_id: build_proof_loop(records) for operation_id, records in histories.items()},
             "runtime_configuration_id": configuration_id(bundle["profile"]["configuration"]),
             "final_budget": bundle["records"][-1]["payload"]["budget_after"],
             "provider_calls": len(bundle["records"][-1]["payload"]["provider_journal"])}
@@ -30,6 +37,10 @@ def render(bundle, results, verification, destination):
     # Le modèle ouvert directement conduit au rapport ; le rapport généré ne redirige pas.
     template = template.replace('<meta data-template-only http-equiv="refresh" content="0;url=../output/report.html">\n', '')
     for key, value in {"DATA": data, "GO": "GO LOCAL" if go else "NO-GO", "TESTS": tests,
+                       "PROOF_LOOP_CLIENT": (Path(__file__).parent / "proof_loop_client.js").read_text(encoding="utf-8"),
+                       "PROOF_LOOP_STYLE": (Path(__file__).parent / "proof_loop.css").read_text(encoding="utf-8"),
+                       "PROOF_LOOP_PASSED": str(results.get("proof_loop_tests", {}).get("passed", 0)),
+                       "PROOF_LOOP_TOTAL": str(len(PROOF_LOOP_TEST_IDS)),
                        "CLAUSES": clauses, "COUNTS": f'{stats["admissible"]} / {stats["configurations"]}',
                        "PASSED": str(results.get("passed", 0)), "RECORDS": str(len(bundle["records"]))}.items():
         template = template.replace("@@" + key + "@@", value)
