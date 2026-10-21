@@ -64,3 +64,7 @@ Optional client descriptions **must stay local to browser by default** until exp
 - No claims of `compliant`, `demonstrated`, `certified`, `safe`, or `approved` for exploratory selection.
 - Accessibility + bilingual checks, offline HTML preview, no broken external links, correct generated report.
 - No site deployment, no public badge, no usage telemetry without consent, no production automation until explicit authorization.
+
+### Economic value — evidence gate
+
+Before quoting an ROI or an avoided loss, use [VALUE-MODEL-ROI.md](VALUE-MODEL-ROI.md). It distinguishes scenario impact, incident probability, mitigation effectiveness, remediations, measured rework savings and total delivery cost. Its MIN / REGULAR / HIGH examples are **illustrative sensitivity cases**, not industry averages or measured REG outcomes. Use documented client-specific data and an explicit attribution chain for case studies; GDPR fine ceilings and unverified 20k audit comparisons are not savings claims.
