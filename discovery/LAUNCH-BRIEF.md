@@ -39,8 +39,8 @@ Output: Conditionality / unresolved assumptions; no claim of unique solution, no
 Payoff: “Your API may be idempotent. Is your business effect?”
 
 ### CTA and paid offer (experiment, not established pricing)
-**Hidden Assumptions Challenge** — single behavioral assertion, 2–4 working days, scoped information only, 2-page findings with sources, invalidation triggers and candidate invariants, optional debrief.
-Pricing *hypothesis to test*: **€2,500–€5,000**. Does NOT include infra audit, legal opinion, product certification or runtime deployment.
+**Hidden Assumptions Challenge** — scoped contradiction analysis, no mandatory code/infra access. **Focused:** one behavior / one workflow / up to 3 references, 4–5 working days, **€2,500** trial price. **Extended:** up to 2 related behaviors/workflows / up to 5 references, 6–7 working days, **€5,000** trial price. Includes declared assumptions, conditional failure paths, candidate invariants, decision brief and executive debrief. Delivery begins after agreed scope and necessary information; **prices and times are hypotheses to validate commercially**, not binding quotations.
+**No fabricated findings guarantee:** if no decision-relevant discovery, explicitly report the negative result and offer one additional behavior within the same agreed perimeter at no additional fee. No subjective 'no invoice unless critical defect' condition. Does NOT include infra audit, legal opinion, product certification or runtime deployment. Public one-pager: [OFFER-HIDDEN-ASSUMPTIONS-CHALLENGE-FR.md](OFFER-HIDDEN-ASSUMPTIONS-CHALLENGE-FR.md).
 Optional TENIR-Gov engagement quoted separately if selected runtime controls are actually needed.
 
 ### Targeting
