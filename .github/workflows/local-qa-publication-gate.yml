@@ -1,0 +1,93 @@
+name: TENIR REG demo — local QA and gated publication
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-qa:
+    name: Local simulation, evidence, packaging and distribution audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install exact declared Python requirements
+        run: python -m pip install -r requirements.txt
+      - name: Unit tests for the independent publication gate
+        run: python -m unittest tools.test_publication_audit -v
+      - name: Re-run local simulation acceptance without changing signed records
+        run: python demo.py test --output tmp/ci-test
+      - name: Verify committed signed dossier without executing simulator
+        run: python verify.py output --public-key output/evidence.public.pem
+      - name: Validate real UI scripts against signed fixture
+        run: |
+          node tests/check_landing.cjs
+          node tests/check_configurator.cjs output/configurator.html
+          node tests/check_report.cjs output/report.html
+          node tests/check_journey.cjs output
+          node tests/check_theme.cjs output
+          node tests/check_proof_loop.cjs output
+          node tests/check_alignment.cjs output
+      - name: Generate and verify a fresh isolated synthetic dossier
+        run: |
+          python demo.py demo --output tmp/ci-generated
+          python verify.py tmp/ci-generated --public-key tmp/ci-generated/evidence.public.pem
+      - name: Test distribution packaging, including rejection of stale sources
+        run: python -m unittest tests.test_packaging -v
+      - name: Build both private candidate archives; never upload/publish them
+        run: python package_demo.py --output dist
+      - name: Report public consultation publication blockers (information only)
+        run: |
+          python tools/publication_audit.py dist/TENIR-REG-consultation.zip --report-only > tmp/publication-readiness.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path('tmp/publication-readiness.json').read_text())
+          print('Machine-ready for public distribution:', result['automated_ready'])
+          print('Blockers:', result['blocker_count'])
+          for finding in result['findings']:
+              print(f" - {finding['code']}: {finding['file']}")
+          print('Manual license, privacy, UX and release authorization still required.')
+          PY
+      - name: Write private CI summary; no distribution artifact uploaded
+        if: always()
+        run: |
+          echo 'Local QA is not public-release approval.' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f tmp/publication-readiness.json ]; then
+            python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          x = json.loads(Path('tmp/publication-readiness.json').read_text())
+          print('Automated public preflight:', 'PASS (manual pending)' if x['automated_ready'] else 'BLOCKED')
+          print('Privacy/integrity blockers:', x['blocker_count'])
+          PY
+          fi
+
+  public-release-gate:
+    name: Explicit public release readiness (never deploy)
+    if: github.event_name == 'workflow_dispatch'
+    needs: local-qa
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Rebuild signed source-verified consultation archive locally
+        run: python package_demo.py --output dist
+      - name: Strict no-exceptions publication audit
+        run: python tools/publication_audit.py dist/TENIR-REG-consultation.zip
+      - name: Publication still requires a separate owner license, UX and deployment approval
+        run: echo 'Machine preflight passed. Manual release gate remains OPEN; no artifact uploaded or deployed.'
