@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TENIR / REG — Diagnostic & Evidence Workbench · Offline</title>
+<meta name="description" content="Explorez des traces simulées signées, comprenez une issue UNKNOWN et choisissez des contrôles candidats. Démonstration locale autonome, non connectée à TENIR-Gov.">
+<style>
+:root{--bg:#f6f7f2;--panel:#fff;--ink:#183d33;--ink-soft:#40574e;--muted:#64766e;--accent:#247a57;--accent-light:#eaf4ed;--line:#d7e3da;--warning:#7c5123;--warning-bg:#fbf4e9;--mono:ui-monospace,SFMono-Regular,Consolas,monospace;--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+a{color:var(--accent)}a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}a:hover{text-decoration-thickness:2px}
+.wrap{max-width:1100px;margin:auto;padding:0 clamp(18px,5vw,54px)}
+header{border-bottom:1px solid var(--line);background:var(--panel)}
+header .wrap{min-height:75px;display:flex;align-items:center;gap:15px;justify-content:space-between;flex-wrap:wrap}
+.brand{font:700 .93rem/1.2 var(--sans);letter-spacing:.09em;color:var(--ink);text-decoration:none}
+.logo{display:inline-grid;place-items:center;width:35px;height:35px;background:var(--ink);color:#fff;border-radius:7px;margin-right:12px}
+.lang{display:flex;gap:4px;border:1px solid var(--line);border-radius:8px;padding:4px}
+.lang button{background:transparent;border:0;border-radius:5px;min-width:43px;min-height:35px;color:var(--ink-soft);font:600 .8rem var(--sans);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:#fff}
+main{padding:clamp(36px,6vw,70px) 0}
+.kicker{font:700 .72rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+h1,h2,h3{font-family:var(--serif);line-height:1.14;letter-spacing:-.02em;font-weight:500}
+h1{font-size:clamp(2.7rem,6vw,5rem);max-width:16ch;margin:0 0 24px}
+h2{font-size:clamp(1.7rem,3vw,2.25rem)}
+h3{font-size:1.4rem}
+.lead{font-size:1.16rem;color:var(--ink-soft);max-width:56ch}
+.hero{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(255px,.7fr);align-items:center;gap:3rem;padding:0 0 48px;border-bottom:1px solid var(--line)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0}
+.cta{display:inline-flex;justify-content:center;align-items:center;border:1px solid var(--accent);background:var(--accent);border-radius:8px;color:#fff;padding:12px 18px;min-height:48px;text-decoration:none;font-size:.95rem;font-weight:650}
+.cta:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.cta.secondary{color:var(--ink);border-color:var(--line);background:#fff}
+.cta.secondary:hover{border-color:var(--accent)}
+.boundary{background:var(--warning-bg);border:1px solid #e8dbca;border-left:4px solid var(--warning);border-radius:8px;padding:24px}
+.boundary span{font:700 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--warning)}
+.boundary strong{display:block;font-size:1.04rem;line-height:1.45;margin:11px 0}
+.boundary p{font-size:.88rem;margin:0;color:#6b5a48}
+.section-head{margin:48px 0 20px}.section-head h2{margin:0 0 12px}.section-head p{margin:0;color:var(--muted);max-width:60ch}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{padding:25px;background:var(--panel);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;min-height:255px}
+.card .number{font:700 .72rem var(--mono);color:var(--accent);margin:0 0 14px}
+.card h3{margin:0 0 12px}.card p{font-size:.93rem;color:var(--ink-soft);flex:1;margin:0 0 20px}
+.card>a{font-weight:650;text-decoration:none;font-size:.93rem}.card>a:hover{text-decoration:underline}
+.note{margin:32px 0;padding:24px;border:1px solid var(--line);background:var(--accent-light);border-radius:9px}
+.note h2{font-size:1.55rem;margin:0 0 8px}.note p{margin:0;max-width:95ch;font-size:.94rem;color:var(--ink-soft)}
+footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.82rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}footer a{color:var(--ink)}
+@media(max-width:820px){.hero{grid-template-columns:1fr;gap:20px}.cards{grid-template-columns:1fr}.card{min-height:0}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="./index.html"><span class="logo" aria-hidden="true">T</span>TENIR / REG</a>
+<div class="lang" role="group" aria-label="Language / Langue"><button id="lang-fr" type="button" aria-pressed="true">FR</button><button id="lang-en" type="button" aria-pressed="false">EN</button></div>
+</div></header>
+<main class="wrap" id="main">
+<section class="hero" aria-labelledby="hero-title">
+<div><p class="kicker" data-fr="ATELIER AUTONOME · DONNÉES FICTIVES" data-en="STANDALONE WORKBENCH · FICTIONAL DATA">ATELIER AUTONOME · DONNÉES FICTIVES</p>
+<h1 id="hero-title" data-fr="L’action est autorisée. Son résultat reste inconnu." data-en="The action was authorized. Its outcome remains unknown.">L’action est autorisée. Son résultat reste inconnu.</h1>
+<p class="lead" data-fr="Avant de relancer un agent, découvrez ce que sa trace permet réellement de savoir. Examinez un scénario, ses preuves signées et les contrôles qu’il faudrait préparer." data-en="Before retrying an agent, find out what its trace can actually establish. Explore a scenario, its signed records and the controls you would need next.">Avant de relancer un agent, découvrez ce que sa trace permet réellement de savoir. Examinez un scénario, ses preuves signées et les contrôles qu’il faudrait préparer.</p>
+<div class="actions"><a class="cta" href="output/report.html?scenario=issue-inconnue&amp;loop=execution#proof-loop" data-fr="Examiner l’incident UNKNOWN →" data-en="Explore the UNKNOWN incident →">Examiner l’incident UNKNOWN →</a><a class="cta secondary" href="output/configurator.html" data-fr="Choisir les contrôles →" data-en="Choose candidate controls →">Choisir les contrôles →</a></div>
+</div>
+<aside class="boundary"><span data-fr="FRONTIÈRE DE LA DÉMONSTRATION" data-en="DEMONSTRATION BOUNDARY">FRONTIÈRE DE LA DÉMONSTRATION</span>
+<strong data-fr="Une simulation locale, pas un gouverneur connecté." data-en="Local simulation, not a connected governor.">Une simulation locale, pas un gouverneur connecté.</strong>
+<p data-fr="Les événements sont fictifs et déjà produits. Les signatures protègent l’intégrité de leurs octets sous la clé fournie ; elles ne démontrent ni un effet réel chez un fournisseur ni l’identité indépendante du signataire. Aucune certification." data-en="Events are fictional and pre-generated. Signatures establish byte integrity under the supplied key; they do not prove a real provider effect or independently authenticate the signer. Not a certification.">Les événements sont fictifs et déjà produits. Les signatures protègent l’intégrité de leurs octets sous la clé fournie ; elles ne démontrent ni un effet réel chez un fournisseur ni l’identité indépendante du signataire. Aucune certification.</p>
+</aside></section>
+<section aria-labelledby="paths-title">
+<div class="section-head"><p class="kicker" data-fr="EXPLORER · AUCUNE EXÉCUTION EN DIRECT" data-en="EXPLORE · NO LIVE EXECUTION">EXPLORER · AUCUNE EXÉCUTION EN DIRECT</p><h2 id="paths-title" data-fr="Trois façons de comprendre." data-en="Three ways to understand.">Trois façons de comprendre.</h2><p data-fr="Aucune étape obligatoire. Chaque lien ouvre une page autonome de ce dossier, même sans connexion." data-en="No mandatory sequence. Each link opens a standalone page within this folder, even offline.">Aucune étape obligatoire. Chaque lien ouvre une page autonome de ce dossier, même sans connexion.</p></div>
+<div class="cards">
+<article class="card"><div class="number">01 / UNKNOWN</div><h3 data-fr="Lire une issue incertaine" data-en="Read an uncertain outcome">Lire une issue incertaine</h3><p data-fr="Un PASS historique, un appel simulé, aucun résultat confirmé. Retrouvez la source et la réservation conservée." data-en="A historical PASS, a simulated dispatch, no confirmed result. Inspect the source and the reserved budget.">Un PASS historique, un appel simulé, aucun résultat confirmé. Retrouvez la source et la réservation conservée.</p><a href="output/report.html?scenario=issue-inconnue&amp;loop=execution#proof-loop" data-fr="Lire la trace →" data-en="Inspect the trace →">Lire la trace →</a></article>
+<article class="card"><div class="number">02 / CONTROLS</div><h3 data-fr="Explorer les configurations" data-en="Explore configurations">Explorer les configurations</h3><p data-fr="Quatre axes, sept clauses, 144 configurations. Une admissibilité structurelle n’est pas une garantie de runtime." data-en="Four axes, seven clauses, 144 configurations. Structural admissibility is not a runtime guarantee.">Quatre axes, sept clauses, 144 configurations. Une admissibilité structurelle n’est pas une garantie de runtime.</p><a href="output/configurator.html" data-fr="Ouvrir le configurateur →" data-en="Open configurator →">Ouvrir le configurateur →</a></article>
+<article class="card"><div class="number">03 / EVIDENCE</div><h3 data-fr="Inspecter les preuves" data-en="Inspect evidence">Inspecter les preuves</h3><p data-fr="Parcourez les champs signés, les annotations documentaires et les empreintes sans les confondre avec une confirmation externe." data-en="Follow signed fields, documentary annotations and hashes without treating them as external confirmation.">Parcourez les champs signés, les annotations documentaires et les empreintes sans les confondre avec une confirmation externe.</p><a href="output/report.html?scenario=issue-inconnue&amp;loop=knowledge#proof-loop" data-fr="Lire la boucle de preuve →" data-en="Explore the evidence loop →">Lire la boucle de preuve →</a></article>
+</div></section>
+<section class="note" aria-labelledby="read-title"><h2 id="read-title" data-fr="Comment lire ce dossier" data-en="How to read this dossier">Comment lire ce dossier</h2><p data-fr="Le reçu Ed25519 lie les fichiers de simulation à la clé publique incluse ; pour authentifier le signataire, obtenez cette clé ou son empreinte par un canal indépendant. Les sources de développement et documents tiers ne font pas partie de cette édition publique minimale. Pour les limites, consultez le guide." data-en="The Ed25519 receipt links simulation files to the included public key; authenticating the signer requires an independent trusted channel for that key or its fingerprint. Development sources and third-party documents are not included in this minimal public edition. See the guide for scope.">Le reçu Ed25519 lie les fichiers de simulation à la clé publique incluse ; pour authentifier le signataire, obtenez cette clé ou son empreinte par un canal indépendant. Les sources de développement et documents tiers ne font pas partie de cette édition publique minimale. Pour les limites, consultez le guide.</p></section>
+</main><footer><div class="wrap"><span data-fr="TENIR / REG · Prototype local pédagogique · v0.1.0" data-en="TENIR / REG · Educational local prototype · v0.1.0">TENIR / REG · Prototype local pédagogique · v0.1.0</span><a href="README.md" data-fr="Guide & limites (FR/EN) →" data-en="Guide & limitations (FR/EN) →">Guide & limites (FR/EN) →</a></div></footer>
+<script>
+"use strict";
+(function(){
+  function choose(lang){
+    document.documentElement.lang=lang;
+    document.querySelectorAll("[data-fr][data-en]").forEach(function(el){el.textContent=el.getAttribute("data-"+lang)});
+    for(const code of ["fr","en"]){document.getElementById("lang-"+code).setAttribute("aria-pressed",String(code===lang))}
+  }
+  document.getElementById("lang-fr").addEventListener("click",function(){choose("fr")});
+  document.getElementById("lang-en").addEventListener("click",function(){choose("en")});
+})();
+</script></body></html>
