@@ -1,1 +1,1 @@
-"""Offline release-check helpers; never part of signed demo engine.\n"""\n
+"""Offline release-check helpers; never part of the signed demo engine."""
