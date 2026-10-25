@@ -74,6 +74,21 @@ jobs:
           PY
           fi
 
+  real-browser-smoke:
+    name: Real Chromium FR/EN desktop and mobile smoke (not user validation)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install headless browser tooling (isolated from signed source/runtime)
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Render all offline pages and check navigation at mobile / desktop sizes
+        run: python tools/browser_smoke.py
+
   public-release-gate:
     name: Explicit public release readiness (never deploy)
     if: github.event_name == 'workflow_dispatch'
