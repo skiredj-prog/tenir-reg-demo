@@ -11,7 +11,7 @@ import sys
 import tempfile
 import zipfile
 
-from package_demo import DOSSIER_FILES, PackageError, _check_consultation_links
+from package_demo import DOSSIER_FILES, PackageError, _PageLinks, _local_target
 from tools.publication_audit import inspect_archive
 from verify import verify_directory
 
@@ -128,7 +128,13 @@ def build_public_kit(root: Path = ROOT, destination: Path | None = None) -> dict
         "REFERENCE_ALIGNMENT.md": PUBLIC_ALIGNMENT.encode("utf-8"),
         "references/manifest.json": public_reference_summary(),
     }
-    _check_consultation_links(files)
+    for page_name in ("index.html", "output/configurator.html", "output/report.html"):
+        parser = _PageLinks()
+        parser.feed(files[page_name].decode("utf-8"))
+        for href in parser.links:
+            target = _local_target(page_name, href)
+            if target is not None and target not in files:
+                raise PackageError("Broken public offline link: " + page_name + " -> " + target)
     meta = {
         "schema": "tenir-demo-package/v1",
         "kind": "consultation",
