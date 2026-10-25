@@ -22,7 +22,7 @@ L’accueil, le configurateur et le rapport proposent **FR/EN** et les thèmes c
 | **Examiner une issue inconnue** | Retrouver le PASS historique, l'appel enregistré et la réservation conservée ; changer de trace sans renvoyer d'action | Une distinction claire entre autorisation et résultat incertain ; une recommandation de suivi, sans résolution automatique |
 | **Relire une preuve** | Parcourir les huit étapes, ouvrir les champs exacts et distinguer explications documentaires, payload signé et métadonnées ; lancer `.\run.ps1 verify` | Le rapport HTML autonome, le dossier JSON, les clés publiques, le reçu et un résultat de vérification |
 | **Animer un atelier de conception** | Mettre en relation les cinq couches de l'architecture et la boucle d'observation, puis comparer les quatre situations | Un support commun pour expliciter les rôles, les règles, les observations et les preuves attendues |
-| **Cadrer une future intégration TENIR** | Lire le diagnostic sur les trois références épinglées, les écarts de contrat et les invariants au périmètre partiel | Une base de travail pour définir un adaptateur vers 5.6.1, cible 5.7 ; aucun adaptateur ni compatibilité d'exécution n'est livré |
+| **Cadrer une future intégration TENIR** | Lire le diagnostic sur les trois références épinglées, les écarts de contrat et les invariants au périmètre partiel | Une base de travail pour définir un adaptateur vers la release 5.7.0 ; le snapshot détaillé local reste 5.6.1 et la compatibilité d'exécution n'est pas livrée |
 
 ## Exemples de transposition
 
@@ -38,7 +38,7 @@ Le prototype **non officiel v0.1.0** exécute quatre scénarios fixes lors de la
 
 La [page de garde](index.html) expose les cinq couches : règle métier, contrainte réglementaire, acte de médiation, standard REG Core/REG+, runtime TENIR-Gov. Le [cadrage produit](PRODUCT.md) précise les livrables et priorités ; le [diagnostic d'alignement](REFERENCE_ALIGNMENT.md) expose les correspondances et écarts sourcés.
 
-**Base d'alignement : TENIR 5.6.1, destinée à être promue en 5.7**, selon la confirmation du porteur du projet. Les documents d'architecture fournis restent un snapshot 5.6.0. Le [suivi d'alignement](ALIGNMENT.md) distingue ces références du moteur local ; la compatibilité d'exécution reste non vérifiée.
+**Base d'alignement : release TENIR 5.7.0 publiée le 24 octobre 2026.** Les fichiers source détaillés conservés ici restent un snapshot 5.6.1, et les documents d'architecture fournis restent un snapshot 5.6.0. Le [suivi d'alignement](ALIGNMENT.md) distingue ces références du moteur local ; la compatibilité d'exécution reste non vérifiée.
 
 ## Choisir le kit adapté
 

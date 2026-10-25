@@ -2,17 +2,17 @@
   "schema": "demo-architecture-context/v1",
   "alignment_target": {
     "runtime": "TENIR-Gov",
-    "version": "5.7",
+    "version": "5.7.0",
     "authority": "user-request",
-    "status": "BASE_CONFIRMED_PROMOTION_PLANNED",
-    "release_reference": null,
-    "base_version": "5.6.1",
-    "base_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
-    "promotion_basis": "project-owner-confirmation",
+    "status": "RELEASE_PUBLISHED_SNAPSHOT_PENDING_RESYNC",
+    "release_reference": "https://github.com/skiredj-prog/tenir_governance/releases/tag/v5.7.0",
+    "base_version": "5.7.0",
+    "base_commit": "47ef67e",
+    "promotion_basis": "published-release",
     "execution_compatibility": "NOT_VERIFIED",
-    "owner_statement": "5.6.1 would be it, it will be promoted to 5.7"
+    "owner_statement": "The v5.7.0 release is live; detailed source resynchronization and execution compatibility remain open."
   },
-  "checked_date": "2026-10-20",
+  "checked_date": "2026-10-25",
   "supplied_architecture_version": "5.6.0",
   "source_files": [
     {
@@ -50,10 +50,10 @@
     {
       "repository": "skiredj-prog/tenir_governance",
       "role": "runtime",
-      "commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
-      "declared_version": "5.6.1",
-      "release_note": "Pending release in inspected CHANGELOG",
-      "url": "https://github.com/skiredj-prog/tenir_governance/tree/41fae550c1e0a3632e2bde473db6d31b450d4269"
+      "commit": "47ef67e",
+      "declared_version": "5.7.0",
+      "release_note": "Published GitHub release, verified 2026-10-25; detailed local source snapshot remains 5.6.1",
+      "url": "https://github.com/skiredj-prog/tenir_governance/releases/tag/v5.7.0"
     },
     {
       "repository": "skiredj-prog/reg-conformance",
@@ -81,12 +81,12 @@
     "invariant_mapping": "FOCUSED_STATIC_REVIEW_I1_TO_I9"
   },
   "5_7_search": {
-    "runtime": "branches, v5.7 tag refs, releases, default-branch code and selected docs inspected; no versioned5.7 contract identified",
+    "runtime": "v5.7.0 release and tag verified; full source contract not yet resynchronized into this repository",
     "standard_and_harness": "branches/tags/default-branch code searched for5.7; no matching versioned reference found",
-    "owner_clarification": "Subsequent owner confirmation identifies 5.6.1 as the base to be promoted to 5.7; no separate 5.7 branch is required to select the working reference."
+    "owner_clarification": "The v5.7.0 release is now published; the local detailed source snapshot must be refreshed before execution compatibility is assessed."
   },
   "layer_source": "architecture-v1.html (FR) and architecture-v2.html (EN), levels0-4",
-  "notes": "Metamodel notes are proposed interpretations and roadmap ideas, not conformance evidence. Guides describe a5.6.0-era snapshot; later source changes must be assessed at their pinned commits. Owner clarification supersedes the initial missing-reference question: the pinned 5.6.1 runtime is the confirmed base for planned 5.7 promotion, not proof of execution compatibility.",
+  "notes": "Metamodel notes are proposed interpretations and roadmap ideas, not conformance evidence. Guides describe a5.6.0-era snapshot; the detailed runtime files remain pinned to 5.6.1 while the current release target is 5.7.0. The published release does not by itself prove execution compatibility of this prototype.",
   "alignment_diagnostic": {
     "module": "tenir_demo/alignment.py",
     "documentation": "REFERENCE_ALIGNMENT.md",

@@ -2,17 +2,17 @@
 
 Le catalogue structurel concorde sur **144 configurations et 1 008 résultats de clause** dans le périmètre fermé comparé. La **compatibilité d'exécution reste `NOT_VERIFIED`**. Ces deux résultats portent sur des objets différents : une comparaison de règles ne constitue pas un essai du runtime ou du harnais de référence.
 
-La base retenue est **TENIR 5.6.1**, destinée à être promue en **5.7** selon la confirmation du porteur du projet. Le prototype conserve sa version `0.1.0` et ses formats `demo-*` ; ce diagnostic ne transforme pas son moteur en runtime de référence.
+La référence actuelle est la release publiée **TENIR 5.7.0** ([release GitHub](https://github.com/skiredj-prog/tenir_governance/releases/tag/v5.7.0), commit affiché `47ef67e`). Le prototype conserve sa version `0.1.0` et ses formats `demo-*` ; ce diagnostic ne transforme pas son moteur en runtime de référence. Les sources détaillées citées ci-dessous restent un snapshot 5.6.1 et doivent être resynchronisées avant toute conclusion de compatibilité avec 5.7.0.
 
 ## Trois sources épinglées
 
 | Source | Référence | Rôle dans le diagnostic |
 |---|---|---|
 | [REG Conformance — catalogue](https://github.com/skiredj-prog/reg-conformance/blob/cd5ab1b616ad59014f4b84d522b57a890a48a088/catalog/compatibility-rules-v1.yaml) | `cd5ab1b616ad59014f4b84d522b57a890a48a088` | Axes, sept implications, résultats du catalogue et déclarations de capacités |
-| [TENIR Governance — version](https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/pyproject.toml#L5-L10) | `41fae550c1e0a3632e2bde473db6d31b450d4269` | Version 5.6.1, contrats du noyau, composition, états, budget et ledger |
+| [TENIR Governance — release actuelle](https://github.com/skiredj-prog/tenir_governance/releases/tag/v5.7.0) | `v5.7.0` / `47ef67e` | Référence actuelle ; les contrats détaillés ci-dessous sont encore lus dans le snapshot 5.6.1 |
 | [Harnais S1/G1 — retour après incertitude](https://github.com/skiredj-prog/tenir-conformance-s1-g1/blob/d29400100b00f7e7a87d229af660f62e51d61f12/src/tenir_conformance/membrane/membrane.py#L707-L716) | `d29400100b00f7e7a87d229af660f62e51d61f12` | Permis, identité d'effet, tentatives, incertitude et contrat de rejeu |
 
-Les copies brutes et empreintes sont consignées dans les manifestes [REG](references/upstream-reg-manifest.json), [TENIR](references/upstream-tenir-manifest.json) et [harnais](references/upstream-harness-manifest.json). Les fichiers ciblés ont été lus et leur identité vérifiée ; aucun code amont n'a été importé ou exécuté pour ce diagnostic.
+Les copies brutes et empreintes sont consignées dans les manifestes [REG](references/upstream-reg-manifest.json), [TENIR](references/upstream-tenir-manifest.json) et [harnais](references/upstream-harness-manifest.json). Les fichiers ciblés ont été lus et leur identité vérifiée ; aucun code amont n'a été importé ou exécuté pour ce diagnostic. Le manifeste TENIR signale désormais la release 5.7.0, tout en conservant l'identité du snapshot 5.6.1 des fichiers détaillés.
 
 ## Ce qui est calculé et ce qui est relu
 
@@ -62,11 +62,12 @@ Deux incohérences des sources restent visibles :
 - Le [tableau du guide](https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/agentic-governance-guide.md#L126-L135) numérote notamment délégation/budget/terminalité autrement que le [code des gardes](https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L208-L276) et le tableau du manuscrit. Le relevé ne résout pas cette divergence doctrinale par un renommage silencieux.
 - Le [manuscrit mentionne HMAC](https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/manuscript.md#L413-L419), alors que le [ledger composé inspecté](https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py#L185-L219) calcule un hash SHA-256 de JSON trié, sans clé. Ce constat concerne ce ledger précis. L'enveloppe locale RFC8785/Ed25519 reste un autre contrat ; aucune supériorité ni équivalence n'en est déduite.
 
-## Prochain lot : contrat d'adaptation avant simulation paramétrable
+## Prochain lot : resynchronisation 5.7.0 puis contrat d'adaptation
 
-1. **Fixer le sujet et les retours** : runtime et harnais réellement appelés, identité/versions, détection explicite de tout fallback, décision historique séparée de la disposition courante, mapping des états et des identités d'effet.
-2. **Fixer les phases du budget** : réservation, commit, HOLD, UNKNOWN, confirmation et remboursement ; choisir un contrat explicite puis construire les oracles de transition, sans comparer seulement des totaux finaux.
-3. **Fixer les entrées et les preuves** : observation locale, entrées épistémiques, fraîcheur, politique, contexte TENIR 1.2 et format exporté. Chaque champ absent reste une lacune explicite ; les payloads signés existants sont conservés.
-4. **Recetter l'adaptateur sur les quatre scénarios**, en conservant séparément les sorties locales et de référence, puis ajouter les erreurs, conflits et reprises nécessaires au périmètre retenu. L'exécution de ces essais sera une livraison distincte du présent diagnostic statique.
+1. **Resynchroniser la référence** : récupérer les fichiers ciblés au commit 5.7.0, recalculer leurs empreintes et comparer les contrats 5.6.1 → 5.7.0 avant de réutiliser les anciennes citations.
+2. **Fixer le sujet et les retours** : runtime et harnais réellement appelés, identité/versions, détection explicite de tout fallback, décision historique séparée de la disposition courante, mapping des états et des identités d'effet.
+3. **Fixer les phases du budget** : réservation, commit, HOLD, UNKNOWN, confirmation et remboursement ; choisir un contrat explicite puis construire les oracles de transition, sans comparer seulement des totaux finaux.
+4. **Fixer les entrées et les preuves** : observation locale, entrées épistémiques, fraîcheur, politique, contexte TENIR 1.2 et format exporté. Chaque champ absent reste une lacune explicite ; les payloads signés existants sont conservés.
+5. **Recetter l'adaptateur sur les quatre scénarios**, en conservant séparément les sorties locales et de référence, puis ajouter les erreurs, conflits et reprises nécessaires au périmètre retenu. L'exécution de ces essais sera une livraison distincte du présent diagnostic statique.
 
 La simulation paramétrable peut ensuite utiliser un contrat choisi et vérifié, plutôt que prolonger implicitement les différences actuelles.

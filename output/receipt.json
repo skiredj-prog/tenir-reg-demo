@@ -3,11 +3,11 @@
     "files": {
       "configuration-catalogue.json": "f34e64197e340e2bea543ef2935dee60f49956e5aa37971c00d0ef7bb65ca6c6",
       "configurator.html": "d3b7e357b570cfb02434330465a64652e6d8807ddf86fb3855db3d906cd6e3cf",
-      "evidence.json": "af9bae4c89f994b83fc2a8aa965a862afaea0035b4e777979537f1c035bdaa54",
-      "evidence.public.pem": "ab5e7b68575ee880c2ff28a072e278c1123a6d12e94ed42f1ba2293208d9b53a",
-      "report.html": "4253fdc5e5e19fb9809a85da1f919c0e01532897753e817168cd4b63f3ae096a",
-      "signal.public.pem": "8bb838acd695809e4d1a1f831b1c8882cf729c1481a9675e1b38d4b1a405e09f",
-      "test-results.json": "9754505521c9a36d356d128d8afa80eca46499509b0c0d5a107fbf62cf4179cd",
+      "evidence.json": "31b0c1e0d5d0deff0eeea51c59151628543a1ae0b93107fffb856a5ca77657be",
+      "evidence.public.pem": "ee1416fec4d7d33140f9e8f10b01bd93dafd630642d8e24f30787898dd08a34c",
+      "report.html": "1359aedb3c3740fbb5dec5470a3b4656074aadf9e2139a6125442e5f709ccd06",
+      "signal.public.pem": "8fde3797d8d7230d4b44a25b20c6a62dc05cd19cd64f8be8f016681f18aa9455",
+      "test-results.json": "f58c6e16e4dc2a377ffd252b38effe5cb22dc9bb7e0b9580f30c6998a370388a",
       "verification.json": "cfc5d4e83c253e4b66b5d1055618cf306e7ecb07e6b06f1fee01623e68f8d5ad"
     },
     "go_local": true,
@@ -18,8 +18,8 @@
     "algorithm": "Ed25519",
     "canonicalization": "RFC8785",
     "domain": "TENIR-REG-LOCAL-DEMO-v1",
-    "key_id": "65b0400b63496624a07bff380bc7f42390c8c93e7aecb8e8ba2b9134a1e96353",
-    "payload_sha256": "483dcd3cef61817e873104828d307519ae19143b79166e6eea947dfb65a98e5f",
-    "signature": "qKLAXgT62PRUFzzDK6J37qClBC3DrVcSgp1hA1IPhSJjbiqxqcSWbMtIdB+mEcYcn3OkLRzud7qOaoombNhkAA=="
+    "key_id": "9fab865c89d5c56733cf69c5926cf47692ed9d7e616480b320de163d4983dfab",
+    "payload_sha256": "7cfbe82bad959362963ac9415502fbcbdbe26d49dbab215787d74caeb9a4f134",
+    "signature": "IchOHEa9Ao5REaBrF2DP3q30W8UUWXdUbRa6HhOSAJHe/R7ukq5bsn0bGY3c6VY4ZW5oDpxxY9lrpWZJOnO+Dw=="
   }
 }
