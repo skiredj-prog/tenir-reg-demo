@@ -92,13 +92,13 @@ jobs:
       - name: Install declared cryptography for exact signed-dossier verification
         run: python -m pip install -r requirements.txt
       - name: Build privacy-minimal candidate from verified original dossier
-        run: python tools/public_kit.py --output dist/TENIR-REG-public-consultation.zip
+        run: python -m tools.public_kit --output dist/TENIR-REG-public-consultation.zip
       - name: Strict preflight of exact minimal candidate before any upload
         run: python tools/publication_audit.py dist/TENIR-REG-public-consultation.zip
       - name: Render all original offline pages and check navigation at mobile / desktop sizes
         run: python tools/browser_smoke.py
       - name: Render exact public kit under Chromium and validate FR/EN mobile and desktop
-        run: python tools/browser_public_kit.py
+        run: python -m tools.browser_public_kit
       - name: Private downloadable candidate only — never a public release
         uses: actions/upload-artifact@v4
         with:
@@ -120,7 +120,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
       - name: Build release-candidate minimal public ZIP
-        run: python tools/public_kit.py --output dist/TENIR-REG-public-consultation.zip
+        run: python -m tools.public_kit --output dist/TENIR-REG-public-consultation.zip
       - name: Strict no-exceptions privacy and inventory audit
         run: python tools/publication_audit.py dist/TENIR-REG-public-consultation.zip
       - name: Publication still requires a separate owner license, UX and deployment approval
