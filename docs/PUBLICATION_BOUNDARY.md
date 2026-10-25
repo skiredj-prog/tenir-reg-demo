@@ -8,7 +8,7 @@ Use `index.html` for local review and `package_demo.py` for the *private*, verif
 
 ## Confirmed blocker
 
-The snapshot `references/manifest.json` includes absolute Windows paths under the original author's local user profile. Those paths are **historical provenance metadata, not prerequisites for rendering the demo**. The consultation packaging currently carries references verbatim, therefore the existing ZIP should not be advertised as privacy-cleared. Other files may have additional findings when the complete archive is scanned.
+The CI inspection of the built consultation ZIP identified **two definite automated privacy blockers**: `references/manifest.json` and `references/architecture-sources.json` contain absolute Windows paths under the original author's local user profile. They are provenance metadata, not prerequisites for rendering the simulation. The consultation packaging currently carries these references verbatim. **Machine publication readiness is therefore FALSE (2 blockers)**; licensing and usability reviews remain independently open.
 
 `tools/publication_audit.py` validates the ZIP inventory/digests, refuses unsafe archive paths, detects local-user-profile strings and embedded private PEM keys, and **never prints the matched content**. The script is deliberately separate from the source inventory covered by the existing signed dossier, so it can be introduced without silently rewriting or re-signing previous EvidenceRecords.
 
