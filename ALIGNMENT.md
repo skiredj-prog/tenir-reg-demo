@@ -2,26 +2,26 @@
 
 ## Cible et sources observées
 
-La **référence technique publiée est désormais TENIR 5.7.0**. La release GitHub a été vérifiée le 25 octobre 2026 ; elle pointe vers le commit `47ef67e` (identifiant court affiché par GitHub). Le snapshot source détaillé conservé dans ce dépôt reste épinglé à TENIR 5.6.1 jusqu’à sa resynchronisation fichier par fichier. La compatibilité d’exécution du prototype avec 5.7.0 reste donc à vérifier.
+La **référence technique publiée est désormais TENIR 5.7.0**. La release GitHub a été vérifiée le 25 octobre 2026 ; elle pointe vers le commit `47ef67e3efc5f3008896a7d88bebf929fa0a98f0`. Le snapshot source détaillé a maintenant été resynchronisé sur ce commit. La compatibilité d’exécution du prototype avec 5.7.0 reste à vérifier.
 
 La vérification en lecture seule du 19 octobre 2026 a identifié :
 
 | Élément | Référence consultée | Portée |
 |---|---|---|
 | Architecture en cinq niveaux | HTML fournis v5.6.0, éditions v1 FR et v2 EN | Terminologie et responsabilités des niveaux 0 à 4 |
-| Runtime `tenir_governance` | Release `v5.7.0`, commit `47ef67e` | Release publiée ; snapshot détaillé local encore 5.6.1 |
+| Runtime `tenir_governance` | Release `v5.7.0`, commit `47ef67e3efc5f3008896a7d88bebf929fa0a98f0` | Release publiée ; snapshot détaillé local resynchronisé |
 | Standard `reg-conformance` | `cd5ab1b616ad59014f4b84d522b57a890a48a088` | Axes/règles/catalogue v1.0.0 ; capacités v1.1.0 |
 | Harnais `tenir-conformance-s1-g1` | `d29400100b00f7e7a87d229af660f62e51d61f12` | Harnais exécutable S1 G0+G1 ; package 0.1.0 |
 | Prototype de ce dépôt | `tenir_demo` 0.1.0 | Moteur local non officiel, fournisseur simulé, format de preuve de démonstration |
 
 Les liens et empreintes des documents sont consignés dans [architecture-sources.json](references/architecture-sources.json). Les sources GitHub sont liées à leurs commits pour éviter de confondre une branche mouvante avec une version de référence.
 
-La recherche initiale n'avait pas trouvé de référence nommée 5.7. La release **v5.7.0 est maintenant publiée**. Le constat historique est conservé pour expliquer l’ancien état du dossier ; il ne sert plus de cible actuelle. Les changements entre le snapshot 5.6.1 et le commit 5.7.0 doivent être comparés avant de revendiquer une prise en charge.
+La recherche initiale n'avait pas trouvé de référence nommée 5.7. La release **v5.7.0 est maintenant publiée** et son snapshot ciblé est resynchronisé. Le constat historique est conservé pour expliquer l’ancien état du dossier ; il ne sert plus de cible actuelle. La compatibilité d’exécution doit encore être testée séparément.
 
 ## Ce qui est aligné dans cette livraison
 
 - L'accueil présente l'architecture en cinq couches, son vocabulaire FR/EN et le rôle des trois dépôts.
-- La release 5.7.0 publiée, le snapshot détaillé 5.6.1, les documents d'architecture 5.6.0 et le prototype local sont identifiés séparément.
+- La release 5.7.0 publiée, le snapshot runtime resynchronisé, les documents d'architecture 5.6.0 et le prototype local sont identifiés séparément.
 - Chaque couche indique ce qu'elle signifie et ce que la démo illustre effectivement.
 - Le diagnostic compare les 144 configurations et 1 008 résultats de clause au catalogue épinglé, avec contrôle des copies et empreintes. Une revue statique source neuf invariants et sept contrats, sans exécuter le code amont. Voir [le diagnostic détaillé](REFERENCE_ALIGNMENT.md).
 - Les preuves Ed25519 de la démo restent attribuées à son format `demo-evidence/v1`, sans être présentées comme la sortie du runtime de référence.

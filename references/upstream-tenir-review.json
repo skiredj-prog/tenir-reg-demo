@@ -1,7 +1,7 @@
 {
   "schema": "upstream-tenir-review/v1",
   "repository": "skiredj-prog/tenir_governance",
-  "pinned_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+  "pinned_commit": "47ef67e3efc5f3008896a7d88bebf929fa0a98f0",
   "review_date": "2026-10-20",
   "execution_compatibility": "NOT_VERIFIED",
   "remote_code_executed": false,
@@ -20,7 +20,7 @@
         "line_start": 149,
         "line_end": 161,
         "local_copy": "references/upstream-tenir-manuscript.md",
-        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/manuscript.md#L149-L161"
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/docs/manuscript.md#L149-L161"
       },
       "local_scope": "One process lifetime; one simulated provider; stable caller-supplied operation_id.",
       "local_test_ids": [
@@ -41,7 +41,7 @@
         "line_start": 208,
         "line_end": 276,
         "local_copy": "references/upstream-tenir-membrane.py",
-        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L208-L276"
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/membrane/__init__.py#L208-L276"
       },
       "local_scope": "Definition/applicability unresolved in this focused audit.",
       "local_test_ids": [],
@@ -59,7 +59,7 @@
         "line_start": 216,
         "line_end": 222,
         "local_copy": "references/upstream-tenir-membrane.py",
-        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L216-L222"
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/membrane/__init__.py#L216-L222"
       },
       "local_scope": "Replay protection only; no full reference passage/state protocol.",
       "local_test_ids": [
@@ -80,7 +80,7 @@
         "line_start": 224,
         "line_end": 230,
         "local_copy": "references/upstream-tenir-membrane.py",
-        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L224-L230"
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/membrane/__init__.py#L224-L230"
       },
       "local_scope": "Control-before-simulated-dispatch only.",
       "local_test_ids": [
@@ -102,7 +102,7 @@
         "line_start": 208,
         "line_end": 276,
         "local_copy": "references/upstream-tenir-membrane.py",
-        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L208-L276"
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/membrane/__init__.py#L208-L276"
       },
       "local_scope": "Definition/applicability unresolved in this focused audit.",
       "local_test_ids": [],
@@ -120,7 +120,7 @@
         "line_start": 208,
         "line_end": 214,
         "local_copy": "references/upstream-tenir-membrane.py",
-        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L208-L214"
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/membrane/__init__.py#L208-L214"
       },
       "local_scope": "No quarantine model in the local engine.",
       "local_test_ids": [],
@@ -138,7 +138,7 @@
         "line_start": 232,
         "line_end": 245,
         "local_copy": "references/upstream-tenir-membrane.py",
-        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L232-L245"
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/membrane/__init__.py#L232-L245"
       },
       "local_scope": "Delegation excluded from local scenario model.",
       "local_test_ids": [],
@@ -156,7 +156,7 @@
         "line_start": 247,
         "line_end": 264,
         "local_copy": "references/upstream-tenir-membrane.py",
-        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L247-L264"
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/membrane/__init__.py#L247-L264"
       },
       "local_scope": "One process, one in-memory budget; lifecycle/accounting is not equivalent.",
       "local_test_ids": [
@@ -179,7 +179,7 @@
         "line_start": 266,
         "line_end": 276,
         "local_copy": "references/upstream-tenir-membrane.py",
-        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L266-L276"
+        "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/membrane/__init__.py#L266-L276"
       },
       "local_scope": "No trajectory object or temporal sequence constraints.",
       "local_test_ids": [],
@@ -204,14 +204,14 @@
           "line_start": 5,
           "line_end": 10,
           "local_copy": "references/upstream-tenir-pyproject.toml",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/pyproject.toml#L5-L10"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/pyproject.toml#L5-L10"
         },
         {
           "path": "tenir_governance/_profile_meta.py",
           "line_start": 25,
           "line_end": 46,
           "local_copy": "references/upstream-tenir-profile-meta.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/_profile_meta.py#L25-L46"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/_profile_meta.py#L25-L46"
         }
       ],
       "local_sources": [
@@ -229,8 +229,8 @@
         }
       ],
       "description": {
-        "fr": "La base de référence déclare 5.6.1, une version de schéma 1.2 et une extension profile-bound. Le prototype conserve ses versions et contrats de démonstration ; l'annonce de promotion en 5.7 ne valide pas son exécution avec cette base.",
-        "en": "The reference declares platform 5.6.1, schema 1.2 and a profile-bound extension. The prototype retains its own demonstration versions and contracts; planned promotion to 5.7 does not validate execution compatibility."
+        "fr": "La base de référence déclare encore 5.6.1 dans ses métadonnées de profil, avec une version de schéma 1.2 et une extension profile-bound. Le prototype conserve ses versions et contrats de démonstration ; la release publiée 5.7.0 ne valide pas à elle seule son exécution.",
+        "en": "The reference still declares platform 5.6.1 in its profile metadata, with schema 1.2 and a profile-bound extension. The prototype retains its own demonstration versions and contracts; the published 5.7.0 release alone does not validate execution compatibility."
       }
     },
     {
@@ -246,28 +246,28 @@
           "line_start": 49,
           "line_end": 60,
           "local_copy": "references/upstream-tenir-kernel.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/kernel.py#L49-L60"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_kernel/kernel.py#L49-L60"
         },
         {
           "path": "tenir_kernel/kernel.py",
           "line_start": 145,
           "line_end": 187,
           "local_copy": "references/upstream-tenir-kernel.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/kernel.py#L145-L187"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_kernel/kernel.py#L145-L187"
         },
         {
           "path": "tenir_kernel/schemas/tenir_1_2.schema.json",
           "line_start": 70,
           "line_end": 138,
           "local_copy": "references/upstream-tenir-schema-1-2.json",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/schemas/tenir_1_2.schema.json#L70-L138"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_kernel/schemas/tenir_1_2.schema.json#L70-L138"
         },
         {
           "path": "tenir_governance/composition/governor.py",
           "line_start": 228,
           "line_end": 247,
           "local_copy": "references/upstream-tenir-composition-governor.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L228-L247"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/governor.py#L228-L247"
         }
       ],
       "local_sources": [
@@ -312,21 +312,21 @@
           "line_start": 23,
           "line_end": 44,
           "local_copy": "references/upstream-tenir-composition-decisions.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/decisions.py#L23-L44"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/decisions.py#L23-L44"
         },
         {
           "path": "tenir_governance/composition/lattice.py",
           "line_start": 46,
           "line_end": 126,
           "local_copy": "references/upstream-tenir-composition-lattice.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py#L46-L126"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/lattice.py#L46-L126"
         },
         {
           "path": "tenir_governance/composition/schema_adapter.py",
           "line_start": 46,
           "line_end": 62,
           "local_copy": "references/upstream-tenir-schema-adapter.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/schema_adapter.py#L46-L62"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/schema_adapter.py#L46-L62"
         }
       ],
       "local_sources": [
@@ -371,21 +371,21 @@
           "line_start": 31,
           "line_end": 68,
           "local_copy": "references/upstream-tenir-passage.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/objects/passage.py#L31-L68"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/objects/passage.py#L31-L68"
         },
         {
           "path": "tenir_governance/operations/registry.py",
           "line_start": 72,
           "line_end": 121,
           "local_copy": "references/upstream-tenir-operation-registry.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/operations/registry.py#L72-L121"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/operations/registry.py#L72-L121"
         },
         {
           "path": "tenir_governance/operations/registry.py",
           "line_start": 196,
           "line_end": 248,
           "local_copy": "references/upstream-tenir-operation-registry.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/operations/registry.py#L196-L248"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/operations/registry.py#L196-L248"
         }
       ],
       "local_sources": [
@@ -430,21 +430,21 @@
           "line_start": 485,
           "line_end": 557,
           "local_copy": "references/upstream-tenir-composition-governor.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L485-L557"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/governor.py#L485-L557"
         },
         {
           "path": "tenir_governance/composition/governor.py",
           "line_start": 827,
           "line_end": 855,
           "local_copy": "references/upstream-tenir-composition-governor.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L827-L855"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/governor.py#L827-L855"
         },
         {
           "path": "tenir_governance/composition/governor.py",
           "line_start": 1130,
           "line_end": 1207,
           "local_copy": "references/upstream-tenir-composition-governor.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L1130-L1207"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/governor.py#L1130-L1207"
         }
       ],
       "local_sources": [
@@ -489,21 +489,21 @@
           "line_start": 39,
           "line_end": 145,
           "local_copy": "references/upstream-tenir-operation-provider.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/operations/provider.py#L39-L145"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/operations/provider.py#L39-L145"
         },
         {
           "path": "tenir_governance/composition/governor.py",
           "line_start": 908,
           "line_end": 1034,
           "local_copy": "references/upstream-tenir-composition-governor.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L908-L1034"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/governor.py#L908-L1034"
         },
         {
           "path": "tenir_governance/composition/governor.py",
           "line_start": 1036,
           "line_end": 1080,
           "local_copy": "references/upstream-tenir-composition-governor.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/governor.py#L1036-L1080"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/governor.py#L1036-L1080"
         }
       ],
       "local_sources": [
@@ -548,35 +548,35 @@
           "line_start": 131,
           "line_end": 145,
           "local_copy": "references/upstream-tenir-composition-lattice.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py#L131-L145"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/lattice.py#L131-L145"
         },
         {
           "path": "tenir_governance/composition/lattice.py",
           "line_start": 163,
           "line_end": 223,
           "local_copy": "references/upstream-tenir-composition-lattice.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py#L163-L223"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/lattice.py#L163-L223"
         },
         {
           "path": "tenir_governance/composition/schema_adapter.py",
           "line_start": 71,
           "line_end": 88,
           "local_copy": "references/upstream-tenir-schema-adapter.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/schema_adapter.py#L71-L88"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/schema_adapter.py#L71-L88"
         },
         {
           "path": "tenir_governance/composition/schema_adapter.py",
           "line_start": 133,
           "line_end": 169,
           "local_copy": "references/upstream-tenir-schema-adapter.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/schema_adapter.py#L133-L169"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/schema_adapter.py#L133-L169"
         },
         {
           "path": "tenir_kernel/schemas/tenir_1_2.schema.json",
           "line_start": 6,
           "line_end": 27,
           "local_copy": "references/upstream-tenir-schema-1-2.json",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_kernel/schemas/tenir_1_2.schema.json#L6-L27"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_kernel/schemas/tenir_1_2.schema.json#L6-L27"
         }
       ],
       "local_sources": [
@@ -627,21 +627,21 @@
           "line_start": 126,
           "line_end": 135,
           "local_copy": "references/upstream-tenir-agentic-guide.md",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/agentic-governance-guide.md#L126-L135"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/docs/agentic-governance-guide.md#L126-L135"
         },
         {
           "path": "tenir_governance/membrane/__init__.py",
           "line_start": 208,
           "line_end": 276,
           "local_copy": "references/upstream-tenir-membrane.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/membrane/__init__.py#L208-L276"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/membrane/__init__.py#L208-L276"
         },
         {
           "path": "docs/manuscript.md",
           "line_start": 179,
           "line_end": 188,
           "local_copy": "references/upstream-tenir-manuscript.md",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/manuscript.md#L179-L188"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/docs/manuscript.md#L179-L188"
         }
       ],
       "resolution": "CODE_LABEL_USED_FOR_PINNED_IMPLEMENTATION_AUDIT; doctrinal numbering not resolved"
@@ -658,14 +658,14 @@
           "line_start": 413,
           "line_end": 419,
           "local_copy": "references/upstream-tenir-manuscript.md",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/docs/manuscript.md#L413-L419"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/docs/manuscript.md#L413-L419"
         },
         {
           "path": "tenir_governance/composition/lattice.py",
           "line_start": 185,
           "line_end": 219,
           "local_copy": "references/upstream-tenir-composition-lattice.py",
-          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/41fae550c1e0a3632e2bde473db6d31b450d4269/tenir_governance/composition/lattice.py#L185-L219"
+          "canonical_url": "https://github.com/skiredj-prog/tenir_governance/blob/47ef67e3efc5f3008896a7d88bebf929fa0a98f0/tenir_governance/composition/lattice.py#L185-L219"
         }
       ],
       "resolution": "ACTUAL_COMPOSITION_LEDGER_CONTRACT_RECORDED; documentation drift retained"

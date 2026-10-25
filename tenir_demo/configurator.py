@@ -129,7 +129,7 @@ def build_model(bundle=None, verification=None):
             "invariant_references": ["references/reg-specification-guide.pdf", "references/tenir-gov-operationalization-guide.pdf"],
             "alignment_target": {"runtime": "TENIR-Gov", "version": "5.7",
                                  "status": "BASE_CONFIRMED_PROMOTION_PLANNED", "base_version": "5.6.1",
-                                 "base_commit": "41fae550c1e0a3632e2bde473db6d31b450d4269",
+                                 "base_commit": "47ef67e3efc5f3008896a7d88bebf929fa0a98f0",
                                  "execution_compatibility": "NOT_VERIFIED",
                                  "source_manifest": "references/architecture-sources.json"},
         },

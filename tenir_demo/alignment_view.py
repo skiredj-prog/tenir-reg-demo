@@ -47,7 +47,7 @@ def render_alignment(model):
              f' data-structural-status="{escape(structural["status"], quote=True)}"'
              f' data-execution-compatibility="{escape(model["execution_compatibility"], quote=True)}"'
              f' data-full-conformance="{escape(model["full_conformance"], quote=True)}">',
-             _text("BASE 5.6.1 → CIBLE 5.7", "5.6.1 BASE → 5.7 TARGET", "p").replace('<p ', '<p class="eyebrow" '),
+             _text("BASE 5.7.0 → CIBLE 5.7.0", "5.7.0 BASE → 5.7.0 TARGET", "p").replace('<p ', '<p class="eyebrow" '),
              _text("Où en est l'alignement ?", "Where does alignment stand?", "h2").replace('<h2 ', '<h2 id="alignment-heading" '),
              '<p class="alignment-status">' + summary + '</p>', result,
              _text("Comparaison locale avec trois commits épinglés. Le catalogue est comparé automatiquement ; les contrats et invariants font l'objet d'une revue statique. Aucun code amont exécuté.",

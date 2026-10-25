@@ -16,7 +16,7 @@ AXIS_ORDER = ("HOST_SCOPE", "DEDUP_LAYER", "CONCURRENCY", "UNCERTAINTY")
 CLAUSE_IDS = ("R1a", "R1b", "R1c", "R2a", "R2b", "R2c", "R3a")
 PINS = (
     ("reg", "skiredj-prog/reg-conformance", "cd5ab1b616ad59014f4b84d522b57a890a48a088"),
-    ("tenir", "skiredj-prog/tenir_governance", "41fae550c1e0a3632e2bde473db6d31b450d4269"),
+    ("tenir", "skiredj-prog/tenir_governance", "47ef67e3efc5f3008896a7d88bebf929fa0a98f0"),
     ("harness", "skiredj-prog/tenir-conformance-s1-g1", "d29400100b00f7e7a87d229af660f62e51d61f12"),
 )
 HASH = re.compile(r"[0-9a-f]{64}\Z")

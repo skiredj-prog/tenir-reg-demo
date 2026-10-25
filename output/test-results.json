@@ -7,20 +7,20 @@
     "rfc8785": "0.1.4"
   },
   "source": {
-    "sha256": "36f336ad523f3a080970476bf8831b66e42a703b36beba4b746798fade08ae5c",
+    "sha256": "00eed6f2072bb2b75579694c4f9088a692faa4160fcb9e7285f4c81c359c72d5",
     "files": {
-      "ALIGNMENT.md": "aa3370c2906785a57bae942911ac3ebdbdb1bb950671d51d4be2735de96a8e24",
+      "ALIGNMENT.md": "6231fc3b459b4d68811cfe44cef5adb510c970b2d666347a808fc75c643bba1a",
       "demo.py": "fd9012eb7404732ba6ada13ef52636812134d50e8cf8e54a030165f5b1b414f2",
       "DIAGNOSTIC_ATELIER.md": "8d566aff0b45182301be71ce61d9efd7fb143b9d1ab2a47486f0489ce608e411",
       "fixtures/acceptance.json": "858ff8c3b813c9823c1dfbbd8405f490fe389d290a3d26d48f2cc6f4aa681568",
       "fixtures/structure.json": "08220abd52d567d463a602344a28cf702a0397639fe33feab94e8266d12ea8f1",
       "GUIDE_CONSULTATION.md": "cc398318342352709c6f81558d9199730c211f6f90ad4505415ffb0ea24827eb",
-      "index.html": "07af038b91c393083383d1c5a4b493757f64dae7dfcf8edf6fd5ff7e9033a941",
+      "index.html": "d99d9f8a99ddefa8a260b4afcd0b7681e56bee5a8a61d6e8e567de290423d26f",
       "package_demo.py": "bc0747356c216c78e0cc8a0a81c7c920c7eed1c379e68794c6ac0ff27e4f8d73",
-      "PRODUCT.md": "78893932867a1f7760558a17aa9b1d652ac36a64c7e7b30c926c5c56fca15535",
-      "README.md": "bed7dac4c212e9eb8154e7ed0c131ebe2e8b9b5bcd1e3621f7ccd34b153a381f",
-      "REFERENCE_ALIGNMENT.md": "8fedda00a633c5556929cf6ae079e5743e510c9f016bdc22323dc554cb5ff73c",
-      "references/architecture-sources.json": "94969c61b73522129633fb0912541a78d4511c45c1dedb71043ecd2e9b82de51",
+      "PRODUCT.md": "3d8a60fe3476def05ee874cd611ddc396edc46b5326a5b5487b860f2f2cda97b",
+      "README.md": "b914d7b504fca2d70f775b4a76c8860a49eccce3aa5183fdb3ebe547a0a0e659",
+      "REFERENCE_ALIGNMENT.md": "00b36ac3522f472ad83723e85d8a7a9b3010de16ad7d267f8da976cd8e66f0f5",
+      "references/architecture-sources.json": "2f729e9dd20b3cfa662807e9b82c5f7954b3871868b6cc2fc0977f6fb9981d92",
       "references/architecture-v1.html": "a715129d5a33e13d565304ffca2266b6a935182ba37092c3020e3e7484cc3f27",
       "references/architecture-v2.html": "8f7f9af371342d31943676208cb8ca957b4493de89eda5f717fad629c6d05e09",
       "references/axes.json": "763763c1d89e86f238e2891adf4368bfa023c9d88727053361a48818d73d6c5c",
@@ -70,37 +70,37 @@
       "references/upstream-reg-tools-enumerate_configs.py": "aca4b268ca7a1041499d13a18597914d3896ac592f5fa52cfc01b5d73ad98050",
       "references/upstream-reg-tools-verify_effective_guarantees.py": "d24bdf74019a77abf9ff664b27443c9e59b5bfd18edf8307d46344e08c4a0f3f",
       "references/upstream-reg-tree.json": "1c5a825905289e781d8293148dc0214de5854d540680436bfdd115c097ef37a3",
-      "references/upstream-tenir-agentic-guide.md": "49d27d5b3ef02428f939c3410d4bd9b5ef316dbc64f589bb5d31ba6f8a6f3db7",
-      "references/upstream-tenir-changelog.md": "1c208c399dbbae7690ba089f701f60226586716eb8e9742cc44f2ebfd2b01432",
-      "references/upstream-tenir-composition-decisions.py": "fa2691c10200f958430094766f2618f815e00b7c8eda0b5e22e836d36c0c19e5",
-      "references/upstream-tenir-composition-governor.py": "69e88edc47eac338eb6c3533c191948798606ae30f5f4495fbb8a3f5580f1df8",
-      "references/upstream-tenir-composition-lattice.py": "df2e2aea06222025f401cc4a06241fdbb1b493dcd5ec8104e868a750abcdd454",
-      "references/upstream-tenir-kernel.py": "280c05554ce9bbeac1cd54c50d2a7eb4bb60a78beb688530f626fe1172a72319",
-      "references/upstream-tenir-LICENSE": "104c165f9953dcdfc5ef04fe6491f4bb970622e2fcfec759431eebef86a43d16",
-      "references/upstream-tenir-manifest.json": "ca1bbba2f52441338d9c2200681fb90fda707b0beaaadd935bec3154bfb78b61",
-      "references/upstream-tenir-manuscript.md": "f22a5e3ee160b0102a6e0f97d75b5a8e68d847db642d8094801c78e7316d5d3f",
-      "references/upstream-tenir-membrane.py": "dceab6b76633ae18e82e94161867b00a917989c117fb8fa80a6eb79f8efa3efa",
-      "references/upstream-tenir-operation-provider.py": "6fc3073c1c83fb7ad51dfd21b95131220755e0c4408a27f25f8540426479ec7a",
-      "references/upstream-tenir-operation-registry.py": "18b0ea1c5cbd4ed3593fe264a2038051d250d10abba64c9a18625e1956d71c51",
-      "references/upstream-tenir-package-init.py": "07778022846e32e2ee7426a910a7bcbb4024f0d017a0397d0bff6b68aff1d994",
-      "references/upstream-tenir-passage.py": "6479686cdf28c3bcc9ada261e1c4ea6abeebc1068781715d6ca7d0237fc04bc7",
-      "references/upstream-tenir-profile-meta.py": "98d950cb723dd45893db8f21a1f4dbb1e72337e26c1add2df39cc4a5c190d8ff",
-      "references/upstream-tenir-pyproject.toml": "e7b7823e96ee54bd2517995b27f4e22eee38efdc97f35b2a7549037f82a5bb4f",
-      "references/upstream-tenir-resource.py": "7f80d93caaf9190c8127dfe4dcdbb6e129eadcd9c0f554b6f2e5124f3226f911",
-      "references/upstream-tenir-review.json": "36314aef438df31d9bbf4bc2552731f14f8b32752d78b6a0745dc300287d4414",
-      "references/upstream-tenir-schema-1-2.json": "b2a7552f7e7047422851688217de13c4fba5aefa13f82298b6d3d92b90a78190",
-      "references/upstream-tenir-schema-adapter.py": "78e25f802d6e39af0a677b6ed45ddaee09aae4a4079497f20d2dc28463091f84",
-      "references/upstream-tenir-test-membrane.py": "6d9725ca6118362069c73246105a3b1bf6b08313945b4ba5ecafdce2b4ea40f7",
+      "references/upstream-tenir-agentic-guide.md": "675a879d2ae51b7afe85b8c6bc05ab4d311b90190fc62a6a45b56d9fc0b2058c",
+      "references/upstream-tenir-changelog.md": "02eacf7c75bd007bec6a1edc16dc7fe3b30f3790b7370bdcbba52cdcc2af9bec",
+      "references/upstream-tenir-composition-decisions.py": "b1d812f864266d690d0d1d623934fd9d9aca6edf72c8480ff9df4521beaade3f",
+      "references/upstream-tenir-composition-governor.py": "f2093e33b045cad001c96ea6bbfae06db617f98a830fdcb3f5f5b185479ea564",
+      "references/upstream-tenir-composition-lattice.py": "aa87cd47303e3923cad94bc61bbd09eec55a481cf80f9e488483e893b1cfa6b7",
+      "references/upstream-tenir-kernel.py": "e6653889233f65fe9e97a98a4d70ff62fc9494f3690517e79bead4dc2cb66ab0",
+      "references/upstream-tenir-LICENSE": "5e20159c2db0b21d353e55bfe4c4d2bd1f18b65a9e5d2013c48a3f552638a764",
+      "references/upstream-tenir-manifest.json": "44bb2d971c938eb805d92a172ab7e4b72997b846941e815b58b1336c09d1e7cf",
+      "references/upstream-tenir-manuscript.md": "80324a3c00adab85b3ddba0191657e2cc533ed9879778ba1f6cad6db58590141",
+      "references/upstream-tenir-membrane.py": "192662c041cebab698e4c36f7794b9d459400033418e50c692d229da147616e5",
+      "references/upstream-tenir-operation-provider.py": "cca5d9626aef62cd00a942114e5ab8e56a43c42279b9dacd22ab4070337e9574",
+      "references/upstream-tenir-operation-registry.py": "e3eb9464a4937d437fe11e004e38e22ef5d9eb665d6d66b2a16ce92f2b38b5de",
+      "references/upstream-tenir-package-init.py": "0c66f714f0a72e3af3459cec8d5972d26ccfc383b90c7a895cf692d57aa4cf41",
+      "references/upstream-tenir-passage.py": "a764890c83c34585680e4b0a4e44d8468ed9826125b2d07d994563fff88410b0",
+      "references/upstream-tenir-profile-meta.py": "8c56e731f9506cf33cdd2845efe6460fc91e2ed973ca87939d0f0de354aa63f8",
+      "references/upstream-tenir-pyproject.toml": "2defa9182dcd9dc1ba4a05d994d7fa099e87763928adf36ddef8edad343208c3",
+      "references/upstream-tenir-resource.py": "f07817ec374fb8459f02680915fe74b42fad07f684eef8d05f987d41998fe2c6",
+      "references/upstream-tenir-review.json": "a73d1d6bc614c10c63d00b8fc1fcae45f720770916dadb8eea1ff2c81c74f0a1",
+      "references/upstream-tenir-schema-1-2.json": "ef8d20b9264dc1d5a5b9c18f55274a88805f8ea3dde4310bfa9a7a1b74b48ee0",
+      "references/upstream-tenir-schema-adapter.py": "7c18258e1cd240b91392deb3100f9d85d32df941a2c2595b72b2f9dd59d536ef",
+      "references/upstream-tenir-test-membrane.py": "495880321dd011ba7b5a2057caff972b825ca7dae1d245b98f35d5d8922b4c14",
       "requirements.txt": "6245940e3b65e73edb34f73ca9e7c7d1161905f12984067c5e50e01ad97c4043",
       "REVIEW_ACTIONS.md": "0d4df13822fa9304ebba63e451f313a1fc1f76067c6cfdba074f1b28610f2fa1",
       "run.ps1": "6cb39c2e2a818fe03fdf724e0c6ce8e09ce4f7c1c3eb066b3921f0c6ec05eba6",
       "tenir_demo/__init__.py": "caaac9825442ced07aafbee16367a120e54bebb6ea1f1b22f4eed4210185fc00",
       "tenir_demo/acceptance.py": "684166af67b305164c380ef7fadce5949f4fe48e1473d55cec18181bdb462363",
       "tenir_demo/alignment.css": "ed98a4d1eebdaa37131c43e5b95a0cd5c8624a255899c771ef3568b8e84742b2",
-      "tenir_demo/alignment.py": "230640e60a34e9e1d0254269ba49bfa023dbbe877bf4a5abc1f6b6765c6ed5c2",
-      "tenir_demo/alignment_view.py": "dfe6030090832a67debd32841d9a9355c0b751e39ab0e02ac55341d952ccfb93",
+      "tenir_demo/alignment.py": "e7f6065d0f4916868d50ccc55f3118d4242ab7e8a28152f71cdeaec10393a345",
+      "tenir_demo/alignment_view.py": "bd83b4854f4926bed54bda50b42ac464158d64e95e94b834678b6e0b5a9cc976",
       "tenir_demo/configurator.css": "0613bae16bb584fdc353c663d58539364f95e55dd736e48f4266b1b53294a826",
-      "tenir_demo/configurator.py": "e4d441f5e3c9e20568a0c0ee0170a9c6731b345dc7d6c77ea78c2b8d1d7eb6c2",
+      "tenir_demo/configurator.py": "c695671de56fd90b8baaff23b32aff5a3a4c5eccf03e9dc87cf7bd16a6ef3369",
       "tenir_demo/configurator_client.js": "ab012b9933358877db64363b7c02174400271c55dc6ceb0fec67ba87b9803c0d",
       "tenir_demo/configurator_template.html": "372842c1cde121069988c2f112d7d3a828b87c007940488e0652749ab8d358fe",
       "tenir_demo/configurator_ux.css": "0a86aa815a5b7bbd3af40d33c307f064891e66cbd7f30f2b47552a7b2ccec8d5",
@@ -200,7 +200,7 @@
       "status": "PASS"
     }
   ],
-  "unittest_output": "test_T01_structure (tests.test_acceptance.Acceptance.test_T01_structure)\nClauses R1a–R3a et violations multiples ; test interne. ... ok\ntest_T02_budget (tests.test_acceptance.Acceptance.test_T02_budget)\nBudget nominal, limite exacte, montants et unités invalides. ... ok\ntest_T03_veto (tests.test_acceptance.Acceptance.test_T03_veto)\nDépassement et signal affaibli : aucun appel ni réservation. ... ok\ntest_T04_hold (tests.test_acceptance.Acceptance.test_T04_hold)\nSignaux absent, expiré et invalide distingués avant envoi. ... ok\ntest_T05_unknown (tests.test_acceptance.Acceptance.test_T05_unknown)\nUNKNOWN conserve la réservation et le verdict au rejeu. ... ok\ntest_T06_concurrency (tests.test_acceptance.Acceptance.test_T06_concurrency)\n50 courses synchronisées : contrôle atomique du plafond. ... ok\ntest_T07_idempotency (tests.test_acceptance.Acceptance.test_T07_idempotency)\nDoublons, conflits et doublons pendant un envoi en cours. ... ok\ntest_T08_determinism (tests.test_acceptance.Acceptance.test_T08_determinism)\nMême entrée, état, profil et temps : décision reproductible. ... ok\ntest_T09_integrity (tests.test_acceptance.Acceptance.test_T09_integrity)\nSignature, altération, autre clé, ordre JSON et chaîne tronquée. ... ok\ntest_T10_end_to_end (tests.test_acceptance.Acceptance.test_T10_end_to_end)\nQuatre parcours : rapport, preuves, appels et budget concordent. ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 2.631s\n\nOK\n",
+  "unittest_output": "test_T01_structure (tests.test_acceptance.Acceptance.test_T01_structure)\nClauses R1a–R3a et violations multiples ; test interne. ... ok\ntest_T02_budget (tests.test_acceptance.Acceptance.test_T02_budget)\nBudget nominal, limite exacte, montants et unités invalides. ... ok\ntest_T03_veto (tests.test_acceptance.Acceptance.test_T03_veto)\nDépassement et signal affaibli : aucun appel ni réservation. ... ok\ntest_T04_hold (tests.test_acceptance.Acceptance.test_T04_hold)\nSignaux absent, expiré et invalide distingués avant envoi. ... ok\ntest_T05_unknown (tests.test_acceptance.Acceptance.test_T05_unknown)\nUNKNOWN conserve la réservation et le verdict au rejeu. ... ok\ntest_T06_concurrency (tests.test_acceptance.Acceptance.test_T06_concurrency)\n50 courses synchronisées : contrôle atomique du plafond. ... ok\ntest_T07_idempotency (tests.test_acceptance.Acceptance.test_T07_idempotency)\nDoublons, conflits et doublons pendant un envoi en cours. ... ok\ntest_T08_determinism (tests.test_acceptance.Acceptance.test_T08_determinism)\nMême entrée, état, profil et temps : décision reproductible. ... ok\ntest_T09_integrity (tests.test_acceptance.Acceptance.test_T09_integrity)\nSignature, altération, autre clé, ordre JSON et chaîne tronquée. ... ok\ntest_T10_end_to_end (tests.test_acceptance.Acceptance.test_T10_end_to_end)\nQuatre parcours : rapport, preuves, appels et budget concordent. ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 2.099s\n\nOK\n",
   "product_tests": {
     "go": true,
     "passed": 10,
@@ -256,7 +256,7 @@
         "status": "PASS"
       }
     ],
-    "unittest_output": "test_C01_exhaustive_enumeration (tests.test_configurator.Configurator.test_C01_exhaustive_enumeration)\nAll 144 configurations agree with the structural evaluator. ... ok\ntest_C02_clauses_and_highlights (tests.test_configurator.Configurator.test_C02_clauses_and_highlights)\nClauses retain their fields, applicability and evaluated operands. ... ok\ntest_C03_nearest_corrections (tests.test_configurator.Configurator.test_C03_nearest_corrections)\nEvery suggestion is valid, minimum-distance, complete and stable. ... ok\ntest_C04_runtime_and_guarantees_are_separate (tests.test_configurator.Configurator.test_C04_runtime_and_guarantees_are_separate)\nAn admissible multi-host draft does not gain runtime support. ... ok\ntest_C05_verified_bundle_gate (tests.test_configurator.Configurator.test_C05_verified_bundle_gate)\nOnly the matching runtime with explicit verified evidence is linked. ... ok\ntest_C06_no_mutation_or_hidden_execution (tests.test_configurator.Configurator.test_C06_no_mutation_or_hidden_execution)\nBuilding and editing a draft leaves bundle, profile and rules intact. ... ok\ntest_C07_unsigned_provenance_and_reproducibility (tests.test_configurator.Configurator.test_C07_unsigned_provenance_and_reproducibility)\nExports identify their extracted rules and carry no signed claim. ... ok\ntest_C08_standalone_page_projection (tests.test_configurator_integration.ConfiguratorIntegration.test_C08_standalone_page_projection)\nPage autonome, sans marqueurs ni redirection, fidèle au catalogue. ... ok\ntest_C09_signed_dossier_covers_product_files (tests.test_configurator_integration.ConfiguratorIntegration.test_C09_signed_dossier_covers_product_files)\nReçu v2 valide puis altération des nouveaux fichiers détectée. ... ok\ntest_C10_failing_product_recipe_remains_no_go (tests.test_configurator_integration.ConfiguratorIntegration.test_C10_failing_product_recipe_remains_no_go)\nRecette produit en échec : dossier valide, aucune démo revendiquée. ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 14.909s\n\nOK\n"
+    "unittest_output": "test_C01_exhaustive_enumeration (tests.test_configurator.Configurator.test_C01_exhaustive_enumeration)\nAll 144 configurations agree with the structural evaluator. ... ok\ntest_C02_clauses_and_highlights (tests.test_configurator.Configurator.test_C02_clauses_and_highlights)\nClauses retain their fields, applicability and evaluated operands. ... ok\ntest_C03_nearest_corrections (tests.test_configurator.Configurator.test_C03_nearest_corrections)\nEvery suggestion is valid, minimum-distance, complete and stable. ... ok\ntest_C04_runtime_and_guarantees_are_separate (tests.test_configurator.Configurator.test_C04_runtime_and_guarantees_are_separate)\nAn admissible multi-host draft does not gain runtime support. ... ok\ntest_C05_verified_bundle_gate (tests.test_configurator.Configurator.test_C05_verified_bundle_gate)\nOnly the matching runtime with explicit verified evidence is linked. ... ok\ntest_C06_no_mutation_or_hidden_execution (tests.test_configurator.Configurator.test_C06_no_mutation_or_hidden_execution)\nBuilding and editing a draft leaves bundle, profile and rules intact. ... ok\ntest_C07_unsigned_provenance_and_reproducibility (tests.test_configurator.Configurator.test_C07_unsigned_provenance_and_reproducibility)\nExports identify their extracted rules and carry no signed claim. ... ok\ntest_C08_standalone_page_projection (tests.test_configurator_integration.ConfiguratorIntegration.test_C08_standalone_page_projection)\nPage autonome, sans marqueurs ni redirection, fidèle au catalogue. ... ok\ntest_C09_signed_dossier_covers_product_files (tests.test_configurator_integration.ConfiguratorIntegration.test_C09_signed_dossier_covers_product_files)\nReçu v2 valide puis altération des nouveaux fichiers détectée. ... ok\ntest_C10_failing_product_recipe_remains_no_go (tests.test_configurator_integration.ConfiguratorIntegration.test_C10_failing_product_recipe_remains_no_go)\nRecette produit en échec : dossier valide, aucune démo revendiquée. ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 13.927s\n\nOK\n"
   },
   "proof_loop_tests": {
     "go": true,
@@ -293,7 +293,7 @@
         "status": "PASS"
       }
     ],
-    "unittest_output": "test_P01_deterministic_projection_without_mutation (tests.test_proof_loop.ProofLoop.test_P01_deterministic_projection_without_mutation)\nProjection déterministe des huit étapes, sans modifier le dossier signé. ... ok\ntest_P02_every_source_resolves_to_its_signed_envelope (tests.test_proof_loop.ProofLoop.test_P02_every_source_resolves_to_its_signed_envelope)\nChaque référence restitue le champ exact et distingue payload et métadonnées. ... ok\ntest_P03_documentary_question_and_initial_budget (tests.test_proof_loop.ProofLoop.test_P03_documentary_question_and_initial_budget)\nQuestion documentaire explicite ; le raisonnement utilise le budget avant réservation. ... ok\ntest_P04_pass_does_not_mean_confirmed_execution (tests.test_proof_loop.ProofLoop.test_P04_pass_does_not_mean_confirmed_execution)\nPASS est conservé pour UNKNOWN ; l'issue inconnue conserve sa réservation. ... ok\ntest_P05_veto_and_hold_stop_before_dispatch (tests.test_proof_loop.ProofLoop.test_P05_veto_and_hold_stop_before_dispatch)\nVeto et attente arrêtent l'envoi sans confondre les appels cumulés des autres opérations. ... ok\ntest_P06_reject_unknown_missing_and_invalid_sources (tests.test_proof_loop.ProofLoop.test_P06_reject_unknown_missing_and_invalid_sources)\nRéférences inconnues, absentes, ambiguës ou mal formées rejetées explicitement. ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.911s\n\nOK\n"
+    "unittest_output": "test_P01_deterministic_projection_without_mutation (tests.test_proof_loop.ProofLoop.test_P01_deterministic_projection_without_mutation)\nProjection déterministe des huit étapes, sans modifier le dossier signé. ... ok\ntest_P02_every_source_resolves_to_its_signed_envelope (tests.test_proof_loop.ProofLoop.test_P02_every_source_resolves_to_its_signed_envelope)\nChaque référence restitue le champ exact et distingue payload et métadonnées. ... ok\ntest_P03_documentary_question_and_initial_budget (tests.test_proof_loop.ProofLoop.test_P03_documentary_question_and_initial_budget)\nQuestion documentaire explicite ; le raisonnement utilise le budget avant réservation. ... ok\ntest_P04_pass_does_not_mean_confirmed_execution (tests.test_proof_loop.ProofLoop.test_P04_pass_does_not_mean_confirmed_execution)\nPASS est conservé pour UNKNOWN ; l'issue inconnue conserve sa réservation. ... ok\ntest_P05_veto_and_hold_stop_before_dispatch (tests.test_proof_loop.ProofLoop.test_P05_veto_and_hold_stop_before_dispatch)\nVeto et attente arrêtent l'envoi sans confondre les appels cumulés des autres opérations. ... ok\ntest_P06_reject_unknown_missing_and_invalid_sources (tests.test_proof_loop.ProofLoop.test_P06_reject_unknown_missing_and_invalid_sources)\nRéférences inconnues, absentes, ambiguës ou mal formées rejetées explicitement. ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.671s\n\nOK\n"
   },
   "alignment_tests": {
     "go": true,
@@ -330,6 +330,6 @@
         "status": "PASS"
       }
     ],
-    "unittest_output": "test_A01_independent_closed_catalogue_oracle (tests.test_alignment.Alignment.test_A01_independent_closed_catalogue_oracle)\nLes 144 configurations et 1 008 résultats sont recalculés et comparés aux sources. ... ok\ntest_A02_invalid_source_identity_fails_closed (tests.test_alignment.Alignment.test_A02_invalid_source_identity_fails_closed)\nSource altérée, absente, dupliquée ou mal formée : aucune concordance revendiquée. ... ok\ntest_A03_local_axes_and_rules_differences_are_detected (tests.test_alignment.Alignment.test_A03_local_axes_and_rules_differences_are_detected)\nUne divergence locale valide reste un écart, même avec une provenance cohérente. ... ok\ntest_A04_catalogue_outcomes_are_compared_not_cached (tests.test_alignment.Alignment.test_A04_catalogue_outcomes_are_compared_not_cached)\nAdmissibilité et clauses du catalogue sont comparées au calcul, sans reprendre un ancien résultat. ... ok\ntest_A05_reviewed_scopes_never_claim_runtime_equivalence (tests.test_alignment.Alignment.test_A05_reviewed_scopes_never_claim_runtime_equivalence)\nConcordance structurelle, budgets et UNKNOWN conservent leurs limites de contrat. ... ok\ntest_A06_deterministic_read_only_detached_diagnostic (tests.test_alignment.Alignment.test_A06_deterministic_read_only_detached_diagnostic)\nDiagnostic déterministe, détaché des appels précédents et sans écriture des sources. ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 19.771s\n\nOK\n"
+    "unittest_output": "test_A01_independent_closed_catalogue_oracle (tests.test_alignment.Alignment.test_A01_independent_closed_catalogue_oracle)\nLes 144 configurations et 1 008 résultats sont recalculés et comparés aux sources. ... ok\ntest_A02_invalid_source_identity_fails_closed (tests.test_alignment.Alignment.test_A02_invalid_source_identity_fails_closed)\nSource altérée, absente, dupliquée ou mal formée : aucune concordance revendiquée. ... ok\ntest_A03_local_axes_and_rules_differences_are_detected (tests.test_alignment.Alignment.test_A03_local_axes_and_rules_differences_are_detected)\nUne divergence locale valide reste un écart, même avec une provenance cohérente. ... ok\ntest_A04_catalogue_outcomes_are_compared_not_cached (tests.test_alignment.Alignment.test_A04_catalogue_outcomes_are_compared_not_cached)\nAdmissibilité et clauses du catalogue sont comparées au calcul, sans reprendre un ancien résultat. ... ok\ntest_A05_reviewed_scopes_never_claim_runtime_equivalence (tests.test_alignment.Alignment.test_A05_reviewed_scopes_never_claim_runtime_equivalence)\nConcordance structurelle, budgets et UNKNOWN conservent leurs limites de contrat. ... ok\ntest_A06_deterministic_read_only_detached_diagnostic (tests.test_alignment.Alignment.test_A06_deterministic_read_only_detached_diagnostic)\nDiagnostic déterministe, détaché des appels précédents et sans écriture des sources. ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 19.437s\n\nOK\n"
   }
 }
