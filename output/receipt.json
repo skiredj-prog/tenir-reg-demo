@@ -1,14 +1,14 @@
 {
   "payload": {
     "files": {
-      "configuration-catalogue.json": "136e270ca16b852b9381114bac0fd3b0abc349523847bbdcf09d9b63f4f3417e",
-      "configurator.html": "4be190e8649d7232cc94f37aa7ad34a95cc72bead8011f406d2597470a4ab544",
-      "evidence.json": "559d832fb2527b69c2a0f948bc1363c241cbd8cc8e4eb4e61574b959cfb008a7",
-      "evidence.public.pem": "7ab378c5ec41eb817dc1b356dd745fcd172c648520a74f747c71ad0fb17f77f5",
-      "report.html": "8bfa1f8b41734c340a9ba17d71abb69fe30b5d87abb5035227954f4d00b7400f",
-      "signal.public.pem": "93558dd5d8b139948054d42bf942d247f8bb8ffdd2c57f3bd083aeacdfa46c7a",
-      "test-results.json": "f4f6632dfab20fff6cb3bcece26f99afa3bed950c39bd124f41ab01bcbbb80a3",
-      "verification.json": "cfc5d4e83c253e4b66b5d1055618cf306e7ecb07e6b06f1fee01623e68f8d5ad"
+      "configuration-catalogue.json": "ca29527665438fc0675390bbfaf8c1f98ad85b3c40dfb2b02bc5f92c086e9e96",
+      "configurator.html": "77bece7e7978ac2e54a7c6bd3149e1817e0413fbae4e56337f5530b93606b288",
+      "evidence.json": "74ce98e767ae4c74ee0df242e59f31e895ff800759b4d918d9187c65e7de5f6d",
+      "evidence.public.pem": "5e67d821963f60178095f993083d14ca2cb89528bbc9a7772fff84f1eb5022ae",
+      "report.html": "cb5b8e6c18eecd4eceb38dece449165fe17a02e1bcf5d7467bb16662a08583b1",
+      "signal.public.pem": "e4eda5b50e4192245eb389f76072a1d602b57249c27487869bc47d20f1087d14",
+      "test-results.json": "1a9c1d6463754e6b3f8a84764086c348a592b215277f2519e113bbb6baa8d56c",
+      "verification.json": "7caae6bac8f3436dcba417b403523929cf00580a18b022e3246e3335ac3763b8"
     },
     "go_local": true,
     "production": false,
@@ -18,8 +18,8 @@
     "algorithm": "Ed25519",
     "canonicalization": "RFC8785",
     "domain": "TENIR-REG-LOCAL-DEMO-v1",
-    "key_id": "877068c77188f4e02aa74856f4bb3d28e9d820e8eac40f458fad63b854ecc472",
-    "payload_sha256": "ecd41a5821dc63b3562443a221d60ff9f1f37331f22bf23ad6059a6d9b514ec7",
-    "signature": "ubo1mB7aKPQXd5pZ50iWZlPlD5IfITwN1MVH13jL0ojXoTigvJ47m/KYpYHM+HloyWr++yMSP7Dki1NSD5hDCw=="
+    "key_id": "73295a823adc3cbc7a1188b728fe0e398d932986cb3b846134b7ed26bde1c062",
+    "payload_sha256": "d4b8c94c7939cb69072c23bdd81e3a0dff7c859a4bdb9ccd8559146acd75cb66",
+    "signature": "lSOJ0AlHSryOtwQoVJvqcBdkDk8sNA25gVfEoyW+IsRAr1rzxkBCWoDlHkgZhwpji6my5Rk5rsiIEvKT8Eh/Bg=="
   }
 }
